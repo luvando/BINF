@@ -11,4 +11,6 @@ package ijshockey;
  */
 public class TestGit {
     
+    // lijn toegeveogd door Luc
+    
 }
