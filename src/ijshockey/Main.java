@@ -17,7 +17,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws DBException {
-        
+        //commentaar test push/pull
         DriverManager dm = new DriverManager();
         dm.getConnection();
          GUIPackage.Startscherm start = new GUIPackage.Startscherm(dm);
