@@ -16,8 +16,10 @@ public class Opstelling {
     private String positie;
     private int tijdstipIn;
     private int tijdstipUit;
- 
 
+    public Opstelling() {
+    }
+ 
     public Opstelling(String positie, int tijdstipIn, int tijdstipUit) {
         this.positie = positie;
         this.tijdstipIn = tijdstipIn;
@@ -47,6 +49,11 @@ public class Opstelling {
 
     public void setTijdstipUit(int tijdstipUit) {
         this.tijdstipUit = tijdstipUit;
+    }
+
+    @Override
+    public String toString() {
+        return "Opstelling{" + "positie=" + positie + ", tijdstipIn=" + tijdstipIn + ", tijdstipUit=" + tijdstipUit + '}';
     }
 
     

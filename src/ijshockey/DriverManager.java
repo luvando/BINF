@@ -5,10 +5,7 @@
  */
 package ijshockey;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -101,7 +98,14 @@ public class DriverManager {
     
     
     
-    
+    public static void main(String[] args) throws DBException {
+        //commentaar test push/pull fase 2
+        DriverManager dm = new DriverManager();
+        int a = dm.playedMinutesGame(2,1);
+        System.out.println("Gespeelde minuten van speler 2 in wedstrijd 1 van seizoen 2015: " +a);
+        int b = dm.playedMinutesSeason(2);
+        System.out.println("Gespeelde minuten van speler 2 in seizoen 2015: " +b);
+    }
     
 
     public static Opstelling getOpstelling(int wedstrijdnr, int lidnr, int opstellingnr) throws DBException {
@@ -111,7 +115,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT tijdstip_in, tijdstip_uit, positie"
+            String sql = "SELECT tijdstip_in, tijdstip_uit, positie "
                     + "FROM opstelling "
                     + "WHERE wedstrijdnr = " + wedstrijdnr + " AND lidnr = " + lidnr + " AND opstellingnr = " + opstellingnr;
 
@@ -148,7 +152,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT wedstrijdnr, lidnr, opstellingnr"
+            String sql = "SELECT wedstrijdnr, lidnr, opstellingnr "
                     + "FROM opstelling "
                     + "WHERE wedstrijdnr = " + wedstrijdnr + " AND lidnr = " + lidnr;
 
@@ -175,7 +179,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT wedstrijdnr, lidnr, opstellingnr"
+            String sql = "SELECT wedstrijdnr, lidnr, opstellingnr "
                     + "FROM opstelling "
                     + "WHERE lidnr = " + lidnr;
 
