@@ -11,4 +11,8 @@ package ijshockey;
  */
 public class TestGit extends Penalty {
     // lijn toegeveogd door jorn
+public class TestGit {
+    
+    // lijn toegeveogd door Luc
+    
 }
