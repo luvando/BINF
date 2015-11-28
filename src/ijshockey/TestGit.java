@@ -9,6 +9,6 @@ package ijshockey;
  *
  * @author Luc
  */
-public class TestGit {
+public class TestGit extends Penalty {
     // lijn toegeveogd door jorn
 }
