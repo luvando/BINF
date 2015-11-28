@@ -231,7 +231,7 @@ public class DriverManager {
             String subProtocol = "mysql";
             String subName = "//mysqlha2.ugent.be/BINFG11?user=BINFG11&password=4v3yfrzt";
             String URL = protocol + ":" + subProtocol + ":" + subName;
-
+// wat met meerdere connecties? bestaande connectie herbruiken
             con = java.sql.DriverManager.getConnection(URL);
             return con;
         } catch (SQLException sqle) {
