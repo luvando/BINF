@@ -5,7 +5,10 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -163,7 +166,12 @@ public class BewerkCompetitieScherm extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        KeuzeSchermBestaandeCompetitie updateForm = new KeuzeSchermBestaandeCompetitie(dManager);
+        KeuzeSchermBestaandeCompetitie updateForm = null;
+        try {
+            updateForm = new KeuzeSchermBestaandeCompetitie(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(BewerkCompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
         

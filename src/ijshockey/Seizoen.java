@@ -15,10 +15,18 @@ import java.util.Date;
  */
 public class Seizoen {
 
+    private String competitienaam;
     private int jaar;
     private Speeldag speeldag;
     private ArrayList<Speeldag> speeldagen;
     private ArrayList<Team> teams;
+
+    public Seizoen(String competitienaam, int jaar) {
+        this.competitienaam = competitienaam;
+        this.jaar = jaar;
+    }
+
+    
 
     public void addTeamEnTrainer(int stamNr, String naam, String arena, String voornaam, String achternaam, Date geboortedatum) {
         Team t = new Team(stamNr, naam, arena);
@@ -54,6 +62,14 @@ public class Seizoen {
         return this.getTeams();
     }
 //getters en setters
+
+    public String getCompetitienaam() {
+        return competitienaam;
+    }
+
+    public void setCompetitienaam(String competitienaam) {
+        this.competitienaam = competitienaam;
+    }
 
     public Speeldag getSpeeldag() {
         return speeldag;

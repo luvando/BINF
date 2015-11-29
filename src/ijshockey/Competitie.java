@@ -15,9 +15,14 @@ public class Competitie {
 
     public String competitienaam; // PK
     private ArrayList<Competitie> competities;
-
     private ArrayList<Seizoen> seizoenen;
 
+    public Competitie(String competitienaam) {
+        this.competitienaam = competitienaam;
+    }
+
+    
+    
     public ArrayList<Team> getTeamsSeizoen(int jaar) { // Viktor 24/11 getTeam adhv seizoen jaar
         for (Seizoen s : seizoenen) {
             if (s.getJaar() == jaar) {
@@ -40,6 +45,14 @@ public class Competitie {
             return ranked;
         }
         return null;
+    }
+
+    public String getCompetitienaam() {
+        return competitienaam;
+    }
+
+    public void setCompetitienaam(String competitienaam) {
+        this.competitienaam = competitienaam;
     }
     
 

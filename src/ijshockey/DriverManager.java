@@ -19,74 +19,50 @@ import javax.swing.JList;
  */
 public class DriverManager {
 
-    private Connection databaseConnection;
-
-    //private String databaseLocatie;
-    /**
-     * Creates a new instance of Database
-     */
     public DriverManager() {
     }
 
-    /*public void start() {
-        loadDriver();
-        connect();
-    }
-
-    private void loadDriver() {
-        //TRY LOADING SUN DRIVER
+    public void add(Competitie c) throws DBException {
+        Connection con = null;
         try {
-            //LOAD SUN DRIVER
-            Class.forName("com.mysql.jdbc.Driver");
-        }//END try
-        //DRIVER NOT FOUND, REPORT ERROR
-        catch (ClassNotFoundException err) {
-            System.out.println("Could not load driver ");
-            System.exit(1);
-        }//END catch
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into competitie "
+                        + "(competitienaam) "
+                        + "VALUES ('" + c.getCompetitienaam()+ "')";
+                stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
     }
 
-    private void connect() {
-     try {
-     //CONNECT TO DATABASE
-     String protocol = "jdbc";
-     String subProtocol = "mysql";
-     String subName = "//mysqlha2.ugent.be/BINFG11?user=BINFG11&password=4v3yfrzt";
+    public void add(Seizoen s) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
-     //DB, JAN en RARA vervangen
-     String URL = protocol + ":" + subProtocol + ":" + subName;
-
-     databaseConnection = java.sql.DriverManager.getConnection(URL);
-     //return dbConnection;
-     }//END try
-     catch (SQLException error) {
-     System.err.println("Error connecting to database: "
-     + error.toString());
-     }//END catch
-
-     }//END connectDatabase()
-
-     public Connection getDatabaseConnection() {
-     return databaseConnection;
-     }
-
-     public void closeConnection() {
-     try {
-     //CLOSE CONNECTED
-     databaseConnection.close();
-     }//END try
-     catch (SQLException error) {
-     System.err.println("Cannot disconnect database");
-     }//END catch
-
-     }//END closeConnection()*/
-    public void addCompetitie() {
-        Competitie comp = new Competitie();
-
+            String sql = "INSERT into seizoen "
+                    + "(competitienaam, jaar) "
+                    + "VALUES ('" + s.getCompetitienaam()+ "', '" + s.getJaar() + "')";
+            stmt.executeUpdate(sql);
+            
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
     }
-
-    public void addSeizoen() {
-    }
+    
+    
 
     public void addTeam() {
     }
@@ -97,20 +73,8 @@ public class DriverManager {
     public void addSpeler(String voornaam, String achternaam, Date geboortedatum, String voorkeurspositie) { // hoe date ingeven in gui
         Speler nieuweSpeler = new Speler(voornaam, achternaam, geboortedatum, voorkeurspositie);//aangepast door jorn 23/11
     }
-    
-    
-    
-    public static void main(String[] args) throws DBException {
-        //commentaar test push/pull fase 2
-        DriverManager dm = new DriverManager();
-        int a = dm.playedMinutesGame(2,1);
-        System.out.println("Gespeelde minuten van speler 2 in wedstrijd 1 van seizoen 2015: " +a);
-        int b = dm.playedMinutesSeason(2);
-        System.out.println("Gespeelde minuten van speler 2 in seizoen 2015: " +b);
-    }
-    
 
-    public static Opstelling getOpstelling(int wedstrijdnr, int lidnr, int opstellingnr) throws DBException {
+    public Opstelling getOpstelling(int wedstrijdnr, int lidnr, int opstellingnr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -147,7 +111,7 @@ public class DriverManager {
         }
     }
 
-    public static ArrayList<Opstelling> getOpstellingenGame(int wedstrijdnr, int lidnr) throws DBException {
+    public ArrayList<Opstelling> getOpstellingenGame(int wedstrijdnr, int lidnr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -173,8 +137,8 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
-    public static ArrayList<Opstelling> getOpstellingenSeason(int lidnr) throws DBException {
+
+    public ArrayList<Opstelling> getOpstellingenSeason(int lidnr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -225,11 +189,8 @@ public class DriverManager {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return playedMinutesSeason;
-   
+
     }
-    
-    
-   
 
     public static Connection getConnection() throws DBException {
         Connection con = null;

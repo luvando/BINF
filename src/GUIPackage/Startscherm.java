@@ -5,7 +5,10 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -132,7 +135,12 @@ public class Startscherm extends javax.swing.JFrame {
 
     private void BestaandeCompetitieButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BestaandeCompetitieButtonActionPerformed
         // bestaande competitie bewerken
-        KeuzeSchermBestaandeCompetitie updateForm = new KeuzeSchermBestaandeCompetitie(dManager);
+        KeuzeSchermBestaandeCompetitie updateForm = null;
+        try {
+            updateForm = new KeuzeSchermBestaandeCompetitie(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(Startscherm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BestaandeCompetitieButtonActionPerformed
@@ -152,7 +160,12 @@ public class Startscherm extends javax.swing.JFrame {
 
     private void GegevensOpvragenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GegevensOpvragenButtonActionPerformed
         // TODO add your handling code here:
-        CompetitieOpvragen updateForm = new CompetitieOpvragen(dManager);
+        CompetitieOpvragen updateForm = null;
+        try {
+            updateForm = new CompetitieOpvragen(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(Startscherm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_GegevensOpvragenButtonActionPerformed
