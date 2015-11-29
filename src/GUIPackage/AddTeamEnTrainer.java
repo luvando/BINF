@@ -39,16 +39,16 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        Stamnummer = new javax.swing.JTextField();
+        Naam = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        Thuisarena = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        VoornaamTrainer = new javax.swing.JTextField();
+        GeboortedatumTrainer = new javax.swing.JTextField();
+        AchternaamTrainer = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         CancelButton = new javax.swing.JButton();
         AddSpelerButton = new javax.swing.JButton();
@@ -60,9 +60,9 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
 
         jLabel2.setText("Naam");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Stamnummer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                StamnummerActionPerformed(evt);
             }
         });
 
@@ -74,21 +74,21 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
 
         jLabel6.setText("Geboortedatum");
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        VoornaamTrainer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                VoornaamTrainerActionPerformed(evt);
             }
         });
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        GeboortedatumTrainer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                GeboortedatumTrainerActionPerformed(evt);
             }
         });
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        AchternaamTrainer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                AchternaamTrainerActionPerformed(evt);
             }
         });
 
@@ -123,10 +123,10 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(GeboortedatumTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField4)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))))
+                                .addComponent(AchternaamTrainer)
+                                .addComponent(VoornaamTrainer, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -134,15 +134,15 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Stamnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel2)
                                         .addComponent(jLabel3))
                                     .addGap(38, 38, 38)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(Thuisarena, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Naam, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 86, Short.MAX_VALUE)))
                 .addContainerGap(171, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -158,15 +158,15 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Stamnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Naam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Thuisarena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -174,14 +174,14 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(VoornaamTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(AchternaamTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6))
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(GeboortedatumTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton)
@@ -192,21 +192,21 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void StamnummerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StamnummerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_StamnummerActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void VoornaamTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoornaamTrainerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_VoornaamTrainerActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void GeboortedatumTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeboortedatumTrainerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_GeboortedatumTrainerActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void AchternaamTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AchternaamTrainerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_AchternaamTrainerActionPerformed
 
     private void AddSpelerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpelerButtonActionPerformed
         // TODO add your handling code here:
@@ -257,8 +257,14 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AchternaamTrainer;
     private javax.swing.JButton AddSpelerButton;
     private javax.swing.JButton CancelButton;
+    private javax.swing.JTextField GeboortedatumTrainer;
+    private javax.swing.JTextField Naam;
+    private javax.swing.JTextField Stamnummer;
+    private javax.swing.JTextField Thuisarena;
+    private javax.swing.JTextField VoornaamTrainer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -266,11 +272,5 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
