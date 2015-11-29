@@ -5,13 +5,12 @@
  */
 package ijshockey;
 
+import java.util.*;
+import java.io.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +21,15 @@ public class DriverManager {
     public DriverManager() {
     }
 
-    public void add(Competitie c) throws DBException {
+    public static void main(String[] args) throws DBException {
+
+        GUIPackage.AddNieuweCompetitie anc = new GUIPackage.AddNieuweCompetitie(new DriverManager());
+        anc.setVisible(true);
+    }
+    
+    
+    
+    public static void add(Competitie c) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -42,7 +49,7 @@ public class DriverManager {
         }
     }
 
-    public void add(Seizoen s) throws DBException {
+    public static void add(Seizoen s) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -64,17 +71,7 @@ public class DriverManager {
     
     
 
-    public void addTeam() {
-    }
-
-    public void addTrainer() {
-    }
-
-    public void addSpeler(String voornaam, String achternaam, Date geboortedatum, String voorkeurspositie) { // hoe date ingeven in gui
-        Speler nieuweSpeler = new Speler(voornaam, achternaam, geboortedatum, voorkeurspositie);//aangepast door jorn 23/11
-    }
-
-    public Opstelling getOpstelling(int wedstrijdnr, int lidnr, int opstellingnr) throws DBException {
+    public static Opstelling getOpstelling(int wedstrijdnr, int lidnr, int opstellingnr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -111,7 +108,7 @@ public class DriverManager {
         }
     }
 
-    public ArrayList<Opstelling> getOpstellingenGame(int wedstrijdnr, int lidnr) throws DBException {
+    public static ArrayList<Opstelling> getOpstellingenGame(int wedstrijdnr, int lidnr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -138,7 +135,7 @@ public class DriverManager {
         }
     }
 
-    public ArrayList<Opstelling> getOpstellingenSeason(int lidnr) throws DBException {
+    public static ArrayList<Opstelling> getOpstellingenSeason(int lidnr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -165,7 +162,7 @@ public class DriverManager {
         }
     }
 
-    public int playedMinutesGame(int lidnr, int wedstrijdnr) {
+    public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
         int playedMinutesGame = 0;
         try {
             ArrayList<Opstelling> opstellingen = getOpstellingenGame(wedstrijdnr, lidnr);
@@ -178,7 +175,7 @@ public class DriverManager {
         return playedMinutesGame;
     }
 
-    public int playedMinutesSeason(int lidnr) {
+    public static int playedMinutesSeason(int lidnr) {
         int playedMinutesSeason = 0;
         try {
             ArrayList<Opstelling> opstellingen = getOpstellingenSeason(lidnr);

@@ -5,7 +5,14 @@
  */
 package GUIPackage;
 
+import ijshockey.Competitie;
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTextField;
 
 /**
  *
@@ -13,7 +20,7 @@ import ijshockey.DriverManager;
  */
 public class AddNieuweCompetitie extends javax.swing.JFrame {
 
-    public static ijshockey.DriverManager dManager;
+    private DriverManager dManager;
 
     /**
      * Creates new form AddNieuweCompetitie
@@ -22,10 +29,11 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
         initComponents();
     }
 
-    public AddNieuweCompetitie(DriverManager dManger) {
+    public AddNieuweCompetitie(DriverManager dManager) {
 
         this.dManager = dManager;
         initComponents();
+        Store.addActionListener(new EventHandler(this));
     }
 
 //    public addNieuweCompetitie(DriverManager passedManager) {
@@ -42,11 +50,12 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        competitienaam = new javax.swing.JTextField();
         CancelButton = new javax.swing.JButton();
         AddTeamButton = new javax.swing.JButton();
         AddScheidsrechterButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
+        Store = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nieuwe Competitie");
@@ -81,6 +90,8 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
             }
         });
 
+        Store.setText("Store");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,8 +100,10 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
                 .addGap(94, 94, 94)
                 .addComponent(jLabel1)
                 .addGap(29, 29, 29)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addComponent(competitienaam, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Store)
+                .addContainerGap(27, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -103,11 +116,12 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
+                .addGap(87, 87, 87)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                    .addComponent(competitienaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Store))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(AddScheidsrechterButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AddTeamButton)
@@ -186,8 +200,35 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
     private javax.swing.JButton AddScheidsrechterButton;
     private javax.swing.JButton AddTeamButton;
     private javax.swing.JButton CancelButton;
+    private javax.swing.JButton Store;
     private javax.swing.JButton VorigeButton;
+    private javax.swing.JTextField competitienaam;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    public String getCompetitieNaam() {
+        return competitienaam.getText();
+    }
+
+    private class EventHandler implements ActionListener
+    {
+        private AddNieuweCompetitie form;
+        public EventHandler(AddNieuweCompetitie anc)
+        {
+            form = anc;
+        }
+        public void actionPerformed(ActionEvent e)
+        {
+            if (e.getSource() == Store)
+            {
+                Competitie c = new Competitie(form.getCompetitieNaam());
+                
+                try {
+                    form.dManager.add(c);
+                } catch (DBException ex) {
+                    Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 }
