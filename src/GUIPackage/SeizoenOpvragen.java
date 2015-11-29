@@ -20,6 +20,8 @@ import java.util.logging.Logger;
  */
 public class SeizoenOpvragen extends javax.swing.JFrame {
     public static ijshockey.DriverManager dManager;
+    
+    
 
     public SeizoenOpvragen() {
         initComponents();
