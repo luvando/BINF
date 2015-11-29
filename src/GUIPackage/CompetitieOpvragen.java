@@ -5,25 +5,53 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import static ijshockey.DriverManager.closeConnection;
+import static ijshockey.DriverManager.getConnection;
+import java.sql.*;
+import javax.swing.*;
 
-/**
- *
- * @author Wim
- */
+
 public class CompetitieOpvragen extends javax.swing.JFrame {
 
     public static DriverManager dManager;
-    /**
-     * Creates new form CompetieOpvragen
-     */
+    
+    final void FillList() throws DBException{
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement();
+
+            String sql = "SELECT * FROM competitie ";
+            
+            ResultSet srs = stmt.executeQuery(sql);
+            
+            DefaultListModel DLM = new DefaultListModel();
+            
+            while(srs.next()) {
+                DLM.addElement(srs.getString(1));
+            }
+            
+            LijstCompetities.setModel(DLM);
+  
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+        
+    }
+    
+
     public CompetitieOpvragen() {
         initComponents();
     }
     
-    public CompetitieOpvragen(DriverManager dManager) {
+    public CompetitieOpvragen(DriverManager dManager) throws DBException {
         this.dManager = dManager;
         initComponents();
+        FillList();
     }
 
     /**
@@ -36,7 +64,7 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        LijstCompetities = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
         CancelButton = new javax.swing.JButton();
         VolgendeButton = new javax.swing.JButton();
@@ -45,12 +73,7 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Competitie kiezen");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(LijstCompetities);
 
         jLabel1.setText("Kies competitie");
 
@@ -83,10 +106,10 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(jLabel1)
                 .addGap(78, 78, 78)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(109, Short.MAX_VALUE)
                 .addComponent(VolgendeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(VorigeButton)
@@ -99,12 +122,12 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton)
                     .addComponent(VolgendeButton)
@@ -173,10 +196,10 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
+    private javax.swing.JList LijstCompetities;
     private javax.swing.JButton VolgendeButton;
     private javax.swing.JButton VorigeButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

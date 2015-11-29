@@ -5,7 +5,14 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import static ijshockey.DriverManager.closeConnection;
+import static ijshockey.DriverManager.getConnection;
+import javax.swing.*;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,9 +20,7 @@ import ijshockey.DriverManager;
  */
 public class SeizoenOpvragen extends javax.swing.JFrame {
     public static ijshockey.DriverManager dManager;
-    /**
-     * Creates new form SeizoenOpvragen
-     */
+
     public SeizoenOpvragen() {
         initComponents();
     }
@@ -36,7 +41,7 @@ public class SeizoenOpvragen extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        LijstSeizoenen = new javax.swing.JList();
         VolgendeButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
@@ -48,12 +53,7 @@ public class SeizoenOpvragen extends javax.swing.JFrame {
 
         jLabel1.setText("kies seizoen ");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(LijstSeizoenen);
 
         VolgendeButton.setText("Volgende");
         VolgendeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +103,7 @@ public class SeizoenOpvragen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton)
                     .addComponent(VolgendeButton)
@@ -128,7 +128,12 @@ public class SeizoenOpvragen extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        CompetitieOpvragen updateForm = new CompetitieOpvragen(dManager);
+        CompetitieOpvragen updateForm = null;
+        try {
+            updateForm = new CompetitieOpvragen(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(SeizoenOpvragen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
         
@@ -171,11 +176,11 @@ public class SeizoenOpvragen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
+    private javax.swing.JList LijstSeizoenen;
     private javax.swing.JButton VolgendeButton;
     private javax.swing.JButton VorigeButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

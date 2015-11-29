@@ -5,25 +5,58 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import static ijshockey.DriverManager.closeConnection;
+import static ijshockey.DriverManager.getConnection;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
+
+
 
 /**
  *
  * @author ekmaes
  */
 public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
+     final void FillList() throws DBException{
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement();
 
+            String sql = "SELECT * FROM competitie ";
+            
+            ResultSet srs = stmt.executeQuery(sql);
+            
+            DefaultListModel DLM = new DefaultListModel();
+            
+            while(srs.next()) {
+                DLM.addElement(srs.getString(1));
+            }
+            
+            LijstCompetities.setModel(DLM);
+  
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+        
+    }
+    
     public static DriverManager dManager;
-    /**
-     * Creates new form KeuzeSchermBestaandeCompetitie
-     */
+
     public KeuzeSchermBestaandeCompetitie() {
         initComponents();
     }
     
-     public KeuzeSchermBestaandeCompetitie(DriverManager dManager) {
+     public KeuzeSchermBestaandeCompetitie(DriverManager dManager) throws DBException {
         this.dManager = dManager;
         initComponents();
+        FillList();
     }
 
     /**
@@ -37,7 +70,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        LijstCompetities = new javax.swing.JList();
         CancelButton = new javax.swing.JButton();
         CompetitieBewerkenButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
@@ -47,12 +80,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
 
         jLabel1.setText("Selecteer competitie");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(LijstCompetities);
 
         CancelButton.setText("Beëindig");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +121,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
                         .addComponent(VorigeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CancelButton)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +130,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton)
                     .addComponent(CompetitieBewerkenButton)
@@ -170,9 +198,9 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton CompetitieBewerkenButton;
+    private javax.swing.JList LijstCompetities;
     private javax.swing.JButton VorigeButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
