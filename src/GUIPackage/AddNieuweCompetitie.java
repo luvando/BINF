@@ -21,7 +21,7 @@ import javax.swing.JTextField;
  */
 public class AddNieuweCompetitie extends javax.swing.JFrame {
 
-    private DriverManager dManager;
+    private static DriverManager dManager;
 
     /**
      * Creates new form AddNieuweCompetitie

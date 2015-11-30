@@ -24,7 +24,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
     final void FillLijstCompetities() throws DBException {
         Connection con = null;
         try {
-            con = dManager.getConnection();
+            con = DriverManager.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM competitie ";
@@ -41,7 +41,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            dManager.closeConnection(con);
+            DriverManager.closeConnection(con);
             throw new DBException(ex);
         }
 
