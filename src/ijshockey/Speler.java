@@ -15,13 +15,12 @@ import java.util.HashMap;
  */
 public class Speler extends Lid {
 
-    
     private String voorkeurpositie;
     private int goals;
     private int assists;
     private int penaltys;
     private int speelminuten;
-    private Team team;
+    private Team team; //waarom team en niet stamnr?
 
     public Speler(int lidnr, String voornaam, String achternaam, Date geboortedatum, String voorkeurpositie, int goals, int assists, int penaltys, int speelminuten, Team team) {
         super(lidnr, voornaam, achternaam, geboortedatum);
@@ -37,12 +36,18 @@ public class Speler extends Lid {
         return team;
     }
 
-    @Override
-    public String toString() {
+    public String toStringSpelerRanking() {
         return super.getVoornaam() + " " + super.getAchternaam() + ": " + goals + " goals";
     }
-    
-    
-    
-    
+
+    public String toStringSpelerRapport() {
+        return super.getVoornaam() + " " + super.getAchternaam() + "\n"
+                + "---------------------" + "\n"
+                + "aantal doelpunten: " + goals + "\n"
+                + "aantal assists: " + assists + "\n"
+                + "aantal penalty's: " + penaltys + "\n"
+                + "aantal speelminuten: " + speelminuten + "\n";
+
+    }
+
 }
