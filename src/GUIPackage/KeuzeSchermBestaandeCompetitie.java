@@ -7,8 +7,8 @@ package GUIPackage;
 
 import ijshockey.DBException;
 import ijshockey.DriverManager;
-import static ijshockey.DriverManager.closeConnection;
-import static ijshockey.DriverManager.getConnection;
+//import ijshockey.DriverManager.closeConnection;
+//import ijshockey.DriverManager.getConnection;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -256,7 +256,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
     private void LijstCompetitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstCompetitiesValueChanged
         Connection con = null;
         try {
-            con = getConnection();
+            con = dManager.getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             String sql = "SELECT jaar FROM seizoen WHERE competitienaam = " + "'" + LijstCompetities.getSelectedValue() + "'";
