@@ -229,7 +229,7 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
                 Competitie c = new Competitie(form.getCompetitieNaam());
                 
                 try {
-                    form.dManager.add(c);
+                    form.dManager.addComp(c);
                     
                     JOptionPane.showMessageDialog(null, "Competitie opgeslagen!");
                 } catch (DBException ex) {

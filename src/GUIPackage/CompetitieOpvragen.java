@@ -7,14 +7,13 @@ package GUIPackage;
 
 import ijshockey.DBException;
 import ijshockey.DriverManager;
-import static ijshockey.DriverManager.closeConnection;
-import static ijshockey.DriverManager.getConnection;
+//import static ijshockey.DriverManager.closeConnection;
+//import static ijshockey.DriverManager.getConnection;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.text.Position;
-
 
 public class CompetitieOpvragen extends javax.swing.JFrame {
 
@@ -24,39 +23,39 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
+
     public CompetitieOpvragen(DriverManager dManager) throws DBException {
         this.dManager = dManager;
         initComponents();
         FillList();
         setLocationRelativeTo(null);
-        
+
     }
-    
-    final void FillList() throws DBException{
+
+    final void FillList() throws DBException {
         Connection con = null;
         try {
-            con = getConnection();
+            con = dManager.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM competitie ";
-            
+
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             DefaultListModel DLM = new DefaultListModel();
-            
-            while(srs.next()) {
+
+            while (srs.next()) {
                 DLM.addElement(srs.getString(1));
             }
-            
+
             LijstCompetities.setModel(DLM);
-  
-        }catch (Exception ex) {
+
+        } catch (Exception ex) {
             ex.printStackTrace();
-            closeConnection(con);
+            dManager.closeConnection(con);
             throw new DBException(ex);
         }
-        
+
     }
 
     /**
@@ -193,7 +192,7 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
         Startscherm updateForm = new Startscherm(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
@@ -203,30 +202,30 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
 
     private void LijstCompetitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstCompetitiesValueChanged
         // TODO add your handling code here:
-         Connection con = null;
+        Connection con = null;
         try {
-            con = getConnection();
+            con = dManager.getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT jaar FROM seizoen WHERE competitienaam = "+"'"+LijstCompetities.getSelectedValue()+"'";
-            
+            String sql = "SELECT jaar FROM seizoen WHERE competitienaam = " + "'" + LijstCompetities.getSelectedValue() + "'";
+
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             DefaultListModel DLM2 = new DefaultListModel();
-            
-            while(srs.next()) {
+
+            while (srs.next()) {
                 DLM2.addElement(srs.getString("jaar"));
             }
-            
+
             LijstSeizoenen.setModel(DLM2);
-  
-        }catch (SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
-            closeConnection(con);
+            dManager.closeConnection(con);
         } catch (DBException ex) {
-             Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
+            Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_LijstCompetitiesValueChanged
 
     /**

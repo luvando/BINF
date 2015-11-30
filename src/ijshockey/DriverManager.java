@@ -29,7 +29,7 @@ public class DriverManager {
 //    
     
     
-    public static void add(Competitie c) throws DBException {
+    public void addComp(Competitie c) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -49,7 +49,7 @@ public class DriverManager {
         }
     }
 
-    public static void add(Seizoen s) throws DBException {
+    public void addSeizoen(Seizoen s) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -71,7 +71,7 @@ public class DriverManager {
     
     
 
-    public static Opstelling getOpstelling(int wedstrijdnr, int lidnr, int opstellingnr) throws DBException {
+    public Opstelling getOpstelling(int wedstrijdnr, int lidnr, int opstellingnr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -108,7 +108,7 @@ public class DriverManager {
         }
     }
 
-    public static ArrayList<Opstelling> getOpstellingenGame(int wedstrijdnr, int lidnr) throws DBException {
+    public ArrayList<Opstelling> getOpstellingenGame(int wedstrijdnr, int lidnr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -135,7 +135,7 @@ public class DriverManager {
         }
     }
 
-    public static ArrayList<Opstelling> getOpstellingenSeason(int lidnr) throws DBException {
+    public ArrayList<Opstelling> getOpstellingenSeason(int lidnr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -162,7 +162,7 @@ public class DriverManager {
         }
     }
 
-    public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
+    public int playedMinutesGame(int lidnr, int wedstrijdnr) {
         int playedMinutesGame = 0;
         try {
             ArrayList<Opstelling> opstellingen = getOpstellingenGame(wedstrijdnr, lidnr);
@@ -175,7 +175,7 @@ public class DriverManager {
         return playedMinutesGame;
     }
 
-    public static int playedMinutesSeason(int lidnr) {
+    public int playedMinutesSeason(int lidnr) {
         int playedMinutesSeason = 0;
         try {
             ArrayList<Opstelling> opstellingen = getOpstellingenSeason(lidnr);
@@ -189,7 +189,7 @@ public class DriverManager {
 
     }
 
-    public static Connection getConnection() throws DBException {
+    public Connection getConnection() throws DBException {
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -216,7 +216,7 @@ public class DriverManager {
         }
     }
 
-    public static void closeConnection(Connection con) {
+    public void closeConnection(Connection con) {
         try {
             con.close();
         } catch (SQLException sqle) {

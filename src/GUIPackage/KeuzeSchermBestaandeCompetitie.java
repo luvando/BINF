@@ -15,37 +15,36 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.text.Position;
 
-
-
 /**
  *
  * @author ekmaes
  */
 public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
-     final void FillLijstCompetities() throws DBException{
+
+    final void FillLijstCompetities() throws DBException {
         Connection con = null;
         try {
-            con = getConnection();
+            con = dManager.getConnection();
             Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM competitie ";
-            
+
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             DefaultListModel DLM = new DefaultListModel();
-            
-            while(srs.next()) {
+
+            while (srs.next()) {
                 DLM.addElement(srs.getString(1));
             }
-            
+
             LijstCompetities.setModel(DLM);
-  
-        }catch (Exception ex) {
+
+        } catch (Exception ex) {
             ex.printStackTrace();
-            closeConnection(con);
+            dManager.closeConnection(con);
             throw new DBException(ex);
         }
-        
+
     }
 
     public static DriverManager dManager;
@@ -53,8 +52,8 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
     public KeuzeSchermBestaandeCompetitie() {
         initComponents();
     }
-    
-     public KeuzeSchermBestaandeCompetitie(DriverManager dManager) throws DBException {
+
+    public KeuzeSchermBestaandeCompetitie(DriverManager dManager) throws DBException {
         this.dManager = dManager;
         initComponents();
         FillLijstCompetities();
@@ -260,30 +259,30 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT jaar FROM seizoen WHERE competitienaam = "+"'"+LijstCompetities.getSelectedValue()+"'";
-            
+            String sql = "SELECT jaar FROM seizoen WHERE competitienaam = " + "'" + LijstCompetities.getSelectedValue() + "'";
+
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             DefaultListModel DLM2 = new DefaultListModel();
-            
-            while(srs.next()) {
+
+            while (srs.next()) {
                 DLM2.addElement(srs.getString("jaar"));
             }
-            
+
             LijstSeizoenen.setModel(DLM2);
-  
-        }catch (SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
-            closeConnection(con);
+            dManager.closeConnection(con);
         } catch (DBException ex) {
-             Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
+            Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_LijstCompetitiesValueChanged
 
     private void LijstSeizoenenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstSeizoenenValueChanged
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_LijstSeizoenenValueChanged
 
     private void SearchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextActionPerformed
@@ -300,32 +299,31 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
         // TODO add your handling code here:
         Connection con = null;
         try {
-            con = getConnection();
+            con = dManager.getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "INSERT INTO seizoen (competitienaam, jaar) "+" VALUES ('"+LijstCompetities.getSelectedValue()+"', '"+NieuwSeizoen.getText()+"')";
-            
+            String sql = "INSERT INTO seizoen (competitienaam, jaar) " + " VALUES ('" + LijstCompetities.getSelectedValue() + "', '" + NieuwSeizoen.getText() + "')";
+
             stmt.execute(sql);
-            
+
             DefaultListModel DLM2 = new DefaultListModel();
-            
-            String query = "SELECT jaar FROM seizoen WHERE competitienaam = "+"'"+LijstCompetities.getSelectedValue()+"'";
-            
+
+            String query = "SELECT jaar FROM seizoen WHERE competitienaam = " + "'" + LijstCompetities.getSelectedValue() + "'";
+
             ResultSet srs = stmt.executeQuery(query);
-            
-            while(srs.next()) {
+
+            while (srs.next()) {
                 DLM2.addElement(srs.getString("jaar"));
             }
-            
+
             LijstSeizoenen.setModel(DLM2);
-            
-  
-        }catch (SQLException ex) {
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
-            closeConnection(con);
+            dManager.closeConnection(con);
         } catch (DBException ex) {
-             Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_NieuwSeizoenButtonActionPerformed
 
     private void AddWedstrijdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddWedstrijdButtonActionPerformed

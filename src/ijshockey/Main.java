@@ -17,6 +17,7 @@ public class Main {
         DriverManager dm = new DriverManager();
         Startscherm st = new Startscherm(dm);
         st.setVisible(true);
+        
 
 //        //Test speelminuten berekenen
 //       
