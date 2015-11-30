@@ -26,9 +26,6 @@ public class Seizoen {
         this.jaar = jaar;
     }
 
-    
-
-
     public Team searchTeam(int stamNr) { // Viktor 24/11 search methode + setPunten
         for (Team t : teams) {
             if (t.getStamNr() == stamNr) {
@@ -40,17 +37,14 @@ public class Seizoen {
 
     public void setPuntenATeam(int stamNr) {
         Team t = this.searchTeam(stamNr);
-        t.setPunten(t.getAantalGewonnen(), t.getAantalGelijk());
-
+        t.setPunten(); //hier ook aangepast
     }
 
     public void setPuntenAllTeams() {
         for (Team t : teams) {
             this.setPuntenATeam(t.getStamNr());
         }
-
     }
-//getters en setters
 
     public String getCompetitienaam() {
         return competitienaam;

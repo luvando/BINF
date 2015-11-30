@@ -1,4 +1,5 @@
 package ijshockey;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -14,14 +15,10 @@ import java.util.Collections;
 public class Competitie {
 
     public String competitienaam; // PK
-   
 
     public Competitie(String competitienaam) {
         this.competitienaam = competitienaam;
     }
-
-    
-    
 
     public String getCompetitienaam() {
         return competitienaam;
@@ -30,10 +27,5 @@ public class Competitie {
     public void setCompetitienaam(String competitienaam) {
         this.competitienaam = competitienaam;
     }
-    
 
-
-
- 
-    
 }

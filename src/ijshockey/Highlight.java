@@ -13,16 +13,13 @@ public class Highlight {
 
     public String highlightId; //PK
     private int tijdstip;
-    public String lidId ; // LidId meegeven!!! */
-
+    public String lidId; // LidId meegeven!!
 
     public Highlight(int tijdstip, String LidId) {
         this.tijdstip = tijdstip;
-        
-    }
-   
 
-//getters en setters
+    }
+
     public String getHighlightId() {
         return highlightId;
     }
@@ -38,10 +35,5 @@ public class Highlight {
     public void setTijdstip(int tijdstip) {
         this.tijdstip = tijdstip;
     }
-
-   
-
-   
-    
 
 }

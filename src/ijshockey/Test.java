@@ -16,9 +16,9 @@ public class Test {
 
     public static void main(String[] args) throws DBException {
         DriverManager dm = new DriverManager();
-        DriverManager.printTeamRanking();
-        DriverManager.printSpelerRanking();
-        DriverManager.printTeamRapport(1);
-        
+        DriverManager.printTeamRanking(); //werkt
+        DriverManager.printSpelerRanking(); //werkt
+        DriverManager.printTeamRapport(1); //werkt
+        DriverManager.printSpelerRapport(2);
     }
 }

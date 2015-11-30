@@ -18,7 +18,6 @@ public class Straf extends Highlight {
         super(tijdstip, LidId);
     }
 
-//getters en setters
     public int getAantalMinAf() {
         return aantalMinAf;
     }

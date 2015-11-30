@@ -164,9 +164,8 @@ public class DriverManager {
             }
 
             closeConnection(con);
-            System.out.println();
             for (Speler s : rankedplayers) {
-                System.out.println(s.toString());
+                System.out.println(s.toStringSpelerRanking());
             }
         } catch (DBException dbe) {
             dbe.printStackTrace();
@@ -177,6 +176,10 @@ public class DriverManager {
             closeConnection(con);
             throw new DBException(ex);
         }
+    }
+    
+    public static void printSpelerRapport(int lidnr) throws DBException {
+        System.out.println(getSpeler(lidnr).toStringSpelerRapport());
     }
 
     public static Team getTeam(int stamnr) throws DBException {
@@ -214,7 +217,7 @@ public class DriverManager {
                 verloren = srs.getInt("verloren");
                 goalsvoor = srs.getInt("goalsvoor");
                 goalstegen = srs.getInt("goalstegen");
-                penaltys= srs.getInt("penaltys");
+                penaltys = srs.getInt("penaltys");
                 lidnr_trainer = srs.getInt("lidnr_trainer");
 
             } else {
@@ -250,7 +253,6 @@ public class DriverManager {
             }
 
             closeConnection(con);
-            System.out.println();
             for (Team t : rankedteams) {
                 System.out.println(t.toStringTeamRanking());
             }
@@ -264,12 +266,10 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
-    public static void printTeamRapport(int stamNr) throws DBException 
-    {
+
+    public static void printTeamRapport(int stamNr) throws DBException {
         System.out.println(getTeam(stamNr).toStringTeamRapport());
     }
-            
 
     public static Opstelling getOpstelling(int wedstrijdnr, int lidnr, int opstellingnr) throws DBException {
         Connection con = null;

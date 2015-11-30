@@ -15,9 +15,4 @@ public class Assist extends Highlight {
         super(tijdstip, LidId);
     }
 
-    
-
-    
-    // linken aan een goal? 
-
 }

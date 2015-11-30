@@ -17,15 +17,11 @@ public class Goal extends Highlight {
         super(tijdstip, LidId);
     }
 
-
-  
-
     public Assist getAssist() {
         return assist;
     }
 
-    public void setAssist(String LidId) {
+    public void setAssist(Assist assist) {
         this.assist = assist;
     }
-    
 }

@@ -42,16 +42,10 @@ public class Team {
         this.lidnr_trainer = lidnr_trainer;
     }
 
-    
-
-    
-
-    public void setPunten(int aantalGewonnen, int aantalGelijk) { // Viktor 24//11 , zou dit werken?
-
-        this.punten = 2 * aantalGewonnen + 1 * aantalGelijk;
+    public void setPunten() { // Viktor 24//11 , zou dit werken? /aangepast door Jorn
+        this.punten = 2 * this.getAantalGewonnen() + 1 * this.getAantalGelijk();
     }
 
-    
     public int getAantalVerloren() {
         return aantalVerloren;
     }
@@ -63,9 +57,6 @@ public class Team {
     public void setAantalGelijk(int aantalGelijk) {
         this.aantalGelijk = aantalGelijk;
     }
-//getters en setters
-
- 
 
     public int getStamNr() {
         return stamNr;
@@ -107,39 +98,35 @@ public class Team {
         return aantalGelijk;
     }
 
+    //hulpmethodes voor ranking en rapport
     public String toStringTeamRanking() {
         return naam + ": " + punten + " punten (" + aantalGespeeld + " wedstrijden)";
     }
-    
+
     public String toStringTeamRapport() {
         int doelpuntenSaldo = doelpuntenVoor - doelpuntenTegen;
         int goalsPerGame;
         int penaltysPerGame;
-        if (aantalGespeeld==0) {
+        if (aantalGespeeld == 0) {
             goalsPerGame = 0;
             penaltysPerGame = 0;
         } else {
-            goalsPerGame = (doelpuntenVoor-aantalGespeeld); 
-            penaltysPerGame = (penaltys-aantalGespeeld);
-        } 
-            
-        return naam + "\n" + 
-                "---------------------" + "\n" + 
-                "aantal gespeelde wedstrijden: " + aantalGespeeld + "\n" +
-                "aantal punten: " + punten + "\n" + 
-                "aantal gewonnen wedstrijden: " + aantalGewonnen + "\n" +
-                "aantal gelijkgespeelde wedstrijden: " + aantalGelijk + "\n" +
-                "aantal verloren wedstrijden: " + aantalVerloren + "\n" +
-                "doelpuntensaldo: " + doelpuntenSaldo + "\n" +
-                "totaal aantal penalty's: " + penaltys + "\n" + 
-                "aantal doelpunten per wedstrijd: " + goalsPerGame + "\n" +
-                "aantal penalty's per wedstrijd: " + penaltysPerGame ;
-                
-                
-                
-                
-    }
+            goalsPerGame = (doelpuntenVoor - aantalGespeeld);
+            penaltysPerGame = (penaltys - aantalGespeeld);
+        }
 
-    
+        return naam + "\n"
+                + "---------------------" + "\n"
+                + "aantal gespeelde wedstrijden: " + aantalGespeeld + "\n"
+                + "aantal punten: " + punten + "\n"
+                + "aantal gewonnen wedstrijden: " + aantalGewonnen + "\n"
+                + "aantal gelijkgespeelde wedstrijden: " + aantalGelijk + "\n"
+                + "aantal verloren wedstrijden: " + aantalVerloren + "\n"
+                + "doelpuntensaldo: " + doelpuntenSaldo + "\n"
+                + "totaal aantal penalty's: " + penaltys + "\n"
+                + "aantal doelpunten per wedstrijd: " + goalsPerGame + "\n"
+                + "aantal penalty's per wedstrijd: " + penaltysPerGame;
+
+    }
 
 }

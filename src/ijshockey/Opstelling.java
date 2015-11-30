@@ -17,16 +17,12 @@ public class Opstelling {
     private int tijdstipIn;
     private int tijdstipUit;
 
-    public Opstelling() {
-    }
- 
     public Opstelling(String positie, int tijdstipIn, int tijdstipUit) {
         this.positie = positie;
         this.tijdstipIn = tijdstipIn;
         this.tijdstipUit = tijdstipUit;
     }
 
-//getters en setters
     public String getPositie() {
         return positie;
     }
@@ -56,5 +52,4 @@ public class Opstelling {
         return "Opstelling{" + "positie=" + positie + ", tijdstipIn=" + tijdstipIn + ", tijdstipUit=" + tijdstipUit + '}';
     }
 
-    
 }

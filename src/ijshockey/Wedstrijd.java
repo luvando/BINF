@@ -24,7 +24,6 @@ public class Wedstrijd {
     private Boolean gespeeld; 
     private ArrayList<Opstelling> opstelling;
 
-//getters en setters    
     public int getWedstrijdNr() {
         return wedstrijdNr;
     }

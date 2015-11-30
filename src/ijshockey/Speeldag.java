@@ -17,7 +17,12 @@ public class Speeldag {
     private Wedstrijd wedstrijd;
     private ArrayList<Wedstrijd> wedstrijden;
 
-//getters en setters
+    public Speeldag(int speeldagNr, Wedstrijd wedstrijd, ArrayList<Wedstrijd> wedstrijden) {
+        this.speeldagNr = speeldagNr;
+        this.wedstrijd = wedstrijd;
+        this.wedstrijden = wedstrijden;
+    }
+
     public int getSpeeldagNr() {
         return speeldagNr;
     }

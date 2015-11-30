@@ -19,14 +19,11 @@ public class Lid {
     private String voornaam;
     private String achternaam;
     private Date geboortedatum;
-//    private Seizoen seizoen;
-//    private int year = this.seizoen.getJaar();
 
     public Lid(int lidnr, String voornaam, String achternaam, Date geboortedatum) {
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.geboortedatum = geboortedatum;
-
     }
 
     public String getVoornaam() {
