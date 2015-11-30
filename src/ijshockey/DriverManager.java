@@ -5,12 +5,14 @@
  */
 package ijshockey;
 
+import GUIPackage.Startscherm;
 import java.util.*;
 import java.io.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import java.util.Date;
 
 /**
  *
@@ -21,14 +23,41 @@ public class DriverManager {
     public DriverManager() {
     }
 
-//    public static void main(String[] args) throws DBException {
-//
-//        GUIPackage.AddNieuweCompetitie anc = new GUIPackage.AddNieuweCompetitie(new DriverManager());
-//        anc.setVisible(true);
-//    }
-//    
-    
-    
+    public static void main(String[] args) throws DBException { // Start programma methode!!
+        DriverManager dm = new DriverManager();
+        Startscherm st = new Startscherm(dm);
+        st.setVisible(true);
+
+//        //Test speelminuten berekenen
+//       
+//        int a = DriverManager.playedMinutesGame(2,1);
+//        System.out.println("Gespeelde minuten van speler 2 in wedstrijd 1 van seizoen 2015: " +a);
+//        int b = DriverManager.playedMinutesSeason(2);
+//        System.out.println("Gespeelde minuten van speler 2 in seizoen 2015: " +b);
+//        
+//        
+//        //Test gegevens toevoegen aan database
+//        
+//        Competitie c = new Competitie("BeneLeague");
+//        DriverManager.add(c);
+//        Seizoen s = new Seizoen(c.getCompetitienaam(),2015);
+//        DriverManager.add(s);
+//        
+//        /*Opmerking: SQL om rijen terug te verwijderen in phpmyadmin:
+//         SET FOREIGN_KEY_CHECKS=0; 
+//         DELETE FROM seizoen
+//         WHERE competitienaam='BeneLeague';
+//         DELETE FROM competitie
+//         WHERE competitienaam='BeneLeague';
+//         SET FOREIGN_KEY_CHECKS=1; */
+//        
+//        //Test database updaten
+    }
+
+    public static void updateDB() {
+        //gegevens spelers en teams berekenen en in database steken na elke speeldag
+    }
+
     public static void addComp(Competitie c) throws DBException {
         Connection con = null;
         try {
@@ -37,9 +66,9 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "INSERT into competitie "
-                        + "(competitienaam) "
-                        + "VALUES ('" + c.getCompetitienaam()+ "')";
-                stmt.executeUpdate(sql);
+                    + "(competitienaam) "
+                    + "VALUES ('" + c.getCompetitienaam() + "')";
+            stmt.executeUpdate(sql);
 
             closeConnection(con);
         } catch (Exception ex) {
@@ -58,9 +87,9 @@ public class DriverManager {
 
             String sql = "INSERT into seizoen "
                     + "(competitienaam, jaar) "
-                    + "VALUES ('" + s.getCompetitienaam()+ "', '" + s.getJaar() + "')";
+                    + "VALUES ('" + s.getCompetitienaam() + "', '" + s.getJaar() + "')";
             stmt.executeUpdate(sql);
-            
+
             closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -68,8 +97,179 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
+
+    public static Speler getSpeler(int lidnr) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT * "
+                    + "FROM speler "
+                    + "WHERE lidnr = " + lidnr;
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            String voornaam;
+            String achternaam;
+            Date geboortedatum;
+            String voorkeurpositie;
+            int goals;
+            int assists;
+            int penaltys;
+            int speelminuten;
+            Team team;
+
+            if (srs.next()) {
+                voornaam = srs.getString("voornaam");
+                achternaam = srs.getString("achternaam");
+                geboortedatum = srs.getDate("geboortedatum");
+                voorkeurpositie = srs.getString("voorkeurpositie");
+                goals = srs.getInt("goals");
+                assists = srs.getInt("assists");
+                penaltys = srs.getInt("penaltys");
+                speelminuten = srs.getInt("speelminuten");
+                team = getTeam(srs.getInt("stamnr"));
+
+            } else {
+                closeConnection(con);
+                return null;
+            }
+            Speler s = new Speler(lidnr, voornaam, achternaam, geboortedatum, voorkeurpositie, goals, assists, penaltys, speelminuten, team);
+            closeConnection(con);
+            return s;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+    public static void printSpelerRanking() throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT lidnr "
+                    + "FROM speler "
+                    + "ORDER BY goals DESC";
+            ResultSet srs = stmt.executeQuery(sql);
+
+            ArrayList<Speler> rankedplayers = new ArrayList<Speler>();
+            while (srs.next()) {
+                rankedplayers.add(getSpeler(srs.getInt("lidnr")));
+            }
+
+            closeConnection(con);
+            System.out.println();
+            for (Speler s : rankedplayers) {
+                System.out.println(s.toString());
+            }
+        } catch (DBException dbe) {
+            dbe.printStackTrace();
+            closeConnection(con);
+            throw dbe;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+    public static Team getTeam(int stamnr) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT * "
+                    + "FROM team "
+                    + "WHERE stamnr = " + stamnr;
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            String naam;
+            String thuisarena;
+            int punten;
+            int gespeeld;
+            int gewonnen;
+            int gelijk;
+            int verloren;
+            int goalsvoor;
+            int goalstegen;
+            int penaltys;
+            int lidnr_trainer;
+
+            if (srs.next()) {
+                naam = srs.getString("naam");
+                thuisarena = srs.getString("thuisarena");
+                punten = srs.getInt("punten");
+                gespeeld = srs.getInt("gespeeld");
+                gewonnen = srs.getInt("gewonnen");
+                gelijk = srs.getInt("gespeeld");
+                verloren = srs.getInt("verloren");
+                goalsvoor = srs.getInt("goalsvoor");
+                goalstegen = srs.getInt("goalstegen");
+                penaltys= srs.getInt("penaltys");
+                lidnr_trainer = srs.getInt("lidnr_trainer");
+
+            } else {
+                closeConnection(con);
+                return null;
+            }
+            Team t = new Team(stamnr, naam, thuisarena, punten, gespeeld, gewonnen, verloren, gelijk, goalsvoor, goalstegen, penaltys, lidnr_trainer);
+
+            closeConnection(con);
+            return t;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+    public static void printTeamRanking() throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT stamnr "
+                    + "FROM team "
+                    + "ORDER BY punten DESC";
+            ResultSet srs = stmt.executeQuery(sql);
+
+            ArrayList<Team> rankedteams = new ArrayList<Team>();
+            while (srs.next()) {
+                rankedteams.add(getTeam(srs.getInt("stamnr")));
+            }
+
+            closeConnection(con);
+            System.out.println();
+            for (Team t : rankedteams) {
+                System.out.println(t.toStringTeamRanking());
+            }
+        } catch (DBException dbe) {
+            dbe.printStackTrace();
+            closeConnection(con);
+            throw dbe;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
     
-    
+    public static void printTeamRapport(int stamNr) throws DBException 
+    {
+        System.out.println(getTeam(stamNr).toStringTeamRapport());
+    }
+            
 
     public static Opstelling getOpstelling(int wedstrijdnr, int lidnr, int opstellingnr) throws DBException {
         Connection con = null;

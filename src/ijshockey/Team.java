@@ -13,7 +13,7 @@ import java.util.HashMap;
  *
  * @author favdndor
  */
-public class Team implements Comparable {
+public class Team {
 
     private int stamNr; //PK
     private String naam;
@@ -23,77 +23,35 @@ public class Team implements Comparable {
     private int aantalGewonnen;
     private int aantalVerloren;
     private int aantalGelijk;
-    private HashMap<Integer, String> resultaten; // wedstrijdnummer,gewonnen/verloren/gelijk
-    private ArrayList<Speler> spelers;
-    private ArrayList<Lid> leden;
-    private Trainer trainer;
     private int doelpuntenVoor;
     private int doelpuntenTegen;
-    private int doelpuntenSaldo = doelpuntenVoor - doelpuntenTegen;
-    private int goalsperwedstrijd;
-    private int penaltysperwedstrijd;
+    private int lidnr_trainer;
+    private int penaltys;
 
-    public Team(int stamNr, String naam, String arena) {
-        this.thuisArena = arena;
-        this.naam = naam;
+    public Team(int stamNr, String naam, String thuisArena, int punten, int aantalGespeeld, int aantalGewonnen, int aantalVerloren, int aantalGelijk, int doelpuntenVoor, int doelpuntenTegen, int penaltys, int lidnr_trainer) {
         this.stamNr = stamNr;
-        spelers = new ArrayList<>();
+        this.naam = naam;
+        this.thuisArena = thuisArena;
+        this.punten = punten;
+        this.aantalGespeeld = aantalGespeeld;
+        this.aantalGewonnen = aantalGewonnen;
+        this.aantalVerloren = aantalVerloren;
+        this.aantalGelijk = aantalGelijk;
+        this.doelpuntenVoor = doelpuntenVoor;
+        this.doelpuntenTegen = doelpuntenTegen;
+        this.lidnr_trainer = lidnr_trainer;
     }
 
-    public void addTrainer(String voornaam, String achternaam, Date geboortedatum) {
-        Trainer tr = new Trainer(voornaam, achternaam, geboortedatum);
-        this.setTrainer(tr);
-    }
+    
+
+    
 
     public void setPunten(int aantalGewonnen, int aantalGelijk) { // Viktor 24//11 , zou dit werken?
 
         this.punten = 2 * aantalGewonnen + 1 * aantalGelijk;
     }
 
-    @Override
-    public int compareTo(Object o) { // VIktor 24/ 11 compareTo adhv punten of aantal gewonnen of doelpuntensaldo
-        if (o != null) {
-            if (o.getClass() == this.getClass()) {
-                Team other = (Team) o;
-                if (other.getStamNr() != this.getStamNr()) {
-                    if (this.getPunten() > other.getPunten()) {
-                        return 1;
-
-                    }
-                    if (this.getPunten() == other.getPunten()) {
-                        if (this.getAantalGewonnen() > other.getPunten()) {
-                            return 1;
-                        }
-                        if (this.getAantalGewonnen() == other.getPunten()) {
-                            if (this.getDoelpuntenSaldo() > other.getDoelpuntenSaldo()) {
-                                return 1;
-                            } else {
-                                return -1;
-                            }
-                        }
-
-                    }
-                    if (this.getPunten() < other.getPunten()) {
-                        return -1;
-                    }
-                }
-
-            }
-
-        }
-        return 0;
-    }
-
-    public Lid searchLid(String LidId) { // Viktor 24/11 kan ook voor spelers etc gebruikt worden
-        for (Lid l : leden) {
-            if (l.getLidId().equals(LidId)) {
-                return l;
-            }
-        }
-        return null;
-
-    }
-
+    
     public int getAantalVerloren() {
         return aantalVerloren;
     }
@@ -107,9 +65,7 @@ public class Team implements Comparable {
     }
 //getters en setters
 
-    public int getDoelpuntenSaldo() {
-        return doelpuntenSaldo;
-    }
+ 
 
     public int getStamNr() {
         return stamNr;
@@ -151,28 +107,39 @@ public class Team implements Comparable {
         return aantalGelijk;
     }
 
-    public HashMap<Integer, String> getResultaten() {
-        return resultaten;
+    public String toStringTeamRanking() {
+        return naam + ": " + punten + " punten (" + aantalGespeeld + " wedstrijden)";
+    }
+    
+    public String toStringTeamRapport() {
+        int doelpuntenSaldo = doelpuntenVoor - doelpuntenTegen;
+        int goalsPerGame;
+        int penaltysPerGame;
+        if (aantalGespeeld==0) {
+            goalsPerGame = 0;
+            penaltysPerGame = 0;
+        } else {
+            goalsPerGame = (doelpuntenVoor-aantalGespeeld); 
+            penaltysPerGame = (penaltys-aantalGespeeld);
+        } 
+            
+        return naam + "\n" + 
+                "---------------------" + "\n" + 
+                "aantal gespeelde wedstrijden: " + aantalGespeeld + "\n" +
+                "aantal punten: " + punten + "\n" + 
+                "aantal gewonnen wedstrijden: " + aantalGewonnen + "\n" +
+                "aantal gelijkgespeelde wedstrijden: " + aantalGelijk + "\n" +
+                "aantal verloren wedstrijden: " + aantalVerloren + "\n" +
+                "doelpuntensaldo: " + doelpuntenSaldo + "\n" +
+                "totaal aantal penalty's: " + penaltys + "\n" + 
+                "aantal doelpunten per wedstrijd: " + goalsPerGame + "\n" +
+                "aantal penalty's per wedstrijd: " + penaltysPerGame ;
+                
+                
+                
+                
     }
 
-    public void setResultaten(HashMap<Integer, String> resultaten) {
-        this.resultaten = resultaten;
-    }
-
-    public ArrayList<Speler> getSpelers() {
-        return spelers;
-    }
-
-    public void setSpelers(ArrayList<Speler> spelers) {
-        this.spelers = spelers;
-    }
-
-    public Trainer getTrainer() {
-        return trainer;
-    }
-
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
-    }
+    
 
 }

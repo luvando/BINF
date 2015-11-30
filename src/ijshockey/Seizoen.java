@@ -28,12 +28,6 @@ public class Seizoen {
 
     
 
-    public void addTeamEnTrainer(int stamNr, String naam, String arena, String voornaam, String achternaam, Date geboortedatum) {
-        Team t = new Team(stamNr, naam, arena);
-        t.addTrainer(voornaam, achternaam, geboortedatum);
-        teams.add(t);
-
-    }
 
     public Team searchTeam(int stamNr) { // Viktor 24/11 search methode + setPunten
         for (Team t : teams) {
@@ -55,11 +49,6 @@ public class Seizoen {
             this.setPuntenATeam(t.getStamNr());
         }
 
-    }
-
-    public ArrayList<Team> getRankedTeams() {
-        Collections.sort(teams);
-        return this.getTeams();
     }
 //getters en setters
 

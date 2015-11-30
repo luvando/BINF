@@ -15,80 +15,34 @@ import java.util.HashMap;
  */
 public class Speler extends Lid {
 
-    private ArrayList<Goal> goals;
-    private ArrayList<Assist> assists;
-    private ArrayList<Penalty> penaltys;
-    //geen int maar arraylists toch? //Jorn 24/11
     
-    private String voorkeurspositie;
-    private int speelMinuten;
-    private Team team;//jorn 23/11
-    
-    
-    public Speler(String voornaam, String achternaam, Date geboortedatum, String voorkeurspositie) {
-        super(voornaam, achternaam, geboortedatum);
-        this.voorkeurspositie = voorkeurspositie;
-        this.lidId = voornaam.substring(0, 1).toUpperCase() 
-                + achternaam.substring(0, 1).toUpperCase() + "s" /* + geboortedatum + nr*/ ;        
+    private String voorkeurpositie;
+    private int goals;
+    private int assists;
+    private int penaltys;
+    private int speelminuten;
+    private Team team;
+
+    public Speler(int lidnr, String voornaam, String achternaam, Date geboortedatum, String voorkeurpositie, int goals, int assists, int penaltys, int speelminuten, Team team) {
+        super(lidnr, voornaam, achternaam, geboortedatum);
+        this.voorkeurpositie = voorkeurpositie;
+        this.goals = goals;
+        this.assists = assists;
+        this.penaltys = penaltys;
+        this.speelminuten = DriverManager.playedMinutesSeason(lidnr);
+        this.team = team;
     }
 
-//getters en setters
-//    public int getGoals() {
-//        return goals;
-//    }
-//
-//    public void setGoals(int goals) {
-//        this.goals = goals;
-//    }
-//
-//    public int getAssists() {
-//        return assists;
-//    }
-//
-//    public void setAssists(int assists) {
-//        this.assists = assists;
-//    }
-//
-//    public int getPenaltys() {
-//        return penaltys;
-//    }
-//
-//    public void setPenaltys(int penaltys) {
-//        this.penaltys = penaltys;
-//    }
-
-    public String getVoorkeurspositie() {
-        return voorkeurspositie;
-    }
-
-    public void setVoorkeurspositie(String voorkeurspositie) {
-        this.voorkeurspositie = voorkeurspositie;
-    }
-
-    public int getSpeelMinuten() {
-        return speelMinuten;
-    }
-
-    public void setSpeelMinuten(int speelMinuten) {
-        this.speelMinuten = speelMinuten;
-    }
-
-    //Jorn 23/11
     public Team getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    @Override
+    public String toString() {
+        return super.getVoornaam() + " " + super.getAchternaam() + ": " + goals + " goals";
     }
-
-    public String getLidId() {
-        return lidId;
-    }
-
-    public void setLidId(String lidId) {
-        this.lidId = lidId;
-    }
+    
+    
     
     
 }

@@ -15,33 +15,19 @@ import java.util.Date;
  */
 public class Lid {
 
-    public String lidId; // PK of nummer
+    public int lidnr; // PK of nummer
     private String voornaam;
     private String achternaam;
     private Date geboortedatum;
 //    private Seizoen seizoen;
 //    private int year = this.seizoen.getJaar();
 
-    public Lid(String voornaam, String achternaam, Date geboortedatum) {
+    public Lid(int lidnr, String voornaam, String achternaam, Date geboortedatum) {
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.geboortedatum = geboortedatum;
 
     }
-
-//    public int setLeeftijd(Date geboortedatum) {
-//        return year - geboortedatum.getYear();
-//    }
-    //  private void duplicateCheck(String voornaam, String achternaam) {
-    //}
-//getters en setters
-    public String getLidId() {
-        return this.lidId;
-    }
-//
-//    public void setLidId(String LidId) {
-//        this.LidId = LidId;
-//    }
 
     public String getVoornaam() {
         return voornaam;

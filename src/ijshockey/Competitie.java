@@ -14,8 +14,7 @@ import java.util.Collections;
 public class Competitie {
 
     public String competitienaam; // PK
-    private ArrayList<Competitie> competities;
-    private ArrayList<Seizoen> seizoenen;
+   
 
     public Competitie(String competitienaam) {
         this.competitienaam = competitienaam;
@@ -23,29 +22,6 @@ public class Competitie {
 
     
     
-    public ArrayList<Team> getTeamsSeizoen(int jaar) { // Viktor 24/11 getTeam adhv seizoen jaar
-        for (Seizoen s : seizoenen) {
-            if (s.getJaar() == jaar) {
-                return s.getTeams();
-
-            }
-
-        }
-        return null;
-    }
-
-    public ArrayList<Team> rankedTeamsSeizoen(int jaar) { // Viktor 24/11 Gerankte teams voor een bepaalde seizoen
-        ArrayList<Team> ranked = null;
-        for (Seizoen s : seizoenen) {
-            if (s.getJaar() == jaar) {
-                s.setPuntenAllTeams();
-
-                ranked = s.getRankedTeams();
-            }
-            return ranked;
-        }
-        return null;
-    }
 
     public String getCompetitienaam() {
         return competitienaam;
@@ -56,21 +32,6 @@ public class Competitie {
     }
     
 
-    public ArrayList<Competitie> getCompetities() {
-        return competities;
-    }
-
-    public void setCompetities(ArrayList<Competitie> competities) {
-        this.competities = competities;
-    }
-
-    public ArrayList<Seizoen> getSeizoenen() {
-        return seizoenen;
-    }
-
-    public void setSeizoenen(ArrayList<Seizoen> seizoenen) {
-        this.seizoenen = seizoenen;
-    }
 
 
  

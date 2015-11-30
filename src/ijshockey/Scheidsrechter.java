@@ -13,8 +13,8 @@ import java.util.Date;
  */
 public class Scheidsrechter extends Lid {
 
-    public Scheidsrechter(String voornaam, String achternaam, Date geboortedatum) {
-        super(voornaam, achternaam, geboortedatum);
+    public Scheidsrechter(int lidnr, String voornaam, String achternaam, Date geboortedatum) {
+        super(lidnr, voornaam, achternaam, geboortedatum);
     }
 
 }

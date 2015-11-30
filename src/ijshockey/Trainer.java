@@ -13,8 +13,8 @@ import java.util.Date;
  */
 public class Trainer extends Lid {
 
-    public Trainer(String voornaam, String achternaam, Date geboortedatum) {
-        super(voornaam, achternaam, geboortedatum);
+    public Trainer(int lidnr, String voornaam, String achternaam, Date geboortedatum) {
+        super(lidnr, voornaam, achternaam, geboortedatum);
         
     }
 
