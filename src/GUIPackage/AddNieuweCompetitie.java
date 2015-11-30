@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -27,6 +28,7 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
      */
     public AddNieuweCompetitie() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     public AddNieuweCompetitie(DriverManager dManager) {
@@ -34,6 +36,7 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
         this.dManager = dManager;
         initComponents();
         Store.addActionListener(new EventHandler(this));
+        setLocationRelativeTo(null);
     }
 
 //    public addNieuweCompetitie(DriverManager passedManager) {
@@ -209,10 +212,12 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
     public String getCompetitieNaam() {
         return competitienaam.getText();
     }
+    
+    private AddNieuweCompetitie form;
 
     private class EventHandler implements ActionListener
     {
-        private AddNieuweCompetitie form;
+        
         public EventHandler(AddNieuweCompetitie anc)
         {
             form = anc;
@@ -225,6 +230,8 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
                 
                 try {
                     form.dManager.add(c);
+                    
+                    JOptionPane.showMessageDialog(null, "Competitie opgeslagen!");
                 } catch (DBException ex) {
                     Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -27,10 +27,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="SeizoenToevoegenButton" max="32767" attributes="0"/>
                   <Component id="TeamToevoegenButton" alignment="1" max="32767" attributes="0"/>
                   <Component id="TeamBewerkenButton" alignment="1" max="32767" attributes="0"/>
-                  <Component id="SeizoenBewerkenButton" alignment="0" max="32767" attributes="0"/>
+                  <Component id="SeizoenBewerkenButton" alignment="0" pref="165" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="194" max="32767" attributes="0"/>
           </Group>
@@ -46,9 +45,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-              <Component id="SeizoenToevoegenButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
               <Component id="SeizoenBewerkenButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="TeamToevoegenButton" min="-2" max="-2" attributes="0"/>
@@ -65,14 +62,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="SeizoenToevoegenButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Seizoen toevoegen"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SeizoenToevoegenButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="TeamToevoegenButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Team toevoegen"/>

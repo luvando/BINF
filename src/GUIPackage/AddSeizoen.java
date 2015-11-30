@@ -5,7 +5,14 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Seizoen;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
 
 /**
  *
@@ -20,11 +27,13 @@ public class AddSeizoen extends javax.swing.JFrame {
      */
     public AddSeizoen() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     AddSeizoen(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -37,11 +46,12 @@ public class AddSeizoen extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        Jaar = new javax.swing.JTextField();
         AddWedstrijdButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
         BewerkSpeeldagButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
+        Store = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Seizoen Toevoegen");
@@ -76,6 +86,8 @@ public class AddSeizoen extends javax.swing.JFrame {
             }
         });
 
+        Store.setText("Store");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,8 +96,10 @@ public class AddSeizoen extends javax.swing.JFrame {
                 .addGap(95, 95, 95)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addComponent(Jaar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Store)
+                .addContainerGap(48, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -98,11 +112,13 @@ public class AddSeizoen extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Jaar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Store))
                     .addComponent(jLabel1))
-                .addGap(59, 59, 59)
+                .addGap(57, 57, 57)
                 .addComponent(BewerkSpeeldagButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AddWedstrijdButton)
@@ -181,8 +197,18 @@ public class AddSeizoen extends javax.swing.JFrame {
     private javax.swing.JButton AddWedstrijdButton;
     private javax.swing.JButton BewerkSpeeldagButton;
     private javax.swing.JButton CancelButton;
+    private javax.swing.JTextField Jaar;
+    private javax.swing.JButton Store;
     private javax.swing.JButton VorigeButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+     public String getJaar() {
+        return Jaar.getText();
+    }
+    
+
+
+
+
+
 }

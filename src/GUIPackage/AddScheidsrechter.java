@@ -19,11 +19,13 @@ public class AddScheidsrechter extends javax.swing.JFrame {
      */
     public AddScheidsrechter() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     AddScheidsrechter(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

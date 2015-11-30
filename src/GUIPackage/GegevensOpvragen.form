@@ -28,7 +28,7 @@
               <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="RapportTeamButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="RapportSpelerButton" alignment="0" pref="200" max="32767" attributes="0"/>
+                  <Component id="RapportSpelerButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="RankingTeamsButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="RankingSpelersButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="PenaltysPerTeamButton" alignment="0" max="32767" attributes="0"/>

@@ -23,12 +23,13 @@ public class Startscherm extends javax.swing.JFrame {
      */
     public Startscherm() {
         initComponents();
-
+        setLocationRelativeTo(null);
     }
 
     public Startscherm(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

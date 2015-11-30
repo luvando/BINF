@@ -39,7 +39,6 @@ public class BewerkCompetitieScherm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SeizoenToevoegenButton = new javax.swing.JButton();
         TeamToevoegenButton = new javax.swing.JButton();
         TeamBewerkenButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
@@ -48,13 +47,6 @@ public class BewerkCompetitieScherm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bewerken");
-
-        SeizoenToevoegenButton.setText("Seizoen toevoegen");
-        SeizoenToevoegenButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SeizoenToevoegenButtonActionPerformed(evt);
-            }
-        });
 
         TeamToevoegenButton.setText("Team toevoegen");
         TeamToevoegenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -98,10 +90,9 @@ public class BewerkCompetitieScherm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(SeizoenToevoegenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TeamToevoegenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TeamBewerkenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SeizoenBewerkenButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(SeizoenBewerkenButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
                 .addContainerGap(194, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -113,9 +104,7 @@ public class BewerkCompetitieScherm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(SeizoenToevoegenButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(102, 102, 102)
                 .addComponent(SeizoenBewerkenButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TeamToevoegenButton)
@@ -130,13 +119,6 @@ public class BewerkCompetitieScherm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void SeizoenToevoegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeizoenToevoegenButtonActionPerformed
-        // TODO add your handling code here:
-         AddSeizoen updateForm = new AddSeizoen(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_SeizoenToevoegenButtonActionPerformed
 
     private void TeamToevoegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamToevoegenButtonActionPerformed
         // TODO add your handling code here:
@@ -216,7 +198,6 @@ public class BewerkCompetitieScherm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton SeizoenBewerkenButton;
-    private javax.swing.JButton SeizoenToevoegenButton;
     private javax.swing.JButton TeamBewerkenButton;
     private javax.swing.JButton TeamToevoegenButton;
     private javax.swing.JButton VorigeButton;
