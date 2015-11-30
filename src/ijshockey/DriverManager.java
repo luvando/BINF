@@ -21,12 +21,12 @@ public class DriverManager {
     public DriverManager() {
     }
 
-    public static void main(String[] args) throws DBException {
-
-        GUIPackage.AddNieuweCompetitie anc = new GUIPackage.AddNieuweCompetitie(new DriverManager());
-        anc.setVisible(true);
-    }
-    
+//    public static void main(String[] args) throws DBException {
+//
+//        GUIPackage.AddNieuweCompetitie anc = new GUIPackage.AddNieuweCompetitie(new DriverManager());
+//        anc.setVisible(true);
+//    }
+//    
     
     
     public static void add(Competitie c) throws DBException {
