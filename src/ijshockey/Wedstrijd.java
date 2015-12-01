@@ -25,7 +25,7 @@ public class Wedstrijd {
     private Boolean gespeeld;
     private Speeldag sp;
 
-    public Wedstrijd(Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {       
+    public Wedstrijd(Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
         this.wedstrijdNr = wedstrijdNr;
         this.thuisTeam = thuisTeam;
         this.uitTeam = uitTeam;
@@ -45,7 +45,6 @@ public class Wedstrijd {
         this.arena = arena;
         this.scoreThuisTeam = score_thuis;
         this.scoreUitTeam = score_thuis;
-
         this.datum = datum;
         gespeeld = true;
     }
@@ -106,14 +105,6 @@ public class Wedstrijd {
         this.scheidsrechter = scheidsrechter;
     }
 
-
-
-
-
-
-
-
-
     public String getDatum() {
         return datum;
     }
@@ -137,24 +128,14 @@ public class Wedstrijd {
     public void setSp(Speeldag sp) {
         this.sp = sp;
     }
-    
-    
 
-    
     public String printWedstrijd() {
         return thuisTeam.getNaam() + " - " + uitTeam.getNaam() + " " + datum;
     }
-        
+
     @Override
     public String toString() {
         return thuisTeam + " - " + uitTeam + " " + datum;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

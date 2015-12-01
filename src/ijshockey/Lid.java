@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public class Lid {
 
-    public int lidnr; // PK of nummer
+    public int lidnr; //nodig?
     private String voornaam;
     private String achternaam;
     private String geboortedatum;

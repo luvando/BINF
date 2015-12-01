@@ -15,13 +15,7 @@ public class Trainer extends Lid {
 
     public Trainer(String voornaam, String achternaam, String geboortedatum) {
         super(voornaam, achternaam, geboortedatum);
-        
-    }
 
-    public int getLidnr() {
-        return lidnr;
     }
-    
-    
 
 }

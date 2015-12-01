@@ -18,7 +18,7 @@ public class Team {
     private int stamNr; //PK
     private String naam;
     private String thuisArena;
-    private int punten; // Berekenen uit gewonnen verloren?
+    private int punten;
     private int aantalGespeeld;
     private int aantalGewonnen;
     private int aantalVerloren;
@@ -28,7 +28,6 @@ public class Team {
     private int lidnr_trainer;
     private int penaltys;
     private int dps = doelpuntenVoor - doelpuntenTegen;
-
 
     public Team(int stamNr, String naam, String thuisArena, int punten, int aantalGespeeld, int aantalGewonnen, int aantalVerloren, int aantalGelijk, int doelpuntenVoor, int doelpuntenTegen, int penaltys, int lidnr_trainer) {
         this.stamNr = stamNr;
@@ -108,9 +107,6 @@ public class Team {
         return aantalGelijk;
     }
 
-
-    
-
     //hulpmethodes voor ranking en rapport
     public String toStringTeamRanking() {
         return naam + ": " + punten + " punten (" + aantalGespeeld + " wedstrijden, doelpuntensaldo: " + dps + ")";
@@ -140,5 +136,4 @@ public class Team {
                 + "aantal penalty's per wedstrijd: " + penaltysPerGame;
 
     }
-
 }

@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 public class Penalty extends Goal {
 
     private int gescoord;
-    public Penalty(int minuut, int lidnr, int wedstrijdNr, int gescoord) 
-    {
+
+    public Penalty(int minuut, int lidnr, int wedstrijdNr, int gescoord) {
         super(minuut, lidnr, wedstrijdNr);
         this.gescoord = gescoord;
     }
@@ -29,18 +29,14 @@ public class Penalty extends Goal {
 //            return 0;
 //        }
 //    }
-    
-    
-
     /*public int isGescoordIntBoolean(boolean gescoord) {
-        //penalty gescoord = 1 , als gescoord Boolean is.
-        if (gescoord) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }*/
-
+     //penalty gescoord = 1 , als gescoord Boolean is.
+     if (gescoord) {
+     return 1;
+     } else {
+     return 0;
+     }
+     }*/
     public int getGescoord() {
         return gescoord;
     }
@@ -48,10 +44,11 @@ public class Penalty extends Goal {
     public void setGescoord(int gescoord) {
         this.gescoord = gescoord;
     }
+
     @Override
-public String toString() {
+    public String toString() {
         String s = null;
-        
+
         try {
             s = "Penalty" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
         } catch (DBException ex) {
@@ -59,7 +56,6 @@ public String toString() {
         }
         return s;
 
-    }    
-    
+    }
 
 }
