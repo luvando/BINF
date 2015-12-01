@@ -382,7 +382,6 @@ public class DriverManager {
     }
 
 //speler
-//>>>>>>> Ijshockey/master
     public static void addSpeler(Speler s) throws DBException {
         Connection con = null;
         try {
@@ -403,52 +402,7 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-//<<<<<<< HEAD
-
-    public static void addTrainer(Trainer s) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "INSERT into trainer "
-                    + "(voornaam, achternaam, geboortedatum) "
-                    + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '" + s.getGeboortedatum() + "')";
-            stmt.executeUpdate(sql);
-
-            closeConnection(con);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
-    }
-
-    public static void addTeam(Team t, String competitie, int seizoen) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "INSERT into team "
-                    + "(stamnr, naam, thuisarena) "
-                    + "VALUES ('" + t.getStamNr() + "', '" + t.getNaam() + "', '" + t.getThuisArena() + "')";
-            stmt.executeUpdate(sql);
-            String sql2 = "INSERT into deelname "
-                    + "(competitienaam,seizoen, stamnr) "
-                    + "VALUES ('" + competitie + "', '" + seizoen + "', '" + t.getStamNr() + "')";
-            stmt.executeUpdate(sql2);
-
-            closeConnection(con);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
-    }
-
+    
     public static Speler getSpeler(int lidnr) throws DBException {
         Connection con = null;
         try {
@@ -560,9 +514,50 @@ public class DriverManager {
 
     }
 //trainer
+    public static void addTrainer(Trainer s) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
+            String sql = "INSERT into trainer "
+                    + "(voornaam, achternaam, geboortedatum) "
+                    + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '" + s.getGeboortedatum() + "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
 //team
-    //addTeam
+    public static void addTeam(Team t, String competitie, int seizoen) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into team "
+                    + "(stamnr, naam, thuisarena) "
+                    + "VALUES ('" + t.getStamNr() + "', '" + t.getNaam() + "', '" + t.getThuisArena() + "')";
+            stmt.executeUpdate(sql);
+            String sql2 = "INSERT into deelname "
+                    + "(competitienaam,seizoen, stamnr) "
+                    + "VALUES ('" + competitie + "', '" + seizoen + "', '" + t.getStamNr() + "')";
+            stmt.executeUpdate(sql2);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
     public static Team getTeam(int stamnr) throws DBException {
         Connection con = null;
         try {
