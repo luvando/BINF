@@ -484,7 +484,16 @@ public class DriverManager {
     }
 
     public static void printSpelerRapport(int lidnr) throws DBException {
-        System.out.println(getSpeler(lidnr).toStringSpelerRapport());
+        
+        Speler s = DriverManager.getSpeler(lidnr);
+        if (s.getPenaltys()>0){
+            System.out.println(getSpeler(lidnr).toStringSpelerRapport());
+            System.out.println(getSpeler(lidnr).toStringSpelerRapportPenalty());
+        }
+        else{
+            System.out.println(getSpeler(lidnr).toStringSpelerRapport());
+        }
+        
     }
 
     public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
