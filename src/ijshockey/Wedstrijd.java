@@ -122,4 +122,9 @@ public class Wedstrijd {
         this.gespeeld = gespeeld;
     }
 
+    @Override
+    public String toString() {
+        return thuisTeam + " - " + uitTeam + " " + datum;
+    }
+
 }

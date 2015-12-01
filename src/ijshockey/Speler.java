@@ -96,9 +96,6 @@ public class Speler extends Lid {
 
     }
     
-    public String toStringSpelerRapportPenalty() { //extra rapport als speler minstens één penalty heeft genomen
-        String s = null;
-        return s;  
-    }
+    
 
 }

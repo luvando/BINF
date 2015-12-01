@@ -11,27 +11,32 @@ package ijshockey;
  */
 public class Straf extends Highlight {
 
-    private int aantalMinAf;
+    private int aantalMinuten;
     private String reden;
 
-    public Straf(int tijdstip, int lidnr) {
-        super(tijdstip, lidnr);
+    public Straf(int highlightNr, int minuut, String reden, int aantalMinuten, int lidnr, int wedstrijdNr) {
+        super(highlightNr, minuut, lidnr, wedstrijdNr);
+        this.reden = reden;
+        this.aantalMinuten = aantalMinuten;
+        
     }
 
-    public int getAantalMinAf() {
-        return aantalMinAf;
-    }
-
-    public void setAantalMinAf(int aantalMinAf) {
-        this.aantalMinAf = aantalMinAf;
+    public int getAantalMinuten() {
+        return aantalMinuten;
     }
 
     public String getReden() {
         return reden;
     }
 
+    public void setAantalMinuten(int aantalMinuten) {
+        this.aantalMinuten = aantalMinuten;
+    }
+
     public void setReden(String reden) {
         this.reden = reden;
     }
+
+    
 
 }

@@ -144,82 +144,23 @@ public class DriverManager {
         }
     }
 
-    public static Competitie getCompetitie(String competitienaam) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "SELECT competitienaam "
-                    + "FROM competitie "
-                    + "WHERE competitienaam = " + competitienaam;
-
-            ResultSet srs = stmt.executeQuery(sql);
-
-            Competitie c = new Competitie(competitienaam);
-            closeConnection(con);
-            return c;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
+    public static Competitie getCompetitie(String competitienaam){
+        Competitie c = new Competitie(competitienaam);
+        return c;
     }
 
 //seizoen
     //addSeizoen
-    public static Seizoen getSeizoen(int jaar, String competitienaam) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "SELECT * "
-                    + "FROM seizoen "
-                    + "WHERE competitienaam = " + competitienaam + " AND jaar = " + jaar;
-
-            ResultSet srs = stmt.executeQuery(sql);
-
-            Competitie c = getCompetitie(competitienaam);
-
-            Seizoen s = new Seizoen(c, jaar);
-            closeConnection(con);
-            return s;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
+    public static Seizoen getSeizoen(int jaar, String competitienaam){
+        Seizoen s = new Seizoen(DriverManager.getCompetitie(competitienaam),jaar);
+        return s;
     }
 
 //speeldag   
     //addSpeeldag
-    public static Speeldag getSpeeldag(String competitienaam, int jaar, int speeldagnr) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "SELECT * "
-                    + "FROM speeldag "
-                    + "WHERE competitienaam = " + competitienaam + " AND jaar = " + jaar + " AND speeldagnr = " + speeldagnr;
-
-            ResultSet srs = stmt.executeQuery(sql);
-
-            Competitie c = getCompetitie(competitienaam);
-            Seizoen seizoen = getSeizoen(jaar, competitienaam);
-
-            Speeldag s = new Speeldag(c, seizoen, speeldagnr);
-            closeConnection(con);
-            return s;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
+    public static Speeldag getSpeeldag(String competitienaam, int jaar, int speeldagnr){
+        Speeldag s = new Speeldag(DriverManager.getCompetitie(competitienaam), DriverManager.getSeizoen(jaar, competitienaam), speeldagnr);
+        return s;
     }
 
     public static void addSpeeldag(Speeldag sp) throws DBException {
@@ -326,7 +267,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into trainer "
+            String sql = "INSERT into assist "
                     + "(minuut, lidnr, wedstrijdnr) "
                     + "VALUES ('" + a.getMinuut() + "', '" + a.getLidNr() + "', '" + a.getWedstrijdNr() + "')";
             stmt.executeUpdate(sql);
@@ -346,7 +287,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into trainer "
+            String sql = "INSERT into goal "
                     + "(minuut, lidnr, wedstrijdnr, highlightnr_assist) "
                     + "VALUES ('" + g.getMinuut() + "', '" + g.getLidNr() + "', '" + g.getWedstrijdNr() + "', '" + g.getHighlightNr_assist() + "')";
             stmt.executeUpdate(sql);
@@ -366,9 +307,49 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into trainer "
+            String sql = "INSERT into owngoal "
                     + "(minuut, lidnr, wedstrijdnr) "
                     + "VALUES ('" + o.getMinuut() + "', '" + o.getLidNr() + "', '" + o.getWedstrijdNr() + "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+    public static void addPenalty(Penalty p) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into penalty "
+                    + "(minuut, gescoord, lidnr, wedstrijdnr) "
+                    + "VALUES ('" + p.getMinuut() + "', '" + p.getGescoord() + "', '" + p.getLidNr() + "', '" + p.getWedstrijdNr() + "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+    public static void addStraf(Straf s) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into penalty "
+                    + "(minuut, reden, aantal_minuten, lidnr, wedstrijdnr) "
+                    + "VALUES ('" + s.getMinuut() + "', '" + s.getReden() + "', '" + s.getAantalMinuten() + "', '" + s.getLidNr() + "', '" + s.getWedstrijdNr() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
@@ -437,7 +418,6 @@ public class DriverManager {
     }
 
 //speler
-//>>>>>>> Ijshockey/master
     public static void addSpeler(Speler s) throws DBException {
         Connection con = null;
         try {
@@ -450,51 +430,6 @@ public class DriverManager {
                     + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '" + s.getGeboortedatum() + "', '" + s.getVoorkeurpositie() + "', '" + s.getGoals()
                     + "', '" + s.getAssists() + "', '" + s.getPenaltys() + "', '" + s.getSpeelminuten() + "', '" + s.getTeam() + "')";
             stmt.executeUpdate(sql);
-
-            closeConnection(con);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
-    }
-//<<<<<<< HEAD
-
-    public static void addTrainer(Trainer s) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "INSERT into trainer "
-                    + "(voornaam, achternaam, geboortedatum) "
-                    + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '" + s.getGeboortedatum() + "')";
-            stmt.executeUpdate(sql);
-
-            closeConnection(con);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
-    }
-
-    public static void addTeam(Team t, String competitie, int seizoen) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "INSERT into team "
-                    + "(stamnr, naam, thuisarena) "
-                    + "VALUES ('" + t.getStamNr() + "', '" + t.getNaam() + "', '" + t.getThuisArena() + "')";
-            stmt.executeUpdate(sql);
-            String sql2 = "INSERT into deelname "
-                    + "(competitienaam,seizoen, stamnr) "
-                    + "VALUES ('" + competitie + "', '" + seizoen + "', '" + t.getStamNr() + "')";
-            stmt.executeUpdate(sql2);
 
             closeConnection(con);
         } catch (Exception ex) {
@@ -585,7 +520,15 @@ public class DriverManager {
     }
 
     public static void printSpelerRapport(int lidnr) throws DBException {
-        System.out.println(getSpeler(lidnr).toStringSpelerRapport());
+
+        Speler s = DriverManager.getSpeler(lidnr);
+        if (s.getPenaltys() > 0) {
+            System.out.println(getSpeler(lidnr).toStringSpelerRapport());
+
+        } else {
+            System.out.println(getSpeler(lidnr).toStringSpelerRapport());
+        }
+
     }
 
     public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
@@ -616,8 +559,51 @@ public class DriverManager {
     }
 //trainer
 
+    public static void addTrainer(Trainer s) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into trainer "
+                    + "(voornaam, achternaam, geboortedatum) "
+                    + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '" + s.getGeboortedatum() + "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
 //team
-    //addTeam
+    public static void addTeam(Team t, String competitie, int seizoen) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into team "
+                    + "(stamnr, naam, thuisarena) "
+                    + "VALUES ('" + t.getStamNr() + "', '" + t.getNaam() + "', '" + t.getThuisArena() + "')";
+            stmt.executeUpdate(sql);
+            String sql2 = "INSERT into deelname "
+                    + "(competitienaam,seizoen, stamnr) "
+                    + "VALUES ('" + competitie + "', '" + seizoen + "', '" + t.getStamNr() + "')";
+            stmt.executeUpdate(sql2);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
     public static Team getTeam(int stamnr) throws DBException {
         Connection con = null;
         try {
@@ -678,9 +664,9 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT stamnr "
+            String sql = "SELECT stamnr, (goalsvoor - goalstegen) "
                     + "FROM team "
-                    + "ORDER BY punten DESC";
+                    + "ORDER BY punten DESC, (goalsvoor - goalstegen) DESC ";
             ResultSet srs = stmt.executeQuery(sql);
 
             ArrayList<Team> rankedteams = new ArrayList<Team>();
@@ -707,7 +693,147 @@ public class DriverManager {
         System.out.println(getTeam(stamNr).toStringTeamRapport());
     }
 
+//goal
+    public static Goal getGoal(int highlightnr) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT minuut, lidnr, wedstrijdnr "
+                    + "FROM goal "
+                    + "WHERE highlightnr = " + highlightnr;
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            int minuut;
+            int lidnr;
+            int wedstrijdnr;
+
+            if (srs.next()) {
+                minuut = srs.getInt("minuut");
+                lidnr = srs.getInt("lidnr");
+                wedstrijdnr = srs.getInt("wedstrijdnr");
+
+            } else {
+                closeConnection(con);
+                return null;
+            }
+            Goal g = new Goal(highlightnr, minuut, lidnr, wedstrijdnr);
+
+            closeConnection(con);
+            return g;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+    public static void printGoals() throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT highlightnr "
+                    + "FROM goal ";
+            ResultSet srs = stmt.executeQuery(sql);
+
+            ArrayList<Goal> goals = new ArrayList<>();
+            while (srs.next()) {
+                goals.add(getGoal(srs.getInt("highlightnr")));
+            }
+
+            closeConnection(con);
+            for (Goal g : goals) {
+                System.out.println(g.toString());
+            }
+        } catch (DBException dbe) {
+            dbe.printStackTrace();
+            closeConnection(con);
+            throw dbe;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+//penalty
+    public static Penalty getPenalty(int highlightnr) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT minuut, lidnr, wedstrijdnr, gescoord "
+                    + "FROM penalty "
+                    + "WHERE highlightnr = " + highlightnr;
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            int minuut;
+            int lidnr;
+            int wedstrijdnr;
+            int gescoord;
+
+            if (srs.next()) {
+                minuut = srs.getInt("minuut");
+                lidnr = srs.getInt("lidnr");
+                wedstrijdnr = srs.getInt("wedstrijdnr");
+                gescoord = srs.getInt("gescoord");
+
+            } else {
+                closeConnection(con);
+                return null;
+            }
+            Penalty p = new Penalty(highlightnr, minuut, lidnr, wedstrijdnr, gescoord);
+
+            closeConnection(con);
+            return p;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+    public static void printPenaltys() throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT highlightnr "
+                    + "FROM penalty ";
+            ResultSet srs = stmt.executeQuery(sql);
+
+            ArrayList<Penalty> penaltys = new ArrayList<>();
+            while (srs.next()) {
+                penaltys.add(getPenalty(srs.getInt("highlightnr")));
+            }
+
+            closeConnection(con);
+            for (Penalty p : penaltys) {
+                System.out.println(p.toString());
+            }
+        } catch (DBException dbe) {
+            dbe.printStackTrace();
+            closeConnection(con);
+            throw dbe;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
 //opstelling
+
     public static Opstelling getOpstelling(int wedstrijdnr, int lidnr, int opstellingnr) throws DBException {
         Connection con = null;
         try {

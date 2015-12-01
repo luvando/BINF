@@ -1,5 +1,8 @@
 package ijshockey;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,12 +14,11 @@ package ijshockey;
  */
 public class Penalty extends Goal {
 
-    private int gescoordInt;
-    private Boolean gescoordBoo;
-
-    public Penalty(int tijdsstip, int lidnr, Boolean gescoordBoo) { // Viktor 24/11
-        super(tijdsstip, lidnr);
-        this.gescoordInt = this.isGescoordIntBoolean(gescoordBoo);
+    private int gescoord;
+    public Penalty(int highlightNr, int minuut, int lidnr, int wedstrijdNr, int gescoord) 
+    {
+        super(highlightNr, minuut, lidnr, wedstrijdNr);
+        this.gescoord = gescoord;
     }
 
     //this.highlightId = Integer.toString(tijdstip) + lid.getLidId() + "p" + this.isGescoordIntBoolean(gescoordBoo);
@@ -27,12 +29,37 @@ public class Penalty extends Goal {
 //            return 0;
 //        }
 //    }
-    public int isGescoordIntBoolean(Boolean gescoordBoo) { //penalty gescoord = 1 , als gescoord Boolean is.
-        if (gescoordBoo) {
+    
+    
+
+    /*public int isGescoordIntBoolean(boolean gescoord) {
+        //penalty gescoord = 1 , als gescoord Boolean is.
+        if (gescoord) {
             return 1;
         } else {
             return 0;
         }
+    }*/
+
+    public int getGescoord() {
+        return gescoord;
     }
+
+    public void setGescoord(int gescoord) {
+        this.gescoord = gescoord;
+    }
+    @Override
+public String toString() {
+        String s = null;
+        
+        try {
+            s = "Penalty" + " in minuut " + super.getMinuut() + " in wedstrijd " + DriverManager.getWedstrijd(super.getWedstrijdNr()).toString();
+        } catch (DBException ex) {
+            Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return s;
+
+    }    
+    
 
 }
