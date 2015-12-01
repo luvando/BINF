@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -47,7 +48,8 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
         this.FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(competitie, seizoenInt));
         this.FillLijstScheids(ijshockey.DriverManager.FillLijstScheids());
-
+        this.FillLijstTeamthuis(ijshockey.DriverManager.FillLijstTeam(competitie, seizoenInt));
+        this.FillLijstTeamuit(ijshockey.DriverManager.FillLijstTeam(competitie, seizoenInt));
     }
 
     private void FillLijstSpeeldag(ResultSet srs) {
@@ -71,7 +73,9 @@ public class AddWedstrijd extends javax.swing.JFrame {
             DefaultListModel DLM = new DefaultListModel();
 
             while (srs.next()) {
-                DLM.addElement(srs.getString(1));
+                int lidnr = srs.getInt("lidnr");
+                DLM.addElement(DriverManager.getScheids(lidnr).getVoornaam() + " " + DriverManager.getScheids(lidnr).getAchternaam() + " (" + lidnr + ")");
+
             }
 
             jListScheids.setModel(DLM);
@@ -80,6 +84,44 @@ public class AddWedstrijd extends javax.swing.JFrame {
             ex.printStackTrace();
 
         }
+    }
+
+    private void FillLijstTeamthuis(ResultSet srs) {
+        try {
+            DefaultListModel DLM = new DefaultListModel();
+
+            while (srs.next()) {
+                int stamnr = srs.getInt("stamnr");
+                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " (" + stamnr + ")");
+
+            }
+
+            jListThuisteam.setModel(DLM);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+
+    }
+
+    private void FillLijstTeamuit(ResultSet srs) {
+        try {
+            DefaultListModel DLM = new DefaultListModel();
+
+            while (srs.next()) {
+                int stamnr = srs.getInt("stamnr");
+                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " (" + stamnr + ")");
+
+            }
+            DLM.removeElement(jListThuisteam.getSelectedValue());
+            jListUitteam.setModel(DLM);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+
     }
 
     /**
@@ -107,13 +149,15 @@ public class AddWedstrijd extends javax.swing.JFrame {
         CancelButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextUitteam = new javax.swing.JTextField();
-        jTextThuisteam = new javax.swing.JTextField();
         jTextaddSpeeldag = new javax.swing.JTextField();
         jButtonaddSpeeldag = new javax.swing.JButton();
         Store = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListScheids = new javax.swing.JList();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jListThuisteam = new javax.swing.JList();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jListUitteam = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Voeg speeldag en wedstrijd toe");
@@ -150,18 +194,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
         jLabel9.setText("Thuisteam");
 
-        jTextUitteam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextUitteamActionPerformed(evt);
-            }
-        });
-
-        jTextThuisteam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextThuisteamActionPerformed(evt);
-            }
-        });
-
         jTextaddSpeeldag.setText("Voeg speeldag toe");
 
         jButtonaddSpeeldag.setText("Voeg speeldag toe");
@@ -185,6 +217,20 @@ public class AddWedstrijd extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jListScheids);
 
+        jListThuisteam.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(jListThuisteam);
+
+        jListUitteam.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jListUitteam);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,7 +238,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(91, 91, 91)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel7)
@@ -216,45 +261,49 @@ public class AddWedstrijd extends javax.swing.JFrame {
                             .addComponent(jTextScoreUit)
                             .addComponent(jTextScoreThuis)
                             .addComponent(jTextDatum)
-                            .addComponent(jTextArena)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                            .addComponent(jTextUitteam)
-                            .addComponent(jTextThuisteam)
-                            .addComponent(jScrollPane2))
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane4)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextArena, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(29, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jTextaddSpeeldag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonaddSpeeldag)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(41, 41, 41)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextThuisteam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextUitteam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextArena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(54, 54, 54))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextArena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -289,38 +338,32 @@ public class AddWedstrijd extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_OpstellingToevoegenButtonActionPerformed
 
-    private void jTextUitteamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextUitteamActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextUitteamActionPerformed
-
-    private void jTextThuisteamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextThuisteamActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextThuisteamActionPerformed
-    private AddWedstrijd form;
     private void jButtonaddSpeeldagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddSpeeldagActionPerformed
-        jTextaddSpeeldag.setText("");
-        Speeldag sp = new Speeldag(competitie, seizoenInt, form.getjTextaddSpeeldag());
+
+        Speeldag sp = new Speeldag(competitie, seizoenInt, this.getjTextaddSpeeldag());
         try {
             DriverManager.addSpeeldag(sp);
             FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(competitie, seizoenInt));
         } catch (DBException | SQLException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
+        jTextaddSpeeldag.setText("");
     }//GEN-LAST:event_jButtonaddSpeeldagActionPerformed
 
     private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
-//     //   Wedstrijd wed = new Wedstrijd();
-//       // int lidnrScheids = null;
+//        jListThuisteam.getSelectedValue()
+//        Wedstrijd wed = new Wedstrijd(DriverManager.getTeam(
+//        int lidnrScheids = null;
 //        try {
 //
-//            jTextUitteam.setText("");
-//            jTextThuisteam.setText("");
+//            
+//            
 //            jTextScoreUit.setText("");
 //            jTextScoreThuis.setText("");
 //            jTextDatum.setText("");
 //            jTextArena.setText("");
 //            JOptionPane.showMessageDialog(null, "Wedstrijdgegevens opgeslagen!");
-//       // } catch (DBException ex) {
+//        } catch (DBException ex) {
 //            Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
 //        }
      }//GEN-LAST:event_StoreActionPerformed
@@ -360,7 +403,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
             }
         });
     }
-    
+
 //        private class EventHandler implements ActionListener {
 //
 //        private AddWedstrijd form;
@@ -391,7 +434,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
 //        }
 //        }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton OpstellingToevoegenButton;
@@ -407,14 +449,16 @@ public class AddWedstrijd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jListScheids;
     private javax.swing.JList jListSpeeldag;
+    private javax.swing.JList jListThuisteam;
+    private javax.swing.JList jListUitteam;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextArena;
     private javax.swing.JTextField jTextDatum;
     private javax.swing.JTextField jTextScoreThuis;
     private javax.swing.JTextField jTextScoreUit;
-    private javax.swing.JTextField jTextThuisteam;
-    private javax.swing.JTextField jTextUitteam;
     private javax.swing.JTextField jTextaddSpeeldag;
     // End of variables declaration//GEN-END:variables
 
@@ -432,14 +476,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
     public int getjTextScoreUit() {
         return Integer.parseInt(jTextScoreUit.getText());
-    }
-
-    public String getjTextThuisteam() {
-        return jTextThuisteam.getText();
-    }
-
-    public String getjTextUitteam() {
-        return jTextUitteam.getText();
     }
 
     public int getjTextaddSpeeldag() {
