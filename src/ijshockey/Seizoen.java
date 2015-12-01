@@ -15,18 +15,18 @@ import java.util.Date;
  */
 public class Seizoen {
 
-    private String competitienaam;
+    Competitie c;
     private int jaar;
-    private Speeldag speeldag;
+    /*private Speeldag speeldag;
     private ArrayList<Speeldag> speeldagen;
-    private ArrayList<Team> teams;
+    private ArrayList<Team> teams;*/
 
-    public Seizoen(String competitienaam, int jaar) {
-        this.competitienaam = competitienaam;
+    public Seizoen(Competitie c, int jaar) {
+        this.c = c;
         this.jaar = jaar;
     }
 
-    public Team searchTeam(int stamNr) { // Viktor 24/11 search methode + setPunten
+    /*public Team searchTeam(int stamNr) { // Viktor 24/11 search methode + setPunten
         for (Team t : teams) {
             if (t.getStamNr() == stamNr) {
                 return t;
@@ -46,14 +46,6 @@ public class Seizoen {
         }
     }
 
-    public String getCompetitienaam() {
-        return competitienaam;
-    }
-
-    public void setCompetitienaam(String competitienaam) {
-        this.competitienaam = competitienaam;
-    }
-
     public Speeldag getSpeeldag() {
         return speeldag;
     }
@@ -68,7 +60,7 @@ public class Seizoen {
 
     public void setTeams(ArrayList<Team> teams) {
         this.teams = teams;
-    }
+    }*/
 
     public int getJaar() {
         return jaar;
@@ -78,12 +70,14 @@ public class Seizoen {
         this.jaar = jaar;
     }
 
-    public ArrayList<Speeldag> getSpeeldagen() {
+    /*public ArrayList<Speeldag> getSpeeldagen() {
         return speeldagen;
     }
 
     public void setSpeeldagen(ArrayList<Speeldag> speeldagen) {
         this.speeldagen = speeldagen;
-    }
+    }*/
+    
+    
 
 }
