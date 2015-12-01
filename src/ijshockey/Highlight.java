@@ -11,28 +11,52 @@ package ijshockey;
  */
 public class Highlight {
 
-    public String highlightId; //PK
-    private int tijdstip;
-    public int lidnr; // LidId meegeven!!
+    private int highlightNr; //PK
+    private int minuut;
+    private int lidNr; 
+    private int wedstrijdNr;
+    
 
-    public Highlight(int tijdstip, int lidnr) {
-        this.tijdstip = tijdstip;
+    public Highlight(int highlightNr, int minuut, int lidNr, int wedstrijdNr) {
+        this.highlightNr = highlightNr;
+        this.minuut = minuut;
+        this.lidNr = lidNr;
+        this.wedstrijdNr = wedstrijdNr;
     }
 
-    public String getHighlightId() {
-        return highlightId;
+    public int getHighlightNr() {
+        return highlightNr;
     }
 
-    public void setHighlightId(String highlightId) {
-        this.highlightId = highlightId;
+    public int getMinuut() {
+        return minuut;
     }
 
-    public int getTijdstip() {
-        return tijdstip;
+    public int getLidNr() {
+        return lidNr;
     }
 
-    public void setTijdstip(int tijdstip) {
-        this.tijdstip = tijdstip;
+    public int getWedstrijdNr() {
+        return wedstrijdNr;
     }
 
+    public void setWedstrijdNr(int wedstrijdNr) {
+        this.wedstrijdNr = wedstrijdNr;
+    }
+
+    
+    public void setHighlightNr(int highlightNr) {
+        this.highlightNr = highlightNr;
+    }
+
+    public void setMinuut(int minuut) {
+        this.minuut = minuut;
+    }
+
+    public void setLidNr(int lidNr) {
+        this.lidNr = lidNr;
+    }
+    
 }
+
+    
