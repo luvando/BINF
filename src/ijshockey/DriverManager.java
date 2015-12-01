@@ -284,6 +284,37 @@ public class DriverManager {
     }
 
         
+public static Competitie getCompetitie(String competitienaam) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT competitienaam "
+                    + "FROM competitie "
+                    + "WHERE competitienaam = " + competitienaam;
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            String cn;
+
+            if (srs.next()) {
+                cn = srs.getString("competitienaam");
+
+            } else {
+                closeConnection(con);
+                return null;
+            }
+            Competitie c = new Competitie(cn);
+            closeConnection(con);
+            return c;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
 
     public static Speler getSpeler(int lidnr) throws DBException {
         Connection con = null;
