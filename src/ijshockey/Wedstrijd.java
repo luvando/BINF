@@ -123,8 +123,8 @@ public class Wedstrijd {
     }
 
     
-    public String printNaam() {
-        return thuisTeam.toStringNaam() + " - " + uitTeam.toStringNaam() + " " + datum;
+    public String printWedstrijd() {
+        return thuisTeam.getNaam() + " - " + uitTeam.getNaam() + " " + datum;
     }
 
 }

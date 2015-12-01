@@ -108,9 +108,6 @@ public class Team {
         return aantalGelijk;
     }
 
-    public String toStringNaam() {
-        return naam;
-    }
 
     
 

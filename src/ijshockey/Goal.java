@@ -39,7 +39,7 @@ public class Goal extends Highlight {
         String s = null;
         
         try {
-            s = "Goal" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printNaam();
+            s = "Goal" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
         } catch (DBException ex) {
             Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
         }
