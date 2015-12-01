@@ -230,7 +230,7 @@ public class DriverManager {
             if (srs.next()) {
                 c = getCompetitie(srs.getString("competitienaam"));
                 jaar = srs.getInt("jaar");
-                arena = srs.getString("voornaam");
+                arena = srs.getString("arena");
                 datum = srs.getString("datum");
                 gespeeld = srs.getBoolean("gespeeld");
                 score_thuis = srs.getInt("score_thuis");
