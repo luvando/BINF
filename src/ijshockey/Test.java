@@ -18,15 +18,10 @@ public class Test {
      // DriverManager dm = new DriverManager();
        // DriverManager.printTeamRanking(); //werkt
       //  DriverManager.printSpelerRanking(); //werkt
-       // DriverManager.printTeamRapport(1); //werkt
-        //DriverManager.printSpelerRapport(2); //werkt
-        /*DriverManager.getScheids(lidnr);
-        DriverManager.getCompetitie(null);
-        DriverManager.getSeizoen(jaar, null);
-        DriverManager.getSpeeldag(null, jaar, speeldagnr);
-        DriverManager.getSpeler(lidnr);
-        DriverManager.getTeam(stamnr);
-        DriverManager.getWedstrijd(wnr);*/
+        //DriverManager.printTeamRapport(1); //werkt
+        DriverManager.printSpelerRapport(3); //werkt
+        
+        
         //DriverManager.printSpelerRapport(2);
         /*Owngoal o = new Owngoal(2, 16, 2, 1);
         DriverManager.addOwngoal(o);
@@ -36,8 +31,8 @@ public class Test {
         Penalty p = new Penalty(1, 15, 2, 1, 0);
         DriverManager.addPenalty(p);*/
         
-        Goal g = new Goal(15, 2, 1, 3);
-        DriverManager.addGoal(g);
+        //Goal g = new Goal(15, 2, 1, 3);
+        //DriverManager.addGoal(g);
         
 
         

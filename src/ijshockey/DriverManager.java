@@ -599,6 +599,7 @@ public class DriverManager {
             System.out.println(getSpeler(lidnr).toStringSpelerRapport());
             DriverManager.printGoals(lidnr);
             DriverManager.printPenaltys(lidnr);
+            DriverManager.printAssist(lidnr);
         }
 
     }
@@ -823,6 +824,38 @@ public class DriverManager {
             closeConnection(con);
             for (Goal g : goals) {
                 System.out.println(g.toString());
+            }
+        } catch (DBException dbe) {
+            dbe.printStackTrace();
+            closeConnection(con);
+            throw dbe;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
+    public static void printAssist(int lidnr) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT highlightnr "
+                    + "FROM goal "
+                    + "WHERE lidnr_assist = " + lidnr ;
+            ResultSet srs = stmt.executeQuery(sql);
+
+            ArrayList<Goal> goals = new ArrayList<>();
+            while (srs.next()) {
+                goals.add(getGoal(srs.getInt("highlightnr")));
+            }
+
+            closeConnection(con);
+            for (Goal g : goals) {
+                System.out.println(g.toStringAssist());
             }
         } catch (DBException dbe) {
             dbe.printStackTrace();

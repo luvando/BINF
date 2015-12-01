@@ -49,5 +49,18 @@ public class Goal extends Highlight {
         return s;
 
     }
+    
+    public String toStringAssist() {
+        String s = null;
+        
+        try {
+            s = "Assist" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
+        } catch (DBException ex) {
+            Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return s;
+
+    }
+
 
 }
