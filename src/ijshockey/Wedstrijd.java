@@ -109,13 +109,4 @@ public class Wedstrijd {
         this.gespeeld = gespeeld;
     }
 
-    public ArrayList<Opstelling> getOpstelling() {
-        return opstelling;
-    }
-
-    public void setOpstelling(ArrayList<Opstelling> opstelling) {
-        this.opstelling = opstelling;
-    }
-
-    
 }
