@@ -21,16 +21,10 @@ import javax.swing.text.Position;
  */
 public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
 
-    final void FillLijstCompetities() throws DBException {
-        Connection con = null;
+    public static DriverManager dManager;
+
+    public void FillLijst(ResultSet srs) {
         try {
-            con = DriverManager.getConnection();
-            Statement stmt = con.createStatement();
-
-            String sql = "SELECT * FROM competitie ";
-
-            ResultSet srs = stmt.executeQuery(sql);
-
             DefaultListModel DLM = new DefaultListModel();
 
             while (srs.next()) {
@@ -41,22 +35,18 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            DriverManager.closeConnection(con);
-            throw new DBException(ex);
+
         }
-
     }
-
-    public static DriverManager dManager;
 
     public KeuzeSchermBestaandeCompetitie() {
         initComponents();
     }
 
-    public KeuzeSchermBestaandeCompetitie(DriverManager dManager) throws DBException {
+    public KeuzeSchermBestaandeCompetitie(DriverManager dManager) throws DBException, SQLException {
         this.dManager = dManager;
         initComponents();
-        FillLijstCompetities();
+        FillLijst(ijshockey.DriverManager.FillLijstCompetities());
         setLocationRelativeTo(null);
     }
 

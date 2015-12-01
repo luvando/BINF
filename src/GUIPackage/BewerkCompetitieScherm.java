@@ -7,6 +7,7 @@ package GUIPackage;
 
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -152,6 +153,8 @@ public class BewerkCompetitieScherm extends javax.swing.JFrame {
         try {
             updateForm = new KeuzeSchermBestaandeCompetitie(dManager);
         } catch (DBException ex) {
+            Logger.getLogger(BewerkCompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(BewerkCompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
         }
         updateForm.setVisible(true);

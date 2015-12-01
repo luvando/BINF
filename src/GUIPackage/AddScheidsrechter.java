@@ -5,7 +5,17 @@
  */
 package GUIPackage;
 
+import ijshockey.Competitie;
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Scheidsrechter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -14,6 +24,7 @@ import ijshockey.DriverManager;
 public class AddScheidsrechter extends javax.swing.JFrame {
 
     public static DriverManager dManager;
+
     /**
      * Creates new form AddScheidsrechter
      */
@@ -21,11 +32,12 @@ public class AddScheidsrechter extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
-    AddScheidsrechter(DriverManager dManager) {
+
+    public AddScheidsrechter(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
         setLocationRelativeTo(null);
+        Store.addActionListener(new AddScheidsrechter.EventHandler(this));
     }
 
     /**
@@ -40,13 +52,14 @@ public class AddScheidsrechter extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jTextVoornaam = new javax.swing.JTextField();
+        jTextGeboortedatum = new javax.swing.JTextField();
+        jTextNaam = new javax.swing.JTextField();
         AddAnotherScheidsrechterButton = new javax.swing.JButton();
         AddTeamButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
+        Store = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Voeg scheidsrechter toe");
@@ -85,6 +98,13 @@ public class AddScheidsrechter extends javax.swing.JFrame {
             }
         });
 
+        Store.setText("Store");
+        Store.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StoreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,13 +120,17 @@ public class AddScheidsrechter extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextGeboortedatum, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextVoornaam, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(AddTeamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(CancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(VorigeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(89, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Store)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,16 +138,18 @@ public class AddScheidsrechter extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextVoornaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(jTextGeboortedatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Store)
+                .addGap(3, 3, 3)
                 .addComponent(AddAnotherScheidsrechterButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AddTeamButton)
@@ -131,7 +157,7 @@ public class AddScheidsrechter extends javax.swing.JFrame {
                 .addComponent(VorigeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CancelButton)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -162,6 +188,10 @@ public class AddScheidsrechter extends javax.swing.JFrame {
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
+
+    private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StoreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,16 +228,80 @@ public class AddScheidsrechter extends javax.swing.JFrame {
         });
     }
 
+    private class EventHandler implements ActionListener {
+
+        private AddScheidsrechter form;
+
+        public EventHandler(AddScheidsrechter anr) {
+            form = anr;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == Store) {
+
+                Scheidsrechter scheids = new Scheidsrechter(form.getjTextVoornaam(), form.getjTextNaam(), form.getjTextGeboortedatumString());
+                jTextNaam.setText("");
+                jTextVoornaam.setText("");
+                jTextGeboortedatum.setText("");
+                try {
+                    DriverManager.addScheids(scheids);
+
+                    JOptionPane.showMessageDialog(null, "Scheidsrechter opgeslagen!");
+                } catch (DBException ex) {
+                    Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddAnotherScheidsrechterButton;
     private javax.swing.JButton AddTeamButton;
     private javax.swing.JButton CancelButton;
+    private javax.swing.JButton Store;
     private javax.swing.JButton VorigeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextGeboortedatum;
+    private javax.swing.JTextField jTextNaam;
+    private javax.swing.JTextField jTextVoornaam;
     // End of variables declaration//GEN-END:variables
+
+//    public Date getjTextGeboortedatum() {
+//        String datum = this.getjTextGeboortedatumString();
+//        String[] array = datum.split("-");
+//        int year = Integer.parseInt(array[0]);
+//        int month = Integer.parseInt(array[1]);
+//        int day = Integer.parseInt(array[2]);
+//        Date geboortedatum = new Date(year, month, day);
+//        return geboortedatum;
+//
+//    }
+
+    public String getjTextGeboortedatumString() {
+        return jTextGeboortedatum.getText();
+    }
+
+    public void setjTextGeboortedatum(JTextField jTextGeboortedatum) {
+        this.jTextGeboortedatum = jTextGeboortedatum;
+    }
+
+    public String getjTextNaam() {
+        return jTextNaam.getText();
+    }
+
+    public void setjTextNaam(JTextField jTextNaam) {
+        this.jTextNaam = jTextNaam;
+    }
+
+    public String getjTextVoornaam() {
+        return jTextVoornaam.getText();
+    }
+
+    public void setjTextVoornaam(JTextField jTextVoornaam) {
+        this.jTextVoornaam = jTextVoornaam;
+    }
+
 }

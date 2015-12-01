@@ -212,25 +212,22 @@ public class AddNieuweCompetitie extends javax.swing.JFrame {
     public String getCompetitieNaam() {
         return competitienaam.getText();
     }
-    
+
     private AddNieuweCompetitie form;
 
-    private class EventHandler implements ActionListener
-    {
-        
-        public EventHandler(AddNieuweCompetitie anc)
-        {
+    private class EventHandler implements ActionListener {
+
+        public EventHandler(AddNieuweCompetitie anc) {
             form = anc;
         }
-        public void actionPerformed(ActionEvent e)
-        {
-            if (e.getSource() == Store)
-            {
+
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == Store) {
                 Competitie c = new Competitie(form.getCompetitieNaam());
-                
+                competitienaam.setText("");
                 try {
-                    form.dManager.addComp(c);
-                    
+                    DriverManager.addComp(c);
+
                     JOptionPane.showMessageDialog(null, "Competitie opgeslagen!");
                 } catch (DBException ex) {
                     Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
