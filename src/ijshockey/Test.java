@@ -27,6 +27,20 @@ public class Test {
         DriverManager.getSpeler(lidnr);
         DriverManager.getTeam(stamnr);
         DriverManager.getWedstrijd(wnr);*/
-        DriverManager.printSpelerRapport(2);
+        //DriverManager.printSpelerRapport(2);
+        /*Owngoal o = new Owngoal(2, 16, 2, 1);
+        DriverManager.addOwngoal(o);
+        
+        Straf s = new Straf(2, 15, "heel stout geweest", 10, 2, 1);
+        DriverManager.addStraf(s);
+        Penalty p = new Penalty(1, 15, 2, 1, 0);
+        DriverManager.addPenalty(p);
+        
+        Goal g = new Goal(1, 15, 2, 1, a);
+        DriverManager.addGoal(g);
+        Assist a = new Assist(10, 2, 1);        
+        DriverManager.addAssist(a);*/
+
+        
     }
 }

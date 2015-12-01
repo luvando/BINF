@@ -14,11 +14,11 @@ import java.util.logging.Logger;
  */
 public class Goal extends Highlight {
 
-    private int highlightNr_assist;
+    private Assist assist ;
 
-    public Goal(int highlightNr, int minuut, int lidnr, int wedstrijdNr, int highlightNr_assist) {
+    public Goal(int highlightNr, int minuut, int lidnr, int wedstrijdNr, Assist assist) {
         super(highlightNr, minuut, lidnr, wedstrijdNr);
-        this.highlightNr_assist = highlightNr_assist;
+        this.assist = assist;
     }
 
     public Goal(int highlightNr, int minuut, int lidnr, int wedstrijdNr)
@@ -26,14 +26,15 @@ public class Goal extends Highlight {
         super(highlightNr, minuut, lidnr, wedstrijdNr);
     }
 
-    public int getHighlightNr_assist() {
-        return highlightNr_assist;
+    public Assist getAssist() {
+        return assist;
     }
 
-    public void setHighlightNr_assist(int highlightNr_assist) {
-        this.highlightNr_assist = highlightNr_assist;
+    public void setAssist(Assist assist) {
+        this.assist = assist;
     }
 
+   
     @Override
     public String toString() {
         String s = null;

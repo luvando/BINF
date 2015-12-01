@@ -266,12 +266,25 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "INSERT into assist "
+            
+            String sql = "SELECT assists "+
+                         "FROM speler "+
+                         "WHERE lidnr = " + a.getLidNr();
+            ResultSet srs = stmt.executeQuery(sql);
+            
+            if (srs.next()) {//waarvoor dient next() methode???
+            
+            sql = "UPDATE speler "+
+                  "SET assists = assists + 1 "+
+                  "WHERE lidnr = " + a.getLidNr();
+                      
+            stmt.executeUpdate(sql);
+            sql = "INSERT into assist "
                     + "(minuut, lidnr, wedstrijdnr) "
                     + "VALUES ('" + a.getMinuut() + "', '" + a.getLidNr() + "', '" + a.getWedstrijdNr() + "')";
             stmt.executeUpdate(sql);
-
+            }
+            
             closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -287,19 +300,33 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into goal "
-                    + "(minuut, lidnr, wedstrijdnr, highlightnr_assist) "
-                    + "VALUES ('" + g.getMinuut() + "', '" + g.getLidNr() + "', '" + g.getWedstrijdNr() + "', '" + g.getHighlightNr_assist() + "')";
+            String sql = "SELECT goals "+
+                         "FROM speler "+
+                         "WHERE lidnr = " + g.getLidNr();
+            ResultSet srs = stmt.executeQuery(sql);
+            
+            if (srs.next()) {//waarvoor dient next() methode???
+            
+            sql = "UPDATE speler "+
+                  "SET goals = goals + 1 "+
+                  "WHERE lidnr = " + g.getLidNr();
+                      
             stmt.executeUpdate(sql);
-
+          
+            sql = "INSERT into goal "
+                    + "(minuut, lidnr, wedstrijdnr, highlightnr_assist) "
+                    + "VALUES ('" + g.getMinuut() + "', '" + g.getLidNr() + "', '" + g.getWedstrijdNr() + "', '" + g.getAssist().getHighlightNr() + "')";
+            stmt.executeUpdate(sql);
+            }
+            
             closeConnection(con);
-        } catch (Exception ex) {
+        }  catch (Exception ex) {
             ex.printStackTrace();
             closeConnection(con);
             throw new DBException(ex);
         }
     }
-
+    
     public static void addOwngoal(Owngoal o) throws DBException {
         Connection con = null;
         try {
@@ -307,11 +334,26 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into owngoal "
+            
+            String sql = "SELECT owngoals "+
+                         "FROM speler "+
+                         "WHERE lidnr = " + o.getLidNr();
+            ResultSet srs = stmt.executeQuery(sql);
+            
+            if (srs.next()) {//waarvoor dient next() methode???
+            
+            sql = "UPDATE speler "+
+                  "SET owngoals = owngoals + 1 "+
+                  "WHERE lidnr = " + o.getLidNr();
+                      
+            stmt.executeUpdate(sql);
+          
+            sql = "INSERT into owngoal "
                     + "(minuut, lidnr, wedstrijdnr) "
                     + "VALUES ('" + o.getMinuut() + "', '" + o.getLidNr() + "', '" + o.getWedstrijdNr() + "')";
             stmt.executeUpdate(sql);
-
+            }
+            
             closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -332,12 +374,13 @@ public class DriverManager {
                          "WHERE lidnr = " + p.getLidNr();
             ResultSet srs = stmt.executeQuery(sql);
             
-            if (srs.next()) {
+            if (srs.next()) {//waarvoor dient next() methode???
             
             sql = "UPDATE speler "+
-                      "SET penaltys = penaltys + 1 ";
+                  "SET penaltys = penaltys + 1 "+
+                  "WHERE lidnr = " + p.getLidNr();
                       
-                stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);
           
             sql = "INSERT into penalty "
                     + "(minuut, gescoord, lidnr, wedstrijdnr) "
@@ -360,11 +403,24 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into penalty "
+            String sql = "SELECT straffen "+
+                         "FROM speler "+
+                         "WHERE lidnr = " + s.getLidNr();
+            ResultSet srs = stmt.executeQuery(sql);
+            
+            if (srs.next()) {//waarvoor dient next() methode???
+            
+            sql = "UPDATE speler "+
+                  "SET straffen = straffen + 1 "+
+                  "WHERE lidnr = " + s.getLidNr();
+                   
+            stmt.executeUpdate(sql);
+        
+            sql = "INSERT into straf "
                     + "(minuut, reden, aantal_minuten, lidnr, wedstrijdnr) "
                     + "VALUES ('" + s.getMinuut() + "', '" + s.getReden() + "', '" + s.getAantalMinuten() + "', '" + s.getLidNr() + "', '" + s.getWedstrijdNr() + "')";
             stmt.executeUpdate(sql);
-
+            }
             closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
