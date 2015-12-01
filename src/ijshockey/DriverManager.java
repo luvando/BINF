@@ -671,7 +671,7 @@ public class DriverManager {
 
             String sql = "SELECT stamnr "
                     + "FROM team "
-                    + "ORDER BY punten DESC";
+                    + "ORDER BY punten DESC, (goalsvoor - goalstegen)";
             ResultSet srs = stmt.executeQuery(sql);
 
             ArrayList<Team> rankedteams = new ArrayList<Team>();

@@ -107,7 +107,8 @@ public class Team {
 
     //hulpmethodes voor ranking en rapport
     public String toStringTeamRanking() {
-        return naam + ": " + punten + " punten (" + aantalGespeeld + " wedstrijden)";
+        int dps = doelpuntenVoor - doelpuntenTegen;
+        return naam + ": " + punten + " punten (" + aantalGespeeld + " wedstrijden," + "doelpuntensaldo: " + dps + ")";
     }
 
     public String toStringTeamRapport() {
@@ -118,8 +119,8 @@ public class Team {
             goalsPerGame = 0;
             penaltysPerGame = 0;
         } else {
-            goalsPerGame = (doelpuntenVoor - aantalGespeeld);
-            penaltysPerGame = (penaltys - aantalGespeeld);
+            goalsPerGame = (doelpuntenVoor / aantalGespeeld);
+            penaltysPerGame = (penaltys / aantalGespeeld);
         }
 
         return naam + "\n"
