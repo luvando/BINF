@@ -128,6 +128,42 @@ public class DriverManager {
         }
     }
     
+    public static Scheidsrechter getScheids(int lidnr) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT * "
+                    + "FROM scheidsrechter "
+                    + "WHERE lidnr = " + lidnr;
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            String voornaam;
+            String achternaam;
+            String geboortedatum;
+
+            if (srs.next()) {
+                voornaam = srs.getString("voornaam");
+                achternaam = srs.getString("achternaam");
+                geboortedatum = srs.getString("geboortedatum");
+
+            } else {
+                closeConnection(con);
+                return null;
+            }
+            Scheidsrechter s = new Scheidsrechter(voornaam, achternaam, geboortedatum);
+            closeConnection(con);
+            return s;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
     public static void addWedstrijd(Wedstrijd w) throws DBException {
         Connection con = null;
         try {
@@ -148,7 +184,7 @@ public class DriverManager {
         }
     }
     
-    public static Wedstrijd getWedstrijd(String c, int j, int wnr) throws DBException {
+    public static Wedstrijd getWedstrijd(int wnr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -157,28 +193,32 @@ public class DriverManager {
 
             String sql = "SELECT * "
                     + "FROM wedstrijd "
-                    + "WHERE competitienaam = " + c + " AND jaar = " + j + " AND wedstrijdnr = " + w;
+                    + "WHERE wedstrijdnr = " + wnr;
 
             ResultSet srs = stmt.executeQuery(sql);
-
+            
+            Competitie c;
+            int jaar;
             String arena;
             Date datum;
             boolean gespeeld;
             int score_thuis;
             int score_uit;
             Scheidsrechter scheidsrechter;
-            int speeldagnr;
+            Speeldag s;
             Team thuis;
             Team uit;
 
             if (srs.next()) {
+                c = getCompetitie(srs.getString("competitienaam"));
+                jaar = srs.getInt("jaar");
                 arena = srs.getString("voornaam");
                 datum = srs.getDate("datum");
                 gespeeld = srs.getBoolean("gespeeld");
                 score_thuis = srs.getInt("score_thuis");
                 score_uit = srs.getInt("score_uit");
                 scheidsrechter = getScheids(srs.getInt("lidnr_scheidsrechter"));
-                speeldagnr = srs.getInt("speeldagnr");
+                s = getSpeeldag(srs.getInt("speeldagnr"));
                 thuis = getTeam(srs.getInt("stamnr_thuis"));
                 uit = getTeam(srs.getInt("stamnr_uit"));
 
