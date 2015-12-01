@@ -46,10 +46,10 @@ public class Team {
     }
 
     public Team(int stamnummer, String thuisArena, String teamNaam) {
-      this.stamNr = stamnummer;
-      this.naam = naam;
-      this.thuisArena = thuisArena;
-              
+        this.stamNr = stamnummer;
+        this.naam = teamNaam;
+        this.thuisArena = thuisArena;
+
     }
 
     public void setPunten() { // Viktor 24//11 , zou dit werken? /aangepast door Jorn

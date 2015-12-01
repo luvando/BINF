@@ -223,7 +223,7 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.toString());
             dManager.closeConnection(con);
         } catch (DBException ex) {
-            Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_LijstCompetitiesValueChanged
