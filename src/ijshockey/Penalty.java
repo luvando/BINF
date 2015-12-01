@@ -14,8 +14,8 @@ public class Penalty extends Goal {
     private int gescoordInt;
     private Boolean gescoordBoo;
 
-    public Penalty(int tijdsstip, String LidId, Boolean gescoordBoo) { // Viktor 24/11
-        super(tijdsstip, LidId);
+    public Penalty(int tijdsstip, int lidnr, Boolean gescoordBoo) { // Viktor 24/11
+        super(tijdsstip, lidnr);
         this.gescoordInt = this.isGescoordIntBoolean(gescoordBoo);
     }
 

@@ -14,8 +14,8 @@ public class Straf extends Highlight {
     private int aantalMinAf;
     private String reden;
 
-    public Straf(int tijdstip, String LidId) {
-        super(tijdstip, LidId);
+    public Straf(int tijdstip, int lidnr) {
+        super(tijdstip, lidnr);
     }
 
     public int getAantalMinAf() {

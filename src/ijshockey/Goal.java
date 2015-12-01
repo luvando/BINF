@@ -13,8 +13,8 @@ public class Goal extends Highlight {
 
     private Assist assist;
 
-    public Goal(int tijdstip, String LidId) {
-        super(tijdstip, LidId);
+    public Goal(int tijdstip, int lidnr) {
+        super(tijdstip, lidnr);
     }
 
     public Assist getAssist() {

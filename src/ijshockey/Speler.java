@@ -36,11 +36,57 @@ public class Speler extends Lid {
         return team;
     }
 
+    public String getVoorkeurpositie() {
+        return voorkeurpositie;
+    }
+
+    public int getGoals() {
+        return goals;
+    }
+
+    public int getAssists() {
+        return assists;
+    }
+
+    public int getPenaltys() {
+        return penaltys;
+    }
+
+    public int getSpeelminuten() {
+        return speelminuten;
+    }
+
+    public void setVoorkeurpositie(String voorkeurpositie) {
+        this.voorkeurpositie = voorkeurpositie;
+    }
+
+    public void setGoals(int goals) {
+        this.goals = goals;
+    }
+
+    public void setAssists(int assists) {
+        this.assists = assists;
+    }
+
+    public void setPenaltys(int penaltys) {
+        this.penaltys = penaltys;
+    }
+
+    public void setSpeelminuten(int speelminuten) {
+        this.speelminuten = speelminuten;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+    
+    
+
     public String toStringSpelerRanking() {
         return super.getVoornaam() + " " + super.getAchternaam() + ": " + goals + " goals";
     }
 
-    public String toStringSpelerRapport() {
+    public String toStringSpelerRapport() { //gewoon spelersrapport voor alle spelers, ongeacht of speler penalty gezet heeft
         return super.getVoornaam() + " " + super.getAchternaam() + "\n"
                 + "---------------------" + "\n"
                 + "aantal doelpunten: " + goals + "\n"
@@ -48,6 +94,11 @@ public class Speler extends Lid {
                 + "aantal penalty's: " + penaltys + "\n"
                 + "aantal speelminuten: " + speelminuten + "\n";
 
+    }
+    
+    public String toStringSpelerRapportPenalty() { //extra rapport als speler minstens één penalty heeft genomen
+        String s = null;
+        return s;  
     }
 
 }

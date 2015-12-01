@@ -127,6 +127,29 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
+    
+        public static void addSpeler(Speler s) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into speler "
+                    + "(lidnr, voornaam, achternaam, geboortedatum, voorkeurspositie, goals, assists, penaltys, speelminuten, team) "
+                    + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '" + s.getGeboortedatum() + "', '" + s.getVoorkeurpositie() + "', '" + s.getGoals()
+                    + "', '" + s.getAssists()+ "', '" + s.getPenaltys()+ "', '" + s.getSpeelminuten()+ "', '" + s.getTeam()+ "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+        
 
     public static Speler getSpeler(int lidnr) throws DBException {
         Connection con = null;
