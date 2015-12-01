@@ -19,6 +19,13 @@ public class Test {
         DriverManager.printTeamRanking(); //werkt
         DriverManager.printSpelerRanking(); //werkt
         DriverManager.printTeamRapport(1); //werkt
-        DriverManager.printSpelerRapport(2);
+        DriverManager.printSpelerRapport(2); //werkt
+        /*DriverManager.getScheids(lidnr);
+        DriverManager.getCompetitie(null);
+        DriverManager.getSeizoen(jaar, null);
+        DriverManager.getSpeeldag(null, jaar, speeldagnr);
+        DriverManager.getSpeler(lidnr);
+        DriverManager.getTeam(stamnr);
+        DriverManager.getWedstrijd(wnr);*/
     }
 }

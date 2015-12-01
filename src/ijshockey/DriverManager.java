@@ -186,7 +186,7 @@ public class DriverManager {
     }
 
 //wedstrijd
-    public static void addWedstrijd(Wedstrijd w) throws DBException {
+    /*public static void addWedstrijd(Wedstrijd w) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -204,7 +204,7 @@ public class DriverManager {
             closeConnection(con);
             throw new DBException(ex);
         }
-    }
+    }*/
 
     public static Wedstrijd getWedstrijd(int wnr) throws DBException {
         Connection con = null;
@@ -259,7 +259,66 @@ public class DriverManager {
     }
     
 //highlight
+     public static void addAssist(Assist a) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into trainer "
+                    + "(minuut, lidnr, wedstrijdnr) "
+                    + "VALUES ('" + a.getMinuut() + "', '" + a.getLidNr()+ "', '" + a.getWedstrijdNr()+ "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
     
+        public static void addGoal(Goal g) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into trainer "
+                    + "(minuut, lidnr, wedstrijdnr, highlightnr_assist) "
+                    + "VALUES ('" + g.getMinuut()+ "', '" + g.getLidNr()+ "', '" + g.getWedstrijdNr()+ "', '" + g.getHighlightNr_assist()+ "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+        
+        public static void addOwngoal(Owngoal o) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into trainer "
+                    + "(minuut, lidnr, wedstrijdnr) "
+                    + "VALUES ('" + o.getMinuut()+ "', '" + o.getLidNr()+ "', '" + o.getWedstrijdNr()+"')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+        
 //scheidsrechter    
     public static void addScheids(Scheidsrechter sch) throws DBException {
         Connection con = null;
@@ -388,70 +447,6 @@ public class DriverManager {
         }
     }
     
-    public static void addAssist(Assist a) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "INSERT into trainer "
-                    + "(minuut, lidnr, wedstrijdnr) "
-                    + "VALUES ('" + a.getMinuut() + "', '" + a.getLidNr()+ "', '" + a.getWedstrijdNr()+ "')";
-            stmt.executeUpdate(sql);
-
-            closeConnection(con);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
-    }
-    
-        public static void addGoal(Goal g) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "INSERT into trainer "
-                    + "(minuut, lidnr, wedstrijdnr, highlightnr_assist) "
-                    + "VALUES ('" + g.getMinuut()+ "', '" + g.getLidNr()+ "', '" + g.getWedstrijdNr()+ "', '" + g.getHighlightNr_assist()+ "')";
-            stmt.executeUpdate(sql);
-
-            closeConnection(con);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
-    }
-        
-        public static void addOwngoal(Owngoal o) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "INSERT into trainer "
-                    + "(minuut, lidnr, wedstrijdnr) "
-                    + "VALUES ('" + o.getMinuut()+ "', '" + o.getLidNr()+ "', '" + o.getWedstrijdNr()+"')";
-            stmt.executeUpdate(sql);
-
-            closeConnection(con);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
-    }
-        
-    
-    
-
-
     public static void printSpelerRanking() throws DBException {
         Connection con = null;
         try {
