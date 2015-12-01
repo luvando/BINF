@@ -26,7 +26,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
 
     public static DriverManager dManager;
 
-    public void FillLijst(ResultSet srs) {
+    private void FillLijst(ResultSet srs) {
         try {
             DefaultListModel DLM = new DefaultListModel();
 
@@ -331,7 +331,18 @@ public class CompetitieScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_NieuwSeizoenButtonActionPerformed
 
     private void AddWedstrijdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddWedstrijdButtonActionPerformed
-        // TODO add your handling code here:
+//        // TODO add your handling code here:
+//        AddWedstrijd updateForm = null;
+//        try {
+//            updateForm = new AddWedstrijd(dManager, (String) LijstCompetities.getSelectedValue(), LijstSeizoenen.getSelectedValue());
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        updateForm.setVisible(true);
+//        this.setVisible(false);
+    }//GEN-LAST:event_AddWedstrijdButtonActionPerformed
+
+    private void AddSpeeldagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpeeldagButtonActionPerformed
         AddWedstrijd updateForm = null;
         try {
             updateForm = new AddWedstrijd(dManager, (String) LijstCompetities.getSelectedValue(), LijstSeizoenen.getSelectedValue());
@@ -340,13 +351,6 @@ public class CompetitieScherm extends javax.swing.JFrame {
         }
         updateForm.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_AddWedstrijdButtonActionPerformed
-
-    private void AddSpeeldagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpeeldagButtonActionPerformed
-        // TODO add your handling code here:
-        // AddWedstrijd updateForm = new AddWedstrijd(dManager);
-        //   updateForm.setVisible(true);
-        // this.setVisible(false);
     }//GEN-LAST:event_AddSpeeldagButtonActionPerformed
 
     private void TeamToevoegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamToevoegenButtonActionPerformed

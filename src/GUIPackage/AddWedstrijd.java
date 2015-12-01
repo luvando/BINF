@@ -45,12 +45,12 @@ public class AddWedstrijd extends javax.swing.JFrame {
         this.competitie = competitie;
         setLocationRelativeTo(null);
 
-        FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(competitie, seizoenInt));
-        FillLijstScheids(ijshockey.DriverManager.FillLijstScheids());
+        this.FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(competitie, seizoenInt));
+        this.FillLijstScheids(ijshockey.DriverManager.FillLijstScheids());
 
     }
 
-    public void FillLijstSpeeldag(ResultSet srs) {
+    private void FillLijstSpeeldag(ResultSet srs) {
         try {
             DefaultListModel DLM = new DefaultListModel();
 
@@ -66,7 +66,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
         }
     }
 
-    public void FillLijstScheids(ResultSet srs) {
+    private void FillLijstScheids(ResultSet srs) {
         try {
             DefaultListModel DLM = new DefaultListModel();
 
