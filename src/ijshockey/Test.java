@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class Test {
 
     public static void main(String[] args) throws DBException {
-        //DriverManager dm = new DriverManager();
+        DriverManager dm = new DriverManager();
         DriverManager.printTeamRanking(); //werkt
         //DriverManager.printSpelerRanking(); //werkt
         //DriverManager.printTeamRapport(1); //werkt
