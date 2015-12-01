@@ -17,7 +17,7 @@ public class Goal extends Highlight {
         super(highlightNr, minuut, lidnr, wedstrijdNr);
         this.highlightNr_assist = highlightNr_assist;
     }
-    
+
     public Goal(int highlightNr, int minuut, int lidnr, int wedstrijdNr)
     {
         super(highlightNr, minuut, lidnr, wedstrijdNr);
@@ -30,6 +30,7 @@ public class Goal extends Highlight {
     public void setHighlightNr_assist(int highlightNr_assist) {
         this.highlightNr_assist = highlightNr_assist;
     }
+
 
 
 }
