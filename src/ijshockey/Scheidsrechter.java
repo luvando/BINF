@@ -1,6 +1,7 @@
 package ijshockey;
 
 import java.util.Date;
+import javax.swing.JTextField;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,8 +14,8 @@ import java.util.Date;
  */
 public class Scheidsrechter extends Lid {
 
-    public Scheidsrechter(int lidnr, String voornaam, String achternaam, Date geboortedatum) {
-        super(lidnr, voornaam, achternaam, geboortedatum);
+    public Scheidsrechter(String voornaam, String achternaam, String geboortedatum) {
+        super(voornaam, achternaam, geboortedatum);
     }
 
 }

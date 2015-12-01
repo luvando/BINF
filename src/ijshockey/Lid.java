@@ -18,9 +18,9 @@ public class Lid {
     public int lidnr; // PK of nummer
     private String voornaam;
     private String achternaam;
-    private Date geboortedatum;
+    private String geboortedatum;
 
-    public Lid(int lidnr, String voornaam, String achternaam, Date geboortedatum) {
+    public Lid(String voornaam, String achternaam, String geboortedatum) {
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.geboortedatum = geboortedatum;
@@ -42,11 +42,11 @@ public class Lid {
         this.achternaam = achternaam;
     }
 
-    public Date getGeboortedatum() {
+    public String getGeboortedatum() {
         return geboortedatum;
     }
 
-    public void setGeboortedatum(Date geboortedatum) {
+    public void setGeboortedatum(String geboortedatum) {
         this.geboortedatum = geboortedatum;
     }
 
