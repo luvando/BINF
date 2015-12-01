@@ -54,7 +54,8 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT speeldagnr FROM speeldag WHERE copetitinienaam =" + competitienaam + "AND jaar=" + jaar + "  ";
+            String sql = "SELECT speeldagnr FROM speeldag "
+                    + "WHERE competitienaam = '"+competitienaam+"' AND jaar = '"+jaar+"'";
 
             ResultSet srs = stmt.executeQuery(sql);
             return srs;
@@ -183,25 +184,29 @@ public class DriverManager {
         }
     }
 
-//    public static void addWedstrijd(Wedstrijd w) throws DBException {
-//        Connection con = null;
-//        try {
-//            con = getConnection();
-//            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-//                    ResultSet.CONCUR_READ_ONLY);
-//
-//            String sql = "INSERT into wedstrijd "
-//                    + "(competitienaam, jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit) ; "
-//                    + "VALUES ('" w "')";
-//     stmt.executeUpdate(sql);
-//
-//            closeConnection(con);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            closeConnection(con);
-//            throw new DBException(ex);
-//        }
-//    }
+    public static void addWedstrijd(Wedstrijd w, Speeldag sp) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into wedstrijd "
+                    + "(competitienaam, jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, "
+                    + "lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit) ; "
+                    + "VALUES ('" +sp.getCompetitienaam()+ "', '" +sp.getJaar()+ "', '" +w.getWedstrijdNr()+ "', '" +w.getArena()+ "', '"
+                    +w.getDatum()+ "', '"+w.getGespeeld()+ "', '" +w.getScoreThuisTeam()+ "', '"+w.getScoreUitTeam()+ "', '" +w.getLidNrScheids()+ "', '"
+                    + sp.getSpeeldagnr()+ "', '" +w.getThuisTeam().getStamNr()+ "', '"+w.getUitTeam().getStamNr()+"')";
+            
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
     public static Wedstrijd getWedstrijd(int wnr) throws DBException {
         Connection con = null;
         try {

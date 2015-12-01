@@ -13,7 +13,6 @@ import java.util.Date;
  * @author favdndor
  */
 public class Wedstrijd {
-
     private int wedstrijdNr;
     private Team thuisTeam;
     private Team uitTeam;
@@ -25,7 +24,7 @@ public class Wedstrijd {
     private Boolean gespeeld;
     //private ArrayList<Opstelling> opstelling;
 
-    public Wedstrijd(Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, int lidNrScheids, String datum) {
+    public Wedstrijd(Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, int lidNrScheids, String datum) {       
         this.wedstrijdNr = wedstrijdNr;
         this.thuisTeam = thuisTeam;
         this.uitTeam = uitTeam;
@@ -125,6 +124,11 @@ public class Wedstrijd {
     
     public String printWedstrijd() {
         return thuisTeam.getNaam() + " - " + uitTeam.getNaam() + " " + datum;
+        
+    @Override
+    public String toString() {
+        return thuisTeam + " - " + uitTeam + " " + datum;
     }
 
 }
+
