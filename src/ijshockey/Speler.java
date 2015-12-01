@@ -96,13 +96,6 @@ public class Speler extends Lid {
 
     }
     
-    public String toStringSpelerRapportPenalty() { //extra rapport als speler minstens één penalty heeft genomen
-        return super.getVoornaam() + " " + super.getAchternaam() + "\n"
-                + "---------------------" + "\n"
-                + "aantal doelpunten: " + goals + "\n"
-                + "aantal assists: " + assists + "\n"
-                + "aantal penalty's: " + penaltys + "\n"
-                + "aantal speelminuten: " + speelminuten + "\n";
-    }
+    
 
 }

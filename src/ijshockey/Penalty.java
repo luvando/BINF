@@ -1,5 +1,8 @@
 package ijshockey;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,8 +14,8 @@ package ijshockey;
  */
 public class Penalty extends Goal {
 
-    private Boolean gescoord;
-    public Penalty(int highlightNr, int minuut, int lidnr, int wedstrijdNr, boolean gescoord) 
+    private int gescoord;
+    public Penalty(int highlightNr, int minuut, int lidnr, int wedstrijdNr, int gescoord) 
     {
         super(highlightNr, minuut, lidnr, wedstrijdNr);
         this.gescoord = gescoord;
@@ -38,14 +41,25 @@ public class Penalty extends Goal {
         }
     }*/
 
-    public Boolean getGescoord() {
+    public int getGescoord() {
         return gescoord;
     }
 
-    public void setGescoord(Boolean gescoord) {
+    public void setGescoord(int gescoord) {
         this.gescoord = gescoord;
     }
-    
+    @Override
+public String toString() {
+        String s = null;
+        
+        try {
+            s = "Penalty" + " in minuut " + super.getMinuut() + " in wedstrijd " + DriverManager.getWedstrijd(super.getWedstrijdNr()).toString();
+        } catch (DBException ex) {
+            Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return s;
+
+    }    
     
 
 }
