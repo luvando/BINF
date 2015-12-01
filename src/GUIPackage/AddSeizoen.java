@@ -133,10 +133,10 @@ public class AddSeizoen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddWedstrijdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddWedstrijdButtonActionPerformed
-        // TODO add your handling code here:
-        AddWedstrijd updateForm = new AddWedstrijd(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
+//        // TODO add your handling code here:
+//        AddWedstrijd updateForm = new AddWedstrijd(dManager);
+//        updateForm.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_AddWedstrijdButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
@@ -146,16 +146,16 @@ public class AddSeizoen extends javax.swing.JFrame {
 
     private void BewerkSpeeldagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BewerkSpeeldagButtonActionPerformed
         // TODO add your handling code here:
-        AddWedstrijd updateForm = new AddWedstrijd(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
+//        AddWedstrijd updateForm = new AddWedstrijd(dManager);
+//        updateForm.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_BewerkSpeeldagButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        BewerkCompetitieScherm updateForm = new BewerkCompetitieScherm(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
+//        BewerkCompetitieScherm updateForm = new BewerkCompetitieScherm(dManager);
+//        updateForm.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     /**

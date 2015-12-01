@@ -47,6 +47,44 @@ public class DriverManager {
 //            ResultSet srs = stmt.executeQuery(sql);
 //    }
 
+    public static ResultSet FillLijstSpeeldagen(String competitienaam, int jaar) throws SQLException {
+        Connection con = null;
+
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT speeldagnr FROM speeldag WHERE copetitinienaam =" + competitienaam + "AND jaar=" + jaar + "  ";
+
+            ResultSet srs = stmt.executeQuery(sql);
+            return srs;
+
+        } catch (DBException ex) {
+            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
+    public static ResultSet FillLijstScheids() throws SQLException {
+        Connection con = null;
+
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT * FROM scheidsrechter ";
+
+            ResultSet srs = stmt.executeQuery(sql);
+            return srs;
+
+        } catch (DBException ex) {
+            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
     public DriverManager() {
     }
 
@@ -184,27 +222,45 @@ public class DriverManager {
         }
     }
 
-//wedstrijd
-    /*public static void addWedstrijd(Wedstrijd w) throws DBException {
-     Connection con = null;
-     try {
-     con = getConnection();
-     Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-     ResultSet.CONCUR_READ_ONLY);
+    public static void addSpeeldag(Speeldag sp) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
-     String sql = "INSERT into wedstrijd "
-     + "(competitienaam, jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit) ; "
-     + "VALUES ('" w "')";
-     stmt.executeUpdate(sql);
+            String sql = "INSERT into speeldag "
+                    + "(competitienaam, jaar, speeldagnr)"
+                    + "VALUES ('" + sp.getCompetitie() + "','" + sp.getJaar() + "','" + sp.getSpeeldagnr() + "')";
+            stmt.executeUpdate(sql);
 
-     closeConnection(con);
-     } catch (Exception ex) {
-     ex.printStackTrace();
-     closeConnection(con);
-     throw new DBException(ex);
-     }
-     }*/
-    
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+//    public static void addWedstrijd(Wedstrijd w) throws DBException {
+//        Connection con = null;
+//        try {
+//            con = getConnection();
+//            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+//                    ResultSet.CONCUR_READ_ONLY);
+//
+//            String sql = "INSERT into wedstrijd "
+//                    + "(competitienaam, jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit) ; "
+//                    + "VALUES ('" w "')";
+//     stmt.executeUpdate(sql);
+//
+//            closeConnection(con);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            closeConnection(con);
+//            throw new DBException(ex);
+//        }
+//    }
     public static Wedstrijd getWedstrijd(int wnr) throws DBException {
         Connection con = null;
         try {
@@ -221,7 +277,7 @@ public class DriverManager {
             Competitie c;
             int jaar;
             String arena;
-            Date datum;
+            String datum;
             boolean gespeeld;
             int score_thuis;
             int score_uit;
@@ -234,7 +290,7 @@ public class DriverManager {
                 c = getCompetitie(srs.getString("competitienaam"));
                 jaar = srs.getInt("jaar");
                 arena = srs.getString("voornaam");
-                datum = srs.getDate("datum");
+                datum = srs.getString("datum");
                 gespeeld = srs.getBoolean("gespeeld");
                 score_thuis = srs.getInt("score_thuis");
                 score_uit = srs.getInt("score_uit");
@@ -343,7 +399,6 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-
 
     public static Scheidsrechter getScheids(int lidnr) throws DBException {
         Connection con = null;

@@ -126,9 +126,9 @@ public class Startscherm extends javax.swing.JFrame {
 
     private void BestaandeCompetitieButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BestaandeCompetitieButtonActionPerformed
         // bestaande competitie bewerken
-        KeuzeSchermBestaandeCompetitie updateForm = null;
+        CompetitieScherm updateForm = null;
         try {
-            updateForm = new KeuzeSchermBestaandeCompetitie(dManager);
+            updateForm = new CompetitieScherm(dManager);
         } catch (DBException ex) {
             Logger.getLogger(Startscherm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

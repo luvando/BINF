@@ -22,7 +22,7 @@ import javax.swing.text.Position;
  *
  * @author ekmaes
  */
-public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
+public class CompetitieScherm extends javax.swing.JFrame {
 
     public static DriverManager dManager;
 
@@ -42,11 +42,11 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
         }
     }
 
-    public KeuzeSchermBestaandeCompetitie() {
+    public CompetitieScherm() {
         initComponents();
     }
 
-    public KeuzeSchermBestaandeCompetitie(DriverManager dManager) throws DBException, SQLException {
+    public CompetitieScherm(DriverManager dManager) throws DBException, SQLException {
         this.dManager = dManager;
         initComponents();
         FillLijst(ijshockey.DriverManager.FillLijstCompetities());
@@ -279,7 +279,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.toString());
             dManager.closeConnection(con);
         } catch (DBException ex) {
-            Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_LijstCompetitiesValueChanged
@@ -326,22 +326,27 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.toString());
             dManager.closeConnection(con);
         } catch (DBException ex) {
-            Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_NieuwSeizoenButtonActionPerformed
 
     private void AddWedstrijdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddWedstrijdButtonActionPerformed
         // TODO add your handling code here:
-        AddWedstrijd updateForm = new AddWedstrijd(dManager);
+        AddWedstrijd updateForm = null;
+        try {
+            updateForm = new AddWedstrijd(dManager, (String) LijstCompetities.getSelectedValue(), LijstSeizoenen.getSelectedValue());
+        } catch (SQLException ex) {
+            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_AddWedstrijdButtonActionPerformed
 
     private void AddSpeeldagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpeeldagButtonActionPerformed
         // TODO add your handling code here:
-        AddWedstrijd updateForm = new AddWedstrijd(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
+        // AddWedstrijd updateForm = new AddWedstrijd(dManager);
+        //   updateForm.setVisible(true);
+        // this.setVisible(false);
     }//GEN-LAST:event_AddSpeeldagButtonActionPerformed
 
     private void TeamToevoegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamToevoegenButtonActionPerformed
@@ -369,7 +374,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
         } catch (DBException ex) {
             Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -393,24 +398,25 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class
+            java.util.logging.Logger.getLogger(CompetitieScherm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class
+            java.util.logging.Logger.getLogger(CompetitieScherm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class
+            java.util.logging.Logger.getLogger(CompetitieScherm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class
+            java.util.logging.Logger.getLogger(CompetitieScherm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KeuzeSchermBestaandeCompetitie().setVisible(true);
+                new CompetitieScherm().setVisible(true);
             }
         });
     }

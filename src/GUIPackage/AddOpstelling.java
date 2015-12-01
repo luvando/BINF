@@ -225,9 +225,9 @@ public class AddOpstelling extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        AddWedstrijd updateForm = new AddWedstrijd(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
+//        AddWedstrijd updateForm = new AddWedstrijd(dManager);
+//        updateForm.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void VolgendeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolgendeButtonActionPerformed

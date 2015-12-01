@@ -1,4 +1,5 @@
 package ijshockey;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,24 +20,36 @@ public class Wedstrijd {
     private String arena;
     private int scoreThuisTeam;
     private int scoreUitTeam;
-    private Scheidsrechter scheidsrechter;
-    private Date datum;
-    private Boolean gespeeld; 
+    private int lidNrScheids;
+    private String datum;
+    private Boolean gespeeld;
     //private ArrayList<Opstelling> opstelling;
 
-    public Wedstrijd(int wedstrijdNr, Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, Date datum, Boolean gespeeld) {
+    public Wedstrijd(Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, int lidNrScheids, String datum) {
         this.wedstrijdNr = wedstrijdNr;
         this.thuisTeam = thuisTeam;
         this.uitTeam = uitTeam;
         this.arena = arena;
         this.scoreThuisTeam = scoreThuisTeam;
         this.scoreUitTeam = scoreUitTeam;
-        this.scheidsrechter = scheidsrechter;
+
         this.datum = datum;
-        this.gespeeld = gespeeld;
+        gespeeld = true;
         //this.opstelling = opstelling;
     }
-    
+
+    Wedstrijd(int wnr, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, boolean gespeeld) {
+        this.wedstrijdNr = wnr;
+        this.thuisTeam = thuis;
+        this.uitTeam = uit;
+        this.arena = arena;
+        this.scoreThuisTeam = score_thuis;
+        this.scoreUitTeam = score_thuis;
+
+        this.datum = datum;
+        gespeeld = true;
+    }
+
     public int getWedstrijdNr() {
         return wedstrijdNr;
     }
@@ -85,19 +98,19 @@ public class Wedstrijd {
         this.scoreUitTeam = scoreUitTeam;
     }
 
-    public Scheidsrechter getScheidsrechter() {
-        return scheidsrechter;
+    public int getLidNrScheids() {
+        return lidNrScheids;
     }
 
-    public void setScheidsrechter(Scheidsrechter scheidsrechter) {
-        this.scheidsrechter = scheidsrechter;
+    public void setLidNrScheids(int lidNrScheids) {
+        this.lidNrScheids = lidNrScheids;
     }
 
-    public Date getDatum() {
+    public String getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(String datum) {
         this.datum = datum;
     }
 
