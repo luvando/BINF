@@ -533,6 +533,7 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
+    
 //team
     public static void addTeam(Team t, String competitie, int seizoen) throws DBException {
         Connection con = null;
