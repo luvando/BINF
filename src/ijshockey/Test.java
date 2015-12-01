@@ -34,8 +34,15 @@ public class Test {
         //Goal g = new Goal(15, 2, 1, 3);
         //DriverManager.addGoal(g);
         
-        Wedstrijd w = new Wedstrijd(DriverManager.getTeam(1), DriverManager.getTeam(2), "Camp Nou", 5, 0, DriverManager.getScheids(1), "11/11/2015", DriverManager.getSpeeldag("National League", 2015, 1));
+        Team t = DriverManager.getTeam(1);
+        
+        Team tt = DriverManager.getTeam(2);
+        Scheidsrechter s = DriverManager.getScheids(1);
+        Speeldag ss = DriverManager.getSpeeldag("National League", 2015, 1);
+        Wedstrijd w = new Wedstrijd(t, tt, "Camp Nou", 5, 0, s, "11/11/2015", ss);
         DriverManager.addWedstrijd(w);
+        
+        
         
 
         

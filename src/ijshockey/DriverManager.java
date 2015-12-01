@@ -193,7 +193,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into speeldag "
+            String sql = "INSERT INTO speeldag "
                     + "(competitienaam, jaar, speeldagnr)"
                     + "VALUES ('" + sp.getCompetitienaam() + "','" + sp.getJaar() + "','" + sp.getSpeeldagnr() + "')";
             stmt.executeUpdate(sql);
@@ -213,18 +213,12 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             
-             String sql = "INSERT into wedstrijd "
+            String sql = "INSERT INTO wedstrijd "
                     + "(competitienaam, jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, "
-                    + "lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit) ; "
-                    + "VALUES ('" + w.getSp().getCompetitienaam()+ "', '" + w.getSp().getJaar()+ "', '" +w.getWedstrijdNr()+ "', '" +w.getArena()+ "', '"
-                    +w.getDatum()+ "', '"+w.getGespeeld()+ "', '" +w.getScoreThuisTeam()+ "', '"+w.getScoreUitTeam()+ "', '" + w.getScheidsrechter().getLidnr() + "', '"
-                    + w.getSp().getSpeeldagnr() + "', '" +w.getThuisTeam().getStamNr()+ "', '"+w.getUitTeam().getStamNr()+"')";
-            
-            stmt.executeUpdate(sql);
-          
-            sql = "SELECT punten, gespeeld, gewonnen, verloren, gelijk, goalsvoor, goalstegen, penaltys "+
-                         "FROM team "+
-                         "WHERE stamnr = " + w.getThuisTeam().getStamNr();
+                    + "lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit)"
+                    + "VALUES ('" + w.getSp().getCompetitienaam()+ "','" + w.getSp().getJaar()+ "','" +w.getWedstrijdNr()+ "','" +w.getArena()+ "','"
+                    +w.getDatum()+ "','"+w.getGespeeld()+ "','" +w.getScoreThuisTeam()+ "','"+w.getScoreUitTeam()+ "','" + w.getScheidsrechter().getLidnr() + "','"
+                    + w.getSp().getSpeeldagnr() + "','" +w.getThuisTeam().getStamNr()+ "','"+w.getUitTeam().getStamNr()+"')";
             
             stmt.executeUpdate(sql);
             
@@ -246,7 +240,7 @@ public class DriverManager {
             } 
                                    
             if (w.getScoreThuisTeam()==w.getScoreUitTeam()) {
-                 sql = "UPDATE team "+
+            sql = "UPDATE team "+
                   "SET gespeeld = gespeeld + 1, "+
                   "punten = punten + 1, " + 
                   "gelijk = gelijk + 1, "+
