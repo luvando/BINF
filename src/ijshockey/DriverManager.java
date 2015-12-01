@@ -273,7 +273,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into trainer "
+            String sql = "INSERT into assist "
                     + "(minuut, lidnr, wedstrijdnr) "
                     + "VALUES ('" + a.getMinuut() + "', '" + a.getLidNr() + "', '" + a.getWedstrijdNr() + "')";
             stmt.executeUpdate(sql);
@@ -293,7 +293,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into trainer "
+            String sql = "INSERT into goal "
                     + "(minuut, lidnr, wedstrijdnr, highlightnr_assist) "
                     + "VALUES ('" + g.getMinuut() + "', '" + g.getLidNr() + "', '" + g.getWedstrijdNr() + "', '" + g.getHighlightNr_assist() + "')";
             stmt.executeUpdate(sql);
@@ -313,7 +313,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into trainer "
+            String sql = "INSERT into owngoal "
                     + "(minuut, lidnr, wedstrijdnr) "
                     + "VALUES ('" + o.getMinuut() + "', '" + o.getLidNr() + "', '" + o.getWedstrijdNr() + "')";
             stmt.executeUpdate(sql);
@@ -325,6 +325,47 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
+    
+        public static void addPenalty(Penalty p) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into penalty "
+                    + "(minuut, gescoord, lidnr, wedstrijdnr) "
+                    + "VALUES ('" + p.getMinuut() + "', '" + p.getGescoord() + "', '" + p.getLidNr() + "', '" + p.getWedstrijdNr() + "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
+        public static void addStraf(Straf s) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into penalty "
+                    + "(minuut, reden, aantal_minuten, lidnr, wedstrijdnr) "
+                    + "VALUES ('" + s.getMinuut() + "', '" + s.getReden() + "', '" + s.getAantalMinuten() + "', '" + s.getLidNr()+ "', '" + s.getWedstrijdNr() + "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
 
 //scheidsrechter    
     public static void addScheids(Scheidsrechter sch) throws DBException {
