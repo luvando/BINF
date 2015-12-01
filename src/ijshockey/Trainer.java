@@ -18,4 +18,10 @@ public class Trainer extends Lid {
         
     }
 
+    public int getLidnr() {
+        return lidnr;
+    }
+    
+    
+
 }
