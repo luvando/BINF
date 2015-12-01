@@ -57,7 +57,6 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="BestaandeCompetitieButton" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="NieuweCompetitieButton" min="-2" pref="200" max="-2" attributes="0"/>
                           <Component id="GegevensOpvragenButton" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
@@ -72,10 +71,8 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-              <Component id="NieuweCompetitieButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="BestaandeCompetitieButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="BestaandeCompetitieButton" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="GegevensOpvragenButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="48" max="32767" attributes="0"/>
@@ -86,14 +83,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="NieuweCompetitieButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nieuwe competitie toevoegen"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NieuweCompetitieButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="BestaandeCompetitieButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Bestaande competitie bewerken"/>

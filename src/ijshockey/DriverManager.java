@@ -5,17 +5,14 @@
  */
 package ijshockey;
 
-import static GUIPackage.KeuzeSchermBestaandeCompetitie.dManager;
-import GUIPackage.Startscherm;
+import GUIPackage.*;
 import java.util.*;
+import java.util.Date;
 import java.io.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import java.util.Date;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.*;
 
 /**
  *
@@ -388,6 +385,7 @@ public class DriverManager {
         }
     }
 
+
     public static Scheidsrechter getScheids(int lidnr) throws DBException {
         Connection con = null;
         try {
@@ -445,7 +443,7 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-
+    
     public static Speler getSpeler(int lidnr) throws DBException {
         Connection con = null;
         try {
@@ -527,7 +525,16 @@ public class DriverManager {
     }
 
     public static void printSpelerRapport(int lidnr) throws DBException {
-        System.out.println(getSpeler(lidnr).toStringSpelerRapport());
+        
+        Speler s = DriverManager.getSpeler(lidnr);
+        if (s.getPenaltys()>0){
+            System.out.println(getSpeler(lidnr).toStringSpelerRapport());
+            System.out.println(getSpeler(lidnr).toStringSpelerRapportPenalty());
+        }
+        else{
+            System.out.println(getSpeler(lidnr).toStringSpelerRapport());
+        }
+        
     }
 
     public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
@@ -557,9 +564,51 @@ public class DriverManager {
 
     }
 //trainer
+    public static void addTrainer(Trainer s) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
+            String sql = "INSERT into trainer "
+                    + "(voornaam, achternaam, geboortedatum) "
+                    + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '" + s.getGeboortedatum() + "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
 //team
-    //addTeam
+    public static void addTeam(Team t, String competitie, int seizoen) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into team "
+                    + "(stamnr, naam, thuisarena) "
+                    + "VALUES ('" + t.getStamNr() + "', '" + t.getNaam() + "', '" + t.getThuisArena() + "')";
+            stmt.executeUpdate(sql);
+            String sql2 = "INSERT into deelname "
+                    + "(competitienaam,seizoen, stamnr) "
+                    + "VALUES ('" + competitie + "', '" + seizoen + "', '" + t.getStamNr() + "')";
+            stmt.executeUpdate(sql2);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
     public static Team getTeam(int stamnr) throws DBException {
         Connection con = null;
         try {
