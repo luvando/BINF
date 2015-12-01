@@ -5,7 +5,17 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Scheidsrechter;
+import ijshockey.Team;
+import ijshockey.Trainer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -14,19 +24,32 @@ import ijshockey.DriverManager;
 public class AddTeamEnTrainer extends javax.swing.JFrame {
 
     public static DriverManager dManager;
+
     /**
      * Creates new form AddTeam
      */
     public AddTeamEnTrainer() {
         initComponents();
     }
-    
+    private String competitie;
+    private int seizoenInt;
+
     public AddTeamEnTrainer(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
+        setLocationRelativeTo(null);
+        Store.addActionListener(new AddTeamEnTrainer.EventHandler(this));
     }
-    
-    
+
+    public AddTeamEnTrainer(DriverManager dManager, String competitie, String seizoen) {
+        this.dManager = dManager;
+        initComponents();
+        setLocationRelativeTo(null);
+        Store.addActionListener(new AddTeamEnTrainer.EventHandler(this));
+        this.competitie = competitie;
+        this.seizoenInt = Integer.parseInt(seizoen);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,7 +63,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Stamnummer = new javax.swing.JTextField();
-        Naam = new javax.swing.JTextField();
+        TeamNaam = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Thuisarena = new javax.swing.JTextField();
@@ -52,6 +75,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         CancelButton = new javax.swing.JButton();
         AddSpelerButton = new javax.swing.JButton();
+        Store = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Team toevoegen");
@@ -108,6 +132,8 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
             }
         });
 
+        Store.setText("Store");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,7 +147,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(GeboortedatumTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -142,9 +168,11 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                                     .addGap(38, 38, 38)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(Thuisarena, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Naam, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 86, Short.MAX_VALUE)))
-                .addContainerGap(171, Short.MAX_VALUE))
+                                        .addComponent(TeamNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 93, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addComponent(Store)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(AddSpelerButton)
@@ -162,7 +190,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(Naam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TeamNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -181,7 +209,9 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                             .addComponent(AchternaamTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6))
-                    .addComponent(GeboortedatumTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(GeboortedatumTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Store)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton)
@@ -256,13 +286,46 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         });
     }
 
+    private class EventHandler implements ActionListener {
+
+        private AddTeamEnTrainer form;
+
+        public EventHandler(AddTeamEnTrainer antr) {
+            form = antr;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == Store) {
+                Team te = new Team(form.getStamnummer(), form.getThuisArena(), form.getTeamNaam());
+                Trainer tr = new Trainer(form.getVoornaamTrainer(), form.getAchternaamTrainer(), form.getGeboortedatumTrainer());
+                AchternaamTrainer.setText("");
+                VoornaamTrainer.setText("");
+                GeboortedatumTrainer.setText("");
+                TeamNaam.setText("");
+                Thuisarena.setText("");
+                Stamnummer.setText("");
+
+                try {
+
+                    DriverManager.addTrainer(tr);
+                    DriverManager.addTeam(te, competitie, seizoenInt);
+                    JOptionPane.showMessageDialog(null, "Team en Trainer opgeslagen!");
+                } catch (DBException ex) {
+                    Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AchternaamTrainer;
     private javax.swing.JButton AddSpelerButton;
     private javax.swing.JButton CancelButton;
     private javax.swing.JTextField GeboortedatumTrainer;
-    private javax.swing.JTextField Naam;
     private javax.swing.JTextField Stamnummer;
+    private javax.swing.JButton Store;
+    private javax.swing.JTextField TeamNaam;
     private javax.swing.JTextField Thuisarena;
     private javax.swing.JTextField VoornaamTrainer;
     private javax.swing.JLabel jLabel1;
@@ -273,4 +336,29 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
+
+    public String getAchternaamTrainer() {
+        return AchternaamTrainer.getText();
+    }
+
+    public String getGeboortedatumTrainer() {
+        return GeboortedatumTrainer.getText();
+    }
+
+    public String getVoornaamTrainer() {
+        return VoornaamTrainer.getText();
+    }
+
+    public String getTeamNaam() {
+        return TeamNaam.getText();
+    }
+
+    public int getStamnummer() {
+        return Integer.parseInt(Stamnummer.getText());
+    }
+
+    public String getThuisArena() {
+
+        return Thuisarena.getText();
+    }
 }

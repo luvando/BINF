@@ -13,9 +13,9 @@ import java.util.ArrayList;
  */
 public class Speeldag {
     
-    Competitie competitie;
-    Seizoen seizoen;
-    int speeldagnr;
+    private Competitie competitie;
+    private Seizoen seizoen;
+    private int speeldagnr;
 
     public Speeldag(Competitie competitie, Seizoen seizoen, int speeldagnr) {
         this.competitie = competitie;

@@ -34,7 +34,7 @@
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="GeboortedatumTrainer" min="-2" pref="129" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -60,15 +60,17 @@
                                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="Thuisarena" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <Component id="Naam" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <Component id="TeamNaam" min="-2" pref="129" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="86" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="93" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="171" max="32767" attributes="0"/>
+              <EmptySpace pref="95" max="32767" attributes="0"/>
+              <Component id="Store" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -90,7 +92,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Naam" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="TeamNaam" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -114,7 +116,10 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="GeboortedatumTrainer" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="GeboortedatumTrainer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Store" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="50" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -142,7 +147,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StamnummerActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="Naam">
+    <Component class="javax.swing.JTextField" name="TeamNaam">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -201,6 +206,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddSpelerButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Store">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Store"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

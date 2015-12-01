@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public class Seizoen {
 
-    Competitie c;
+    private Competitie c;
     private int jaar;
     /*private Speeldag speeldag;
     private ArrayList<Speeldag> speeldagen;

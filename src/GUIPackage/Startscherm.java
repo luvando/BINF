@@ -44,7 +44,6 @@ public class Startscherm extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        NieuweCompetitieButton = new javax.swing.JButton();
         BestaandeCompetitieButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
         GegevensOpvragenButton = new javax.swing.JButton();
@@ -66,13 +65,6 @@ public class Startscherm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Competitie");
         setAlwaysOnTop(true);
-
-        NieuweCompetitieButton.setText("Nieuwe competitie toevoegen");
-        NieuweCompetitieButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NieuweCompetitieButtonActionPerformed(evt);
-            }
-        });
 
         BestaandeCompetitieButton.setText("Bestaande competitie bewerken");
         BestaandeCompetitieButton.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +103,6 @@ public class Startscherm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(BestaandeCompetitieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(NieuweCompetitieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(GegevensOpvragenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(86, 86, 86))))
@@ -121,10 +112,8 @@ public class Startscherm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(71, 71, 71)
-                .addComponent(NieuweCompetitieButton)
-                .addGap(18, 18, 18)
-                .addComponent(BestaandeCompetitieButton)
+                .addGap(35, 35, 35)
+                .addComponent(BestaandeCompetitieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(GegevensOpvragenButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
@@ -153,14 +142,6 @@ public class Startscherm extends javax.swing.JFrame {
         // cancel
         System.exit(0);
     }//GEN-LAST:event_CancelButtonActionPerformed
-
-    private void NieuweCompetitieButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NieuweCompetitieButtonActionPerformed
-        // Nieuwe competitie button
-        AddNieuweCompetitie updateForm = new AddNieuweCompetitie(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
-
-    }//GEN-LAST:event_NieuweCompetitieButtonActionPerformed
 
     private void GegevensOpvragenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GegevensOpvragenButtonActionPerformed
         // TODO add your handling code here:
@@ -213,7 +194,6 @@ public class Startscherm extends javax.swing.JFrame {
     private javax.swing.JButton BestaandeCompetitieButton;
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton GegevensOpvragenButton;
-    private javax.swing.JButton NieuweCompetitieButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
