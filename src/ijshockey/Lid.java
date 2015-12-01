@@ -50,4 +50,14 @@ public class Lid {
         this.geboortedatum = geboortedatum;
     }
 
+    public int getLidnr() {
+        return lidnr;
+    }
+
+    public void setLidnr(int lidnr) {
+        this.lidnr = lidnr;
+    }
+    
+    
+
 }

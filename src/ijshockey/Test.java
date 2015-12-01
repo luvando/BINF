@@ -19,7 +19,7 @@ public class Test {
        // DriverManager.printTeamRanking(); //werkt
       //  DriverManager.printSpelerRanking(); //werkt
         //DriverManager.printTeamRapport(1); //werkt
-        DriverManager.printSpelerRapport(3); //werkt
+        //DriverManager.printSpelerRapport(3); //werkt
         
         
         //DriverManager.printSpelerRapport(2);
@@ -33,6 +33,9 @@ public class Test {
         
         //Goal g = new Goal(15, 2, 1, 3);
         //DriverManager.addGoal(g);
+        
+        Wedstrijd w = new Wedstrijd(DriverManager.getTeam(1), DriverManager.getTeam(2), "Camp Nou", 5, 0, DriverManager.getScheids(1), "11/11/2015", DriverManager.getSpeeldag("National League", 2015, 1));
+        DriverManager.addWedstrijd(w);
         
 
         

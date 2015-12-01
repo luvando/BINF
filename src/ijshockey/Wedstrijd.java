@@ -19,22 +19,22 @@ public class Wedstrijd {
     private String arena;
     private int scoreThuisTeam;
     private int scoreUitTeam;
-    private int lidNrScheids;
+    private Scheidsrechter scheidsrechter;
     private String datum;
     private Boolean gespeeld;
-    //private ArrayList<Opstelling> opstelling;
+    private Speeldag sp;
 
-    public Wedstrijd(Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, int lidNrScheids, String datum) {       
+    public Wedstrijd(Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {       
         this.wedstrijdNr = wedstrijdNr;
         this.thuisTeam = thuisTeam;
         this.uitTeam = uitTeam;
         this.arena = arena;
         this.scoreThuisTeam = scoreThuisTeam;
         this.scoreUitTeam = scoreUitTeam;
-
         this.datum = datum;
-        gespeeld = true;
-        //this.opstelling = opstelling;
+        this.scheidsrechter = scheidsrechter;
+        this.gespeeld = true;
+        this.sp = sp;
     }
 
     Wedstrijd(int wnr, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, boolean gespeeld) {
@@ -97,13 +97,21 @@ public class Wedstrijd {
         this.scoreUitTeam = scoreUitTeam;
     }
 
-    public int getLidNrScheids() {
-        return lidNrScheids;
+    public Scheidsrechter getScheidsrechter() {
+        return scheidsrechter;
     }
 
-    public void setLidNrScheids(int lidNrScheids) {
-        this.lidNrScheids = lidNrScheids;
+    public void setScheidsrechter(Scheidsrechter scheidsrechter) {
+        this.scheidsrechter = scheidsrechter;
     }
+
+
+
+
+
+
+
+
 
     public String getDatum() {
         return datum;
@@ -121,6 +129,16 @@ public class Wedstrijd {
         this.gespeeld = gespeeld;
     }
 
+    public Speeldag getSp() {
+        return sp;
+    }
+
+    public void setSp(Speeldag sp) {
+        this.sp = sp;
+    }
+    
+    
+
     
     public String printWedstrijd() {
         return thuisTeam.getNaam() + " - " + uitTeam.getNaam() + " " + datum;
@@ -129,7 +147,14 @@ public class Wedstrijd {
     @Override
     public String toString() {
         return thuisTeam + " - " + uitTeam + " " + datum;
-    
     }
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
