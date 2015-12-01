@@ -13,6 +13,7 @@ import java.util.Date;
  * @author favdndor
  */
 public class Wedstrijd {
+
     private int wedstrijdNr;
     private Team thuisTeam;
     private Team uitTeam;
@@ -157,4 +158,3 @@ public class Wedstrijd {
     
     
 }
-
