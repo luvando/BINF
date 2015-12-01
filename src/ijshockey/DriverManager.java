@@ -87,7 +87,7 @@ public class DriverManager {
     public static void updateDB() {
         //gegevens spelers en teams berekenen en in database steken na elke speeldag
     }
-    
+
 //competitie
     public static void addComp(Competitie c) throws DBException {
         Connection con = null;
@@ -131,8 +131,9 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
+
 //seizoen
+    //addSeizoen
     public static Seizoen getSeizoen(int jaar, String competitienaam) throws DBException {
         Connection con = null;
         try {
@@ -157,8 +158,9 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
-//speeldag    
+
+//speeldag   
+    //addSpeeldag
     public static Speeldag getSpeeldag(String competitienaam, int jaar, int speeldagnr) throws DBException {
         Connection con = null;
         try {
@@ -187,25 +189,25 @@ public class DriverManager {
 
 //wedstrijd
     /*public static void addWedstrijd(Wedstrijd w) throws DBException {
-        Connection con = null;
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
+     Connection con = null;
+     try {
+     con = getConnection();
+     Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into wedstrijd "
-                    + "(competitienaam, jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit) ; "
-                    + "VALUES ('" w "')";
-            stmt.executeUpdate(sql);
+     String sql = "INSERT into wedstrijd "
+     + "(competitienaam, jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit) ; "
+     + "VALUES ('" w "')";
+     stmt.executeUpdate(sql);
 
-            closeConnection(con);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
-    }*/
-
+     closeConnection(con);
+     } catch (Exception ex) {
+     ex.printStackTrace();
+     closeConnection(con);
+     throw new DBException(ex);
+     }
+     }*/
+    
     public static Wedstrijd getWedstrijd(int wnr) throws DBException {
         Connection con = null;
         try {
@@ -257,9 +259,14 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
+
 //highlight
-     public static void addAssist(Assist a) throws DBException {
+    //getGoal
+    //getAssist
+    //getOwngoal
+    //getPenalty
+    //addPenalty
+    public static void addAssist(Assist a) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -268,7 +275,7 @@ public class DriverManager {
 
             String sql = "INSERT into trainer "
                     + "(minuut, lidnr, wedstrijdnr) "
-                    + "VALUES ('" + a.getMinuut() + "', '" + a.getLidNr()+ "', '" + a.getWedstrijdNr()+ "')";
+                    + "VALUES ('" + a.getMinuut() + "', '" + a.getLidNr() + "', '" + a.getWedstrijdNr() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
@@ -278,8 +285,8 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
-        public static void addGoal(Goal g) throws DBException {
+
+    public static void addGoal(Goal g) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -288,7 +295,7 @@ public class DriverManager {
 
             String sql = "INSERT into trainer "
                     + "(minuut, lidnr, wedstrijdnr, highlightnr_assist) "
-                    + "VALUES ('" + g.getMinuut()+ "', '" + g.getLidNr()+ "', '" + g.getWedstrijdNr()+ "', '" + g.getHighlightNr_assist()+ "')";
+                    + "VALUES ('" + g.getMinuut() + "', '" + g.getLidNr() + "', '" + g.getWedstrijdNr() + "', '" + g.getHighlightNr_assist() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
@@ -298,8 +305,8 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-        
-        public static void addOwngoal(Owngoal o) throws DBException {
+
+    public static void addOwngoal(Owngoal o) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -308,7 +315,7 @@ public class DriverManager {
 
             String sql = "INSERT into trainer "
                     + "(minuut, lidnr, wedstrijdnr) "
-                    + "VALUES ('" + o.getMinuut()+ "', '" + o.getLidNr()+ "', '" + o.getWedstrijdNr()+"')";
+                    + "VALUES ('" + o.getMinuut() + "', '" + o.getLidNr() + "', '" + o.getWedstrijdNr() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
@@ -318,7 +325,7 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-        
+
 //scheidsrechter    
     public static void addScheids(Scheidsrechter sch) throws DBException {
         Connection con = null;
@@ -376,7 +383,6 @@ public class DriverManager {
         }
     }
 
-   
 //speler
     public static void addSpeler(Speler s) throws DBException {
         Connection con = null;
@@ -446,7 +452,7 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
+
     public static void printSpelerRanking() throws DBException {
         Connection con = null;
         try {
@@ -482,7 +488,7 @@ public class DriverManager {
     public static void printSpelerRapport(int lidnr) throws DBException {
         System.out.println(getSpeler(lidnr).toStringSpelerRapport());
     }
-    
+
     public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
         int playedMinutesGame = 0;
         try {
@@ -510,8 +516,9 @@ public class DriverManager {
 
     }
 //trainer
-    
+
 //team
+    //addTeam
     public static Team getTeam(int stamnr) throws DBException {
         Connection con = null;
         try {
@@ -693,7 +700,6 @@ public class DriverManager {
         }
     }
 
-    
 //DBconnection
     public static Connection getConnection() throws DBException {
         Connection con = null;
