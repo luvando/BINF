@@ -306,6 +306,70 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
+    
+    public static void addAssist(Assist a) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into trainer "
+                    + "(minuut, lidnr, wedstrijdnr) "
+                    + "VALUES ('" + a.getMinuut() + "', '" + a.getLidNr()+ "', '" + a.getWedstrijdNr()+ "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
+        public static void addGoal(Goal g) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into trainer "
+                    + "(minuut, lidnr, wedstrijdnr, highlightnr_assist) "
+                    + "VALUES ('" + g.getMinuut()+ "', '" + g.getLidNr()+ "', '" + g.getWedstrijdNr()+ "', '" + g.getHighlightNr_assist()+ "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+        
+        public static void addOwngoal(Owngoal o) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into trainer "
+                    + "(minuut, lidnr, wedstrijdnr) "
+                    + "VALUES ('" + o.getMinuut()+ "', '" + o.getLidNr()+ "', '" + o.getWedstrijdNr()+"')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+        
+    
+    
+
 
     public static void printSpelerRanking() throws DBException {
         Connection con = null;
