@@ -11,8 +11,8 @@ package ijshockey;
  */
 public class Assist extends Highlight {
 
-    public Assist(int tijdstip, String LidId) {
-        super(tijdstip, LidId);
+    public Assist(int tijdstip, int lidnr) {
+        super(tijdstip, lidnr);
     }
 
 }
