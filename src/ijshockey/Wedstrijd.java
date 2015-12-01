@@ -22,8 +22,21 @@ public class Wedstrijd {
     private Scheidsrechter scheidsrechter;
     private Date datum;
     private Boolean gespeeld; 
-    private ArrayList<Opstelling> opstelling;
+    //private ArrayList<Opstelling> opstelling;
 
+    public Wedstrijd(int wedstrijdNr, Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, Date datum, Boolean gespeeld) {
+        this.wedstrijdNr = wedstrijdNr;
+        this.thuisTeam = thuisTeam;
+        this.uitTeam = uitTeam;
+        this.arena = arena;
+        this.scoreThuisTeam = scoreThuisTeam;
+        this.scoreUitTeam = scoreUitTeam;
+        this.scheidsrechter = scheidsrechter;
+        this.datum = datum;
+        this.gespeeld = gespeeld;
+        //this.opstelling = opstelling;
+    }
+    
     public int getWedstrijdNr() {
         return wedstrijdNr;
     }
@@ -96,13 +109,4 @@ public class Wedstrijd {
         this.gespeeld = gespeeld;
     }
 
-    public ArrayList<Opstelling> getOpstelling() {
-        return opstelling;
-    }
-
-    public void setOpstelling(ArrayList<Opstelling> opstelling) {
-        this.opstelling = opstelling;
-    }
-
-    
 }

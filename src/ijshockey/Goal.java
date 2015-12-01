@@ -11,17 +11,26 @@ package ijshockey;
  */
 public class Goal extends Highlight {
 
-    private Assist assist;
+    private int highlightNr_assist;
 
-    public Goal(int tijdstip, int lidnr) {
-        super(tijdstip, lidnr);
+    public Goal(int highlightNr, int minuut, int lidnr, int wedstrijdNr, int highlightNr_assist) {
+        super(highlightNr, minuut, lidnr, wedstrijdNr);
+        this.highlightNr_assist = highlightNr_assist;
     }
 
-    public Assist getAssist() {
-        return assist;
+    public Goal(int highlightNr, int minuut, int lidnr, int wedstrijdNr)
+    {
+        super(highlightNr, minuut, lidnr, wedstrijdNr);
     }
 
-    public void setAssist(Assist assist) {
-        this.assist = assist;
+    public int getHighlightNr_assist() {
+        return highlightNr_assist;
     }
+
+    public void setHighlightNr_assist(int highlightNr_assist) {
+        this.highlightNr_assist = highlightNr_assist;
+    }
+
+
+
 }
