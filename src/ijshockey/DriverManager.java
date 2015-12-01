@@ -5,6 +5,7 @@
  */
 package ijshockey;
 
+import static GUIPackage.KeuzeSchermBestaandeCompetitie.dManager;
 import GUIPackage.Startscherm;
 import java.util.*;
 import java.io.*;
@@ -13,12 +14,41 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.util.Date;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
  * @author ekmaes
  */
 public class DriverManager {
+
+    public static ResultSet FillLijstCompetities() throws SQLException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT * FROM competitie";
+
+            ResultSet srs = stmt.executeQuery(sql);
+            return srs;
+
+        } catch (DBException ex) {
+            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+//    public static ResultSet FillLijstCompetitiesSeizoen(JList LijstCompetities){
+//        Connection con = null;
+//            con = getConnection();
+//            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+//
+//            String sql = "SELECT jaar FROM seizoen WHERE competitienaam = " + "'" + LijstCompetities.getSelectedValue() + "'";
+//
+//            ResultSet srs = stmt.executeQuery(sql);
+//    }
 
     public DriverManager() {
     }
@@ -78,16 +108,16 @@ public class DriverManager {
         }
     }
 
-    public static void addSeizoen(Seizoen s) throws DBException {
+    public static void addScheids(Scheidsrechter sch) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "INSERT into seizoen "
-                    + "(competitienaam, jaar) "
-                    + "VALUES ('" + s.getCompetitienaam() + "', '" + s.getJaar() + "')";
+            String sql = "INSERT into scheidsrechter "
+                    + "(voornaam, achternaam, geboortedatum) "
+                    + "VALUES ('" + sch.getVoornaam() + "', '" + sch.getAchternaam() + "','" + sch.getGeboortedatum() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
@@ -113,7 +143,7 @@ public class DriverManager {
 
             String voornaam;
             String achternaam;
-            Date geboortedatum;
+            String geboortedatum;
             String voorkeurpositie;
             int goals;
             int assists;
@@ -124,7 +154,7 @@ public class DriverManager {
             if (srs.next()) {
                 voornaam = srs.getString("voornaam");
                 achternaam = srs.getString("achternaam");
-                geboortedatum = srs.getDate("geboortedatum");
+                geboortedatum = srs.getString("geboortedatum");
                 voorkeurpositie = srs.getString("voorkeurpositie");
                 goals = srs.getInt("goals");
                 assists = srs.getInt("assists");
@@ -136,7 +166,7 @@ public class DriverManager {
                 closeConnection(con);
                 return null;
             }
-            Speler s = new Speler(lidnr, voornaam, achternaam, geboortedatum, voorkeurpositie, goals, assists, penaltys, speelminuten, team);
+            Speler s = new Speler(voornaam, achternaam, geboortedatum, voorkeurpositie, goals, assists, penaltys, speelminuten, team);
             closeConnection(con);
             return s;
         } catch (Exception ex) {
@@ -177,7 +207,7 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
+
     public static void printSpelerRapport(int lidnr) throws DBException {
         System.out.println(getSpeler(lidnr).toStringSpelerRapport());
     }

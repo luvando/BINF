@@ -22,8 +22,8 @@ public class Speler extends Lid {
     private int speelminuten;
     private Team team; //waarom team en niet stamnr?
 
-    public Speler(int lidnr, String voornaam, String achternaam, Date geboortedatum, String voorkeurpositie, int goals, int assists, int penaltys, int speelminuten, Team team) {
-        super(lidnr, voornaam, achternaam, geboortedatum);
+    public Speler(String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, int goals, int assists, int penaltys, int speelminuten, Team team) {
+        super(voornaam, achternaam, geboortedatum);
         this.voorkeurpositie = voorkeurpositie;
         this.goals = goals;
         this.assists = assists;
