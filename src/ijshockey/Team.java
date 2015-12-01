@@ -42,6 +42,13 @@ public class Team {
         this.lidnr_trainer = lidnr_trainer;
     }
 
+    public Team(int stamnummer, String thuisArena, String teamNaam) {
+      this.stamNr = stamnummer;
+      this.naam = naam;
+      this.thuisArena = thuisArena;
+              
+    }
+
     public void setPunten() { // Viktor 24//11 , zou dit werken? /aangepast door Jorn
         this.punten = 2 * this.getAantalGewonnen() + 1 * this.getAantalGelijk();
     }

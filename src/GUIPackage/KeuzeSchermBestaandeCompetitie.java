@@ -5,8 +5,11 @@
  */
 package GUIPackage;
 
+import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 //import ijshockey.DriverManager.closeConnection;
 //import ijshockey.DriverManager.getConnection;
 import java.sql.*;
@@ -48,6 +51,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
         initComponents();
         FillLijst(ijshockey.DriverManager.FillLijstCompetities());
         setLocationRelativeTo(null);
+
     }
 
     /**
@@ -65,7 +69,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
         VorigeButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        LijstSeizoenen = new javax.swing.JList<>();
+        LijstSeizoenen = new javax.swing.JList<String>();
         SearchText = new javax.swing.JTextField();
         SearchButton = new javax.swing.JButton();
         NieuwSeizoen = new javax.swing.JTextField();
@@ -74,6 +78,8 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
         AddSpeeldagButton = new javax.swing.JButton();
         TeamToevoegenButton = new javax.swing.JButton();
         TeamBewerkenButton = new javax.swing.JButton();
+        addCompetitieButton = new javax.swing.JButton();
+        Competitienaam = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bestaande competitie");
@@ -156,6 +162,13 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
             }
         });
 
+        addCompetitieButton.setText("Voeg competitie toe");
+        addCompetitieButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCompetitieButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,9 +179,11 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
                     .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SearchButton)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(SearchText, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(SearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addCompetitieButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Competitienaam))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(117, 117, 117)
@@ -179,41 +194,21 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(136, 136, 136)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                        .addGap(159, 159, 159)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(AddWedstrijdButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(AddSpeeldagButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TeamToevoegenButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TeamBewerkenButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(VorigeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(NieuwSeizoen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NieuwSeizoenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(SearchButton)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
+                        .addGap(63, 63, 63)
                         .addComponent(AddSpeeldagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(AddWedstrijdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,10 +217,29 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(TeamBewerkenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(NieuwSeizoen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(NieuwSeizoenButton)
+                            .addComponent(Competitienaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addCompetitieButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(SearchButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -332,7 +346,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
 
     private void TeamToevoegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamToevoegenButtonActionPerformed
         // TODO add your handling code here:
-        AddTeamEnTrainer updateForm = new AddTeamEnTrainer(dManager);
+        AddTeamEnTrainer updateForm = new AddTeamEnTrainer(dManager, (String) LijstCompetities.getSelectedValue(), LijstSeizoenen.getSelectedValue());
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_TeamToevoegenButtonActionPerformed
@@ -343,6 +357,23 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_TeamBewerkenButtonActionPerformed
+
+    private void addCompetitieButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCompetitieButtonActionPerformed
+
+        Competitie c = new Competitie(this.getCompetitieNaam());
+        Competitienaam.setText("");
+        try {
+            DriverManager.addComp(c);
+            FillLijst(ijshockey.DriverManager.FillLijstCompetities());
+            JOptionPane.showMessageDialog(null, "Competitie opgeslagen!");
+        } catch (DBException ex) {
+            Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_addCompetitieButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,16 +389,21 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KeuzeSchermBestaandeCompetitie.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -383,6 +419,7 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
     private javax.swing.JButton AddSpeeldagButton;
     private javax.swing.JButton AddWedstrijdButton;
     private javax.swing.JButton CancelButton;
+    private javax.swing.JTextField Competitienaam;
     private javax.swing.JList LijstCompetities;
     private javax.swing.JList<String> LijstSeizoenen;
     private javax.swing.JTextField NieuwSeizoen;
@@ -392,8 +429,13 @@ public class KeuzeSchermBestaandeCompetitie extends javax.swing.JFrame {
     private javax.swing.JButton TeamBewerkenButton;
     private javax.swing.JButton TeamToevoegenButton;
     private javax.swing.JButton VorigeButton;
+    private javax.swing.JButton addCompetitieButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+ public String getCompetitieNaam() {
+        return Competitienaam.getText();
+    }
+
 }
