@@ -108,6 +108,9 @@ public class Team {
         return aantalGelijk;
     }
 
+
+    
+
     //hulpmethodes voor ranking en rapport
     public String toStringTeamRanking() {
         return naam + ": " + punten + " punten (" + aantalGespeeld + " wedstrijden, doelpuntensaldo: " + dps + ")";

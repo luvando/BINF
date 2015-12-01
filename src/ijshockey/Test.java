@@ -15,13 +15,11 @@ import java.util.Arrays;
 public class Test {
 
     public static void main(String[] args) throws DBException {
-      //  DriverManager dm = new DriverManager();
+     // DriverManager dm = new DriverManager();
        // DriverManager.printTeamRanking(); //werkt
       //  DriverManager.printSpelerRanking(); //werkt
        // DriverManager.printTeamRapport(1); //werkt
         //DriverManager.printSpelerRapport(2); //werkt
-        DriverManager.printGoals();
-        DriverManager.printPenaltys();
         /*DriverManager.getScheids(lidnr);
         DriverManager.getCompetitie(null);
         DriverManager.getSeizoen(jaar, null);
@@ -29,5 +27,20 @@ public class Test {
         DriverManager.getSpeler(lidnr);
         DriverManager.getTeam(stamnr);
         DriverManager.getWedstrijd(wnr);*/
+        //DriverManager.printSpelerRapport(2);
+        /*Owngoal o = new Owngoal(2, 16, 2, 1);
+        DriverManager.addOwngoal(o);
+        
+        Straf s = new Straf(2, 15, "heel stout geweest", 10, 2, 1);
+        DriverManager.addStraf(s);
+        Penalty p = new Penalty(1, 15, 2, 1, 0);
+        DriverManager.addPenalty(p);
+        
+        Goal g = new Goal(1, 15, 2, 1, a);
+        DriverManager.addGoal(g);
+        Assist a = new Assist(10, 2, 1);        
+        DriverManager.addAssist(a);*/
+
+        
     }
 }

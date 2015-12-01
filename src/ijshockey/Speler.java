@@ -96,6 +96,4 @@ public class Speler extends Lid {
 
     }
     
-    
-
 }

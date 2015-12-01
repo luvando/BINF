@@ -53,7 +53,7 @@ public String toString() {
         String s = null;
         
         try {
-            s = "Penalty" + " in minuut " + super.getMinuut() + " in wedstrijd " + DriverManager.getWedstrijd(super.getWedstrijdNr()).toString();
+            s = "Penalty" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
         } catch (DBException ex) {
             Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
         }

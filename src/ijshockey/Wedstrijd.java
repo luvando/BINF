@@ -120,9 +120,15 @@ public class Wedstrijd {
     public void setGespeeld(Boolean gespeeld) {
         this.gespeeld = gespeeld;
     }
+
+    
+    public String printWedstrijd() {
+        return thuisTeam.getNaam() + " - " + uitTeam.getNaam() + " " + datum;
+        
     @Override
     public String toString() {
         return thuisTeam + " - " + uitTeam + " " + datum;
     }
 
 }
+
