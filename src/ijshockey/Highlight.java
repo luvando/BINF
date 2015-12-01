@@ -17,8 +17,7 @@ public class Highlight {
     private int wedstrijdNr;
     
 
-    public Highlight(int highlightNr, int minuut, int lidNr, int wedstrijdNr) {
-        this.highlightNr = highlightNr;
+    public Highlight(int minuut, int lidNr, int wedstrijdNr) {
         this.minuut = minuut;
         this.lidNr = lidNr;
         this.wedstrijdNr = wedstrijdNr;

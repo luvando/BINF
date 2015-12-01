@@ -314,8 +314,8 @@ public class DriverManager {
             stmt.executeUpdate(sql);
           
             sql = "INSERT into goal "
-                    + "(minuut, lidnr, wedstrijdnr, highlightnr_assist) "
-                    + "VALUES ('" + g.getMinuut() + "', '" + g.getLidNr() + "', '" + g.getWedstrijdNr() + "', '" + g.getAssist().getHighlightNr() + "')";
+                    + "(minuut, lidnr, wedstrijdnr, lidnr_assist) "
+                    + "VALUES ('" + g.getMinuut() + "', '" + g.getLidNr() + "', '" + g.getWedstrijdNr() + "', '" + g.getLidnr_assist() + "')";
             stmt.executeUpdate(sql);
             }
             
@@ -326,6 +326,8 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
+    
+    
     
     public static void addOwngoal(Owngoal o) throws DBException {
         Connection con = null;
@@ -790,7 +792,7 @@ public class DriverManager {
                 closeConnection(con);
                 return null;
             }
-            Goal g = new Goal(highlightnr, minuut, lidnr, wedstrijdnr);
+            Goal g = new Goal(minuut, lidnr, wedstrijdnr);
 
             closeConnection(con);
             return g;
@@ -862,7 +864,7 @@ public class DriverManager {
                 closeConnection(con);
                 return null;
             }
-            Penalty p = new Penalty(highlightnr, minuut, lidnr, wedstrijdnr, gescoord);
+            Penalty p = new Penalty(minuut, lidnr, wedstrijdnr, gescoord);
 
             closeConnection(con);
             return p;

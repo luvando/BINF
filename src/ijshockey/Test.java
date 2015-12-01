@@ -34,12 +34,11 @@ public class Test {
         Straf s = new Straf(2, 15, "heel stout geweest", 10, 2, 1);
         DriverManager.addStraf(s);
         Penalty p = new Penalty(1, 15, 2, 1, 0);
-        DriverManager.addPenalty(p);
+        DriverManager.addPenalty(p);*/
         
-        Goal g = new Goal(1, 15, 2, 1, a);
+        Goal g = new Goal(15, 2, 1, 3);
         DriverManager.addGoal(g);
-        Assist a = new Assist(10, 2, 1);        
-        DriverManager.addAssist(a);*/
+        
 
         
     }
