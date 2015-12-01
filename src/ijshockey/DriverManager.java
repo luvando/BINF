@@ -107,6 +107,32 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
+    
+     public static Speeldag getSpeeldag(String competitienaam, int jaar, int speeldagnr) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT * "
+                    + "FROM speeldag "
+                    + "WHERE competitienaam = " + competitienaam + " AND jaar = " + jaar + " AND speeldagnr = " + speeldagnr;
+
+            ResultSet srs = stmt.executeQuery(sql);
+            
+            Competitie c = getCompetitie(competitienaam);
+            Seizoen seizoen = getSeizoen(jaar);
+            
+            Speeldag s = new Speeldag(c, seizoen, speeldagnr);
+            closeConnection(con);
+            return s;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
 
     public static void addScheids(Scheidsrechter sch) throws DBException {
         Connection con = null;

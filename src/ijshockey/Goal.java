@@ -25,7 +25,4 @@ public class Goal extends Highlight {
         this.assist = assist;
     }
     
-    public static String toString() {
-        return ;
-    }
 }

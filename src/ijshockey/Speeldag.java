@@ -9,34 +9,21 @@ import java.util.ArrayList;
  */
 /**
  *
- * @author favdndor
+ * @author jornys
  */
 public class Speeldag {
+    
+    Competitie competitie;
+    Seizoen seizoen;
+    int speeldagnr;
 
-    private int speeldagNr;
-    private Wedstrijd wedstrijd;
-    private ArrayList<Wedstrijd> wedstrijden;
-
-    public Speeldag(int speeldagNr, Wedstrijd wedstrijd, ArrayList<Wedstrijd> wedstrijden) {
-        this.speeldagNr = speeldagNr;
-        this.wedstrijd = wedstrijd;
-        this.wedstrijden = wedstrijden;
+    public Speeldag(Competitie competitie, Seizoen seizoen, int speeldagnr) {
+        this.competitie = competitie;
+        this.seizoen = seizoen;
+        this.speeldagnr = speeldagnr;
     }
-
-    public int getSpeeldagNr() {
-        return speeldagNr;
-    }
-
-    public void setSpeeldagNr(int speeldagNr) {
-        this.speeldagNr = speeldagNr;
-    }
-
-    public ArrayList<Wedstrijd> getWedstrijden() {
-        return wedstrijden;
-    }
-
-    public void setWedstrijden(ArrayList<Wedstrijd> wedstrijden) {
-        this.wedstrijden = wedstrijden;
-    }
+    
+    
+    
 
 }
