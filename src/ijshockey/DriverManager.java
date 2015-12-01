@@ -669,9 +669,9 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT stamnr "
+            String sql = "SELECT stamnr, (goalsvoor - goalstegen) "
                     + "FROM team "
-                    + "ORDER BY punten DESC, (goalsvoor - goalstegen)";
+                    + "ORDER BY punten DESC, (goalsvoor - goalstegen) DESC ";
             ResultSet srs = stmt.executeQuery(sql);
 
             ArrayList<Team> rankedteams = new ArrayList<Team>();
