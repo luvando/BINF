@@ -5,17 +5,11 @@
  */
 package ijshockey;
 
-import static GUIPackage.KeuzeSchermBestaandeCompetitie.dManager;
-import GUIPackage.Startscherm;
+import GUIPackage.*;
 import java.util.*;
 import java.io.*;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import java.util.Date;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.*;
 
 /**
  *
