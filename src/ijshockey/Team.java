@@ -27,6 +27,8 @@ public class Team {
     private int doelpuntenTegen;
     private int lidnr_trainer;
     private int penaltys;
+    private int dps = doelpuntenVoor - doelpuntenTegen;
+
 
     public Team(int stamNr, String naam, String thuisArena, int punten, int aantalGespeeld, int aantalGewonnen, int aantalVerloren, int aantalGelijk, int doelpuntenVoor, int doelpuntenTegen, int penaltys, int lidnr_trainer) {
         this.stamNr = stamNr;
@@ -40,6 +42,7 @@ public class Team {
         this.doelpuntenVoor = doelpuntenVoor;
         this.doelpuntenTegen = doelpuntenTegen;
         this.lidnr_trainer = lidnr_trainer;
+        this.dps = doelpuntenVoor - doelpuntenTegen;
     }
 
     public Team(int stamnummer, String thuisArena, String teamNaam) {
@@ -107,19 +110,18 @@ public class Team {
 
     //hulpmethodes voor ranking en rapport
     public String toStringTeamRanking() {
-        return naam + ": " + punten + " punten (" + aantalGespeeld + " wedstrijden)";
+        return naam + ": " + punten + " punten (" + aantalGespeeld + " wedstrijden, doelpuntensaldo: " + dps + ")";
     }
 
     public String toStringTeamRapport() {
-        int doelpuntenSaldo = doelpuntenVoor - doelpuntenTegen;
         int goalsPerGame;
         int penaltysPerGame;
         if (aantalGespeeld == 0) {
             goalsPerGame = 0;
             penaltysPerGame = 0;
         } else {
-            goalsPerGame = (doelpuntenVoor - aantalGespeeld);
-            penaltysPerGame = (penaltys - aantalGespeeld);
+            goalsPerGame = (doelpuntenVoor / aantalGespeeld);
+            penaltysPerGame = (penaltys / aantalGespeeld);
         }
 
         return naam + "\n"
@@ -129,7 +131,7 @@ public class Team {
                 + "aantal gewonnen wedstrijden: " + aantalGewonnen + "\n"
                 + "aantal gelijkgespeelde wedstrijden: " + aantalGelijk + "\n"
                 + "aantal verloren wedstrijden: " + aantalVerloren + "\n"
-                + "doelpuntensaldo: " + doelpuntenSaldo + "\n"
+                + "doelpuntensaldo: " + dps + "\n"
                 + "totaal aantal penalty's: " + penaltys + "\n"
                 + "aantal doelpunten per wedstrijd: " + goalsPerGame + "\n"
                 + "aantal penalty's per wedstrijd: " + penaltysPerGame;
