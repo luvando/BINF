@@ -296,15 +296,14 @@ public class AddWedstrijd extends javax.swing.JFrame {
     private void jTextThuisteamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextThuisteamActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextThuisteamActionPerformed
-
+    private AddWedstrijd form;
     private void jButtonaddSpeeldagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddSpeeldagActionPerformed
-        Speeldag sp = new Speeldag(competitie, seizoenInt, this.getjTextaddSpeeldag());
+        jTextaddSpeeldag.setText("");
+        Speeldag sp = new Speeldag(competitie, seizoenInt, form.getjTextaddSpeeldag());
         try {
             DriverManager.addSpeeldag(sp);
             FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(competitie, seizoenInt));
-        } catch (DBException ex) {
-            Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (DBException | SQLException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonaddSpeeldagActionPerformed
@@ -361,6 +360,36 @@ public class AddWedstrijd extends javax.swing.JFrame {
             }
         });
     }
+    
+//        private class EventHandler implements ActionListener {
+//
+//        private AddWedstrijd form;
+//
+//        public EventHandler(AddWedstrijd aw) {
+//            form = aw;
+//        }
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            if (e.getSource() == Store) {
+//
+//            jTextUitteam.setText("");
+//            jTextThuisteam.setText("");
+//            jTextScoreUit.setText("");
+//            jTextScoreThuis.setText("");
+//            jTextDatum.setText("");
+//            jTextArena.setText("");
+//            Wedstrijd w = new Wedstrijd(form.getjTextThuisteam(), form.getjTextUitteam(), form.getjTextArena(), form.getjTextScoreThuis(), form.getjTextScoreUit(), form.jListScheids.getSelectedValue(), form.getjTextDatum());
+//                try {
+//                    DriverManager.addWedstrijd(w);
+//
+//                    JOptionPane.showMessageDialog(null, "Wedstrijdgegevens opgeslagen!");
+//                } catch (DBException ex) {
+//                    Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        }
+//        }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
