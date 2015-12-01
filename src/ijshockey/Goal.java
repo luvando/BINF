@@ -14,25 +14,27 @@ import java.util.logging.Logger;
  */
 public class Goal extends Highlight {
 
-    private Assist assist ;
+    private int lidnr_assist ;
 
-    public Goal(int highlightNr, int minuut, int lidnr, int wedstrijdNr, Assist assist) {
-        super(highlightNr, minuut, lidnr, wedstrijdNr);
-        this.assist = assist;
+    public Goal(int minuut, int lidnr, int wedstrijdNr, int lidnr_assist) {
+        super(minuut, lidnr, wedstrijdNr);
+        this.lidnr_assist = lidnr_assist;
     }
 
-    public Goal(int highlightNr, int minuut, int lidnr, int wedstrijdNr)
+    public Goal(int minuut, int lidnr, int wedstrijdNr)
     {
-        super(highlightNr, minuut, lidnr, wedstrijdNr);
+        super(minuut, lidnr, wedstrijdNr);
     }
 
-    public Assist getAssist() {
-        return assist;
+    public int getLidnr_assist() {
+        return lidnr_assist;
     }
 
-    public void setAssist(Assist assist) {
-        this.assist = assist;
+    public void setLidnr_assist(int lidnr_assist) {
+        this.lidnr_assist = lidnr_assist;
     }
+
+    
 
    
     @Override
@@ -47,5 +49,18 @@ public class Goal extends Highlight {
         return s;
 
     }
+    
+    public String toStringAssist() {
+        String s = null;
+        
+        try {
+            s = "Assist" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
+        } catch (DBException ex) {
+            Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return s;
+
+    }
+
 
 }

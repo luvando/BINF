@@ -15,9 +15,9 @@ import java.util.logging.Logger;
 public class Penalty extends Goal {
 
     private int gescoord;
-    public Penalty(int highlightNr, int minuut, int lidnr, int wedstrijdNr, int gescoord) 
+    public Penalty(int minuut, int lidnr, int wedstrijdNr, int gescoord) 
     {
-        super(highlightNr, minuut, lidnr, wedstrijdNr);
+        super(minuut, lidnr, wedstrijdNr);
         this.gescoord = gescoord;
     }
 

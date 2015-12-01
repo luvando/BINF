@@ -14,8 +14,8 @@ public class Straf extends Highlight {
     private int aantalMinuten;
     private String reden;
 
-    public Straf(int highlightNr, int minuut, String reden, int aantalMinuten, int lidnr, int wedstrijdNr) {
-        super(highlightNr, minuut, lidnr, wedstrijdNr);
+    public Straf(int minuut, String reden, int aantalMinuten, int lidnr, int wedstrijdNr) {
+        super(minuut, lidnr, wedstrijdNr);
         this.reden = reden;
         this.aantalMinuten = aantalMinuten;
         
