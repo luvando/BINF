@@ -109,9 +109,9 @@ public class Wedstrijd {
         this.gespeeld = gespeeld;
     }
 
-    @Override
-    public String toString() {
-        return thuisTeam + " - " + uitTeam + " " + datum;
+    
+    public String printNaam() {
+        return thuisTeam.toStringNaam() + " - " + uitTeam.toStringNaam() + " " + datum;
     }
 
 }
