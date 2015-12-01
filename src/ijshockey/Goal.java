@@ -24,4 +24,8 @@ public class Goal extends Highlight {
     public void setAssist(Assist assist) {
         this.assist = assist;
     }
+    
+    public static String toString() {
+        return ;
+    }
 }

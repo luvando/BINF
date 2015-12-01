@@ -98,7 +98,75 @@ public class DriverManager {
         }
     }
     
-        public static void addSpeler(Speler s) throws DBException {
+    public static void addWedstrijd(Wedstrijd w) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT into wedstrijd "
+                    + "(competitienaam, jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit) ; "
+                    + "VALUES ('" w "')";
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
+    public static Wedstrijd getWedstrijd(String c, int j, int wnr) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT * "
+                    + "FROM wedstrijd "
+                    + "WHERE competitienaam = " + c + " AND jaar = " + j + " AND wedstrijdnr = " + w;
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            String arena;
+            Date datum;
+            boolean gespeeld;
+            int score_thuis;
+            int score_uit;
+            Scheidsrechter scheidsrechter;
+            int speeldagnr;
+            Team thuis;
+            Team uit;
+
+            if (srs.next()) {
+                arena = srs.getString("voornaam");
+                datum = srs.getDate("datum");
+                gespeeld = srs.getBoolean("gespeeld");
+                score_thuis = srs.getInt("score_thuis");
+                score_uit = srs.getInt("score_uit");
+                scheidsrechter = getScheids(srs.getInt("lidnr_scheidsrechter"));
+                speeldagnr = srs.getInt("speeldagnr");
+                thuis = getTeam(srs.getInt("stamnr_thuis"));
+                uit = getTeam(srs.getInt("stamnr_uit"));
+
+            } else {
+                closeConnection(con);
+                return null;
+            }
+            Wedstrijd w = new Wedstrijd(wnr, thuis, uit, arena, score_thuis, score_uit, scheidsrechter, datum, gespeeld);
+            closeConnection(con);
+            return w;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
+    public static void addSpeler(Speler s) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
