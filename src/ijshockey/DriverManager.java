@@ -180,7 +180,6 @@ public class DriverManager {
     }
 
 //speeldag   
-  
     public static Speeldag getSpeeldag(String competitienaam, int jaar, int speeldagnr) {
         Speeldag s = new Speeldag(DriverManager.getCompetitie(competitienaam), DriverManager.getSeizoen(jaar, competitienaam), speeldagnr);
         return s;
@@ -259,7 +258,7 @@ public class DriverManager {
                         + "goalsvoor = goalsvoor + " + scoreWinner + ","
                         + " goalstegen = goalstegen + " + scoreLoser
                         + " WHERE stamnr = " + winner.getStamNr();
-
+                stmt.executeUpdate(sql1);
                 String sql2 = "UPDATE team "
                         + "SET gespeeld = gespeeld + 1, "
                         + "verloren = verloren + 1, "
@@ -267,7 +266,6 @@ public class DriverManager {
                         + " goalstegen = goalstegen + " + scoreWinner
                         + " WHERE stamnr = " + loser.getStamNr();
 
-                stmt.executeUpdate(sql1);
                 stmt.executeUpdate(sql2);
             }
 

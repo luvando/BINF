@@ -405,6 +405,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
             jTextScoreThuis.setText("");
             jTextDatum.setText("");
             jTextArena.setText("");
+            
             JOptionPane.showMessageDialog(null, "Wedstrijdgegevens opgeslagen!");
         } catch (DBException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);

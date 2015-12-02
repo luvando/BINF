@@ -10,8 +10,10 @@ import ijshockey.DriverManager;
 import ijshockey.Scheidsrechter;
 import ijshockey.Team;
 import ijshockey.Trainer;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -87,6 +89,11 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         Stamnummer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StamnummerActionPerformed(evt);
+            }
+        });
+        Stamnummer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                StamnummerKeyReleased(evt);
             }
         });
 
@@ -223,7 +230,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void StamnummerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StamnummerActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_StamnummerActionPerformed
 
     private void VoornaamTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoornaamTrainerActionPerformed
@@ -249,6 +256,21 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_CancelButtonActionPerformed
+
+    private void StamnummerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StamnummerKeyReleased
+        if (Stamnummer.getText() != null) {
+            int stamNr = Integer.parseInt(Stamnummer.getText());
+            try {
+                if (DriverManager.getTeam(stamNr) != null) {
+                    Stamnummer.setBackground(Color.red);
+                } else {
+                    Stamnummer.setBackground(Color.green);
+                }
+            } catch (DBException ex) {
+                Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_StamnummerKeyReleased
 
     /**
      * @param args the command line arguments
