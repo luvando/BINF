@@ -7,12 +7,14 @@ package GUIPackage;
 
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Scheidsrechter;
 import ijshockey.Speeldag;
 import ijshockey.Wedstrijd;
 import ijshockey.Team;
 import ijshockey.Trainer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -74,7 +76,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
             while (srs.next()) {
                 int lidnr = srs.getInt("lidnr");
-                DLM.addElement(DriverManager.getScheids(lidnr).getVoornaam() + " " + DriverManager.getScheids(lidnr).getAchternaam() + " (" + lidnr + ")");
+                DLM.addElement(DriverManager.getScheids(lidnr).getVoornaam() + " " + DriverManager.getScheids(lidnr).getAchternaam() + " - " + lidnr);
 
             }
 
@@ -92,7 +94,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
             while (srs.next()) {
                 int stamnr = srs.getInt("stamnr");
-                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " (" + stamnr + ")");
+                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
 
             }
 
@@ -111,7 +113,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
             while (srs.next()) {
                 int stamnr = srs.getInt("stamnr");
-                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " (" + stamnr + ")");
+                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
 
             }
             DLM.removeElement(jListThuisteam.getSelectedValue());
@@ -221,6 +223,11 @@ public class AddWedstrijd extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jListThuisteam.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MouseClickedEvent(evt);
+            }
         });
         jScrollPane3.setViewportView(jListThuisteam);
 
@@ -351,22 +358,70 @@ public class AddWedstrijd extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonaddSpeeldagActionPerformed
 
     private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
-//        jListThuisteam.getSelectedValue()
-//        Wedstrijd wed = new Wedstrijd(DriverManager.getTeam(
-//        int lidnrScheids = null;
-//        try {
-//
-//            
-//            
-//            jTextScoreUit.setText("");
-//            jTextScoreThuis.setText("");
-//            jTextDatum.setText("");
-//            jTextArena.setText("");
-//            JOptionPane.showMessageDialog(null, "Wedstrijdgegevens opgeslagen!");
-//        } catch (DBException ex) {
-//            Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
+        Speeldag sp = null;
+        Team thuisTeam = null;
+        Team uitTeam = null;
+        Scheidsrechter scheidsrechter = null;
+
+        int speeldagnr = Integer.parseInt((String) jListSpeeldag.getSelectedValue());
+
+        String arena = jTextArena.getText(); // Ook lijst maken?
+
+        String thuis = (String) jListThuisteam.getSelectedValue();
+
+        String[] teamthuis = thuis.split("-");
+        String teamthuistr = teamthuis[1].trim();
+        int stamnrthuis = Integer.parseInt(teamthuistr);
+
+        String uit = (String) jListUitteam.getSelectedValue();
+        String[] teamuit = uit.split("-");
+        String teamuittr = teamuit[1].trim();
+        int stamnruit = Integer.parseInt(teamuittr);
+
+        String scheids = (String) jListScheids.getSelectedValue();
+        String[] scheidsa = scheids.split("-");
+        String scheidstr = scheidsa[1].trim();
+        int lidnr = Integer.parseInt(scheidstr);
+        try {
+            thuisTeam = DriverManager.getTeam(stamnrthuis);
+            uitTeam = DriverManager.getTeam(stamnruit);
+            scheidsrechter = DriverManager.getScheids(lidnr);
+            sp = DriverManager.getSpeeldag(competitie, seizoenInt, speeldagnr);
+
+        } catch (DBException ex) {
+            Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Wedstrijd wed = new Wedstrijd(thuisTeam, uitTeam, arena, this.getjTextScoreThuis(), this.getjTextScoreUit(), scheidsrechter, this.getjTextDatum(), sp);
+        try {
+            DriverManager.addWedstrijd(wed);
+            jTextScoreUit.setText("");
+            jTextScoreThuis.setText("");
+            jTextDatum.setText("");
+            jTextArena.setText("");
+            JOptionPane.showMessageDialog(null, "Wedstrijdgegevens opgeslagen!");
+        } catch (DBException ex) {
+            Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
      }//GEN-LAST:event_StoreActionPerformed
+
+    private void MouseClickedEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseClickedEvent
+        String thuis = (String) jListThuisteam.getSelectedValue();
+        String[] teamthuis = thuis.split("-");
+        String teamthuistr = teamthuis[1].trim();
+        int stamnrthuis = Integer.parseInt(teamthuistr);
+
+        try {
+            Team thuisTeam = DriverManager.getTeam(stamnrthuis);
+            jTextArena.setText(thuisTeam.getThuisArena());
+
+        } catch (DBException ex) {
+            Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_MouseClickedEvent
 
     /**
      * @param args the command line arguments
@@ -404,35 +459,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
         });
     }
 
-//        private class EventHandler implements ActionListener {
-//
-//        private AddWedstrijd form;
-//
-//        public EventHandler(AddWedstrijd aw) {
-//            form = aw;
-//        }
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            if (e.getSource() == Store) {
-//
-//            jTextUitteam.setText("");
-//            jTextThuisteam.setText("");
-//            jTextScoreUit.setText("");
-//            jTextScoreThuis.setText("");
-//            jTextDatum.setText("");
-//            jTextArena.setText("");
-//            Wedstrijd w = new Wedstrijd(form.getjTextThuisteam(), form.getjTextUitteam(), form.getjTextArena(), form.getjTextScoreThuis(), form.getjTextScoreUit(), form.jListScheids.getSelectedValue(), form.getjTextDatum());
-//                try {
-//                    DriverManager.addWedstrijd(w);
-//
-//                    JOptionPane.showMessageDialog(null, "Wedstrijdgegevens opgeslagen!");
-//                } catch (DBException ex) {
-//                    Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        }
-//        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
@@ -468,6 +494,10 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
     public String getjTextDatum() {
         return jTextDatum.getText();
+    }
+
+    public void setjTextArena(String arena) {
+        this.jTextArena.setText(arena);
     }
 
     public int getjTextScoreThuis() {

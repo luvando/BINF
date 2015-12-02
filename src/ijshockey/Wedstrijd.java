@@ -22,8 +22,9 @@ public class Wedstrijd {
     private int scoreUitTeam;
     private Scheidsrechter scheidsrechter;
     private String datum;
-    private Boolean gespeeld;
+    private int gespeeld;
     private Speeldag sp;
+    private Boolean gespeeldBoo;
 
     public Wedstrijd(Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
         this.wedstrijdNr = wedstrijdNr;
@@ -34,11 +35,11 @@ public class Wedstrijd {
         this.scoreUitTeam = scoreUitTeam;
         this.datum = datum;
         this.scheidsrechter = scheidsrechter;
-        this.gespeeld = true;
+        this.gespeeld = 1;
         this.sp = sp;
     }
 
-    Wedstrijd(int wnr, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, boolean gespeeld) {
+    Wedstrijd(int wnr, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, int gespeeld) {
         this.wedstrijdNr = wnr;
         this.thuisTeam = thuis;
         this.uitTeam = uit;
@@ -46,7 +47,8 @@ public class Wedstrijd {
         this.scoreThuisTeam = score_thuis;
         this.scoreUitTeam = score_thuis;
         this.datum = datum;
-        gespeeld = true;
+        if (gespeeld == 1) 
+        {this.gespeeldBoo = true;}
     }
 
     public int getWedstrijdNr() {
@@ -113,14 +115,15 @@ public class Wedstrijd {
         this.datum = datum;
     }
 
-    public Boolean getGespeeld() {
+    public int getGespeeld() {
         return gespeeld;
     }
 
-    public void setGespeeld(Boolean gespeeld) {
+    public void setGespeeld(int gespeeld) {
         this.gespeeld = gespeeld;
     }
 
+  
     public Speeldag getSp() {
         return sp;
     }
