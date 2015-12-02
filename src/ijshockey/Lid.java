@@ -26,6 +26,13 @@ public class Lid {
         this.geboortedatum = geboortedatum;
     }
 
+    public Lid(String voornaam, String achternaam, String geboortedatum, int lidnr) {
+        this.voornaam = voornaam;
+        this.achternaam = achternaam;
+        this.geboortedatum = geboortedatum;
+        this.lidnr = lidnr;
+    }
+
     public String getVoornaam() {
         return voornaam;
     }
@@ -57,7 +64,5 @@ public class Lid {
     public void setLidnr(int lidnr) {
         this.lidnr = lidnr;
     }
-    
-    
 
 }

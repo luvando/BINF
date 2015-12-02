@@ -180,6 +180,7 @@ public class DriverManager {
     }
 
 //speeldag   
+  
     public static Speeldag getSpeeldag(String competitienaam, int jaar, int speeldagnr) {
         Speeldag s = new Speeldag(DriverManager.getCompetitie(competitienaam), DriverManager.getSeizoen(jaar, competitienaam), speeldagnr);
         return s;
@@ -704,8 +705,10 @@ public class DriverManager {
             String voornaam;
             String achternaam;
             String geboortedatum;
+            int lidnrscheids;
 
             if (srs.next()) {
+                lidnrscheids = srs.getInt("lidnr");
                 voornaam = srs.getString("voornaam");
                 achternaam = srs.getString("achternaam");
                 geboortedatum = srs.getString("geboortedatum");
@@ -714,7 +717,7 @@ public class DriverManager {
                 closeConnection(con);
                 return null;
             }
-            Scheidsrechter s = new Scheidsrechter(voornaam, achternaam, geboortedatum);
+            Scheidsrechter s = new Scheidsrechter(voornaam, achternaam, geboortedatum, lidnrscheids);
             closeConnection(con);
             return s;
         } catch (Exception ex) {

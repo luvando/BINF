@@ -18,4 +18,8 @@ public class Scheidsrechter extends Lid {
         super(voornaam, achternaam, geboortedatum);
     }
 
+    public Scheidsrechter(String voornaam, String achternaam, String geboortedatum, int lidnr) {
+        super(voornaam, achternaam, geboortedatum, lidnr);
+    }
+
 }

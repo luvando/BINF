@@ -392,7 +392,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
             thuisTeam = DriverManager.getTeam(stamnrthuis);
             uitTeam = DriverManager.getTeam(stamnruit);
             scheidsrechter = DriverManager.getScheids(lidnr);
-            sp = DriverManager.getSpeeldag(competitie, seizoenInt, speeldagnr);
+            sp = new Speeldag(competitie, seizoenInt, speeldagnr);
 
         } catch (DBException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);

@@ -13,7 +13,7 @@ import java.util.Date;
  * @author favdndor
  */
 public class Wedstrijd {
-
+    
     private int wedstrijdNr;
     private Team thuisTeam;
     private Team uitTeam;
@@ -25,9 +25,9 @@ public class Wedstrijd {
     private int gespeeld;
     private Speeldag sp;
     private Boolean gespeeldBoo;
-
+    
     public Wedstrijd(Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
-        this.wedstrijdNr = wedstrijdNr;
+//        this.wedstrijdNr = wedstrijdNr;
         this.thuisTeam = thuisTeam;
         this.uitTeam = uitTeam;
         this.arena = arena;
@@ -38,7 +38,7 @@ public class Wedstrijd {
         this.gespeeld = 1;
         this.sp = sp;
     }
-
+    
     Wedstrijd(int wnr, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, int gespeeld) {
         this.wedstrijdNr = wnr;
         this.thuisTeam = thuis;
@@ -47,98 +47,106 @@ public class Wedstrijd {
         this.scoreThuisTeam = score_thuis;
         this.scoreUitTeam = score_thuis;
         this.datum = datum;
-        if (gespeeld == 1) 
-        {this.gespeeldBoo = true;}
+        if (gespeeld == 1) {
+            this.setGespeeldBoo(true);
+        }
     }
-
+    
     public int getWedstrijdNr() {
         return wedstrijdNr;
     }
-
+    
     public void setWedstrijdNr(int wedstrijdNr) {
         this.wedstrijdNr = wedstrijdNr;
     }
-
+    
     public Team getThuisTeam() {
         return thuisTeam;
     }
-
+    
     public void setThuisTeam(Team thuisTeam) {
         this.thuisTeam = thuisTeam;
     }
-
+    
     public Team getUitTeam() {
         return uitTeam;
     }
-
+    
     public void setUitTeam(Team uitTeam) {
         this.uitTeam = uitTeam;
     }
-
+    
     public String getArena() {
         return arena;
     }
-
+    
     public void setArena(String arena) {
         this.arena = arena;
     }
-
+    
     public int getScoreThuisTeam() {
         return scoreThuisTeam;
     }
-
+    
     public void setScoreThuisTeam(int scoreThuisTeam) {
         this.scoreThuisTeam = scoreThuisTeam;
     }
-
+    
     public int getScoreUitTeam() {
         return scoreUitTeam;
     }
-
+    
     public void setScoreUitTeam(int scoreUitTeam) {
         this.scoreUitTeam = scoreUitTeam;
     }
-
+    
     public Scheidsrechter getScheidsrechter() {
         return scheidsrechter;
     }
-
+    
     public void setScheidsrechter(Scheidsrechter scheidsrechter) {
         this.scheidsrechter = scheidsrechter;
     }
-
+    
     public String getDatum() {
         return datum;
     }
-
+    
     public void setDatum(String datum) {
         this.datum = datum;
     }
-
+    
     public int getGespeeld() {
         return gespeeld;
     }
-
+    
     public void setGespeeld(int gespeeld) {
         this.gespeeld = gespeeld;
     }
-
-  
+    
+    public Boolean getGespeeldBoo() {
+        return gespeeldBoo;
+    }
+    
+    public void setGespeeldBoo(Boolean gespeeldBoo) {
+        this.gespeeldBoo = gespeeldBoo;
+    }
+    
     public Speeldag getSp() {
         return sp;
     }
-
+    
     public void setSp(Speeldag sp) {
         this.sp = sp;
     }
-
+    
     public String printWedstrijd() {
         return thuisTeam.getNaam() + " - " + uitTeam.getNaam() + " " + datum;
     }
-
+    
     @Override
     public String toString() {
         return thuisTeam + " - " + uitTeam + " " + datum;
     }
-
+    
 }
