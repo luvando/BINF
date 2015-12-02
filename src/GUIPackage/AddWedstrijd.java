@@ -174,6 +174,8 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jListSpeeldag);
 
+        jTextDatum.setToolTipText("YYYY-MM-DD");
+
         jLabel5.setText("Kies speeldag");
 
         jLabel2.setText("Arena");
@@ -196,7 +198,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
         jLabel9.setText("Thuisteam");
 
-        jTextaddSpeeldag.setText("Voeg speeldag toe");
+        jTextaddSpeeldag.setToolTipText("");
 
         jButtonaddSpeeldag.setText("Voeg speeldag toe");
         jButtonaddSpeeldag.addActionListener(new java.awt.event.ActionListener() {
@@ -330,6 +332,9 @@ public class AddWedstrijd extends javax.swing.JFrame {
                 .addGap(47, 47, 47))
         );
 
+        jTextaddSpeeldag.getAccessibleContext().setAccessibleName("");
+        jTextaddSpeeldag.getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -371,17 +376,17 @@ public class AddWedstrijd extends javax.swing.JFrame {
         String thuis = (String) jListThuisteam.getSelectedValue();
 
         String[] teamthuis = thuis.split("-");
-        String teamthuistr = teamthuis[1].trim();
+        String teamthuistr = teamthuis[teamthuis.length -1].trim();
         int stamnrthuis = Integer.parseInt(teamthuistr);
 
         String uit = (String) jListUitteam.getSelectedValue();
         String[] teamuit = uit.split("-");
-        String teamuittr = teamuit[1].trim();
+        String teamuittr = teamuit[teamuit.length -1].trim();
         int stamnruit = Integer.parseInt(teamuittr);
 
         String scheids = (String) jListScheids.getSelectedValue();
         String[] scheidsa = scheids.split("-");
-        String scheidstr = scheidsa[1].trim();
+        String scheidstr = scheidsa[scheidsa.length -1].trim();
         int lidnr = Integer.parseInt(scheidstr);
         try {
             thuisTeam = DriverManager.getTeam(stamnrthuis);

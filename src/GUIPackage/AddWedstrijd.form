@@ -174,6 +174,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="jTextDatum">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="YYYY-MM-DD"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextScoreThuis">
     </Component>
@@ -217,8 +220,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTextaddSpeeldag">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Voeg speeldag toe"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonaddSpeeldag">
       <Properties>
