@@ -258,7 +258,9 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void StamnummerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StamnummerKeyReleased
-        if (Stamnummer.getText() != null) {
+        if (Stamnummer.getText().equalsIgnoreCase("")) {
+            Stamnummer.setBackground(Color.white);
+        } else {
             int stamNr = Integer.parseInt(Stamnummer.getText());
             try {
                 if (DriverManager.getTeam(stamNr) != null) {
