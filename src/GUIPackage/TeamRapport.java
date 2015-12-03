@@ -37,7 +37,6 @@ public class TeamRapport extends javax.swing.JFrame {
         System.setOut(printStream);
         System.setErr(printStream);
         
-        DriverManager.printTeamRapport(2);
         
     }
 
