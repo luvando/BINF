@@ -780,8 +780,9 @@ public class DriverManager {
 
             String sql = "INSERT into speler "
                     + "(voornaam, achternaam, geboortedatum, voorkeurpositie,  stamnr) "
-                    + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '" + s.getGeboortedatum() + "', '" + s.getVoorkeurpositie() + "', '" + s.getGoals()
-                    + "', '" + s.getTeam().getStamNr() + "')";
+                    + "VALUES ('"+ s.getVoornaam() + "', '" + s.getAchternaam() + "', '" 
+                    + s.getGeboortedatum() + "', '" + s.getVoorkeurpositie() + "', '"
+                    + s.getTeam().getStamNr() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
