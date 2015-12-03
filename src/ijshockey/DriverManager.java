@@ -107,7 +107,8 @@ public class DriverManager {
         }
         return null;
     }
-public static ResultSet FillLijstTeam() throws SQLException {
+
+    public static ResultSet FillLijstTeam() throws SQLException {
         Connection con = null;
 
         try {
@@ -115,7 +116,6 @@ public static ResultSet FillLijstTeam() throws SQLException {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             String sql = "SELECT * FROM team ";
-                    
 
             ResultSet srs = stmt.executeQuery(sql);
 
@@ -126,6 +126,7 @@ public static ResultSet FillLijstTeam() throws SQLException {
         }
         return null;
     }
+
     public DriverManager() {
     }
 
@@ -300,7 +301,7 @@ public static ResultSet FillLijstTeam() throws SQLException {
                         + "goalsvoor = goalsvoor + " + scoreWinner + ","
                         + " goalstegen = goalstegen + " + scoreLoser
                         + " WHERE stamnr = '" + winner.getStamNr() + "' AND competitienaam = '" + w.getSp().getCompetitienaam()
-                        + "' AND jaar = '" + w.getSp().getJaar()+"'";
+                        + "' AND jaar = '" + w.getSp().getJaar() + "'";
                 stmt.executeUpdate(sqlwinner);
 
                 String sqlloser = "UPDATE deelname "
@@ -309,7 +310,7 @@ public static ResultSet FillLijstTeam() throws SQLException {
                         + "goalsvoor = goalsvoor + " + scoreLoser + ","
                         + " goalstegen = goalstegen + " + scoreWinner
                         + " WHERE stamnr = '" + loser.getStamNr() + "' AND competitienaam = '" + w.getSp().getCompetitienaam()
-                        + "' AND jaar = '" + w.getSp().getJaar()+"'";
+                        + "' AND jaar = '" + w.getSp().getJaar() + "'";
 
                 stmt.executeUpdate(sqlloser);
             }
@@ -778,9 +779,9 @@ public static ResultSet FillLijstTeam() throws SQLException {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "INSERT into speler "
-                    + "(lidnr, voornaam, achternaam, geboortedatum, voorkeurspositie, goals, assists, penaltys, speelminuten, team) "
+                    + "(voornaam, achternaam, geboortedatum, voorkeurpositie,  stamnr) "
                     + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '" + s.getGeboortedatum() + "', '" + s.getVoorkeurpositie() + "', '" + s.getGoals()
-                    + "', '" + s.getAssists() + "', '" + s.getPenaltys() + "', '" + s.getSpeelminuten() + "', '" + s.getTeam() + "')";
+                    + "', '" + s.getTeam().getStamNr() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
@@ -932,8 +933,6 @@ public static ResultSet FillLijstTeam() throws SQLException {
             throw new DBException(ex);
         }
     }
-    
-    
 
 //team
     public static void addTeam(Team t, String competitie, int jaar) throws DBException {
@@ -959,7 +958,7 @@ public static ResultSet FillLijstTeam() throws SQLException {
             throw new DBException(ex);
         }
     }
-    
+
     public static Trainer getTrainer(int lidnr) throws DBException {
         Connection con = null;
         try {
@@ -997,6 +996,7 @@ public static ResultSet FillLijstTeam() throws SQLException {
         }
     }
 //deelname
+
     public static Deelname getDeelname(Competitie c, Seizoen s, Team t) throws DBException {
         Connection con = null;
         try {
@@ -1021,8 +1021,6 @@ public static ResultSet FillLijstTeam() throws SQLException {
             int goalsvoor;
             int goalstegen;
             int penaltys;
-            
-            
 
             if (srs.next()) {
                 competitienaam = srs.getString("competitienaam");
@@ -1051,8 +1049,7 @@ public static ResultSet FillLijstTeam() throws SQLException {
             throw new DBException(ex);
         }
     }
-    
-    
+
     //team
     public static Team getTeam(int stamnr) throws DBException {
         Connection con = null;
@@ -1105,7 +1102,7 @@ public static ResultSet FillLijstTeam() throws SQLException {
 
             ArrayList<Deelname> rankedteams = new ArrayList<Deelname>();
             while (srs.next()) {
-                rankedteams.add(DriverManager.getDeelname(getCompetitie(srs.getString("competitienaam")),getSeizoen(srs.getInt("jaar"),srs.getString("competitienaam")),getTeam(srs.getInt("stamnr"))));
+                rankedteams.add(DriverManager.getDeelname(getCompetitie(srs.getString("competitienaam")), getSeizoen(srs.getInt("jaar"), srs.getString("competitienaam")), getTeam(srs.getInt("stamnr"))));
             }
 
             closeConnection(con);
@@ -1124,7 +1121,7 @@ public static ResultSet FillLijstTeam() throws SQLException {
     }
 
     public static void printTeamRapport(Competitie c, Seizoen s, Team t) throws DBException {
-        System.out.println(getDeelname(c,s,t).toStringTeamRapport());
+        System.out.println(getDeelname(c, s, t).toStringTeamRapport());
     }
 
 //opstelling

@@ -5,6 +5,7 @@
  */
 package GUIPackage;
 
+import static GUIPackage.AddSpeler.dManager;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Scheidsrechter;
@@ -115,6 +116,11 @@ public class BewerkTeam extends javax.swing.JFrame {
         });
 
         jButton1.setText("Terug");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,19 +169,20 @@ public class BewerkTeam extends javax.swing.JFrame {
     private void AddSpelerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpelerButtonActionPerformed
         // TODO add your handling code here:
         Team team = null;
+        AddSpeler updateForm = null;
+        String teamstring = (String) jListTeam.getSelectedValue();
 
-        String thuis = (String) jListTeam.getSelectedValue();
-
-        String[] teama = thuis.split("-");
+        String[] teama = teamstring.split("-");
         String teamstr = teama[teama.length - 1].trim();
         int stamnr = Integer.parseInt(teamstr);
         try {
-            AddSpeler updateForm = new AddSpeler(dManager,team);
             team = DriverManager.getTeam(stamnr);
+            updateForm = new AddSpeler(dManager, team);
+
         } catch (DBException ex) {
             Logger.getLogger(BewerkTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_AddSpelerButtonActionPerformed
@@ -193,6 +200,19 @@ public class BewerkTeam extends javax.swing.JFrame {
     private void SearchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchTextActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CompetitieScherm updateForm = null;
+        try {
+            updateForm = new CompetitieScherm(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(BewerkTeam.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BewerkTeam.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        updateForm.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

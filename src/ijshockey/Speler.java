@@ -31,9 +31,19 @@ public class Speler extends Lid {
         this.speelminuten = DriverManager.playedMinutesSeason(lidnr);
         this.team = team;
     }
+    public Speler(String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, Team team) {
+        super(voornaam, achternaam, geboortedatum);
+        this.voorkeurpositie = voorkeurpositie;
+        this.speelminuten = DriverManager.playedMinutesSeason(lidnr);
+        this.team = team;
+    }
 
     public Team getTeam() {
         return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public String getVoorkeurpositie() {
@@ -76,12 +86,6 @@ public class Speler extends Lid {
         this.speelminuten = speelminuten;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-    
-    
-
     public String toStringSpelerRanking() {
         return super.getVoornaam() + " " + super.getAchternaam() + ": " + goals + " goals";
     }
@@ -95,5 +99,5 @@ public class Speler extends Lid {
                 + "aantal speelminuten: " + speelminuten + "\n";
 
     }
-    
+
 }
