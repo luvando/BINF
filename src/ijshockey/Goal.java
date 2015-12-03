@@ -14,17 +14,17 @@ import java.util.logging.Logger;
  */
 public class Goal extends Highlight {
 
-    private int lidnr_assist;
+    private Speler assist;
 
-    public Goal(int minuut, int lidnr, int wedstrijdNr, int lidnr_assist) {
-        super(minuut, lidnr, wedstrijdNr);
-        this.lidnr_assist = lidnr_assist;
+    public Goal(int minuut, Speler speler, Wedstrijd wedstrijd, Speler assist) {
+        super(minuut, speler, wedstrijd);
+        this.assist = assist;
     }
 
-    public Goal(int minuut, int lidnr, int wedstrijdNr) {
-        super(minuut, lidnr, wedstrijdNr);
+    public Goal(int minuut, Speler speler, Wedstrijd wedstrijd) {
+        super(minuut, speler, wedstrijd);
     }
-
+/*
     public int getLidnr_assist() {
         return lidnr_assist;
     }
@@ -56,6 +56,6 @@ public class Goal extends Highlight {
         }
         return s;
 
-    }
+    }*/
 
 }

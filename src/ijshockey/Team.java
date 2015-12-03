@@ -19,6 +19,7 @@ public class Team {
     private String naam;
     private String thuisArena;
     private Trainer trainer;
+    
 
     public Team(int stamNr, String naam, String thuisArena, Trainer trainer) {
         this.stamNr = stamNr;

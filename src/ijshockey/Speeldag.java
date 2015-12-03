@@ -14,13 +14,12 @@ import java.util.ArrayList;
 public class Speeldag {
 
     private Competitie competitie;
-    private String competitienaam;
     private int jaar;
     private int speeldagnr;
     private Seizoen seizoen;
 
-    public Speeldag(String competitienaam, int jaar, int speeldagnr) {
-        this.competitienaam = competitienaam;
+    public Speeldag(Competitie competitie, int jaar, int speeldagnr) {
+        this.competitie=competitie;
         this.jaar = jaar;
         this.speeldagnr = speeldagnr;
     }
@@ -39,13 +38,6 @@ public class Speeldag {
         this.competitie = competitie;
     }
 
-    public String getCompetitienaam() {
-        return competitienaam;
-    }
-
-    public void setCompetitienaam(String competitienaam) {
-        this.competitienaam = competitienaam;
-    }
 
     public int getJaar() {
         return jaar;

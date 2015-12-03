@@ -13,14 +13,14 @@ public class Highlight {
 
     private int highlightNr; //PK
     private int minuut;
-    private int lidNr; 
-    private int wedstrijdNr;
+    private Speler speler; 
+    private Wedstrijd wedstrijd;
     
 
-    public Highlight(int minuut, int lidNr, int wedstrijdNr) {
+    public Highlight(int minuut, Speler speler, Wedstrijd wedstrijd) {
         this.minuut = minuut;
-        this.lidNr = lidNr;
-        this.wedstrijdNr = wedstrijdNr;
+        this.speler=speler;
+        this.wedstrijd = wedstrijd;
     }
 
     public int getHighlightNr() {
@@ -31,16 +31,20 @@ public class Highlight {
         return minuut;
     }
 
-    public int getLidNr() {
-        return lidNr;
+    public Speler getSpeler() {
+        return speler;
     }
 
-    public int getWedstrijdNr() {
-        return wedstrijdNr;
+    public void setSpeler(Speler speler) {
+        this.speler = speler;
     }
 
-    public void setWedstrijdNr(int wedstrijdNr) {
-        this.wedstrijdNr = wedstrijdNr;
+    public Wedstrijd getWedstrijd() {
+        return wedstrijd;
+    }
+
+    public void setWedstrijd(Wedstrijd wedstrijd) {
+        this.wedstrijd = wedstrijd;
     }
 
     
@@ -50,10 +54,6 @@ public class Highlight {
 
     public void setMinuut(int minuut) {
         this.minuut = minuut;
-    }
-
-    public void setLidNr(int lidNr) {
-        this.lidNr = lidNr;
     }
     
 }

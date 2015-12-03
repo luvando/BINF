@@ -11,9 +11,9 @@ package ijshockey;
  */
 public class Owngoal extends Goal {
 
-    public Owngoal(int minuut, int lidnr, int wedstrijdNr)
+    public Owngoal(int minuut, Speler speler, Wedstrijd wedstrijd)
     {
-        super(minuut, lidnr, wedstrijdNr);
+        super(minuut, speler, wedstrijd);
     }
 
 

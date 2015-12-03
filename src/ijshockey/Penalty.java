@@ -16,8 +16,8 @@ public class Penalty extends Goal {
 
     private int gescoord;
 
-    public Penalty(int minuut, int lidnr, int wedstrijdNr, int gescoord) {
-        super(minuut, lidnr, wedstrijdNr);
+    public Penalty(int minuut, Speler speler, Wedstrijd wedstrijd, int gescoord) {
+        super(minuut, speler, wedstrijd);
         this.gescoord = gescoord;
     }
 
@@ -44,7 +44,7 @@ public class Penalty extends Goal {
     public void setGescoord(int gescoord) {
         this.gescoord = gescoord;
     }
-
+/*
     @Override
     public String toString() {
         String s = null;
@@ -56,6 +56,6 @@ public class Penalty extends Goal {
         }
         return s;
 
-    }
+    }*/
 
 }

@@ -12,8 +12,8 @@ package ijshockey;
 public class Assist extends Highlight {
 
    
-    public Assist(int minuut, int lidnr, int wedstrijdNr ) {
-        super(minuut, lidnr, wedstrijdNr);
+    public Assist(int minuut, Speler speler, Wedstrijd wedstrijd ) {
+        super(minuut, speler, wedstrijd);
                 
     }
 

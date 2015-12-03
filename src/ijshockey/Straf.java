@@ -14,8 +14,8 @@ public class Straf extends Highlight {
     private int aantalMinuten;
     private String reden;
 
-    public Straf(int minuut, String reden, int aantalMinuten, int lidnr, int wedstrijdNr) {
-        super(minuut, lidnr, wedstrijdNr);
+    public Straf(int minuut, String reden, int aantalMinuten, Speler speler, Wedstrijd wedstrijd) {
+        super(minuut, speler, wedstrijd);
         this.reden = reden;
         this.aantalMinuten = aantalMinuten;
         

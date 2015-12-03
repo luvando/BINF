@@ -10,37 +10,20 @@ package ijshockey;
  * @author Jasper
  */
 public class Deelname {
-    private String competitienaam;
+    
+    private Competitie competitie;
     private int jaar;
-    private int stamnr;
-    private int punten;
-    private int aantalGespeeld;
-    private int aantalGewonnen;
-    private int aantalVerloren;
-    private int aantalGelijk;
-    private int doelpuntenVoor;
-    private int doelpuntenTegen;
-    private int penaltys;
-    
-    private int dps = doelpuntenVoor - doelpuntenTegen;
+    private Team team;
 
-    public Deelname(String competitienaam, int jaar, int stamnr, int punten, int aantalGespeeld, int aantalGewonnen, int aantalVerloren, int aantalGelijk, int doelpuntenVoor, int doelpuntenTegen, int penaltys) {
-        this.competitienaam = competitienaam;
-        this.jaar = jaar;
-        this.stamnr = stamnr;
-        this.punten = punten;
-        this.aantalGespeeld = aantalGespeeld;
-        this.aantalGewonnen = aantalGewonnen;
-        this.aantalVerloren = aantalVerloren;
-        this.aantalGelijk = aantalGelijk;
-        this.doelpuntenVoor = doelpuntenVoor;
-        this.doelpuntenTegen = doelpuntenTegen;
-        this.penaltys = penaltys;
+    public Deelname(Competitie competitie, int jaar, Team team) {
+       this.competitie=competitie;
+       this.jaar= jaar;
+       this.team=team;
+       
     }
-    
-    //hulpmethodes voor ranking en rapport
+   /* //hulpmethodes voor ranking en rapport
     public String toStringTeamRanking() throws DBException {
-        return DriverManager.getTeam(stamnr).getNaam() + ": " + punten + " punten (" + aantalGespeeld + " wedstrijden, doelpuntensaldo: " + dps + ")";
+        return DriverManager.getTeam(stamnr).getNaam() + ": " + punten + " punten (" + team.get + " wedstrijden, doelpuntensaldo: " + dps + ")";
     }
 
     public String toStringTeamRapport() throws DBException {
@@ -66,7 +49,7 @@ public class Deelname {
                 + "aantal doelpunten per wedstrijd: " + goalsPerGame + "\n"
                 + "aantal penalty's per wedstrijd: " + penaltysPerGame;
 
-    }
+    }*/
     
     
     
