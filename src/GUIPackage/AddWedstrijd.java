@@ -375,7 +375,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
     private void jButtonaddSpeeldagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddSpeeldagActionPerformed
         
-        Speeldag sp = new Speeldag(competitie, seizoenInt, this.getjTextaddSpeeldag());
+        Speeldag sp = new Speeldag(DriverManager.getCompetitie(competitie), DriverManager.getSeizoen(seizoenInt, competitie), this.getjTextaddSpeeldag());
         try {
             DriverManager.addSpeeldag(sp);
             FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(competitie, seizoenInt));
@@ -415,7 +415,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
             thuisTeam = DriverManager.getTeam(stamnrthuis);
             uitTeam = DriverManager.getTeam(stamnruit);
             scheidsrechter = DriverManager.getScheids(lidnr);
-            sp = new Speeldag(competitie, seizoenInt, speeldagnr);
+            sp = new Speeldag(DriverManager.getCompetitie(competitie), DriverManager.getSeizoen(seizoenInt,competitie), speeldagnr);
             
         } catch (DBException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
@@ -424,7 +424,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
         Wedstrijd wed = new Wedstrijd(thuisTeam, uitTeam, arena, this.getjTextScoreThuis(), this.getjTextScoreUit(), scheidsrechter, this.getjTextDatum(), sp);
         try {
             DriverManager.addWedstrijd(wed);
-            DriverManager.updateScore(wed);
             jTextScoreUit.setText("");
             jTextScoreThuis.setText("");
             jTextDatum.setText("");

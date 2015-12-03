@@ -60,6 +60,14 @@ public class Team {
         this.thuisArena = thuisArena;
     }
 
+    public Trainer getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(Trainer trainer) {
+        this.trainer = trainer;
+    }
+
    
 
     

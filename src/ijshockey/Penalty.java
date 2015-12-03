@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  *
  * @author favdndor
  */
-public class Penalty extends Goal {
+public class Penalty extends Highlight {
 
     private int gescoord; //waarom is dit een integer? 
 
