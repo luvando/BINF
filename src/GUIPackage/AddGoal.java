@@ -38,7 +38,7 @@ public class AddGoal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
+        StoreButton = new javax.swing.JButton();
         VoegNieuweHighlightToeButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
@@ -55,7 +55,12 @@ public class AddGoal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jButton1.setText("Store");
+        StoreButton.setText("Store");
+        StoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StoreButtonActionPerformed(evt);
+            }
+        });
 
         VoegNieuweHighlightToeButton.setText("Voeg nieuwe highlight toe");
         VoegNieuweHighlightToeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +95,7 @@ public class AddGoal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                            .addComponent(StoreButton)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(96, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -109,7 +114,7 @@ public class AddGoal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(StoreButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(VoegNieuweHighlightToeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,17 +134,23 @@ public class AddGoal extends javax.swing.JFrame {
 
     private void VoegNieuweHighlightToeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoegNieuweHighlightToeButtonActionPerformed
         // TODO add your handling code here:
-         AddWedstrijd updateForm = new AddWedstrijd(dManager);
+         AddHighlight updateForm = new AddHighlight(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VoegNieuweHighlightToeButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-         AddWedstrijd updateForm = new AddWedstrijd(dManager);
+         AddHighlight updateForm = new AddHighlight(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
+
+    private void StoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreButtonActionPerformed
+        // TODO add your handling code here:
+        
+        // kadertje weergeven met "stored"
+    }//GEN-LAST:event_StoreButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,9 +189,9 @@ public class AddGoal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
+    private javax.swing.JButton StoreButton;
     private javax.swing.JButton VoegNieuweHighlightToeButton;
     private javax.swing.JButton VorigeButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;

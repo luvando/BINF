@@ -40,10 +40,10 @@ public class AddStraf extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        StoreButton = new javax.swing.JButton();
         VoegNieuweHighlightToeButton = new javax.swing.JButton();
-        VoegNieuweHighlightToeButton1 = new javax.swing.JButton();
-        VoegNieuweHighlightToeButton2 = new javax.swing.JButton();
+        VorigeButton = new javax.swing.JButton();
+        CancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Voeg straf toe");
@@ -58,7 +58,12 @@ public class AddStraf extends javax.swing.JFrame {
 
         jLabel2.setText("Aantal minuten geschorst :");
 
-        jButton1.setText("Store");
+        StoreButton.setText("Store");
+        StoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StoreButtonActionPerformed(evt);
+            }
+        });
 
         VoegNieuweHighlightToeButton.setText("Voeg nieuwe highlight toe");
         VoegNieuweHighlightToeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -67,17 +72,17 @@ public class AddStraf extends javax.swing.JFrame {
             }
         });
 
-        VoegNieuweHighlightToeButton1.setText("Vorige");
-        VoegNieuweHighlightToeButton1.addActionListener(new java.awt.event.ActionListener() {
+        VorigeButton.setText("Vorige");
+        VorigeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VoegNieuweHighlightToeButton1ActionPerformed(evt);
+                VorigeButtonActionPerformed(evt);
             }
         });
 
-        VoegNieuweHighlightToeButton2.setText("Beëindig");
-        VoegNieuweHighlightToeButton2.addActionListener(new java.awt.event.ActionListener() {
+        CancelButton.setText("Beëindig");
+        CancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VoegNieuweHighlightToeButton2ActionPerformed(evt);
+                CancelButtonActionPerformed(evt);
             }
         });
 
@@ -90,7 +95,7 @@ public class AddStraf extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                            .addComponent(StoreButton)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel2)
@@ -104,8 +109,8 @@ public class AddStraf extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(VoegNieuweHighlightToeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(VoegNieuweHighlightToeButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(VoegNieuweHighlightToeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(VorigeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -120,13 +125,13 @@ public class AddStraf extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(StoreButton)
                 .addGap(18, 18, 18)
                 .addComponent(VoegNieuweHighlightToeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(VoegNieuweHighlightToeButton1)
+                .addComponent(VorigeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(VoegNieuweHighlightToeButton2)
+                .addComponent(CancelButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -139,22 +144,28 @@ public class AddStraf extends javax.swing.JFrame {
 
     private void VoegNieuweHighlightToeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoegNieuweHighlightToeButtonActionPerformed
         // TODO add your handling code here:
-         AddWedstrijd updateForm = new AddWedstrijd(dManager);
+         AddHighlight updateForm = new AddHighlight(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VoegNieuweHighlightToeButtonActionPerformed
 
-    private void VoegNieuweHighlightToeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoegNieuweHighlightToeButton1ActionPerformed
+    private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-         AddWedstrijd updateForm = new AddWedstrijd(dManager);
+         AddHighlight updateForm = new AddHighlight(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_VoegNieuweHighlightToeButton1ActionPerformed
+    }//GEN-LAST:event_VorigeButtonActionPerformed
 
-    private void VoegNieuweHighlightToeButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoegNieuweHighlightToeButton2ActionPerformed
+    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_VoegNieuweHighlightToeButton2ActionPerformed
+    }//GEN-LAST:event_CancelButtonActionPerformed
+
+    private void StoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreButtonActionPerformed
+        // TODO add your handling code here:
+        
+        // kadertje weergeven met "stored"
+    }//GEN-LAST:event_StoreButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,10 +203,10 @@ public class AddStraf extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CancelButton;
+    private javax.swing.JButton StoreButton;
     private javax.swing.JButton VoegNieuweHighlightToeButton;
-    private javax.swing.JButton VoegNieuweHighlightToeButton1;
-    private javax.swing.JButton VoegNieuweHighlightToeButton2;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton VorigeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
