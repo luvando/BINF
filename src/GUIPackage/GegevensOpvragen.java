@@ -5,8 +5,10 @@
  */
 package GUIPackage;
 
+import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Seizoen;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,9 +45,6 @@ public class GegevensOpvragen extends javax.swing.JFrame {
         RankingTeamsButton = new javax.swing.JButton();
         RapportSpelerButton = new javax.swing.JButton();
         RapportTeamButton = new javax.swing.JButton();
-        TeamhihglightsPerWedstrijdButton = new javax.swing.JButton();
-        RapportPenaltynemersButton = new javax.swing.JButton();
-        PenaltysPerTeamButton = new javax.swing.JButton();
         RankingSpelersButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
 
@@ -73,22 +72,6 @@ public class GegevensOpvragen extends javax.swing.JFrame {
             }
         });
 
-        TeamhihglightsPerWedstrijdButton.setText("Teamhighlights per wedstrijd");
-        TeamhihglightsPerWedstrijdButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TeamhihglightsPerWedstrijdButtonActionPerformed(evt);
-            }
-        });
-
-        RapportPenaltynemersButton.setText("Rapport penaltynemers");
-
-        PenaltysPerTeamButton.setText("Penalty's per team");
-        PenaltysPerTeamButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PenaltysPerTeamButtonActionPerformed(evt);
-            }
-        });
-
         RankingSpelersButton.setText("Topschutters");
         RankingSpelersButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,40 +90,32 @@ public class GegevensOpvragen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(187, 187, 187)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(RapportTeamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RapportSpelerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RankingTeamsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RankingSpelersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PenaltysPerTeamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TeamhihglightsPerWedstrijdButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RapportPenaltynemersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(VorigeButton)
                 .addGap(68, 68, 68))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(187, 187, 187)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RankingSpelersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(RapportTeamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(RapportSpelerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                        .addComponent(RankingTeamsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(70, Short.MAX_VALUE)
                 .addComponent(RapportTeamButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(37, 37, 37)
                 .addComponent(RapportSpelerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addComponent(RankingTeamsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addComponent(RankingSpelersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PenaltysPerTeamButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TeamhihglightsPerWedstrijdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RapportPenaltynemersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(VorigeButton)
                 .addGap(36, 36, 36))
         );
@@ -164,29 +139,29 @@ public class GegevensOpvragen extends javax.swing.JFrame {
 
     private void RankingTeamsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingTeamsButtonActionPerformed
         // TODO add your handling code here:
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         TeamRanking updateForm = null;
         try {
-            updateForm = new TeamRanking();
+            updateForm = new TeamRanking(dManager);
         } catch (DBException ex) {
             Logger.getLogger(GegevensOpvragen.class.getName()).log(Level.SEVERE, null, ex);
         }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_RankingTeamsButtonActionPerformed
-
-    private void PenaltysPerTeamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PenaltysPerTeamButtonActionPerformed
-        // TODO add your handling code here:
-        PenaltysPerTeam updateForm = new PenaltysPerTeam(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_PenaltysPerTeamButtonActionPerformed
-
-    private void TeamhihglightsPerWedstrijdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamhihglightsPerWedstrijdButtonActionPerformed
-        // TODO add your handling code here:
-        TeamhighlightsPerWedstrijd updateForm = new TeamhighlightsPerWedstrijd(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_TeamhihglightsPerWedstrijdButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
@@ -249,13 +224,10 @@ public class GegevensOpvragen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton PenaltysPerTeamButton;
     private javax.swing.JButton RankingSpelersButton;
     private javax.swing.JButton RankingTeamsButton;
-    private javax.swing.JButton RapportPenaltynemersButton;
     private javax.swing.JButton RapportSpelerButton;
     private javax.swing.JButton RapportTeamButton;
-    private javax.swing.JButton TeamhihglightsPerWedstrijdButton;
     private javax.swing.JButton VorigeButton;
     // End of variables declaration//GEN-END:variables
 }

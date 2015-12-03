@@ -26,6 +26,9 @@ public class Seizoen {
         this.jaar = jaar;
     }
 
+    public Seizoen() {
+    }
+
     /*public Team searchTeam(int stamNr) { // Viktor 24/11 search methode + setPunten
         for (Team t : teams) {
             if (t.getStamNr() == stamNr) {

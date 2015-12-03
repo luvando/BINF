@@ -5,12 +5,21 @@
  */
 package GUIPackage;
 
+import static GUIPackage.CompetitieOpvragen.dManager;
+import ijshockey.Competitie;
 import ijshockey.CustomOutputStream;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Seizoen;
 import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -19,15 +28,21 @@ import javax.swing.JTextArea;
  */
 public class TeamRanking extends javax.swing.JFrame {
 
+    public static DriverManager dManager;
+    
     private PrintStream standardOut;
+    
+    
     
     
     /**
      * Creates new form TeamRanking
      */
-    public TeamRanking() throws DBException {
+    public TeamRanking(DriverManager dManager) throws DBException {
         super("Klassement");
         initComponents();
+        FillList();
+        setLocationRelativeTo(null);
         jTextArea1.setEditable(false);
         PrintStream printStream = new PrintStream(new CustomOutputStream(jTextArea1));
          
@@ -38,11 +53,35 @@ public class TeamRanking extends javax.swing.JFrame {
         System.setOut(printStream);
         System.setErr(printStream);
         
-        //DriverManager.printTeamRanking();
+       
         
  
     }
+final void FillList() throws DBException {
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection();
+            Statement stmt = con.createStatement();
 
+            String sql = "SELECT * FROM competitie ";
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            DefaultListModel DLM = new DefaultListModel();
+
+            while (srs.next()) {
+                DLM.addElement(srs.getString(1));
+            }
+
+            LijstCompetities.setModel(DLM);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            DriverManager.closeConnection(con);
+            throw new DBException(ex);
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,6 +93,13 @@ public class TeamRanking extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        LijstCompetities = new javax.swing.JList();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        LijstSeizoenen = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Klassement");
@@ -62,67 +108,131 @@ public class TeamRanking extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jLabel2.setText("Selecteer seizoen");
+
+        jLabel3.setText("Selecteer competitie");
+
+        jLabel4.setText("Klassement");
+
+        LijstCompetities.setName(""); // NOI18N
+        LijstCompetities.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                LijstCompetitiesValueChanged(evt);
+            }
+        });
+        jScrollPane3.setViewportView(LijstCompetities);
+
+        LijstSeizoenen.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                LijstSeizoenenValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(LijstSeizoenen);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(72, 72, 72)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void LijstCompetitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstCompetitiesValueChanged
+        // TODO add your handling code here:
+                                                    
+        // TODO add your handling code here:
+        Connection con = null;
+        try {
+            con = dManager.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT jaar FROM seizoen WHERE competitienaam = " + "'" + LijstCompetities.getSelectedValue() + "'";
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            DefaultListModel DLM2 = new DefaultListModel();
+
+            while (srs.next()) {
+                DLM2.addElement(srs.getString("jaar"));
+            }
+
+            LijstSeizoenen.setModel(DLM2);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+            dManager.closeConnection(con);
+        } catch (DBException ex) {
+            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    
+    }//GEN-LAST:event_LijstCompetitiesValueChanged
+
+    private void LijstSeizoenenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstSeizoenenValueChanged
+        // TODO add your handling code here:
+        Competitie c = new Competitie((String) LijstCompetities.getSelectedValue());
+        int jaar = Integer.parseInt((String) LijstSeizoenen.getSelectedValue());
+        Seizoen s = new Seizoen(c,jaar);
+        
+        
+        try {
+            DriverManager.printTeamRanking(c,s);
+        } catch (DBException ex) {
+            Logger.getLogger(TeamRanking.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_LijstSeizoenenValueChanged
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TeamRanking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TeamRanking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TeamRanking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TeamRanking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new TeamRanking().setVisible(true);
-                } catch (DBException ex) {
-                    Logger.getLogger(TeamRanking.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList LijstCompetities;
+    private javax.swing.JList LijstSeizoenen;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

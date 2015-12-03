@@ -24,44 +24,37 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="RapportTeamButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="RapportSpelerButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="RankingTeamsButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="RankingSpelersButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="PenaltysPerTeamButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="TeamhihglightsPerWedstrijdButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="RapportPenaltynemersButton" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace pref="191" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="VorigeButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="RankingSpelersButton" min="-2" pref="169" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="RapportTeamButton" alignment="0" max="32767" attributes="0"/>
+                      <Component id="RapportSpelerButton" alignment="0" pref="169" max="32767" attributes="0"/>
+                      <Component id="RankingTeamsButton" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="191" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace pref="70" max="32767" attributes="0"/>
               <Component id="RapportTeamButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="RapportSpelerButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="RankingTeamsButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="RankingSpelersButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="PenaltysPerTeamButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="TeamhihglightsPerWedstrijdButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="RapportPenaltynemersButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="VorigeButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
           </Group>
@@ -91,27 +84,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RapportTeamButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="TeamhihglightsPerWedstrijdButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Teamhighlights per wedstrijd"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TeamhihglightsPerWedstrijdButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="RapportPenaltynemersButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Rapport penaltynemers"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="PenaltysPerTeamButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Penalty&apos;s per team"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PenaltysPerTeamButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="RankingSpelersButton">

@@ -20,6 +20,10 @@ public class Competitie {
         this.competitienaam = competitienaam;
     }
 
+    public Competitie() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getCompetitienaam() {
         return competitienaam;
     }
