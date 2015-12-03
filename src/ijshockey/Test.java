@@ -18,7 +18,6 @@ public class Test {
         DriverManager dm = new DriverManager();
         DriverManager.printTeamRanking(); //werkt
         DriverManager.printSpelerRanking(); //werkt
-        DriverManager.printTeamRapport(1); //werkt
         DriverManager.printSpelerRapport(3); //werkt
 
         DriverManager.printSpelerRapport(2);

@@ -18,4 +18,8 @@ public class Trainer extends Lid {
 
     }
 
+    public Trainer(String voornaam, String achternaam, String geboortedatum, int lidnr) {
+        super(voornaam, achternaam, geboortedatum, lidnr);
+    }
+
 }
