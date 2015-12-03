@@ -55,12 +55,5 @@ public class Goal extends Highlight {
 
      }*/
 
-    public Speler getAssist() {
-        return assist;
-    }
-
-    public void setAssist(Speler assist) {
-        this.assist = assist;
-    }
 
 }

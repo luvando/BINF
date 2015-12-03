@@ -16,25 +16,25 @@ import java.util.HashMap;
 public class Speler extends Lid {
 
     private String voorkeurpositie;
-    private int goals;
+    /*private int goals;
     private int assists;
     private int penaltys;
-    private int speelminuten;
+    private int speelminuten;*/
     private Team team; //waarom team en niet stamnr?
 
     public Speler(String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, int goals, int assists, int penaltys, int speelminuten, Team team) {
         super(voornaam, achternaam, geboortedatum);
         this.voorkeurpositie = voorkeurpositie;
-        this.goals = goals;
+        /*this.goals = goals;
         this.assists = assists;
         this.penaltys = penaltys;
-        this.speelminuten = DriverManager.playedMinutesSeason(lidnr);
+        this.speelminuten = DriverManager.playedMinutesSeason(lidnr);*/
         this.team = team;
     }
     public Speler(String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, Team team) {
         super(voornaam, achternaam, geboortedatum);
         this.voorkeurpositie = voorkeurpositie;
-        this.speelminuten = DriverManager.playedMinutesSeason(lidnr);
+        //this.speelminuten = DriverManager.playedMinutesSeason(lidnr);
         this.team = team;
     }
 
@@ -50,7 +50,7 @@ public class Speler extends Lid {
         return voorkeurpositie;
     }
 
-    public int getGoals() {
+    /*public int getGoals() {
         return goals;
     }
 
@@ -64,13 +64,13 @@ public class Speler extends Lid {
 
     public int getSpeelminuten() {
         return speelminuten;
-    }
+    }*/
 
     public void setVoorkeurpositie(String voorkeurpositie) {
         this.voorkeurpositie = voorkeurpositie;
     }
 
-    public void setGoals(int goals) {
+   /* public void setGoals(int goals) {
         this.goals = goals;
     }
 
@@ -99,5 +99,5 @@ public class Speler extends Lid {
                 + "aantal speelminuten: " + speelminuten + "\n";
 
     }
-
+*/
 }
