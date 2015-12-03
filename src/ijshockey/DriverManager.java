@@ -828,7 +828,7 @@ public class DriverManager {
         }
     }
 
-    public static void printSpelerRanking() throws DBException {
+    public static void printSpelerRanking(Competitie c, Seizoen s) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -1034,9 +1034,13 @@ public class DriverManager {
 
             String sql
                     = "SELECT naam, ((SELECT 2*COUNT(*) FROM wedstrijd "
-                    + "WHERE ((stamnr_uit=stamnr AND score_uit>score_thuis) OR (stamnr_thuis=stamnr AND score_thuis>score_uit) AND wedstrijd.competitienaam = 'Stella pro league' AND wedstrijd.jaar = 2015)) "
+                    + "WHERE ((stamnr_uit=stamnr AND score_uit>score_thuis) OR (stamnr_thuis=stamnr AND score_thuis>score_uit) "
+                    + "AND wedstrijd.competitienaam = " + c.getCompetitienaam() + " "
+                    + "AND wedstrijd.jaar = " + s.getJaar() + ")) "
                     + "+ (SELECT COUNT(*) FROM wedstrijd "
-                    + "WHERE (score_uit=score_thuis AND (stamnr_uit=stamnr OR stamnr_thuis=stamnr)AND wedstrijd.competitienaam = 'Stella pro league' AND wedstrijd.jaar = 2015))) "
+                    + "WHERE (score_uit=score_thuis AND (stamnr_uit=stamnr OR stamnr_thuis=stamnr)"
+                    + "AND wedstrijd.competitienaam = " + c.getCompetitienaam() + " "
+                    + "AND wedstrijd.jaar = " + s.getJaar() + "))) "
                     + "AS punten FROM team GROUP BY stamnr ORDER BY punten DESC";
 
             ResultSet srs = stmt.executeQuery(sql);

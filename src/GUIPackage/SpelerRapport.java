@@ -36,7 +36,7 @@ public class SpelerRapport extends javax.swing.JFrame {
         System.setOut(printStream);
         System.setErr(printStream);
         
-        DriverManager.printSpelerRapport(2);
+        //DriverManager.printSpelerRapport(2);
     }
 
     /**

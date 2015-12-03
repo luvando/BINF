@@ -36,7 +36,7 @@ public class SpelerRanking extends javax.swing.JFrame {
         System.setOut(printStream);
         System.setErr(printStream);
         
-        DriverManager.printSpelerRanking();
+        //DriverManager.printSpelerRanking();
     }
 
     /**
