@@ -219,7 +219,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="TeamBewerkenButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Team bewerken"/>
+        <Property name="text" type="java.lang.String" value="Team/Speler bewerken"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TeamBewerkenButtonActionPerformed"/>

@@ -29,7 +29,7 @@ import javax.swing.JTextField;
  * @author Wim
  */
 public class AddWedstrijd extends javax.swing.JFrame {
-
+    
     public static DriverManager dManager;
 
     /**
@@ -40,90 +40,90 @@ public class AddWedstrijd extends javax.swing.JFrame {
     }
     private String competitie;
     private int seizoenInt;
-
+    
     public AddWedstrijd(DriverManager dManager, String competitie, String seizoen) throws SQLException {
         AddWedstrijd.dManager = dManager;
         initComponents();
         this.seizoenInt = Integer.parseInt(seizoen);
         this.competitie = competitie;
         setLocationRelativeTo(null);
-
+        this.setjLabelTop("Team toevoegen aan " + competitie + " seizoen : " + seizoenInt);
         this.FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(competitie, seizoenInt));
         this.FillLijstScheids(ijshockey.DriverManager.FillLijstScheids());
         this.FillLijstTeamthuis(ijshockey.DriverManager.FillLijstTeam(competitie, seizoenInt));
         this.FillLijstTeamuit(ijshockey.DriverManager.FillLijstTeam(competitie, seizoenInt));
     }
-
+    
     private void FillLijstSpeeldag(ResultSet srs) {
         try {
             DefaultListModel DLM = new DefaultListModel();
-
+            
             while (srs.next()) {
                 DLM.addElement(srs.getString(1));
             }
-
+            
             jListSpeeldag.setModel(DLM);
-
+            
         } catch (Exception ex) {
             ex.printStackTrace();
-
+            
         }
     }
-
+    
     private void FillLijstScheids(ResultSet srs) {
         try {
             DefaultListModel DLM = new DefaultListModel();
-
+            
             while (srs.next()) {
                 int lidnr = srs.getInt("lidnr");
                 DLM.addElement(DriverManager.getScheids(lidnr).getVoornaam() + " " + DriverManager.getScheids(lidnr).getAchternaam() + " - " + lidnr);
-
+                
             }
-
+            
             jListScheids.setModel(DLM);
-
+            
         } catch (Exception ex) {
             ex.printStackTrace();
-
+            
         }
     }
-
+    
     private void FillLijstTeamthuis(ResultSet srs) {
         try {
             DefaultListModel DLM = new DefaultListModel();
-
+            
             while (srs.next()) {
                 int stamnr = srs.getInt("stamnr");
                 DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
-
+                
             }
-
+            
             jListThuisteam.setModel(DLM);
-
+            
         } catch (Exception ex) {
             ex.printStackTrace();
-
+            
         }
-
+        
     }
-
+    
     private void FillLijstTeamuit(ResultSet srs) {
         try {
             DefaultListModel DLM = new DefaultListModel();
-
+            
             while (srs.next()) {
                 int stamnr = srs.getInt("stamnr");
                 DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
-
+                
             }
             DLM.removeElement(jListThuisteam.getSelectedValue());
             jListUitteam.setModel(DLM);
-
+            
         } catch (Exception ex) {
             ex.printStackTrace();
-
+            
         }
-
+        
     }
 
     /**
@@ -160,6 +160,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
         jListThuisteam = new javax.swing.JList();
         jScrollPane4 = new javax.swing.JScrollPane();
         jListUitteam = new javax.swing.JList();
+        jLabelTop = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Voeg speeldag en wedstrijd toe");
@@ -240,6 +241,8 @@ public class AddWedstrijd extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jListUitteam);
 
+        jLabelTop.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -279,13 +282,19 @@ public class AddWedstrijd extends javax.swing.JFrame {
                             .addComponent(jTextArena, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(292, 292, 292)
+                .addComponent(jLabelTop)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabelTop)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextaddSpeeldag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonaddSpeeldag)
@@ -333,7 +342,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
         );
 
         jTextaddSpeeldag.getAccessibleContext().setAccessibleName("");
-        jTextaddSpeeldag.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -351,7 +359,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
     }//GEN-LAST:event_OpstellingToevoegenButtonActionPerformed
 
     private void jButtonaddSpeeldagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddSpeeldagActionPerformed
-
+        
         Speeldag sp = new Speeldag(competitie, seizoenInt, this.getjTextaddSpeeldag());
         try {
             DriverManager.addSpeeldag(sp);
@@ -363,44 +371,45 @@ public class AddWedstrijd extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonaddSpeeldagActionPerformed
 
     private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
-
+        
         Speeldag sp = null;
         Team thuisTeam = null;
         Team uitTeam = null;
         Scheidsrechter scheidsrechter = null;
-
+        
         int speeldagnr = Integer.parseInt((String) jListSpeeldag.getSelectedValue());
-
+        
         String arena = jTextArena.getText(); // Ook lijst maken?
 
         String thuis = (String) jListThuisteam.getSelectedValue();
-
+        
         String[] teamthuis = thuis.split("-");
-        String teamthuistr = teamthuis[teamthuis.length -1].trim();
+        String teamthuistr = teamthuis[teamthuis.length - 1].trim();
         int stamnrthuis = Integer.parseInt(teamthuistr);
-
+        
         String uit = (String) jListUitteam.getSelectedValue();
         String[] teamuit = uit.split("-");
-        String teamuittr = teamuit[teamuit.length -1].trim();
+        String teamuittr = teamuit[teamuit.length - 1].trim();
         int stamnruit = Integer.parseInt(teamuittr);
-
+        
         String scheids = (String) jListScheids.getSelectedValue();
         String[] scheidsa = scheids.split("-");
-        String scheidstr = scheidsa[scheidsa.length -1].trim();
+        String scheidstr = scheidsa[scheidsa.length - 1].trim();
         int lidnr = Integer.parseInt(scheidstr);
         try {
             thuisTeam = DriverManager.getTeam(stamnrthuis);
             uitTeam = DriverManager.getTeam(stamnruit);
             scheidsrechter = DriverManager.getScheids(lidnr);
             sp = new Speeldag(competitie, seizoenInt, speeldagnr);
-
+            
         } catch (DBException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         Wedstrijd wed = new Wedstrijd(thuisTeam, uitTeam, arena, this.getjTextScoreThuis(), this.getjTextScoreUit(), scheidsrechter, this.getjTextDatum(), sp);
         try {
             DriverManager.addWedstrijd(wed);
+            DriverManager.updateScore(wed);
             jTextScoreUit.setText("");
             jTextScoreThuis.setText("");
             jTextDatum.setText("");
@@ -410,7 +419,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
         } catch (DBException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
 
      }//GEN-LAST:event_StoreActionPerformed
 
@@ -419,11 +428,11 @@ public class AddWedstrijd extends javax.swing.JFrame {
         String[] teamthuis = thuis.split("-");
         String teamthuistr = teamthuis[1].trim();
         int stamnrthuis = Integer.parseInt(teamthuistr);
-
+        
         try {
             Team thuisTeam = DriverManager.getTeam(stamnrthuis);
             jTextArena.setText(thuisTeam.getThuisArena());
-
+            
         } catch (DBException ex) {
             Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -479,6 +488,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelTop;
     private javax.swing.JList jListScheids;
     private javax.swing.JList jListSpeeldag;
     private javax.swing.JList jListThuisteam;
@@ -497,25 +507,30 @@ public class AddWedstrijd extends javax.swing.JFrame {
     public String getjTextArena() {
         return jTextArena.getText();
     }
-
+    
     public String getjTextDatum() {
         return jTextDatum.getText();
     }
-
+    
     public void setjTextArena(String arena) {
         this.jTextArena.setText(arena);
     }
-
+    
     public int getjTextScoreThuis() {
         return Integer.parseInt(jTextScoreThuis.getText());
     }
-
+    
     public int getjTextScoreUit() {
         return Integer.parseInt(jTextScoreUit.getText());
     }
-
+    
     public int getjTextaddSpeeldag() {
         return Integer.parseInt(jTextaddSpeeldag.getText());
     }
-
+    
+    public void setjLabelTop(String string) {
+        this.jLabelTop.setText(string);
+        
+    }
+    
 }

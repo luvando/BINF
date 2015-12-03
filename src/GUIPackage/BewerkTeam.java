@@ -5,7 +5,15 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Scheidsrechter;
+import ijshockey.Speeldag;
+import ijshockey.Team;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.text.Position;
 
@@ -14,18 +22,46 @@ import javax.swing.text.Position;
  * @author Wim
  */
 public class BewerkTeam extends javax.swing.JFrame {
-    
+
     public static DriverManager dManager;
+    private String competitie;
+    private int seizoenInt;
+
     /**
      * Creates new form BewerkTeam
      */
     public BewerkTeam() {
         initComponents();
     }
-    public BewerkTeam(DriverManager dManager) {
-        this.dManager = dManager;
+
+    public BewerkTeam(DriverManager dManager) throws SQLException {
+        AddTeamEnTrainer.dManager = dManager;
         initComponents();
+        setLocationRelativeTo(null);
+        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam());
+
     }
+
+    private void FillLijstTeams(ResultSet srs) {
+
+        try {
+
+            DefaultListModel DLM = new DefaultListModel();
+
+            while (srs.next()) {
+                int stamnr = srs.getInt("stamnr");
+                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
+
+            }
+
+            jListTeam.setModel(DLM);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,30 +72,23 @@ public class BewerkTeam extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        LijstTeams = new javax.swing.JList();
+        jListTeam = new javax.swing.JList();
         AddSpelerButton = new javax.swing.JButton();
-        CancelButton = new javax.swing.JButton();
         SpelerBewerkenButton = new javax.swing.JButton();
         TrainerBewerkenButton = new javax.swing.JButton();
         SearchButton = new javax.swing.JButton();
         SearchText = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Team bewerken");
 
-        jScrollPane1.setViewportView(LijstTeams);
+        jScrollPane1.setViewportView(jListTeam);
 
         AddSpelerButton.setText("Speler toevoegen");
         AddSpelerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddSpelerButtonActionPerformed(evt);
-            }
-        });
-
-        CancelButton.setText("Beëindig");
-        CancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelButtonActionPerformed(evt);
             }
         });
 
@@ -85,44 +114,47 @@ public class BewerkTeam extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Terug");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SearchButton)
-                    .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CancelButton)
-                    .addComponent(SpelerBewerkenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AddSpelerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TrainerBewerkenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SearchButton))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TrainerBewerkenButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(jButton1)
+                    .addComponent(AddSpelerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SpelerBewerkenButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(83, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(SearchButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AddSpelerButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SpelerBewerkenButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TrainerBewerkenButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CancelButton)
-                .addGap(49, 49, 49))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(SearchButton)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addGap(67, 67, 67)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -130,15 +162,23 @@ public class BewerkTeam extends javax.swing.JFrame {
 
     private void AddSpelerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpelerButtonActionPerformed
         // TODO add your handling code here:
-        AddSpeler updateForm = new AddSpeler(dManager);
+        Team team = null;
+
+        String thuis = (String) jListTeam.getSelectedValue();
+
+        String[] teama = thuis.split("-");
+        String teamstr = teama[teama.length - 1].trim();
+        int stamnr = Integer.parseInt(teamstr);
+        try {
+            AddSpeler updateForm = new AddSpeler(dManager,team);
+            team = DriverManager.getTeam(stamnr);
+        } catch (DBException ex) {
+            Logger.getLogger(BewerkTeam.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_AddSpelerButtonActionPerformed
-
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void SpelerBewerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpelerBewerkenButtonActionPerformed
         // TODO add your handling code here:
@@ -146,8 +186,8 @@ public class BewerkTeam extends javax.swing.JFrame {
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         // TODO add your handling code here:
-        int zoekresultaat = LijstTeams.getNextMatch(SearchText.getText(), 0, Position.Bias.Forward);
-        LijstTeams.setSelectedIndex(zoekresultaat);
+        int zoekresultaat = jListTeam.getNextMatch(SearchText.getText(), 0, Position.Bias.Forward);
+        jListTeam.setSelectedIndex(zoekresultaat);
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void SearchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextActionPerformed
@@ -191,12 +231,12 @@ public class BewerkTeam extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddSpelerButton;
-    private javax.swing.JButton CancelButton;
-    private javax.swing.JList LijstTeams;
     private javax.swing.JButton SearchButton;
     private javax.swing.JTextField SearchText;
     private javax.swing.JButton SpelerBewerkenButton;
     private javax.swing.JButton TrainerBewerkenButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JList jListTeam;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

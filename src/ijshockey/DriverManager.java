@@ -107,7 +107,25 @@ public class DriverManager {
         }
         return null;
     }
+public static ResultSet FillLijstTeam() throws SQLException {
+        Connection con = null;
 
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT * FROM team ";
+                    
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            return srs;
+
+        } catch (DBException ex) {
+            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public DriverManager() {
     }
 
@@ -222,11 +240,25 @@ public class DriverManager {
 
             stmt.executeUpdate(sql);
 
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+    public static void updateScore(Wedstrijd w) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
             int scoreWinner;
             int scoreLoser;
             Team winner;
             Team loser;
-                        
+
             if (w.getScoreThuisTeam() > w.getScoreUitTeam()) {
                 winner = w.getThuisTeam();
                 loser = w.getUitTeam();
@@ -240,42 +272,53 @@ public class DriverManager {
             }
 
             if (w.getScoreThuisTeam() == w.getScoreUitTeam()) {
-                String sql3 = "UPDATE team "
+                String sqlthuis = "UPDATE deelname "
                         + "SET gespeeld = gespeeld + 1, "
                         + "punten = punten + 1, "
                         + "gelijk = gelijk + 1, "
                         + "goalsvoor = goalsvoor + " + w.getScoreThuisTeam() + ","
                         + " goalstegen = goalstegen + " + w.getScoreUitTeam()
-                        + " WHERE stamnr = " + w.getThuisTeam().getStamNr() + " OR stamnr = " + w.getUitTeam().getStamNr();
+                        + " WHERE stamnr = '" + w.getThuisTeam().getStamNr() + "' AND competitienaam = '" + w.getSp().getCompetitienaam()
+                        + "' AND jaar = '" + w.getSp().getJaar() + "'";
 
-                stmt.executeUpdate(sql3);
+                stmt.executeUpdate(sqlthuis);
+                String sqluit = "UPDATE deelname "
+                        + "SET gespeeld = gespeeld + 1, "
+                        + "punten = punten + 1, "
+                        + "gelijk = gelijk + 1, "
+                        + "goalsvoor = goalsvoor + " + w.getScoreUitTeam() + ","
+                        + " goalstegen = goalstegen + " + w.getScoreThuisTeam()
+                        + " WHERE stamnr = '" + w.getUitTeam().getStamNr() + "' AND competitienaam = '" + w.getSp().getCompetitienaam()
+                        + "' AND jaar = '" + w.getSp().getJaar() + "'";
 
+                stmt.executeUpdate(sqluit);
             } else {
-                String sql1 = "UPDATE team "
+                String sqlwinner = "UPDATE deelname "
                         + "SET gespeeld = gespeeld + 1, "
                         + "punten = punten + 3, "
                         + "gewonnen = gewonnen + 1, "
                         + "goalsvoor = goalsvoor + " + scoreWinner + ","
                         + " goalstegen = goalstegen + " + scoreLoser
-                        + " WHERE stamnr = " + winner.getStamNr();
-                stmt.executeUpdate(sql1);
-                
-                String sql2 = "UPDATE team "
+                        + " WHERE stamnr = '" + winner.getStamNr() + "' AND competitienaam = '" + w.getSp().getCompetitienaam()
+                        + "' AND jaar = '" + w.getSp().getJaar()+"'";
+                stmt.executeUpdate(sqlwinner);
+
+                String sqlloser = "UPDATE deelname "
                         + "SET gespeeld = gespeeld + 1, "
                         + "verloren = verloren + 1, "
                         + "goalsvoor = goalsvoor + " + scoreLoser + ","
                         + " goalstegen = goalstegen + " + scoreWinner
-                        + " WHERE stamnr = " + loser.getStamNr();
+                        + " WHERE stamnr = '" + loser.getStamNr() + "' AND competitienaam = '" + w.getSp().getCompetitienaam()
+                        + "' AND jaar = '" + w.getSp().getJaar()+"'";
 
-                stmt.executeUpdate(sql2);
+                stmt.executeUpdate(sqlloser);
             }
-
-            closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
             closeConnection(con);
             throw new DBException(ex);
         }
+
     }
 
     public static Wedstrijd getWedstrijd(int wnr) throws DBException {
@@ -943,21 +986,21 @@ public class DriverManager {
             if (srs.next()) {
                 naam = srs.getString("naam");
                 thuisarena = srs.getString("thuisarena");
-                punten = srs.getInt("punten");
-                gespeeld = srs.getInt("gespeeld");
-                gewonnen = srs.getInt("gewonnen");
-                gelijk = srs.getInt("gespeeld");
-                verloren = srs.getInt("verloren");
-                goalsvoor = srs.getInt("goalsvoor");
-                goalstegen = srs.getInt("goalstegen");
-                penaltys = srs.getInt("penaltys");
+//                punten = srs.getInt("punten");
+//                gespeeld = srs.getInt("gespeeld");
+//                gewonnen = srs.getInt("gewonnen");
+//                gelijk = srs.getInt("gespeeld");
+//                verloren = srs.getInt("verloren");
+//                goalsvoor = srs.getInt("goalsvoor");
+//                goalstegen = srs.getInt("goalstegen");
+//                penaltys = srs.getInt("penaltys");
                 lidnr_trainer = srs.getInt("lidnr_trainer");
 
             } else {
                 closeConnection(con);
                 return null;
             }
-            Team t = new Team(stamnr, naam, thuisarena, punten, gespeeld, gewonnen, verloren, gelijk, goalsvoor, goalstegen, penaltys, lidnr_trainer);
+            Team t = new Team(stamnr, naam, thuisarena);//, punten, gespeeld, gewonnen, verloren, gelijk, goalsvoor, goalstegen, penaltys, lidnr_trainer);
 
             closeConnection(con);
             return t;

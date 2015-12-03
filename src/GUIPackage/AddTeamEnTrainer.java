@@ -5,6 +5,7 @@
  */
 package GUIPackage;
 
+import static GUIPackage.CompetitieScherm.dManager;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Scheidsrechter;
@@ -28,7 +29,7 @@ import javax.swing.JTextField;
  * @author ekmaes
  */
 public class AddTeamEnTrainer extends javax.swing.JFrame {
-    
+
     public static DriverManager dManager;
 
     /**
@@ -39,24 +40,24 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     }
     private String competitie;
     private int seizoenInt;
-    
+
     public AddTeamEnTrainer(DriverManager dManager) {
-        this.dManager = dManager;
+        AddTeamEnTrainer.dManager = dManager;
         initComponents();
         setLocationRelativeTo(null);
         Store.addActionListener(new AddTeamEnTrainer.EventHandler(this));
-        
+
     }
-    
+
     public AddTeamEnTrainer(DriverManager dManager, String competitie, String seizoen) throws SQLException {
-        this.dManager = dManager;
+        AddTeamEnTrainer.dManager = dManager;
         initComponents();
         setLocationRelativeTo(null);
         Store.addActionListener(new AddTeamEnTrainer.EventHandler(this));
         this.competitie = competitie;
         this.seizoenInt = Integer.parseInt(seizoen);
         this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam(competitie, seizoenInt));
-        this.setjLabelTeam("Team toevoegen aan " + competitie + " seizoen : " + seizoenInt);
+        this.setjLabelTop("Team toevoegen aan " + competitie + " seizoen : " + seizoenInt);
     }
 
     /**
@@ -81,14 +82,13 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         GeboortedatumTrainer = new javax.swing.JTextField();
         AchternaamTrainer = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        CancelButton = new javax.swing.JButton();
-        AddSpelerButton = new javax.swing.JButton();
         Store = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabelBestaandTeam = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListTeam = new javax.swing.JList();
-        jLabelTeam = new javax.swing.JLabel();
+        jLabelTop = new javax.swing.JLabel();
+        jButtonTerug = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Team toevoegen");
@@ -136,20 +136,6 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
 
         jLabel7.setText("Achternaam");
 
-        CancelButton.setText("Beëindig");
-        CancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelButtonActionPerformed(evt);
-            }
-        });
-
-        AddSpelerButton.setText("Speler toevoegen");
-        AddSpelerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddSpelerButtonActionPerformed(evt);
-            }
-        });
-
         Store.setText("Store");
 
         jLabel8.setText("Nieuw team toevoegen ");
@@ -163,93 +149,109 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jListTeam);
 
-        jLabelTeam.setText("jLabel9");
+        jLabelTop.setText("jLabel9");
+
+        jButtonTerug.setText("Terug");
+        jButtonTerug.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTerugActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(38, 38, 38)
+                        .addGap(67, 67, 67)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Thuisarena, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TeamNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Stamnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelTeam)))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Thuisarena, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TeamNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Stamnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelTop)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel5))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButtonTerug)
+                                .addGap(77, 77, 77)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(VoornaamTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(AchternaamTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Store)
-                            .addComponent(GeboortedatumTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                            .addComponent(GeboortedatumTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Store))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(251, 251, 251))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(AddSpelerButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CancelButton))
-                    .addComponent(jLabelBestaandTeam)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46))
+                        .addComponent(jLabelBestaandTeam)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelTeam)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelTop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Stamnummer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AchternaamTrainer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(TeamNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(GeboortedatumTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Thuisarena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel4)
+                            .addComponent(Store)
+                            .addComponent(jButtonTerug))
+                        .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabelBestaandTeam))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(VoornaamTrainer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelBestaandTeam)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(AchternaamTrainer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GeboortedatumTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CancelButton)
-                    .addComponent(AddSpelerButton)
-                    .addComponent(Store))
-                .addGap(26, 26, 26))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Stamnummer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(TeamNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Thuisarena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(VoornaamTrainer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(111, 111, 111))))
         );
 
         pack();
@@ -271,18 +273,6 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AchternaamTrainerActionPerformed
 
-    private void AddSpelerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpelerButtonActionPerformed
-        // TODO add your handling code here:
-        AddSpeler updateForm = new AddSpeler(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_AddSpelerButtonActionPerformed
-
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_CancelButtonActionPerformed
-
     private void StamnummerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StamnummerKeyReleased
         if (Stamnummer.getText().equalsIgnoreCase("")) {
             Stamnummer.setBackground(Color.white);
@@ -299,6 +289,18 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_StamnummerKeyReleased
+
+    private void jButtonTerugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTerugActionPerformed
+        CompetitieScherm updateForm = null;
+        try {
+            updateForm = new CompetitieScherm(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        updateForm.setVisible(true);
+        this.setVisible(false);    }//GEN-LAST:event_jButtonTerugActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,35 +337,35 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void FillLijstTeams(ResultSet srs) {
-        
+
         try {
-            
+
             DefaultListModel DLM = new DefaultListModel();
-            
+
             while (srs.next()) {
                 int stamnr = srs.getInt("stamnr");
                 DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
-                
+
             }
-            
+
             jListTeam.setModel(DLM);
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
-            
+
         }
     }
-    
+
     private class EventHandler implements ActionListener {
-        
+
         private AddTeamEnTrainer form;
-        
+
         public EventHandler(AddTeamEnTrainer antr) {
             form = antr;
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == Store) {
@@ -375,9 +377,9 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                 TeamNaam.setText("");
                 Thuisarena.setText("");
                 Stamnummer.setText("");
-                
+
                 try {
-                    
+
                     DriverManager.addTrainer(tr);
                     DriverManager.addTeam(te, competitie, seizoenInt);
                     JOptionPane.showMessageDialog(null, "Team en Trainer opgeslagen!");
@@ -390,14 +392,13 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AchternaamTrainer;
-    private javax.swing.JButton AddSpelerButton;
-    private javax.swing.JButton CancelButton;
     private javax.swing.JTextField GeboortedatumTrainer;
     private javax.swing.JTextField Stamnummer;
     private javax.swing.JButton Store;
     private javax.swing.JTextField TeamNaam;
     private javax.swing.JTextField Thuisarena;
     private javax.swing.JTextField VoornaamTrainer;
+    private javax.swing.JButton jButtonTerug;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -407,7 +408,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelBestaandTeam;
-    private javax.swing.JLabel jLabelTeam;
+    private javax.swing.JLabel jLabelTop;
     private javax.swing.JList jListTeam;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
@@ -415,34 +416,32 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     public String getAchternaamTrainer() {
         return AchternaamTrainer.getText();
     }
-    
+
     public String getGeboortedatumTrainer() {
         return GeboortedatumTrainer.getText();
     }
-    
+
     public String getVoornaamTrainer() {
         return VoornaamTrainer.getText();
     }
-    
+
     public String getTeamNaam() {
         return TeamNaam.getText();
     }
-    
+
     public int getStamnummer() {
         return Integer.parseInt(Stamnummer.getText());
     }
-    
+
     public String getThuisArena() {
-        
+
         return Thuisarena.getText();
     }
+
     
-    public JLabel getjLabelBestaandTeam() {
-        return jLabelBestaandTeam;
+
+    public void setjLabelTop(String jLabelTop) {
+        this.jLabelTop.setText(jLabelTop);
     }
-    
-    public void setjLabelTeam(String jLabelTeam) {
-        this.jLabelTeam.setText(jLabelTeam);
-    }
-    
+
 }

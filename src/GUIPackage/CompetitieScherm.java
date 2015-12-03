@@ -155,7 +155,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
             }
         });
 
-        TeamBewerkenButton.setText("Team bewerken");
+        TeamBewerkenButton.setText("Team/Speler bewerken");
         TeamBewerkenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TeamBewerkenButtonActionPerformed(evt);
@@ -367,7 +367,12 @@ public class CompetitieScherm extends javax.swing.JFrame {
 
     private void TeamBewerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamBewerkenButtonActionPerformed
         // TODO add your handling code here:
-        BewerkTeam updateForm = new BewerkTeam(dManager);
+        BewerkTeam updateForm = null;
+        try {
+            updateForm = new BewerkTeam(dManager);
+        } catch (SQLException ex) {
+            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_TeamBewerkenButtonActionPerformed

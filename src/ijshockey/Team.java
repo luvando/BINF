@@ -44,7 +44,7 @@ public class Team {
         this.dps = doelpuntenVoor - doelpuntenTegen;
     }
 
-    public Team(int stamnummer, String thuisArena, String teamNaam) {
+    public Team(int stamnummer, String teamNaam, String thuisArena) {
         this.stamNr = stamnummer;
         this.naam = teamNaam;
         this.thuisArena = thuisArena;
