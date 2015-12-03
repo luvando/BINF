@@ -226,7 +226,7 @@ public class DriverManager {
             int scoreLoser;
             Team winner;
             Team loser;
-
+                        
             if (w.getScoreThuisTeam() > w.getScoreUitTeam()) {
                 winner = w.getThuisTeam();
                 loser = w.getUitTeam();
@@ -259,6 +259,7 @@ public class DriverManager {
                         + " goalstegen = goalstegen + " + scoreLoser
                         + " WHERE stamnr = " + winner.getStamNr();
                 stmt.executeUpdate(sql1);
+                
                 String sql2 = "UPDATE team "
                         + "SET gespeeld = gespeeld + 1, "
                         + "verloren = verloren + 1, "
