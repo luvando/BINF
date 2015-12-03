@@ -52,7 +52,7 @@ public class GegevensOpvragen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gegevens opvragen");
 
-        RankingTeamsButton.setText("Ranking teams");
+        RankingTeamsButton.setText("Klassement");
         RankingTeamsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RankingTeamsButtonActionPerformed(evt);
@@ -89,7 +89,12 @@ public class GegevensOpvragen extends javax.swing.JFrame {
             }
         });
 
-        RankingSpelersButton.setText("Ranking spelers");
+        RankingSpelersButton.setText("Topschutters");
+        RankingSpelersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RankingSpelersButtonActionPerformed(evt);
+            }
+        });
 
         VorigeButton.setText("Vorige");
         VorigeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +111,7 @@ public class GegevensOpvragen extends javax.swing.JFrame {
                 .addGap(187, 187, 187)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(RapportTeamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RapportSpelerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(RapportSpelerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(RankingTeamsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(RankingSpelersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PenaltysPerTeamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -159,7 +164,14 @@ public class GegevensOpvragen extends javax.swing.JFrame {
 
     private void RankingTeamsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingTeamsButtonActionPerformed
         // TODO add your handling code here:
-        
+        TeamRanking updateForm = null;
+        try {
+            updateForm = new TeamRanking();
+        } catch (DBException ex) {
+            Logger.getLogger(GegevensOpvragen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        updateForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_RankingTeamsButtonActionPerformed
 
     private void PenaltysPerTeamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PenaltysPerTeamButtonActionPerformed
@@ -188,6 +200,18 @@ public class GegevensOpvragen extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_VorigeButtonActionPerformed
+
+    private void RankingSpelersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingSpelersButtonActionPerformed
+        // TODO add your handling code here:
+        SpelerRanking updateForm = null;
+        try {
+            updateForm = new SpelerRanking();
+        } catch (DBException ex) {
+            Logger.getLogger(GegevensOpvragen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        updateForm.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_RankingSpelersButtonActionPerformed
 
     /**
      * @param args the command line arguments

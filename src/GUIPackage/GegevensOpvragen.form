@@ -71,7 +71,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="RankingTeamsButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ranking teams"/>
+        <Property name="text" type="java.lang.String" value="Klassement"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RankingTeamsButtonActionPerformed"/>
@@ -116,8 +116,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="RankingSpelersButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ranking spelers"/>
+        <Property name="text" type="java.lang.String" value="Topschutters"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RankingSpelersButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="VorigeButton">
       <Properties>
