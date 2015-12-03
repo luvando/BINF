@@ -38,7 +38,7 @@ public class TeamRanking extends javax.swing.JFrame {
         System.setOut(printStream);
         System.setErr(printStream);
         
-        DriverManager.printTeamRanking();
+        //DriverManager.printTeamRanking();
         
  
     }

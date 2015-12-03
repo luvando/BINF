@@ -39,8 +39,10 @@ public class Test {
         Wedstrijd w = new Wedstrijd(t, tt, "Camp Nou", 5, 0, s2, "11/11/2015", ss);
         DriverManager.addWedstrijd(w);*/
         
-        DriverManager.printTeamRanking();
-        DriverManager.printSpelerRanking();
+        Competitie c = new Competitie("Stella pro league");
+        Seizoen s = new Seizoen(c, 2015);
+        DriverManager.printTeamRanking(c,s);
+        //DriverManager.printSpelerRanking();
 
     }
 }
