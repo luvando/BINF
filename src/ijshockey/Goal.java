@@ -24,12 +24,10 @@ public class Goal extends Highlight {
     public Goal(int minuut, Speler speler, Wedstrijd wedstrijd) {
         super(minuut, speler, wedstrijd);
     }
-/*
-    public int getLidnr_assist() {
-        return lidnr_assist;
-    }
 
-    public void setLidnr_assist(int lidnr_assist) {
+    
+
+  /*  public void setLidnr_assist(int lidnr_assist) {
         this.lidnr_assist = lidnr_assist;
     }
 
@@ -57,5 +55,13 @@ public class Goal extends Highlight {
         return s;
 
     }*/
+
+    public Speler getAssist() {
+        return assist;
+    }
+
+    public void setAssist(Speler assist) {
+        this.assist = assist;
+    }
 
 }

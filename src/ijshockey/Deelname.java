@@ -12,12 +12,12 @@ package ijshockey;
 public class Deelname {
     
     private Competitie competitie;
-    private int jaar;
+    private Seizoen seizoen;
     private Team team;
 
-    public Deelname(Competitie competitie, int jaar, Team team) {
+    public Deelname(Competitie competitie, Seizoen seizoen, Team team) {
        this.competitie=competitie;
-       this.jaar= jaar;
+       this.seizoen= seizoen;
        this.team=team;
        
     }
