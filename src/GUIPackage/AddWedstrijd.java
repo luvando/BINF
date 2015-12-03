@@ -38,6 +38,11 @@ public class AddWedstrijd extends javax.swing.JFrame {
     public AddWedstrijd() {
         initComponents();
     }
+    
+    AddWedstrijd(DriverManager dManager) {
+        this.dManager = dManager;
+        initComponents();
+    }
     private String competitie;
     private int seizoenInt;
     
@@ -161,6 +166,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jListUitteam = new javax.swing.JList();
         jLabelTop = new javax.swing.JLabel();
+        HighlightButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Voeg speeldag en wedstrijd toe");
@@ -243,6 +249,13 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
         jLabelTop.setText("jLabel1");
 
+        HighlightButton.setText("Highlight toevoegen");
+        HighlightButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HighlightButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -260,14 +273,11 @@ public class AddWedstrijd extends javax.swing.JFrame {
                     .addComponent(jTextaddSpeeldag)
                     .addComponent(jButtonaddSpeeldag, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
                 .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Store)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                        .addComponent(OpstellingToevoegenButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CancelButton)
-                        .addGap(115, 115, 115))
+                        .addGap(76, 76, 76)
+                        .addComponent(OpstellingToevoegenButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextScoreUit)
@@ -280,8 +290,12 @@ public class AddWedstrijd extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextArena, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(HighlightButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CancelButton)
+                .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(292, 292, 292)
                 .addComponent(jLabelTop)
@@ -317,7 +331,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -337,7 +351,8 @@ public class AddWedstrijd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(OpstellingToevoegenButton)
                     .addComponent(CancelButton)
-                    .addComponent(Store))
+                    .addComponent(Store)
+                    .addComponent(HighlightButton))
                 .addGap(47, 47, 47))
         );
 
@@ -438,6 +453,13 @@ public class AddWedstrijd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MouseClickedEvent
 
+    private void HighlightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HighlightButtonActionPerformed
+        // TODO add your handling code here:
+        AddHighlight updateForm = new AddHighlight(dManager);
+        updateForm.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_HighlightButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -477,6 +499,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
+    private javax.swing.JButton HighlightButton;
     private javax.swing.JButton OpstellingToevoegenButton;
     private javax.swing.JButton Store;
     private javax.swing.JButton jButtonaddSpeeldag;
