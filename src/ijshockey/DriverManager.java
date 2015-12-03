@@ -848,20 +848,25 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT lidnr "
-                    + "FROM speler "
-                    + "ORDER BY goals DESC";
+            String sql = "SELECT voornaam, achternaam, (SELECT COUNT(*) FROM goal " + 
+                         "WHERE goal.lidnr = speler.lidnr) " + 
+                         "AS goals FROM speler GROUP BY lidnr " +
+                         "ORDER BY goals DESC ";
+            
             ResultSet srs = stmt.executeQuery(sql);
-
-            ArrayList<Speler> rankedplayers = new ArrayList<Speler>();
+            String voornaam = null;
+            String achternaam = null;
+            int goals = 0;
+            
             while (srs.next()) {
-                rankedplayers.add(getSpeler(srs.getInt("lidnr")));
-            }
-
+                voornaam = srs.getString("voornaam");
+                achternaam = srs.getString("achternaam");
+                goals = srs.getInt("goals");
+                System.out.println(voornaam + " " + achternaam + " " + goals);
+            } 
+            
             closeConnection(con);
-            for (Speler s : rankedplayers) {
-                System.out.println(s.toStringSpelerRanking());
-            }
+            
         } catch (DBException dbe) {
             dbe.printStackTrace();
             closeConnection(con);
@@ -1095,21 +1100,25 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-
-            String sql = "SELECT stamnr, (goalsvoor - goalstegen) "
-                    + "FROM deelname "
-                    + "ORDER BY punten DESC, (goalsvoor - goalstegen) DESC ";
+            
+            String sql = 
+                    "SELECT naam, ((SELECT 2*COUNT(*) FROM wedstrijd " +
+                    "WHERE ((stamnr_uit=stamnr AND score_uit>score_thuis) OR (stamnr_thuis=stamnr AND score_thuis>score_uit))) " +
+                    "+ (SELECT COUNT(*) FROM wedstrijd " +
+                    "WHERE (score_uit=score_thuis AND (stamnr_uit=stamnr OR stamnr_thuis=stamnr)))) " +
+                    "AS punten FROM team GROUP BY stamnr ORDER BY punten DESC";
+         
             ResultSet srs = stmt.executeQuery(sql);
-
-            ArrayList<Deelname> rankedteams = new ArrayList<Deelname>();
+            String naam = null;
+            int punten = 0;
+            
             while (srs.next()) {
-                rankedteams.add(DriverManager.getDeelname(getCompetitie(srs.getString("competitienaam")), getSeizoen(srs.getInt("jaar"), srs.getString("competitienaam")), getTeam(srs.getInt("stamnr"))));
-            }
-
+                naam = srs.getString("naam");
+                punten = srs.getInt("punten");
+                System.out.println(naam + " " + punten);
+            } 
+            
             closeConnection(con);
-            for (Deelname d : rankedteams) {
-                System.out.println(d.toStringTeamRanking());
-            }
         } catch (DBException dbe) {
             dbe.printStackTrace();
             closeConnection(con);

@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class Test {
 
     public static void main(String[] args) throws DBException {
-        DriverManager dm = new DriverManager();
+       /* DriverManager dm = new DriverManager();
         DriverManager.printTeamRanking(); //werkt
         DriverManager.printSpelerRanking(); //werkt
         DriverManager.printSpelerRapport(3); //werkt
@@ -37,7 +37,10 @@ public class Test {
         Scheidsrechter s2 = DriverManager.getScheids(1);
         Speeldag ss = DriverManager.getSpeeldag("National League", 2015, 1);
         Wedstrijd w = new Wedstrijd(t, tt, "Camp Nou", 5, 0, s2, "11/11/2015", ss);
-        DriverManager.addWedstrijd(w);
+        DriverManager.addWedstrijd(w);*/
+        
+        DriverManager.printTeamRanking();
+        DriverManager.printSpelerRanking();
 
     }
 }
