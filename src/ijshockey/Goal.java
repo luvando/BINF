@@ -14,48 +14,45 @@ import java.util.logging.Logger;
  */
 public class Goal extends Highlight {
 
-    private Speler assist;
+    private Speler assistgever;
 
-    public Goal(int minuut, Speler speler, Wedstrijd wedstrijd, Speler assist) {
+    public Goal(int minuut, Speler speler, Wedstrijd wedstrijd, Speler assistgever) {
         super(minuut, speler, wedstrijd);
-        this.assist = assist;
+        this.assistgever = assistgever;
     }
 
-    public Goal(int minuut, Speler speler, Wedstrijd wedstrijd) {
-        super(minuut, speler, wedstrijd);
-    }
-/*
-    public int getLidnr_assist() {
-        return lidnr_assist;
+
+    public Speler getAssistgever() {
+        return assistgever;
     }
 
-    public void setLidnr_assist(int lidnr_assist) {
-        this.lidnr_assist = lidnr_assist;
+    public void setAssistgever(Speler assistgever) {
+        this.assistgever = assistgever;
     }
+    /*
+     @Override
+     public String toString() {
+     String s = null;
 
-    @Override
-    public String toString() {
-        String s = null;
+     try {
+     s = "Goal" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
+     } catch (DBException ex) {
+     Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     return s;
 
-        try {
-            s = "Goal" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
-        } catch (DBException ex) {
-            Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return s;
+     }
 
-    }
+     public String toStringAssist() {
+     String s = null;
 
-    public String toStringAssist() {
-        String s = null;
+     try {
+     s = "Assist" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
+     } catch (DBException ex) {
+     Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     return s;
 
-        try {
-            s = "Assist" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
-        } catch (DBException ex) {
-            Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return s;
-
-    }*/
+     }*/
 
 }

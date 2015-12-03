@@ -9,7 +9,7 @@ package ijshockey;
  *
  * @author favdndor
  */
-public class Owngoal extends Goal {
+public class Owngoal extends Highlight {
 
     public Owngoal(int minuut, Speler speler, Wedstrijd wedstrijd)
     {
