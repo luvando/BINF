@@ -191,7 +191,7 @@ public class AddHighlight extends javax.swing.JFrame {
     private void OwngoalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OwngoalButtonActionPerformed
         // TODO add your handling code here:
         
-        // kadertje weergeven met "Owngoal toegevoegd
+        // kadertje weergeven met "Owngoal toegevoegd"
     }//GEN-LAST:event_OwngoalButtonActionPerformed
 
     /**
