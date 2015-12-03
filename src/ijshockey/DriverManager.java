@@ -390,7 +390,7 @@ public class DriverManager {
 
             closeConnection(con);
             for (Goal g : goals) {
-                System.out.println(g.toStringAssist());
+                System.out.println(g.toStringAssist()); //naar waar is deze methode verzet?
             }
         } catch (DBException dbe) {
             dbe.printStackTrace();
@@ -450,7 +450,7 @@ public class DriverManager {
              stmt.executeUpdate(sql);*/
             String sql = "INSERT into goal "
                     + "(minuut, lidnr, wedstrijdnr, lidnr_assist) "
-                    + "VALUES ('" + g.getMinuut() + "', '" + g.getSpeler().getLidnr() + "', '" + g.getWedstrijd().getWedstrijdNr() + "', '" + g.getAssistgever() + "')";
+                    + "VALUES ('" + g.getMinuut() + "', '" + g.getSpeler().getLidnr() + "', '" + g.getWedstrijd().getWedstrijdNr() + "', '" + g.getAssistgever().getLidnr() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
@@ -475,21 +475,21 @@ public class DriverManager {
             ResultSet srs = stmt.executeQuery(sql);
 
             int minuut;
-            int lidnr;
-            int wedstrijdnr;
-            int lidnr_assist;
+            Speler speler;
+            Wedstrijd wedstrijd;
+            Speler assistgever;
 
             if (srs.next()) {
                 minuut = srs.getInt("minuut");
-                lidnr = srs.getInt("lidnr");
-                wedstrijdnr = srs.getInt("wedstrijdnr");
-                lidnr_assist = srs.getInt("lidnr_assist");
+                speler = getSpeler(srs.getInt("lidnr"));
+                wedstrijd = getWedstrijd(srs.getInt("wedstrijdnr"));
+                assistgever = getSpeler(srs.getInt("lidnr_assist"));
 
             } else {
                 closeConnection(con);
                 return null;
             }
-            Goal g = new Goal(minuut, getSpeler(lidnr), getWedstrijd(wedstrijdnr), getSpeler(lidnr_assist));
+            Goal g = new Goal(minuut, speler, wedstrijd, assistgever);
 
             closeConnection(con);
             return g;
@@ -609,21 +609,21 @@ public class DriverManager {
             ResultSet srs = stmt.executeQuery(sql);
 
             int minuut;
-            int lidnr;
-            int wedstrijdnr;
+            Speler speler;
+            Wedstrijd wedstrijd;
             int gescoord;
 
             if (srs.next()) {
                 minuut = srs.getInt("minuut");
-                lidnr = srs.getInt("lidnr");
-                wedstrijdnr = srs.getInt("wedstrijdnr");
+                speler = getSpeler(srs.getInt("lidnr"));
+                wedstrijd = getWedstrijd(srs.getInt("wedstrijdnr"));
                 gescoord = srs.getInt("gescoord");
 
             } else {
                 closeConnection(con);
                 return null;
             }
-            Penalty p = new Penalty(minuut, getSpeler(lidnr), getWedstrijd(wedstrijdnr), gescoord);
+            Penalty p = new Penalty(minuut, speler, wedstrijd, gescoord);
 
             closeConnection(con);
             return p;
@@ -865,7 +865,7 @@ public class DriverManager {
         }
     }
 
-    public static void printSpelerRapport(int lidnr) throws DBException {
+   /* public static void printSpelerRapport(int lidnr) throws DBException {
 
         Speler s = DriverManager.getSpeler(lidnr);
         if (s.getPenaltys() == 0) {
@@ -876,7 +876,7 @@ public class DriverManager {
             DriverManager.printPenaltys(lidnr);
         }
 
-    }
+    }*/
 
     public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
         int playedMinutesGame = 0;

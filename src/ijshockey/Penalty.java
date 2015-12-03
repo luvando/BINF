@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class Penalty extends Highlight {
 
-    private int gescoord;
+    private int gescoord; //waarom is dit een integer? 
 
     public Penalty(int minuut, Speler speler, Wedstrijd wedstrijd, int gescoord) {
         super(minuut, speler, wedstrijd);
