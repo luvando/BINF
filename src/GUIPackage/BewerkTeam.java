@@ -114,7 +114,7 @@ public class BewerkTeam extends javax.swing.JFrame {
                 .addComponent(SpelerBewerkenButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TrainerBewerkenButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CancelButton)
                 .addGap(49, 49, 49))
             .addGroup(layout.createSequentialGroup()

@@ -259,6 +259,7 @@ public class DriverManager {
                         + " goalstegen = goalstegen + " + scoreLoser
                         + " WHERE stamnr = " + winner.getStamNr();
                 stmt.executeUpdate(sql1);
+                
                 String sql2 = "UPDATE team "
                         + "SET gespeeld = gespeeld + 1, "
                         + "verloren = verloren + 1, "
