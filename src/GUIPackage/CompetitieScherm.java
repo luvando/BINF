@@ -355,7 +355,12 @@ public class CompetitieScherm extends javax.swing.JFrame {
 
     private void TeamToevoegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamToevoegenButtonActionPerformed
         // TODO add your handling code here:
-        AddTeamEnTrainer updateForm = new AddTeamEnTrainer(dManager, (String) LijstCompetities.getSelectedValue(), LijstSeizoenen.getSelectedValue());
+        AddTeamEnTrainer updateForm = null;
+        try {
+            updateForm = new AddTeamEnTrainer(dManager, (String) LijstCompetities.getSelectedValue(), LijstSeizoenen.getSelectedValue());
+        } catch (SQLException ex) {
+            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_TeamToevoegenButtonActionPerformed

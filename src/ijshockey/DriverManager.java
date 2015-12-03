@@ -226,7 +226,7 @@ public class DriverManager {
             int scoreLoser;
             Team winner;
             Team loser;
-
+                        
             if (w.getScoreThuisTeam() > w.getScoreUitTeam()) {
                 winner = w.getThuisTeam();
                 loser = w.getUitTeam();
