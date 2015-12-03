@@ -19,6 +19,11 @@ import java.util.logging.Logger;
 public class GegevensOpvragen extends javax.swing.JFrame {
 
     public static DriverManager dManager;
+    private String competitienaam;
+    private int jaar;
+    private Competitie competitie;
+    private Seizoen seizoen;
+
     /**
      * Creates new form GegevensOpvragen
      */
@@ -26,11 +31,22 @@ public class GegevensOpvragen extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
+
     GegevensOpvragen(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
         setLocationRelativeTo(null);
+    }
+
+    GegevensOpvragen(DriverManager dManager, String competitienaam, int jaar) {
+        this.dManager = dManager;
+        this.competitienaam = competitienaam;
+        this.jaar = jaar;
+        this.competitie = DriverManager.getCompetitie(competitienaam);
+        this.seizoen = DriverManager.getSeizoen(jaar, competitienaam);
+        initComponents();
+        setLocationRelativeTo(null);
+        this.setjLabelTop("Gegevens opvragen van " + competitienaam + " seizoen : " + jaar);
     }
 
     /**
@@ -47,6 +63,7 @@ public class GegevensOpvragen extends javax.swing.JFrame {
         RapportTeamButton = new javax.swing.JButton();
         RankingSpelersButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
+        jLabelTop = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gegevens opvragen");
@@ -86,6 +103,8 @@ public class GegevensOpvragen extends javax.swing.JFrame {
             }
         });
 
+        jLabelTop.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,25 +116,29 @@ public class GegevensOpvragen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(187, 187, 187)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RankingSpelersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(RapportTeamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(RapportSpelerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                        .addComponent(RankingTeamsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabelTop)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(RankingSpelersButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(RapportTeamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(RapportSpelerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(RankingTeamsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(191, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
-                .addComponent(RapportTeamButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(RapportSpelerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addContainerGap()
+                .addComponent(jLabelTop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(RankingTeamsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RankingSpelersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RapportTeamButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RapportSpelerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
                 .addComponent(VorigeButton)
                 .addGap(36, 36, 36))
         );
@@ -139,23 +162,10 @@ public class GegevensOpvragen extends javax.swing.JFrame {
 
     private void RankingTeamsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingTeamsButtonActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         TeamRanking updateForm = null;
         try {
-            updateForm = new TeamRanking(dManager);
+            updateForm = new TeamRanking(dManager, competitie, seizoen);
         } catch (DBException ex) {
             Logger.getLogger(GegevensOpvragen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -173,7 +183,7 @@ public class GegevensOpvragen extends javax.swing.JFrame {
         }
         updateForm.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void RankingSpelersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingSpelersButtonActionPerformed
@@ -229,5 +239,10 @@ public class GegevensOpvragen extends javax.swing.JFrame {
     private javax.swing.JButton RapportSpelerButton;
     private javax.swing.JButton RapportTeamButton;
     private javax.swing.JButton VorigeButton;
+    private javax.swing.JLabel jLabelTop;
     // End of variables declaration//GEN-END:variables
+
+    private void setjLabelTop(String string) {
+        this.jLabelTop.setText(string);
+    }
 }

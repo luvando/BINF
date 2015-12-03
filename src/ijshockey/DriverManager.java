@@ -1057,6 +1057,7 @@ public class DriverManager {
             while (srs.next()) {
                 naam = srs.getString("naam");
                 punten = srs.getInt("punten");
+                
                 System.out.println(naam + " " + punten);
             }
 

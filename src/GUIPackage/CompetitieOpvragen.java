@@ -5,6 +5,7 @@
  */
 package GUIPackage;
 
+import static GUIPackage.CompetitieScherm.dManager;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 //import static ijshockey.DriverManager.closeConnection;
@@ -170,9 +171,12 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
 
     private void VolgendeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolgendeButtonActionPerformed
         // TODO add your handling code here:
-        GegevensOpvragen updateForm = new GegevensOpvragen(dManager);
+        GegevensOpvragen updateForm = null;
+        updateForm = new GegevensOpvragen(dManager, (String) LijstCompetities.getSelectedValue(), 
+                Integer.parseInt((String) LijstSeizoenen.getSelectedValue()));
         updateForm.setVisible(true);
         this.setVisible(false);
+
     }//GEN-LAST:event_VolgendeButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
