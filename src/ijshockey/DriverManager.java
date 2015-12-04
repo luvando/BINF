@@ -975,10 +975,27 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT voornaam, achternaam, (SELECT COUNT(*) FROM goal "
-                    + "WHERE goal.lidnr = speler.lidnr) "
-                    + "AS goals FROM speler GROUP BY lidnr "
-                    + "ORDER BY goals DESC ";
+            String sql = "SELECT voornaam, achternaam,\n"
+                    + "(\n"
+                    + "SELECT COUNT(*)\n"
+                    + "FROM \n"
+                    + "(\n"
+                    + "SELECT goal.lidnr, competitienaam, jaar\n"
+                    + "FROM goal\n"
+                    + "JOIN wedstrijd\n"
+                    + "ON wedstrijd.wedstrijdnr = goal.wedstrijdnr\n"
+                    + "JOIN speler\n"
+                    + "ON goal.lidnr = speler.lidnr\n"
+                    + "\n"
+                    + ") AS tabel\n"
+                    + "WHERE tabel.competitienaam = '" + c.getCompetitienaam() + "' AND tabel.jaar = " + s.getJaar() + " AND speler.lidnr = tabel.lidnr\n"
+                    + ")\n"
+                    + "AS goals\n"
+                    + "\n"
+                    + "FROM speler\n"
+                    + "\n"
+                    + "GROUP BY lidnr\n"
+                    + "ORDER BY goals DESC";
 
             ResultSet srs = stmt.executeQuery(sql);
             String voornaam = null;
@@ -1208,7 +1225,7 @@ public class DriverManager {
                     + "(SELECT 2*COUNT(*)\n"
                     + "FROM wedstrijd\n"
                     + "WHERE ((stamnr_uit = stamnr AND score_uit > score_thuis)\n"
-                    + "OR (stamnr_thuis = stamnr AND score_thuis > score_uit)) AND wedstrijd.competitienaam = '" + c.getCompetitienaam() + "' AND wedstrijd.jaar = " + s.getJaar() +"\n"
+                    + "OR (stamnr_thuis = stamnr AND score_thuis > score_uit)) AND wedstrijd.competitienaam = '" + c.getCompetitienaam() + "' AND wedstrijd.jaar = " + s.getJaar() + "\n"
                     + ")\n"
                     + "+\n"
                     + "(SELECT COUNT(*)\n"
@@ -1228,7 +1245,7 @@ public class DriverManager {
             while (srs.next()) {
                 naam = srs.getString("naam");
                 punten = srs.getInt("punten");
-                
+
                 System.out.println(naam + " " + punten);
             }
 

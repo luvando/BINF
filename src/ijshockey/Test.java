@@ -42,7 +42,7 @@ public class Test {
         Competitie c = new Competitie("Stella pro league");
         Seizoen s = new Seizoen(c, 2015);
         DriverManager.printTeamRanking(c,s);
-        //DriverManager.printSpelerRanking();
+        DriverManager.printSpelerRanking(c,s);
 
     }
 }
