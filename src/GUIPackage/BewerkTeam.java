@@ -34,26 +34,20 @@ public class BewerkTeam extends javax.swing.JFrame {
     public BewerkTeam() {
         initComponents();
     }
+    
+    DefaultListModel DLM;
 
     public BewerkTeam(DriverManager dManager) throws SQLException {
         AddTeamEnTrainer.dManager = dManager;
         initComponents();
         setLocationRelativeTo(null);
-        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam());
+        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam(DLM));
 
     }
 
-    private void FillLijstTeams(ResultSet srs) {
+    private void FillLijstTeams(DefaultListModel DLM) {
 
         try {
-
-            DefaultListModel DLM = new DefaultListModel();
-
-            while (srs.next()) {
-                int stamnr = srs.getInt("stamnr");
-                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
-
-            }
 
             jListTeam.setModel(DLM);
 

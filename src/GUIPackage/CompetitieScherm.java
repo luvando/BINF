@@ -26,13 +26,8 @@ public class CompetitieScherm extends javax.swing.JFrame {
 
     public static DriverManager dManager;
 
-    private void FillLijst(ResultSet srs) {
+    private void FillLijst(DefaultListModel DLM) {
         try {
-            DefaultListModel DLM = new DefaultListModel();
-
-            while (srs.next()) {
-                DLM.addElement(srs.getString(1));
-            }
 
             LijstCompetities.setModel(DLM);
 
@@ -46,10 +41,11 @@ public class CompetitieScherm extends javax.swing.JFrame {
         initComponents();
     }
 
+    DefaultListModel DLM;
     public CompetitieScherm(DriverManager dManager) throws DBException, SQLException {
         this.dManager = dManager;
         initComponents();
-        FillLijst(ijshockey.DriverManager.FillLijstCompetities());
+        FillLijst(ijshockey.DriverManager.FillLijstCompetities(DLM));
         setLocationRelativeTo(null);
 
     }
@@ -383,7 +379,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
         Competitienaam.setText("");
         try {
             DriverManager.addComp(c);
-            FillLijst(ijshockey.DriverManager.FillLijstCompetities());
+            FillLijst(ijshockey.DriverManager.FillLijstCompetities(DLM));
             JOptionPane.showMessageDialog(null, "Competitie opgeslagen!");
         } catch (DBException ex) {
             Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);

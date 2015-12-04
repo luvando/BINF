@@ -24,53 +24,56 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
-                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextaddSpeeldag" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButtonaddSpeeldag" pref="202" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="Store" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                      <Component id="OpstellingToevoegenButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTextScoreUit" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextScoreThuis" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextDatum" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="0" pref="129" max="32767" attributes="0"/>
-                          <Component id="jScrollPane3" max="32767" attributes="0"/>
-                          <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextaddSpeeldag" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jButtonaddSpeeldag" pref="202" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextArena" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="Store" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                              <Component id="OpstellingToevoegenButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jTextScoreUit" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextScoreThuis" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextDatum" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="0" pref="129" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane3" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jTextArena" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="HighlightButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="VorigeButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="302" max="-2" attributes="0"/>
+                      <Component id="jLabelTop" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="HighlightButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="CancelButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="52" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
-              <Component id="jLabelTop" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace pref="66" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,9 +82,9 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabelTop" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Component id="jTextaddSpeeldag" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonaddSpeeldag" min="-2" max="-2" attributes="0"/>
@@ -134,7 +137,7 @@
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="OpstellingToevoegenButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="VorigeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Store" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="HighlightButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -209,12 +212,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OpstellingToevoegenButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="CancelButton">
+    <Component class="javax.swing.JButton" name="VorigeButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Be&#xeb;indig"/>
+        <Property name="text" type="java.lang.String" value="Vorige"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CancelButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VorigeButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -320,11 +323,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabelTop">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="HighlightButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Highlight toevoegen"/>
@@ -332,6 +330,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HighlightButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelTop">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

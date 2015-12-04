@@ -40,6 +40,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     }
     private String competitie;
     private int seizoenInt;
+    DefaultListModel DLM;
 
     public AddTeamEnTrainer(DriverManager dManager) {
         AddTeamEnTrainer.dManager = dManager;
@@ -56,7 +57,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         Store.addActionListener(new AddTeamEnTrainer.EventHandler(this));
         this.competitie = competitie;
         this.seizoenInt = Integer.parseInt(seizoen);
-        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam(competitie, seizoenInt));
+        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoenInt));
         this.setjLabelTop("Team toevoegen aan " + competitie + " seizoen : " + seizoenInt);
     }
 
@@ -338,17 +339,9 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         });
     }
 
-    private void FillLijstTeams(ResultSet srs) {
+    private void FillLijstTeams(DefaultListModel DLM) {
 
         try {
-
-            DefaultListModel DLM = new DefaultListModel();
-
-            while (srs.next()) {
-                int stamnr = srs.getInt("stamnr");
-                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
-
-            }
 
             jListTeam.setModel(DLM);
 
