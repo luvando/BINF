@@ -80,7 +80,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="BestaandeCompetitieButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Bestaande competitie bewerken"/>
+        <Property name="text" type="java.lang.String" value="Competities"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BestaandeCompetitieButtonActionPerformed"/>

@@ -66,7 +66,7 @@ public class Startscherm extends javax.swing.JFrame {
         setTitle("Competitie");
         setAlwaysOnTop(true);
 
-        BestaandeCompetitieButton.setText("Bestaande competitie bewerken");
+        BestaandeCompetitieButton.setText("Competities");
         BestaandeCompetitieButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BestaandeCompetitieButtonActionPerformed(evt);
