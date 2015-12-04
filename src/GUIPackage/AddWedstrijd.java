@@ -45,6 +45,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
     }
     private String competitie;
     private int seizoenInt;
+    DefaultListModel DLM;
     
     public AddWedstrijd(DriverManager dManager, String competitie, String seizoen) throws SQLException {
         AddWedstrijd.dManager = dManager;
@@ -53,19 +54,14 @@ public class AddWedstrijd extends javax.swing.JFrame {
         this.competitie = competitie;
         setLocationRelativeTo(null);
         this.setjLabelTop("Team toevoegen aan " + competitie + " seizoen : " + seizoenInt);
-        this.FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(competitie, seizoenInt));
-        this.FillLijstScheids(ijshockey.DriverManager.FillLijstScheids());
-        this.FillLijstTeamthuis(ijshockey.DriverManager.FillLijstTeam(competitie, seizoenInt));
-        this.FillLijstTeamuit(ijshockey.DriverManager.FillLijstTeam(competitie, seizoenInt));
+        this.FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(DLM, competitie, seizoenInt));
+        this.FillLijstScheids(ijshockey.DriverManager.FillLijstScheids(DLM));
+        this.FillLijstTeamthuis(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoenInt));
+        this.FillLijstTeamuit(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoenInt));
     }
     
-    private void FillLijstSpeeldag(ResultSet srs) {
+    private void FillLijstSpeeldag(DefaultListModel DLM) {
         try {
-            DefaultListModel DLM = new DefaultListModel();
-            
-            while (srs.next()) {
-                DLM.addElement(srs.getString(1));
-            }
             
             jListSpeeldag.setModel(DLM);
             
@@ -75,15 +71,8 @@ public class AddWedstrijd extends javax.swing.JFrame {
         }
     }
     
-    private void FillLijstScheids(ResultSet srs) {
+    private void FillLijstScheids(DefaultListModel DLM) {
         try {
-            DefaultListModel DLM = new DefaultListModel();
-            
-            while (srs.next()) {
-                int lidnr = srs.getInt("lidnr");
-                DLM.addElement(DriverManager.getScheids(lidnr).getVoornaam() + " " + DriverManager.getScheids(lidnr).getAchternaam() + " - " + lidnr);
-                
-            }
             
             jListScheids.setModel(DLM);
             
@@ -93,15 +82,8 @@ public class AddWedstrijd extends javax.swing.JFrame {
         }
     }
     
-    private void FillLijstTeamthuis(ResultSet srs) {
+    private void FillLijstTeamthuis(DefaultListModel DLM) {
         try {
-            DefaultListModel DLM = new DefaultListModel();
-            
-            while (srs.next()) {
-                int stamnr = srs.getInt("stamnr");
-                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
-                
-            }
             
             jListThuisteam.setModel(DLM);
             
@@ -112,15 +94,9 @@ public class AddWedstrijd extends javax.swing.JFrame {
         
     }
     
-    private void FillLijstTeamuit(ResultSet srs) {
+    private void FillLijstTeamuit(DefaultListModel DLM) {
         try {
-            DefaultListModel DLM = new DefaultListModel();
-            
-            while (srs.next()) {
-                int stamnr = srs.getInt("stamnr");
-                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
-                
-            }
+
             DLM.removeElement(jListThuisteam.getSelectedValue());
             jListUitteam.setModel(DLM);
             
@@ -378,7 +354,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
         Speeldag sp = new Speeldag(DriverManager.getCompetitie(competitie), DriverManager.getSeizoen(seizoenInt, competitie), this.getjTextaddSpeeldag());
         try {
             DriverManager.addSpeeldag(sp);
-            FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(competitie, seizoenInt));
+            FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(DLM, competitie, seizoenInt));
         } catch (DBException | SQLException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
