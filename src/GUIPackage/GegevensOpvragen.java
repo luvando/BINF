@@ -9,6 +9,7 @@ import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Seizoen;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -99,8 +100,6 @@ public class GegevensOpvragen extends javax.swing.JFrame {
             }
         });
 
-        jLabelTop.setText("jLabel1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,7 +125,7 @@ public class GegevensOpvragen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelTop)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(RankingTeamsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RankingSpelersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,8 +142,14 @@ public class GegevensOpvragen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RapportTeamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RapportTeamButtonActionPerformed
-        // TODO add your handling code here:
-        RapportTeam updateForm = new RapportTeam(dManager);
+        RapportTeam updateForm = null;
+
+        try {
+            updateForm = new RapportTeam(dManager, competitie, seizoen);
+        } catch (SQLException ex) {
+            Logger.getLogger(GegevensOpvragen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_RapportTeamButtonActionPerformed
@@ -186,7 +191,7 @@ public class GegevensOpvragen extends javax.swing.JFrame {
         // TODO add your handling code here:
         SpelerRanking updateForm = null;
         try {
-            updateForm = new SpelerRanking();
+            updateForm = new SpelerRanking(dManager, competitie, seizoen);
         } catch (DBException ex) {
             Logger.getLogger(GegevensOpvragen.class.getName()).log(Level.SEVERE, null, ex);
         }

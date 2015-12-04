@@ -41,7 +41,7 @@ public class Test {
         
         Competitie c = new Competitie("Stella pro league");
         Seizoen s = new Seizoen(c, 2015);
-        Team t = DriverManager.getTeam(666);
+        Team t = DriverManager.getTeam(80);
         DriverManager.printTeamRapport(c,s,t);
 
     }

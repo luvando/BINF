@@ -1228,7 +1228,6 @@ public class DriverManager {
                     + ")\n"
                     + ")\n"
                     + "AS punten\n"
-                    
                     + "FROM team\n"
                     + "GROUP BY stamnr\n"
                     + "ORDER BY punten DESC;";
@@ -1263,98 +1262,137 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT "
-                    + "(SELECT naam "
-                    + "FROM team "
-                    + "WHERE stamnr=" + t.getStamNr()
-                    + ") AS naam, "
-
-                    + "(SELECT COUNT(*) "
-                    + "FROM wedstrijd "
-                    + "WHERE (stamnr_uit=stamnr OR stamnr_thuis=stamnr)"
-                    + ") AS gespeeld, "
-                    
-                    + "(SELECT COUNT(*) "
-                    + "FROM wedstrijd "
-                    + "WHERE ((stamnr_uit = stamnr AND score_uit > score_thuis) OR (stamnr_thuis = stamnr AND score_thuis > score_uit))" 
-                    + ") AS gewonnen, "
-                   
-                    + "(SELECT COUNT(*) "
-                    + "FROM wedstrijd "
-                    + "WHERE ((stamnr_uit = stamnr AND score_uit < score_thuis) OR (stamnr_thuis = stamnr AND score_thuis < score_uit))" 
-                    + ") AS verloren, "
-                    
+            String sql = "SELECT\n"
+                    + "(SELECT naam\n"
+                    + "FROM team\n"
+                    + "WHERE (stamnr = deelname.stamnr))\n"
+                    + "AS naam,\n"
+                    + "\n"
                     + "(SELECT COUNT(*)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE score_thuis = score_uit AND (stamnr_thuis = stamnr OR stamnr_uit = stamnr) "
-                    + ") AS gelijk, "
-                   
-                    + "(SELECT "
+                    + "WHERE (stamnr_uit=deelname.stamnr OR stamnr_thuis=deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "AS gespeeld,\n"
+                    + "\n"
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE ((stamnr_uit = deelname.stamnr AND score_uit > score_thuis) OR (stamnr_thuis = deelname.stamnr AND score_thuis > score_uit)) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "AS gewonnen,\n"
+                    + "\n"
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE ((stamnr_uit = deelname.stamnr AND score_uit < score_thuis) OR (stamnr_thuis = deelname.stamnr AND score_thuis < score_uit)) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "AS verloren,\n"
+                    + "\n"
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE score_thuis = score_uit AND (stamnr_thuis = deelname.stamnr OR stamnr_uit = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "AS gelijk,\n"
+                    + "\n"
+                    + "(SELECT  \n"
+                    + "\n"
                     + "(SELECT 2*COUNT(*)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE (stamnr_uit = stamnr AND score_uit > score_thuis)"
-                    + "OR (stamnr_thuis = stamnr AND score_thuis > score_uit)) "
-                    + "+ (SELECT COUNT(*)\n"
-                    + "FROM wedstrijd\n"
-                    + "WHERE score_thuis = score_uit AND (stamnr_thuis = stamnr OR stamnr_uit = stamnr)) " 
-                    + ") AS punten,\n"
-          
-                    + "(SELECT "
-                    + "(SELECT SUM(score_uit)\n"
-                    + "FROM wedstrijd\n"
-                    + "WHERE (stamnr_uit = stamnr))"
-                    + "+ (SELECT SUM(score_thuis)\n"
-                    + "FROM wedstrijd\n"
-                    + "WHERE (stamnr_thuis = stamnr))"
-                    + "- (SELECT SUM(score_thuis)\n"
-                    + "FROM wedstrijd\n"
-                    + "WHERE (stamnr_uit = stamnr))" 
-                    + "- (SELECT SUM(score_uit)\n"
-                    + "FROM wedstrijd\n"
-                    + "WHERE (stamnr_thuis = stamnr))" 
-                    + ") AS doelpuntensaldo,\n"
-                   
-                    + "(SELECT "
-                    + "(SELECT SUM(score_uit)\n"
-                    + "FROM wedstrijd\n"
-                    + "WHERE stamnr_uit = stamnr)"
-                    + "/\n"
+                    + "WHERE (stamnr_uit = deelname.stamnr AND score_uit > score_thuis AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "OR (stamnr_thuis = deelname.stamnr AND score_thuis > score_uit))\n"
+                    + "+\n"
                     + "(SELECT COUNT(*)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE stamnr_uit = stamnr)" 
-                    + ") AS 'goals per uitgame',\n"
-                  
-                    + "(SELECT "
+                    + "WHERE score_thuis = score_uit AND (stamnr_thuis = deelname.stamnr OR stamnr_uit = deelname.stamnr)) \n"
+                    + ")\n"
+                    + "AS punten,\n"
+                    + "\n"
+                    + "(SELECT  \n"
+                    + "\n"
+                    + "(SELECT SUM(score_uit)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_uit = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "+\n"
                     + "(SELECT SUM(score_thuis)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE stamnr_thuis = stamnr)" 
+                    + "WHERE (stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "-\n"
+                    + "(SELECT SUM(score_thuis)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_uit = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "-\n"
+                    + "(SELECT SUM(score_uit)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + ")\n"
+                    + "AS doelpuntensaldo,\n"
+                    + "\n"
+                    + "(SELECT  \n"
+                    + "\n"
+                    + "(SELECT SUM(score_uit)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE stamnr_uit = deelname.stamnr AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
                     + "/\n"
                     + "(SELECT COUNT(*)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE stamnr_thuis= stamnr)"
+                    + "WHERE stamnr_uit = deelname.stamnr AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + ") AS 'goals per uitgame',\n"
+                    + "\n"
+                    + "(SELECT  \n"
+                    + "\n"
+                    + "(SELECT SUM(score_thuis)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE stamnr_thuis = deelname.stamnr AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "/\n"
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE stamnr_thuis= deelname.stamnr AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
                     + ") AS 'goals per thuisgame',\n"
-                    
-                    + "(SELECT "
+                    + "\n"
+                    + "(SELECT  \n"
+                    + "\n"
                     + "((SELECT SUM(score_thuis)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE stamnr_thuis = stamnr)"
+                    + "WHERE stamnr_thuis = deelname.stamnr AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
                     + "+\n"
                     + "(SELECT SUM(score_uit)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE stamnr_uit= stamnr))"
-                    + "/"
+                    + "WHERE stamnr_uit= deelname.stamnr AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar))\n"
+                    + "/\n"
                     + "(SELECT COUNT(*)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE stamnr_thuis= stamnr OR stamnr_uit=stamnr)"
-                    + ") AS goalspergame "
-                   
+                    + "WHERE stamnr_thuis= deelname.stamnr OR stamnr_uit=deelname.stamnr AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + ") AS 'goals per game',\n"
+                    + "\n"
+                    + "(\n"
+                    + "SELECT COUNT(*)\n"
+                    + "FROM \n"
+                    + "(\n"
+                    + "SELECT penalty.wedstrijdnr, penalty.gescoord, wedstrijd.competitienaam, wedstrijd.jaar, speler.stamnr\n"
+                    + "FROM penalty\n"
+                    + "JOIN wedstrijd\n"
+                    + "ON penalty.wedstrijdnr = wedstrijd.wedstrijdnr\n"
+                    + "JOIN speler\n"
+                    + "ON penalty.lidnr = speler.lidnr\n"
+                    + ") AS tabel\n"
+                    + "WHERE tabel.competitienaam = deelname.competitienaam AND tabel.jaar = deelname.jaar AND tabel.stamnr = deelname.stamnr\n"
+                    + ") AS 'penaltys',\n"
+                    + "\n"
+                    + "(\n"
+                    + "SELECT COUNT(*)\n"
+                    + "FROM \n"
+                    + "(\n"
+                    + "SELECT penalty.wedstrijdnr, penalty.gescoord, wedstrijd.competitienaam, wedstrijd.jaar, speler.stamnr\n"
+                    + "FROM penalty\n"
+                    + "JOIN wedstrijd\n"
+                    + "ON penalty.wedstrijdnr = wedstrijd.wedstrijdnr\n"
+                    + "JOIN speler\n"
+                    + "ON penalty.lidnr = speler.lidnr\n"
+                    + ") AS tabel\n"
+                    + "WHERE tabel.competitienaam = deelname.competitienaam AND tabel.jaar = deelname.jaar AND tabel.stamnr = deelname.stamnr AND tabel.gescoord = 1\n"
+                    + ") AS 'penaltys gescoord'\n"
+                    + "\n"
+                    + "\n"
                     + "FROM deelname "
                     + "WHERE (stamnr = " + t.getStamNr()
-                    + " AND competitienaam = '" + c.getCompetitienaam() + "' AND jaar = " + s.getJaar() + ")" ;
-            
+                    + " AND competitienaam = '" + c.getCompetitienaam() + "' AND jaar = " + s.getJaar() + ")";
 
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             String naam;
             int punten;
             int gewonnen;
@@ -1365,7 +1403,8 @@ public class DriverManager {
             int goalsperuitgame;
             int goalsperthuisgame;
             int goalspergame;
-
+            int penaltys;
+            int penaltysgescoord;
 
             while (srs.next()) {
                 naam = srs.getString("naam");
@@ -1377,16 +1416,20 @@ public class DriverManager {
                 doelpuntensaldo = srs.getInt("doelpuntensaldo");
                 goalsperuitgame = srs.getInt("goals per uitgame");
                 goalsperthuisgame = srs.getInt("goals per thuisgame");
-                goalspergame = srs.getInt("goalspergame");
+                goalspergame = srs.getInt("goals per game");
+                penaltys = srs.getInt("penaltys");
+                penaltysgescoord = srs.getInt("penaltys gescoord");
 
-            String rapport;
-            rapport = naam + "\n" 
-                    + "---------------------" + "\n"
-                    + punten + " punten in " + gespeeld + " matchen (" + gewonnen + "/" + gelijk + "/" + verloren + ")" + "\n" 
-                    + "doelpuntensaldo: " + doelpuntensaldo + "\n"
-                    + goalsperuitgame + " goals per uitwedstrijd\n"
-                    + goalsperthuisgame + " goals per thuiswedstrijd\n"
-                    + goalspergame + " goals per wedstijd";
+                String rapport;
+                rapport = naam + "\n"
+                        + "---------------------" + "\n"
+                        + punten + " punten in " + gespeeld + " matchen (" + gewonnen + "/" + gelijk + "/" + verloren + ")" + "\n"
+                        + "doelpuntensaldo: " + doelpuntensaldo + "\n"
+                        + goalsperthuisgame + " goals per thuiswedstrijd\n"
+                        + goalsperuitgame + " goals per uitwedstrijd\n"
+                        + goalspergame + " goals per wedstrijd\n"
+                        + penaltys + " penaltys gegeven\n"
+                        + penaltysgescoord + " penaltys gescoord";
                 System.out.println(rapport);
             }
 

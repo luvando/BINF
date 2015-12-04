@@ -5,26 +5,67 @@
  */
 package GUIPackage;
 
+import static GUIPackage.CompetitieOpvragen.dManager;
+import static GUIPackage.GegevensOpvragen.dManager;
+import ijshockey.Competitie;
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Seizoen;
+import ijshockey.Team;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Wim
  */
 public class RapportTeam extends javax.swing.JFrame {
+
     public static DriverManager dManager;
+
+    private Competitie competitie;
+    private Seizoen seizoen;
+    private Team team;
+    DefaultListModel DLM;
 
     /**
      * Creates new form RapportTeam
      */
     public RapportTeam() {
-        initComponents();
-    }
-    
-    public RapportTeam(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
+        setLocationRelativeTo(null);
     }
+
+    public RapportTeam(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
+        super("Kies een team");
+        this.dManager = dManager;
+        this.competitie = competitie;
+        this.seizoen = seizoen;
+
+        initComponents();
+        setLocationRelativeTo(null);
+        this.FillLijstTeam(ijshockey.DriverManager.FillLijstTeam(DLM, competitie.getCompetitienaam(), seizoen.getJaar()));
+    }
+
+    private void FillLijstTeam(DefaultListModel DLM) {
+        try {
+
+            LijstTeams.setModel(DLM);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +85,11 @@ public class RapportTeam extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Rapport team");
 
+        LijstTeams.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                LijstTeamsValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(LijstTeams);
 
         jLabel1.setText("Kies team");
@@ -80,7 +126,7 @@ public class RapportTeam extends javax.swing.JFrame {
                 .addComponent(VorigeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CancelButton)
-                .addContainerGap(341, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
@@ -113,18 +159,44 @@ public class RapportTeam extends javax.swing.JFrame {
 
     private void DrukRapportAfButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DrukRapportAfButtonActionPerformed
         // TODO add your handling code here:
-        GegevensOpvragen updateForm = new GegevensOpvragen(dManager);
+        Team team = null;
+        String thuis = (String) LijstTeams.getSelectedValue();
+
+        String[] teamthuis = thuis.split("-");
+        String teamthuistr = teamthuis[teamthuis.length - 1].trim();
+        int stamnrthuis = Integer.parseInt(teamthuistr);
+        try {
+            team = DriverManager.getTeam(stamnrthuis);
+        } catch (DBException ex) {
+            Logger.getLogger(RapportTeam.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        TeamRapport updateForm = null;
+        try {
+            updateForm = new TeamRapport(dManager, competitie, seizoen, team);
+        } catch (DBException ex) {
+            Logger.getLogger(RapportTeam.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_DrukRapportAfButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        GegevensOpvragen updateForm = new GegevensOpvragen(dManager);
+        CompetitieOpvragen updateForm = null;
+        try {
+            updateForm = new CompetitieOpvragen(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(GegevensOpvragen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_VorigeButtonActionPerformed
+
+    private void LijstTeamsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstTeamsValueChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_LijstTeamsValueChanged
 
     /**
      * @param args the command line arguments
@@ -169,4 +241,5 @@ public class RapportTeam extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
 }
