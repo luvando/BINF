@@ -42,6 +42,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
     AddWedstrijd(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
+        setLocationRelativeTo(null);
     }
     private String competitie;
     private int seizoenInt;
@@ -129,7 +130,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
         jTextScoreUit = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         OpstellingToevoegenButton = new javax.swing.JButton();
-        CancelButton = new javax.swing.JButton();
+        VorigeButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jTextaddSpeeldag = new javax.swing.JTextField();
@@ -141,8 +142,8 @@ public class AddWedstrijd extends javax.swing.JFrame {
         jListThuisteam = new javax.swing.JList();
         jScrollPane4 = new javax.swing.JScrollPane();
         jListUitteam = new javax.swing.JList();
-        jLabelTop = new javax.swing.JLabel();
         HighlightButton = new javax.swing.JButton();
+        jLabelTop = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Voeg speeldag en wedstrijd toe");
@@ -170,10 +171,10 @@ public class AddWedstrijd extends javax.swing.JFrame {
             }
         });
 
-        CancelButton.setText("Beëindig");
-        CancelButton.addActionListener(new java.awt.event.ActionListener() {
+        VorigeButton.setText("Vorige");
+        VorigeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelButtonActionPerformed(evt);
+                VorigeButtonActionPerformed(evt);
             }
         });
 
@@ -223,8 +224,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jListUitteam);
 
-        jLabelTop.setText("jLabel1");
-
         HighlightButton.setText("Highlight toevoegen");
         HighlightButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,59 +231,62 @@ public class AddWedstrijd extends javax.swing.JFrame {
             }
         });
 
+        jLabelTop.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextaddSpeeldag)
-                    .addComponent(jButtonaddSpeeldag, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Store)
-                        .addGap(76, 76, 76)
-                        .addComponent(OpstellingToevoegenButton))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextScoreUit)
-                            .addComponent(jTextScoreThuis)
-                            .addComponent(jTextDatum)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jScrollPane4)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextArena, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(HighlightButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CancelButton)
-                .addContainerGap(52, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(jLabelTop)
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel6)
+                            .addComponent(jTextaddSpeeldag)
+                            .addComponent(jButtonaddSpeeldag, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Store)
+                                .addGap(76, 76, 76)
+                                .addComponent(OpstellingToevoegenButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextScoreUit)
+                                    .addComponent(jTextScoreThuis)
+                                    .addComponent(jTextDatum)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane3)
+                                    .addComponent(jScrollPane4)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextArena, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(HighlightButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(VorigeButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(302, 302, 302)
+                        .addComponent(jLabelTop)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
+                        .addContainerGap()
                         .addComponent(jLabelTop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(8, 8, 8)
                         .addComponent(jTextaddSpeeldag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonaddSpeeldag)
@@ -326,7 +328,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(OpstellingToevoegenButton)
-                    .addComponent(CancelButton)
+                    .addComponent(VorigeButton)
                     .addComponent(Store)
                     .addComponent(HighlightButton))
                 .addGap(47, 47, 47))
@@ -337,14 +339,42 @@ public class AddWedstrijd extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
+    private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_CancelButtonActionPerformed
+        
+        CompetitieScherm updateForm = null;
+        try {
+            updateForm = new CompetitieScherm(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        updateForm.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void OpstellingToevoegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpstellingToevoegenButtonActionPerformed
         // TODO add your handling code here:
-        AddOpstelling updateForm = new AddOpstelling(dManager);
+        
+        String thuis = (String) jListThuisteam.getSelectedValue();
+        String[] teamthuis = thuis.split("-");
+        String teamthuistr = teamthuis[teamthuis.length - 1].trim();
+        int stamnrthuis = Integer.parseInt(teamthuistr);
+        
+        String uit = (String) jListUitteam.getSelectedValue();
+        String[] teamuit = uit.split("-");
+        String teamuittr = teamuit[teamuit.length - 1].trim();
+        int stamnruit = Integer.parseInt(teamuittr);
+        
+        AddOpstelling updateForm = null;
+        
+        try {
+            updateForm = new AddOpstelling(dManager, stamnrthuis, stamnruit);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_OpstellingToevoegenButtonActionPerformed
@@ -473,10 +503,10 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelButton;
     private javax.swing.JButton HighlightButton;
     private javax.swing.JButton OpstellingToevoegenButton;
     private javax.swing.JButton Store;
+    private javax.swing.JButton VorigeButton;
     private javax.swing.JButton jButtonaddSpeeldag;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

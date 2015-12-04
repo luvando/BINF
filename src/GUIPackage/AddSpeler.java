@@ -199,7 +199,7 @@ public class AddSpeler extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed
-        Speler speler = new Speler(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText(), jTextVoorkeurspositie.getText(), team);
+        Speler speler = new Speler(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText(), jTextVoorkeurspositie.getText(), team.getStamNr());
 
         try {
 

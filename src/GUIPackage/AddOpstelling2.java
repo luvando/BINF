@@ -6,6 +6,9 @@
 package GUIPackage;
 
 import ijshockey.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -277,9 +280,13 @@ public class AddOpstelling2 extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        AddOpstelling updateForm = new AddOpstelling(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
+//         try {
+//             updateForm = new AddOpstelling(dManager);
+//         } catch (SQLException ex) {
+//             Logger.getLogger(AddOpstelling2.class.getName()).log(Level.SEVERE, null, ex);
+//         }
+//        updateForm.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

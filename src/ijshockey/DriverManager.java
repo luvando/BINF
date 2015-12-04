@@ -168,6 +168,37 @@ public class DriverManager {
         }
         return null;
     }
+    
+        public static DefaultListModel FillLijstSpelers(DefaultListModel DLM, int stamnr) throws SQLException {
+        Connection con = null;
+        DLM = new DefaultListModel();
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT lidnr FROM speler "
+                    + "WHERE stamnr = '" + stamnr + "'";
+
+            ResultSet srs = stmt.executeQuery(sql);
+            
+            while (srs.next()) {
+                int lidnr = srs.getInt("lidnr");
+                Speler speler = DriverManager.getSpeler1(con, lidnr);
+                DLM.addElement(speler.getVoornaam() + " " + speler.getAchternaam() + " - " + lidnr); 
+            
+            }
+            
+            
+            return DLM;
+
+        } catch (DBException ex) {
+            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+            closeConnection(con);
+        }
+        return null;
+
+    }
+
 
     public DriverManager() {
     }
@@ -898,6 +929,41 @@ public class DriverManager {
         } catch (Exception ex) {
             ex.printStackTrace();
             closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
+        public static Speler getSpeler1(Connection con, int lidnr) throws DBException {
+        try {
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT * "
+                    + "FROM speler "
+                    + "WHERE lidnr = " + lidnr;
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            String voornaam;
+            String achternaam;
+            String geboortedatum;
+            String voorkeurpositie;
+            int stamnr;
+
+            if (srs.next()) {
+                voornaam = srs.getString("voornaam");
+                achternaam = srs.getString("achternaam");
+                geboortedatum = srs.getString("geboortedatum");
+                voorkeurpositie = srs.getString("voorkeurpositie");
+                stamnr = srs.getInt("stamnr");
+
+            } else {
+                return null;
+            }
+            Speler s = new Speler(voornaam, achternaam, geboortedatum, voorkeurpositie, stamnr);
+            return s;
+        } catch (Exception ex) {
+            ex.printStackTrace();
             throw new DBException(ex);
         }
     }

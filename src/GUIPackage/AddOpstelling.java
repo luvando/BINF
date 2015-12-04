@@ -6,6 +6,8 @@
 package GUIPackage;
 
 import ijshockey.DriverManager;
+import java.sql.SQLException;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -17,13 +19,38 @@ public class AddOpstelling extends javax.swing.JFrame {
      * Creates new form AddOpstelling
      */
     public static DriverManager dManager;
+    private int stamnr;
+    DefaultListModel DLM;
     public AddOpstelling() {
         initComponents();
     }
 
-    AddOpstelling(DriverManager dManager) {
+    AddOpstelling(DriverManager dManager, int stamnrThuis, int stamnrUit) throws SQLException {
         this.dManager = dManager;
         initComponents();
+        FillLijstSpelertjesThuis(DriverManager.FillLijstSpelers(DLM, stamnrThuis));
+        FillLijstSpelertjesUit(DriverManager.FillLijstSpelers(DLM, stamnrUit));
+    }
+    
+    private void FillLijstSpelertjesThuis(DefaultListModel DLM) {
+        try {
+            
+            jListSpelersThuis.setModel(DLM);
+            
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+        private void FillLijstSpelertjesUit(DefaultListModel DLM) {
+        try {
+            
+            jListSpelersUit.setModel(DLM);
+            
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,21 +93,26 @@ public class AddOpstelling extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jListSpelersThuis = new javax.swing.JList();
+        jTextGoalieThuis = new javax.swing.JTextField();
+        jTextDefender1Thuis = new javax.swing.JTextField();
+        jTextForward1Thuis = new javax.swing.JTextField();
+        jTextForward2Thuis = new javax.swing.JTextField();
+        jTextForward3Thuis = new javax.swing.JTextField();
+        jTextDefender2Thuis = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jList5 = new javax.swing.JList();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jList6 = new javax.swing.JList();
+        jListSpelersUit = new javax.swing.JList();
+        jTextDefender1Uit = new javax.swing.JTextField();
+        jTextForward1Uit = new javax.swing.JTextField();
+        jTextForward2Uit = new javax.swing.JTextField();
+        jTextForward3Uit = new javax.swing.JTextField();
+        jTextDefender2Uit = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jTextGoalieUit = new javax.swing.JTextField();
+        Store = new javax.swing.JButton();
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,59 +212,120 @@ public class AddOpstelling extends javax.swing.JFrame {
 
         jLabel2.setText("Forwards");
 
-        jLabel3.setText("Defensmen");
+        jLabel3.setText("Defenders");
 
         jLabel9.setText("Thuisteam");
 
         jLabel10.setText("Uitteam");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        jScrollPane4.setViewportView(jListSpelersThuis);
+
+        jTextGoalieThuis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextGoalieThuisMouseClicked(evt);
+            }
         });
-        jScrollPane2.setViewportView(jList1);
-
-        jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        jTextGoalieThuis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextGoalieThuisKeyPressed(evt);
+            }
         });
-        jScrollPane3.setViewportView(jList2);
 
-        jList3.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        jTextDefender1Thuis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextDefender1ThuisMouseClicked(evt);
+            }
         });
-        jScrollPane4.setViewportView(jList3);
 
-        jLabel11.setText("Goalie");
-
-        jLabel12.setText("Forwards");
-
-        jLabel13.setText("Defensmen");
-
-        jList4.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        jTextForward1Thuis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextForward1ThuisMouseClicked(evt);
+            }
         });
-        jScrollPane5.setViewportView(jList4);
-
-        jList5.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        jTextForward1Thuis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextForward1ThuisActionPerformed(evt);
+            }
         });
-        jScrollPane6.setViewportView(jList5);
 
-        jList6.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        jTextForward2Thuis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextForward2ThuisMouseClicked(evt);
+            }
         });
-        jScrollPane7.setViewportView(jList6);
+
+        jTextForward3Thuis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextForward3ThuisMouseClicked(evt);
+            }
+        });
+
+        jTextDefender2Thuis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextDefender2ThuisMouseClicked(evt);
+            }
+        });
+        jTextDefender2Thuis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextDefender2ThuisActionPerformed(evt);
+            }
+        });
+
+        jScrollPane5.setViewportView(jListSpelersUit);
+
+        jTextDefender1Uit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextDefender1UitMouseClicked(evt);
+            }
+        });
+
+        jTextForward1Uit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextForward1UitMouseClicked(evt);
+            }
+        });
+        jTextForward1Uit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextForward1UitActionPerformed(evt);
+            }
+        });
+
+        jTextForward2Uit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextForward2UitMouseClicked(evt);
+            }
+        });
+
+        jTextForward3Uit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextForward3UitMouseClicked(evt);
+            }
+        });
+
+        jTextDefender2Uit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextDefender2UitMouseClicked(evt);
+            }
+        });
+        jTextDefender2Uit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextDefender2UitActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Goalie");
+
+        jLabel15.setText("Forwards");
+
+        jLabel16.setText("Defenders");
+
+        jTextGoalieUit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextGoalieUitMouseClicked(evt);
+            }
+        });
+
+        Store.setText("Store");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,76 +335,119 @@ public class AddOpstelling extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel1)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel9)
                         .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(VorigeButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(VolgendeButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(CancelButton)
-                                .addGap(43, 43, 43))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jScrollPane2)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(53, 53, 53)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane3)
-                                    .addComponent(jScrollPane7))
-                                .addGap(55, 55, 55))))
+                        .addComponent(VorigeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(VolgendeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Store)
+                        .addGap(32, 32, 32)
+                        .addComponent(CancelButton)
+                        .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addContainerGap())))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel14)
+                                    .addGap(51, 51, 51)
+                                    .addComponent(jTextGoalieUit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel15)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(jTextForward1Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextForward2Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(jTextForward3Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel3))
+                                        .addGap(24, 24, 24)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jTextDefender1Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextGoalieThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextDefender2Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jTextForward1Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextForward2Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jTextForward3Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel16)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(jTextDefender1Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextDefender2Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(24, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
+                            .addComponent(jTextGoalieThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextDefender1Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextDefender2Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                            .addComponent(jTextForward1Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextForward2Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextForward3Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CancelButton)
-                    .addComponent(VorigeButton)
-                    .addComponent(VolgendeButton))
-                .addGap(30, 30, 30))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CancelButton)
+                            .addComponent(VorigeButton)
+                            .addComponent(VolgendeButton)
+                            .addComponent(Store))
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jTextGoalieUit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jTextDefender1Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextDefender2Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(jTextForward1Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextForward2Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextForward3Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(114, Short.MAX_VALUE))))
         );
 
         pack();
@@ -324,9 +460,9 @@ public class AddOpstelling extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-//        AddWedstrijd updateForm = new AddWedstrijd(dManager);
-//        updateForm.setVisible(true);
-//        this.setVisible(false);
+        AddWedstrijd updateForm = new AddWedstrijd(dManager);
+        updateForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void VolgendeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolgendeButtonActionPerformed
@@ -359,6 +495,91 @@ public class AddOpstelling extends javax.swing.JFrame {
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jTextDefender2ThuisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDefender2ThuisActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTextDefender2ThuisActionPerformed
+
+    private void jTextForward1ThuisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextForward1ThuisActionPerformed
+        // TODO add your handling code here:
+        jTextForward1Uit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextForward1ThuisActionPerformed
+
+    private void jTextGoalieThuisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextGoalieThuisKeyPressed
+        // TODO add your handling code here:
+        jTextGoalieUit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextGoalieThuisKeyPressed
+
+    private void jTextGoalieThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextGoalieThuisMouseClicked
+        // TODO add your handling code here:
+        jTextGoalieThuis.setText((String) jListSpelersThuis.getSelectedValue());
+    }//GEN-LAST:event_jTextGoalieThuisMouseClicked
+
+    private void jTextForward1UitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextForward1UitActionPerformed
+        // TODO add your handling code here:
+        jTextForward1Uit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextForward1UitActionPerformed
+
+    private void jTextDefender2UitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDefender2UitActionPerformed
+        // TODO add your handling code here:
+        jTextDefender2Uit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextDefender2UitActionPerformed
+
+    private void jTextGoalieUitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextGoalieUitMouseClicked
+        // TODO add your handling code here:
+        jTextGoalieUit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextGoalieUitMouseClicked
+
+    private void jTextDefender1ThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextDefender1ThuisMouseClicked
+        // TODO add your handling code here:
+        jTextDefender1Thuis.setText((String) jListSpelersThuis.getSelectedValue());
+    }//GEN-LAST:event_jTextDefender1ThuisMouseClicked
+
+    private void jTextDefender2ThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextDefender2ThuisMouseClicked
+        // TODO add your handling code here:
+        jTextDefender2Thuis.setText((String) jListSpelersThuis.getSelectedValue());
+    }//GEN-LAST:event_jTextDefender2ThuisMouseClicked
+
+    private void jTextForward1ThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward1ThuisMouseClicked
+        // TODO add your handling code here:
+        jTextForward1Thuis.setText((String) jListSpelersThuis.getSelectedValue());
+    }//GEN-LAST:event_jTextForward1ThuisMouseClicked
+
+    private void jTextForward2ThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward2ThuisMouseClicked
+        // TODO add your handling code here:
+        jTextForward2Thuis.setText((String) jListSpelersThuis.getSelectedValue());
+    }//GEN-LAST:event_jTextForward2ThuisMouseClicked
+
+    private void jTextForward3ThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward3ThuisMouseClicked
+        // TODO add your handling code here:
+        jTextForward3Thuis.setText((String) jListSpelersThuis.getSelectedValue());
+    }//GEN-LAST:event_jTextForward3ThuisMouseClicked
+
+    private void jTextDefender1UitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextDefender1UitMouseClicked
+        // TODO add your handling code here:
+        jTextDefender1Uit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextDefender1UitMouseClicked
+
+    private void jTextDefender2UitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextDefender2UitMouseClicked
+        // TODO add your handling code here:
+        jTextDefender2Uit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextDefender2UitMouseClicked
+
+    private void jTextForward1UitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward1UitMouseClicked
+        // TODO add your handling code here:
+        jTextForward1Uit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextForward1UitMouseClicked
+
+    private void jTextForward2UitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward2UitMouseClicked
+        // TODO add your handling code here:
+        jTextForward2Uit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextForward2UitMouseClicked
+
+    private void jTextForward3UitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward3UitMouseClicked
+        // TODO add your handling code here:
+        jTextForward3Uit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextForward3UitMouseClicked
 
     /**
      * @param args the command line arguments
@@ -397,6 +618,7 @@ public class AddOpstelling extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
+    private javax.swing.JButton Store;
     private javax.swing.JButton VolgendeButton;
     private javax.swing.JButton VorigeButton;
     private javax.swing.JComboBox jComboBox1;
@@ -413,9 +635,9 @@ public class AddOpstelling extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -424,24 +646,28 @@ public class AddOpstelling extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
-    private javax.swing.JList jList2;
-    private javax.swing.JList jList3;
-    private javax.swing.JList jList4;
-    private javax.swing.JList jList5;
-    private javax.swing.JList jList6;
+    private javax.swing.JList jListSpelersThuis;
+    private javax.swing.JList jListSpelersUit;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JTextField jTextDefender1Thuis;
+    private javax.swing.JTextField jTextDefender1Uit;
+    private javax.swing.JTextField jTextDefender2Thuis;
+    private javax.swing.JTextField jTextDefender2Uit;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextForward1Thuis;
+    private javax.swing.JTextField jTextForward1Uit;
+    private javax.swing.JTextField jTextForward2Thuis;
+    private javax.swing.JTextField jTextForward2Uit;
+    private javax.swing.JTextField jTextForward3Thuis;
+    private javax.swing.JTextField jTextForward3Uit;
+    private javax.swing.JTextField jTextGoalieThuis;
+    private javax.swing.JTextField jTextGoalieUit;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,6 +21,7 @@ public class Speler extends Lid {
     private int penaltys;
     private int speelminuten;*/
     private Team team; //waarom team en niet stamnr?
+    private int stamnr;
 
     public Speler(String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, int goals, int assists, int penaltys, int speelminuten, Team team) {
         super(voornaam, achternaam, geboortedatum);
@@ -31,11 +32,11 @@ public class Speler extends Lid {
         this.speelminuten = DriverManager.playedMinutesSeason(lidnr);*/
         this.team = team;
     }
-    public Speler(String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, Team team) {
+    public Speler(String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, int stamnr) {
         super(voornaam, achternaam, geboortedatum);
         this.voorkeurpositie = voorkeurpositie;
         //this.speelminuten = DriverManager.playedMinutesSeason(lidnr);
-        this.team = team;
+        this.stamnr = stamnr;
     }
 
     public Team getTeam() {
