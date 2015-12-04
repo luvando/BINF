@@ -31,11 +31,11 @@ public class DriverManager {
             String sql = "SELECT * FROM competitie";
 
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             while (srs.next()) {
                 DLM.addElement(srs.getString(1));
             }
-            
+
             return DLM;
 
         } catch (DBException ex) {
@@ -67,11 +67,11 @@ public class DriverManager {
                     + "WHERE competitienaam = '" + competitienaam + "' AND jaar = '" + jaar + "'";
 
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             while (srs.next()) {
                 DLM.addElement(srs.getString(1));
             }
-            
+
             return DLM;
 
         } catch (DBException ex) {
@@ -93,14 +93,13 @@ public class DriverManager {
             String sql = "SELECT lidnr FROM scheidsrechter ";
 
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             while (srs.next()) {
                 int lidnr = srs.getInt("lidnr");
                 Scheidsrechter scheids = DriverManager.getScheids1(con, lidnr);
-                DLM.addElement(scheids.getVoornaam() + " " + scheids.getAchternaam() + " - " + lidnr);   
+                DLM.addElement(scheids.getVoornaam() + " " + scheids.getAchternaam() + " - " + lidnr);
             }
-            
-            
+
             return DLM;
 
         } catch (DBException ex) {
@@ -108,10 +107,7 @@ public class DriverManager {
             closeConnection(con);
         }
         return null;
-}
-
-    
-
+    }
 
     public static DefaultListModel FillLijstTeam(DefaultListModel DLM, String competitie, int seizoenInt) throws SQLException {
         Connection con = null;
@@ -125,13 +121,13 @@ public class DriverManager {
                     + "WHERE competitienaam = '" + competitie + "' AND jaar = '" + seizoenInt + "'";
 
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             while (srs.next()) {
                 int stamnr = srs.getInt("stamnr");
                 Team team = DriverManager.getTeam1(con, stamnr);
                 DLM.addElement(team.getNaam() + " - " + stamnr);
             }
-            
+
             return DLM;
 
         } catch (DBException ex) {
@@ -152,7 +148,7 @@ public class DriverManager {
             String sql = "SELECT * FROM team ";
 
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             while (srs.next()) {
                 int stamnr = srs.getInt("stamnr");
                 DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
@@ -161,15 +157,14 @@ public class DriverManager {
 
             return DLM;
 
-
         } catch (DBException ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
         return null;
     }
-    
-        public static DefaultListModel FillLijstSpelers(DefaultListModel DLM, int stamnr) throws SQLException {
+
+    public static DefaultListModel FillLijstSpelers(DefaultListModel DLM, int stamnr) throws SQLException {
         Connection con = null;
         DLM = new DefaultListModel();
         try {
@@ -180,15 +175,14 @@ public class DriverManager {
                     + "WHERE stamnr = '" + stamnr + "'";
 
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             while (srs.next()) {
                 int lidnr = srs.getInt("lidnr");
                 Speler speler = DriverManager.getSpeler1(con, lidnr);
-                DLM.addElement(speler.getVoornaam() + " " + speler.getAchternaam() + " - " + lidnr); 
-            
+                DLM.addElement(speler.getVoornaam() + " " + speler.getAchternaam() + " - " + lidnr);
+
             }
-            
-            
+
             return DLM;
 
         } catch (DBException ex) {
@@ -198,7 +192,6 @@ public class DriverManager {
         return null;
 
     }
-
 
     public DriverManager() {
     }
@@ -828,7 +821,7 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
+
     public static Scheidsrechter getScheids1(Connection con, int lidnr) throws DBException {
         try {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
@@ -932,8 +925,8 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
-        public static Speler getSpeler1(Connection con, int lidnr) throws DBException {
+
+    public static Speler getSpeler1(Connection con, int lidnr) throws DBException {
         try {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
@@ -1212,6 +1205,7 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
+
     public static void printTeamRanking(Competitie c, Seizoen s) throws DBException {
         Connection con = null;
         try {
@@ -1234,13 +1228,14 @@ public class DriverManager {
                     + ")\n"
                     + ")\n"
                     + "AS punten\n"
+                    
                     + "FROM team\n"
                     + "GROUP BY stamnr\n"
                     + "ORDER BY punten DESC;";
 
             ResultSet srs = stmt.executeQuery(sql);
-            String naam = null;
-            int punten = 0;
+            String naam;
+            int punten;
 
             while (srs.next()) {
                 naam = srs.getString("naam");
@@ -1268,38 +1263,132 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql
-                    = "SELECT naam, (SELECT COUNT(*) FROM wedstrijd "
-                    + "WHERE (stamnr_uit=stamnr OR stamnr_thuis=stamnr)) "
-                    + "AS gespeeld FROM team "
-                    + "WHERE team.stamnr=" + t.getStamNr()
-                    + " AND competitienaam=" + c.getCompetitienaam()
-                    + " AND jaar=" + s.getJaar();
+            String sql = "SELECT "
+                    + "(SELECT naam "
+                    + "FROM team "
+                    + "WHERE stamnr=" + t.getStamNr()
+                    + ") AS naam, "
+
+                    + "(SELECT COUNT(*) "
+                    + "FROM wedstrijd "
+                    + "WHERE (stamnr_uit=stamnr OR stamnr_thuis=stamnr)"
+                    + ") AS gespeeld, "
+                    
+                    + "(SELECT COUNT(*) "
+                    + "FROM wedstrijd "
+                    + "WHERE ((stamnr_uit = stamnr AND score_uit > score_thuis) OR (stamnr_thuis = stamnr AND score_thuis > score_uit))" 
+                    + ") AS gewonnen, "
+                   
+                    + "(SELECT COUNT(*) "
+                    + "FROM wedstrijd "
+                    + "WHERE ((stamnr_uit = stamnr AND score_uit < score_thuis) OR (stamnr_thuis = stamnr AND score_thuis < score_uit))" 
+                    + ") AS verloren, "
+                    
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE score_thuis = score_uit AND (stamnr_thuis = stamnr OR stamnr_uit = stamnr) "
+                    + ") AS gelijk, "
+                   
+                    + "(SELECT "
+                    + "(SELECT 2*COUNT(*)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_uit = stamnr AND score_uit > score_thuis)"
+                    + "OR (stamnr_thuis = stamnr AND score_thuis > score_uit)) "
+                    + "+ (SELECT COUNT(*)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE score_thuis = score_uit AND (stamnr_thuis = stamnr OR stamnr_uit = stamnr)) " 
+                    + ") AS punten,\n"
+          
+                    + "(SELECT "
+                    + "(SELECT SUM(score_uit)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_uit = stamnr))"
+                    + "+ (SELECT SUM(score_thuis)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_thuis = stamnr))"
+                    + "- (SELECT SUM(score_thuis)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_uit = stamnr))" 
+                    + "- (SELECT SUM(score_uit)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_thuis = stamnr))" 
+                    + ") AS doelpuntensaldo,\n"
+                   
+                    + "(SELECT "
+                    + "(SELECT SUM(score_uit)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE stamnr_uit = stamnr)"
+                    + "/\n"
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE stamnr_uit = stamnr)" 
+                    + ") AS 'goals per uitgame',\n"
+                  
+                    + "(SELECT "
+                    + "(SELECT SUM(score_thuis)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE stamnr_thuis = stamnr)" 
+                    + "/\n"
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE stamnr_thuis= stamnr)"
+                    + ") AS 'goals per thuisgame',\n"
+                    
+                    + "(SELECT "
+                    + "((SELECT SUM(score_thuis)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE stamnr_thuis = stamnr)"
+                    + "+\n"
+                    + "(SELECT SUM(score_uit)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE stamnr_uit= stamnr))"
+                    + "/"
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE stamnr_thuis= stamnr OR stamnr_uit=stamnr)"
+                    + ") AS goalspergame "
+                   
+                    + "FROM deelname "
+                    + "WHERE (stamnr = " + t.getStamNr()
+                    + " AND competitienaam = '" + c.getCompetitienaam() + "' AND jaar = " + s.getJaar() + ")" ;
+            
 
             ResultSet srs = stmt.executeQuery(sql);
-            /*System.out.println(getDeelname(c, s, t).toStringTeamRapport());
-             int goalsPerGame;
-             int penaltysPerGame;
+            
+            String naam;
+            int punten;
+            int gewonnen;
+            int verloren;
+            int gelijk;
+            int gespeeld;
+            int doelpuntensaldo;
+            int goalsperuitgame;
+            int goalsperthuisgame;
+            int goalspergame;
 
-             if (aantalGespeeld == 0) {
-             goalsPerGame = 0;
-             penaltysPerGame = 0;
-             } else {
-             goalsPerGame = (doelpuntenVoor / aantalGespeeld);
-             penaltysPerGame = (penaltys / aantalGespeeld);
-             }
 
-             return DriverManager.getTeam(stamnr).getNaam() + "\n"
-             + "---------------------" + "\n"
-             + "aantal gespeelde wedstrijden: " + aantalGespeeld + "\n"
-             + "aantal punten: " + punten + "\n"
-             + "aantal gewonnen wedstrijden: " + aantalGewonnen + "\n"
-             + "aantal gelijkgespeelde wedstrijden: " + aantalGelijk + "\n"
-             + "aantal verloren wedstrijden: " + aantalVerloren + "\n"
-             + "doelpuntensaldo: " + dps + "\n"
-             + "totaal aantal penalty's: " + penaltys + "\n"
-             + "aantal doelpunten per wedstrijd: " + goalsPerGame + "\n"
-             + "aantal penalty's per wedstrijd: " + penaltysPerGame;*/
+            while (srs.next()) {
+                naam = srs.getString("naam");
+                punten = srs.getInt("punten");
+                gewonnen = srs.getInt("gewonnen");
+                verloren = srs.getInt("verloren");
+                gelijk = srs.getInt("gelijk");
+                gespeeld = srs.getInt("gespeeld");
+                doelpuntensaldo = srs.getInt("doelpuntensaldo");
+                goalsperuitgame = srs.getInt("goals per uitgame");
+                goalsperthuisgame = srs.getInt("goals per thuisgame");
+                goalspergame = srs.getInt("goalspergame");
+
+            String rapport;
+            rapport = naam + "\n" 
+                    + "---------------------" + "\n"
+                    + punten + " punten in " + gespeeld + " matchen (" + gewonnen + "/" + gelijk + "/" + verloren + ")" + "\n" 
+                    + "doelpuntensaldo: " + doelpuntensaldo + "\n"
+                    + goalsperuitgame + " goals per uitwedstrijd\n"
+                    + goalsperthuisgame + " goals per thuiswedstrijd\n"
+                    + goalspergame + " goals per wedstijd";
+                System.out.println(rapport);
+            }
 
             closeConnection(con);
         } catch (DBException dbe) {
