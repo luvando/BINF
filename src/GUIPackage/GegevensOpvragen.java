@@ -19,8 +19,6 @@ import java.util.logging.Logger;
 public class GegevensOpvragen extends javax.swing.JFrame {
 
     public static DriverManager dManager;
-    private String competitienaam;
-    private int jaar;
     private Competitie competitie;
     private Seizoen seizoen;
 
@@ -40,8 +38,6 @@ public class GegevensOpvragen extends javax.swing.JFrame {
 
     GegevensOpvragen(DriverManager dManager, String competitienaam, int jaar) {
         this.dManager = dManager;
-        this.competitienaam = competitienaam;
-        this.jaar = jaar;
         this.competitie = DriverManager.getCompetitie(competitienaam);
         this.seizoen = DriverManager.getSeizoen(jaar, competitienaam);
         initComponents();
