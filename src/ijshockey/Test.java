@@ -15,7 +15,6 @@ import java.util.Arrays;
 public class Test {
 
     public static void main(String[] args) throws DBException {
-        DriverManager dm = new DriverManager();
         /* DriverManager.printTeamRanking(); //werkt
         DriverManager.printSpelerRanking(); //werkt
         DriverManager.printSpelerRapport(3); //werkt
@@ -42,7 +41,7 @@ public class Test {
         Competitie c = new Competitie("Stella pro league");
         Seizoen s = new Seizoen(c, 2015);
         Speler speler = DriverManager.getSpeler(2);
-        Team t = DriverManager.getTeam(80);
+        //Team t = DriverManager.getTeam(80);
       //  DriverManager.printTeamRapport(c, s, t);
         DriverManager.printSpelerRapport(speler, c, s);
 
