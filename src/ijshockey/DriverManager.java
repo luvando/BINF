@@ -79,7 +79,6 @@ public class DriverManager {
             closeConnection(con);
         }
         return null;
-
     }
 
     public static DefaultListModel FillLijstScheids(DefaultListModel DLM) throws SQLException {
@@ -715,11 +714,11 @@ public class DriverManager {
 
             int numberOfPenaltys = 0;
 
-            while(srs.next()) {
+            while (srs.next()) {
                 numberOfPenaltys = srs.getInt("penaltys");
 
-            } 
-            
+            }
+
             closeConnection(con);
             return numberOfPenaltys;
         } catch (Exception ex) {
@@ -1045,9 +1044,8 @@ public class DriverManager {
         }
     }
 
-    public static void printSpelerRapport(int lidnr) throws DBException {
-
-        Speler s = DriverManager.getSpeler(lidnr);
+    public static void printSpelerRapport(Speler s) throws DBException {
+        int lidnr = s.getLidnr();
         if (getNumberOfPenaltys(lidnr) == 0) {
             printSpelerRapportBasic(lidnr);
         } else {
@@ -1055,25 +1053,62 @@ public class DriverManager {
             printGoals(lidnr);
             printPenaltys(lidnr);
         }
-
     }
 
-    public static void printSpelerRapportBasic(int lidnr) {
-        
-        
-        
-        
-        
-        
-        /*public String toStringSpelerRapport() { //gewoon spelersrapport voor alle spelers, ongeacht of speler penalty gezet heeft
-         return super.getVoornaam() + " " + super.getAchternaam() + "\n"
-         + "---------------------" + "\n"
-         + "aantal doelpunten: " + goals + "\n"
-         + "aantal assists: " + assists + "\n"
-         + "aantal penalty's: " + penaltys + "\n"
-         + "aantal speelminuten: " + speelminuten + "\n";*/
+    public static void printSpelerRapportBasic(int lidnr) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql
+                    = "SELECT voornaam, achternaam,\n"
+                   
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM goal\n"
+                    + "WHERE goal.lidnr = speler.lidnr)\n"
+                    + "AS goals,\n"
+                  
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM goal\n"
+                    + "WHERE goal.lidnr_assist = speler.lidnr)\n"
+                    + "AS assists,\n"
+                  
+                    + "(SELECT COUNT(gescoord)\n"
+                    + "FROM penalty\n"
+                    + "WHERE penalty.lidnr = speler.lidnr)\n"
+                    + "AS penaltysgescoord,\n"
+                  
+                    + "(SELECT COUNT(*)\n"
+                    + "FROM owngoal\n"
+                    + "WHERE owngoal.lidnr = speler.lidnr)\n"
+                    + "AS owngoals,\n"
+                 
+                    + "(SELECT SUM(tijdstip_uit - tijdstip_in)\n"
+                    + "FROM opstelling\n"
+                    + "WHERE opstelling.lidnr = speler.lidnr)\n"
+                    + "AS speelminuten\n"
+                
+                    + "FROM speler\n"
+                    + "WHERE lidnr = " + lidnr;
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
     }
 
+    /*public String toStringSpelerRapport() { //gewoon spelersrapport voor alle spelers, ongeacht of speler penalty gezet heeft
+     return super.getVoornaam() + " " + super.getAchternaam() + "\n"
+     + "---------------------" + "\n"
+     + "aantal doelpunten: " + goals + "\n"
+     + "aantal assists: " + assists + "\n"
+     + "aantal penalty's: " + penaltys + "\n"
+     + "aantal speelminuten: " + speelminuten + "\n";*/
     public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
         int playedMinutesGame = 0;
         try {
