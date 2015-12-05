@@ -93,4 +93,9 @@ public class Speler extends Lid {
 
     
 */
+
+    public int getStamNr() {
+        return stamnr;
+    }
+    
 }

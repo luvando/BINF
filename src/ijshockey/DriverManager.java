@@ -897,7 +897,7 @@ public class DriverManager {
                     + "(voornaam, achternaam, geboortedatum, voorkeurpositie,  stamnr) "
                     + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '"
                     + s.getGeboortedatum() + "', '" + s.getVoorkeurpositie() + "', '"
-                    + s.getTeam().getStamNr() + "')";
+                    + s.getStamNr() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
