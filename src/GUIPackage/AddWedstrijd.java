@@ -159,6 +159,11 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
         jLabel8.setText("Score uitteam");
 
+        jListSpeeldag.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListSpeeldagValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jListSpeeldag);
 
         jTextDatum.setToolTipText("YYYY-MM-DD");
@@ -404,7 +409,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
         Team uitTeam = null;
         Scheidsrechter scheidsrechter = null;
         
-        int speeldagnr = Integer.parseInt((String) jListSpeeldag.getSelectedValue());
+        int speeldagnr = (Integer) jListSpeeldag.getSelectedValue();
         
         String arena = jTextArena.getText(); // Ook lijst maken?
 
@@ -468,6 +473,10 @@ public class AddWedstrijd extends javax.swing.JFrame {
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_HighlightButtonActionPerformed
+
+    private void jListSpeeldagValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListSpeeldagValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jListSpeeldagValueChanged
 
     /**
      * @param args the command line arguments
