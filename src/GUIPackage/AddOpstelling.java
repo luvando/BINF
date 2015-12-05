@@ -5,9 +5,19 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import static ijshockey.DriverManager.getWedstrijd;
+import ijshockey.Opstelling;
+import ijshockey.Wedstrijd;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -19,17 +29,26 @@ public class AddOpstelling extends javax.swing.JFrame {
      * Creates new form AddOpstelling
      */
     public static DriverManager dManager;
-    private int stamnr;
+    private int stamnrThuis;
+    private int stamnrUit;
+    public Wedstrijd wedstrijd;
+    private int wedstrijdnr;
+    
     DefaultListModel DLM;
     public AddOpstelling() {
         initComponents();
     }
 
-    AddOpstelling(DriverManager dManager, int stamnrThuis, int stamnrUit) throws SQLException {
+    AddOpstelling(DriverManager dManager, int stamnrThuis, int stamnrUit, int wedstrijdnr) throws SQLException {
         this.dManager = dManager;
+        this.wedstrijd = wedstrijd;
+        this.wedstrijdnr = wedstrijdnr;
+        this.stamnrThuis = stamnrThuis;
+        this.stamnrUit = stamnrUit;
         initComponents();
         FillLijstSpelertjesThuis(DriverManager.FillLijstSpelers(DLM, stamnrThuis));
         FillLijstSpelertjesUit(DriverManager.FillLijstSpelers(DLM, stamnrUit));
+        Store.addActionListener(new AddOpstelling.EventHandler(this));
     }
     
     private void FillLijstSpelertjesThuis(DefaultListModel DLM) {
@@ -89,29 +108,25 @@ public class AddOpstelling extends javax.swing.JFrame {
         VorigeButton = new javax.swing.JButton();
         VolgendeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jListSpelersThuis = new javax.swing.JList();
-        jTextGoalieThuis = new javax.swing.JTextField();
-        jTextDefender1Thuis = new javax.swing.JTextField();
-        jTextForward1Thuis = new javax.swing.JTextField();
-        jTextForward2Thuis = new javax.swing.JTextField();
-        jTextForward3Thuis = new javax.swing.JTextField();
-        jTextDefender2Thuis = new javax.swing.JTextField();
+        jTextSpelerThuis = new javax.swing.JTextField();
+        jComboBoxPositie = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jTextTijdstipInthuis = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextTijdstipUitThuis = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jComboBox14 = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField9 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jListSpelersUit = new javax.swing.JList();
-        jTextDefender1Uit = new javax.swing.JTextField();
-        jTextForward1Uit = new javax.swing.JTextField();
-        jTextForward2Uit = new javax.swing.JTextField();
-        jTextForward3Uit = new javax.swing.JTextField();
-        jTextDefender2Uit = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jTextGoalieUit = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
+        jTextSpelerUit = new javax.swing.JTextField();
         Store = new javax.swing.JButton();
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -208,124 +223,68 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Goalie");
-
-        jLabel2.setText("Forwards");
-
-        jLabel3.setText("Defenders");
+        jLabel1.setText("Speler:");
 
         jLabel9.setText("Thuisteam");
 
-        jLabel10.setText("Uitteam");
-
         jScrollPane4.setViewportView(jListSpelersThuis);
 
-        jTextGoalieThuis.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTextSpelerThuis.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextGoalieThuisMouseClicked(evt);
+                jTextSpelerThuisMouseClicked(evt);
             }
         });
-        jTextGoalieThuis.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextGoalieThuisKeyPressed(evt);
-            }
-        });
-
-        jTextDefender1Thuis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextDefender1ThuisMouseClicked(evt);
-            }
-        });
-
-        jTextForward1Thuis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextForward1ThuisMouseClicked(evt);
-            }
-        });
-        jTextForward1Thuis.addActionListener(new java.awt.event.ActionListener() {
+        jTextSpelerThuis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextForward1ThuisActionPerformed(evt);
+                jTextSpelerThuisActionPerformed(evt);
             }
         });
 
-        jTextForward2Thuis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextForward2ThuisMouseClicked(evt);
-            }
-        });
-
-        jTextForward3Thuis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextForward3ThuisMouseClicked(evt);
-            }
-        });
-
-        jTextDefender2Thuis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextDefender2ThuisMouseClicked(evt);
-            }
-        });
-        jTextDefender2Thuis.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxPositie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Goalie", "Defender", "Forward" }));
+        jComboBoxPositie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextDefender2ThuisActionPerformed(evt);
+                jComboBoxPositieActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("Tijdstip in:");
+
+        jLabel3.setText("Tijdstip uit:");
+
+        jLabel10.setText("Speler:");
+
+        jComboBox14.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Goalie", "Defender", "Forward" }));
+        jComboBox14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox14ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Tijdstip in:");
+
+        jLabel12.setText("Uitteam");
+
+        jLabel13.setText("Tijdstip uit:");
 
         jScrollPane5.setViewportView(jListSpelersUit);
 
-        jTextDefender1Uit.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTextSpelerUit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextDefender1UitMouseClicked(evt);
+                jTextSpelerUitMouseClicked(evt);
             }
         });
-
-        jTextForward1Uit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextForward1UitMouseClicked(evt);
-            }
-        });
-        jTextForward1Uit.addActionListener(new java.awt.event.ActionListener() {
+        jTextSpelerUit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextForward1UitActionPerformed(evt);
-            }
-        });
-
-        jTextForward2Uit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextForward2UitMouseClicked(evt);
-            }
-        });
-
-        jTextForward3Uit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextForward3UitMouseClicked(evt);
-            }
-        });
-
-        jTextDefender2Uit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextDefender2UitMouseClicked(evt);
-            }
-        });
-        jTextDefender2Uit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextDefender2UitActionPerformed(evt);
-            }
-        });
-
-        jLabel14.setText("Goalie");
-
-        jLabel15.setText("Forwards");
-
-        jLabel16.setText("Defenders");
-
-        jTextGoalieUit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextGoalieUitMouseClicked(evt);
+                jTextSpelerUitActionPerformed(evt);
             }
         });
 
         Store.setText("Store");
+        Store.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StoreActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -335,66 +294,55 @@ public class AddOpstelling extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11))
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextSpelerUit)
+                                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(55, 55, 55)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 81, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(17, 17, 17)
                         .addComponent(VorigeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(VolgendeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Store)
-                        .addGap(32, 32, 32)
                         .addComponent(CancelButton)
                         .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel14)
-                                    .addGap(51, 51, 51)
-                                    .addComponent(jTextGoalieUit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel15)
-                                    .addGap(30, 30, 30)
-                                    .addComponent(jTextForward1Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextForward2Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(jTextForward3Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextSpelerThuis, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jTextTijdstipInthuis))
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxPositie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addGap(43, 43, 43)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel3))
-                                        .addGap(24, 24, 24)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jTextDefender1Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextGoalieThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextDefender2Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(jTextForward1Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextForward2Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jTextForward3Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel16)
-                                        .addGap(24, 24, 24)
-                                        .addComponent(jTextDefender1Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextDefender2Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(24, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(Store)
+                                    .addComponent(jTextTijdstipUitThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,50 +352,45 @@ public class AddOpstelling extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
+                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextGoalieThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextDefender1Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextDefender2Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                            .addComponent(jTextSpelerThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxPositie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextForward1Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextForward2Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextForward3Thuis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jLabel10)
-                .addGap(22, 22, 22)
+                            .addComponent(jTextTijdstipInthuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextTijdstipUitThuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(Store)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CancelButton)
-                            .addComponent(VorigeButton)
-                            .addComponent(VolgendeButton)
-                            .addComponent(Store))
-                        .addGap(30, 30, 30))
-                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addComponent(jTextSpelerUit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(jTextGoalieUit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(jTextDefender1Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextDefender2Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(jTextForward1Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextForward2Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextForward3Uit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(114, Short.MAX_VALUE))))
+                            .addComponent(jLabel11)
+                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)
+                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CancelButton)
+                    .addComponent(VorigeButton)
+                    .addComponent(VolgendeButton))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -496,90 +439,35 @@ public class AddOpstelling extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
-    private void jTextDefender2ThuisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDefender2ThuisActionPerformed
+    private void jTextSpelerThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextSpelerThuisMouseClicked
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jTextDefender2ThuisActionPerformed
+        jTextSpelerThuis.setText((String) jListSpelersThuis.getSelectedValue());
+    }//GEN-LAST:event_jTextSpelerThuisMouseClicked
 
-    private void jTextForward1ThuisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextForward1ThuisActionPerformed
+    private void jTextSpelerThuisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSpelerThuisActionPerformed
         // TODO add your handling code here:
-        jTextForward1Uit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jTextForward1ThuisActionPerformed
+    }//GEN-LAST:event_jTextSpelerThuisActionPerformed
 
-    private void jTextGoalieThuisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextGoalieThuisKeyPressed
+    private void jComboBoxPositieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPositieActionPerformed
         // TODO add your handling code here:
-        jTextGoalieUit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jTextGoalieThuisKeyPressed
+    }//GEN-LAST:event_jComboBoxPositieActionPerformed
 
-    private void jTextGoalieThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextGoalieThuisMouseClicked
+    private void jComboBox14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox14ActionPerformed
         // TODO add your handling code here:
-        jTextGoalieThuis.setText((String) jListSpelersThuis.getSelectedValue());
-    }//GEN-LAST:event_jTextGoalieThuisMouseClicked
+    }//GEN-LAST:event_jComboBox14ActionPerformed
 
-    private void jTextForward1UitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextForward1UitActionPerformed
+    private void jTextSpelerUitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextSpelerUitMouseClicked
         // TODO add your handling code here:
-        jTextForward1Uit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jTextForward1UitActionPerformed
+        jTextSpelerUit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jTextSpelerUitMouseClicked
 
-    private void jTextDefender2UitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDefender2UitActionPerformed
+    private void jTextSpelerUitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSpelerUitActionPerformed
         // TODO add your handling code here:
-        jTextDefender2Uit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jTextDefender2UitActionPerformed
+    }//GEN-LAST:event_jTextSpelerUitActionPerformed
 
-    private void jTextGoalieUitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextGoalieUitMouseClicked
+    private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
         // TODO add your handling code here:
-        jTextGoalieUit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jTextGoalieUitMouseClicked
-
-    private void jTextDefender1ThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextDefender1ThuisMouseClicked
-        // TODO add your handling code here:
-        jTextDefender1Thuis.setText((String) jListSpelersThuis.getSelectedValue());
-    }//GEN-LAST:event_jTextDefender1ThuisMouseClicked
-
-    private void jTextDefender2ThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextDefender2ThuisMouseClicked
-        // TODO add your handling code here:
-        jTextDefender2Thuis.setText((String) jListSpelersThuis.getSelectedValue());
-    }//GEN-LAST:event_jTextDefender2ThuisMouseClicked
-
-    private void jTextForward1ThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward1ThuisMouseClicked
-        // TODO add your handling code here:
-        jTextForward1Thuis.setText((String) jListSpelersThuis.getSelectedValue());
-    }//GEN-LAST:event_jTextForward1ThuisMouseClicked
-
-    private void jTextForward2ThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward2ThuisMouseClicked
-        // TODO add your handling code here:
-        jTextForward2Thuis.setText((String) jListSpelersThuis.getSelectedValue());
-    }//GEN-LAST:event_jTextForward2ThuisMouseClicked
-
-    private void jTextForward3ThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward3ThuisMouseClicked
-        // TODO add your handling code here:
-        jTextForward3Thuis.setText((String) jListSpelersThuis.getSelectedValue());
-    }//GEN-LAST:event_jTextForward3ThuisMouseClicked
-
-    private void jTextDefender1UitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextDefender1UitMouseClicked
-        // TODO add your handling code here:
-        jTextDefender1Uit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jTextDefender1UitMouseClicked
-
-    private void jTextDefender2UitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextDefender2UitMouseClicked
-        // TODO add your handling code here:
-        jTextDefender2Uit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jTextDefender2UitMouseClicked
-
-    private void jTextForward1UitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward1UitMouseClicked
-        // TODO add your handling code here:
-        jTextForward1Uit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jTextForward1UitMouseClicked
-
-    private void jTextForward2UitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward2UitMouseClicked
-        // TODO add your handling code here:
-        jTextForward2Uit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jTextForward2UitMouseClicked
-
-    private void jTextForward3UitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextForward3UitMouseClicked
-        // TODO add your handling code here:
-        jTextForward3Uit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jTextForward3UitMouseClicked
+    }//GEN-LAST:event_StoreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -615,6 +503,40 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
     }
+    
+    private class EventHandler implements ActionListener {
+
+        private AddOpstelling form;
+
+        public EventHandler(AddOpstelling ao) {
+            form = ao;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == Store) {
+                
+                String lidnrThuis = form.jTextSpelerThuis.getText();
+                String[] thuis = lidnrThuis.split("-");
+                String lidnrthuissp = thuis[thuis.length - 1].trim();
+                int lidnrthuis = Integer.parseInt(lidnrthuissp);
+                
+                String gekozenpositie = (String) form.jComboBoxPositie.getSelectedItem();
+        
+                Opstelling ops = new Opstelling(wedstrijdnr, lidnrthuis, gekozenpositie, form.getjTextTijdstipInthuis(), form.getjTextTijdstipUitThuis());
+                jTextSpelerThuis.setText("");
+                jTextTijdstipInthuis.setText("");
+                jTextTijdstipUitThuis.setText("");
+                
+                try {
+
+                    DriverManager.addOpstelling(ops);
+                    JOptionPane.showMessageDialog(null, "Team en Trainer opgeslagen!");
+                } catch (DBException ex) {
+                    Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
@@ -625,6 +547,7 @@ public class AddOpstelling extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox10;
     private javax.swing.JComboBox jComboBox11;
     private javax.swing.JComboBox jComboBox12;
+    private javax.swing.JComboBox<String> jComboBox14;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
@@ -633,11 +556,12 @@ public class AddOpstelling extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox7;
     private javax.swing.JComboBox jComboBox8;
     private javax.swing.JComboBox jComboBox9;
+    private javax.swing.JComboBox<String> jComboBoxPositie;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -651,23 +575,52 @@ public class AddOpstelling extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextField jTextDefender1Thuis;
-    private javax.swing.JTextField jTextDefender1Uit;
-    private javax.swing.JTextField jTextDefender2Thuis;
-    private javax.swing.JTextField jTextDefender2Uit;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextForward1Thuis;
-    private javax.swing.JTextField jTextForward1Uit;
-    private javax.swing.JTextField jTextForward2Thuis;
-    private javax.swing.JTextField jTextForward2Uit;
-    private javax.swing.JTextField jTextForward3Thuis;
-    private javax.swing.JTextField jTextForward3Uit;
-    private javax.swing.JTextField jTextGoalieThuis;
-    private javax.swing.JTextField jTextGoalieUit;
+    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextSpelerThuis;
+    private javax.swing.JTextField jTextSpelerUit;
+    private javax.swing.JTextField jTextTijdstipInthuis;
+    private javax.swing.JTextField jTextTijdstipUitThuis;
     // End of variables declaration//GEN-END:variables
+
+    public String getjTextSpelerThuis() {
+        return jTextSpelerThuis.getText();
+    }
+
+    public void setjTextSpelerThuis(JTextField jTextSpelerThuis) {
+        this.jTextSpelerThuis = jTextSpelerThuis;
+    }
+
+    public String getjTextSpelerUit() {
+        return jTextSpelerUit.getText();
+    }
+
+    public void setjTextSpelerUit(JTextField jTextSpelerUit) {
+        this.jTextSpelerUit = jTextSpelerUit;
+    }
+
+    public int getjTextTijdstipInthuis() {
+        return Integer.parseInt(jTextTijdstipInthuis.getText());
+    }
+
+    public void setjTextTijdstipInthuis(JTextField jTextTijdstipInthuis) {
+        this.jTextTijdstipInthuis = jTextTijdstipInthuis;
+    }
+
+    public int getjTextTijdstipUitThuis() {
+        return Integer.parseInt(jTextTijdstipUitThuis.getText());
+    }
+
+    public void setjTextTijdstipUitThuis(JTextField jTextTijdstipUitThuis) {
+        this.jTextTijdstipUitThuis = jTextTijdstipUitThuis;
+    }
+
+
+
 }

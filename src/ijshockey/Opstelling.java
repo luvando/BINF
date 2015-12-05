@@ -16,12 +16,26 @@ public class Opstelling {
     private String positie;
     private int tijdstipIn;
     private int tijdstipUit;
+    private int wedstrijdnr;
+    private int lidnr;
+    private int opstellingNr;
 
-    public Opstelling(String positie, int tijdstipIn, int tijdstipUit) {
+    public Opstelling(int wedstrijdnr, int lidnr, int onr, String positie, int tijdstipIn, int tijdstipUit) {
+        this.opstellingNr = onr;
         this.positie = positie;
         this.tijdstipIn = tijdstipIn;
         this.tijdstipUit = tijdstipUit;
+        this.wedstrijdnr = wedstrijdnr;
+        this.lidnr = lidnr;
     }
+    public Opstelling(int wedstrijdnr, int lidnr, String positie, int tijdstipIn, int tijdstipUit) {
+        this.wedstrijdnr = wedstrijdnr;
+        this.positie = positie;
+        this.tijdstipIn = tijdstipIn;
+        this.tijdstipUit = tijdstipUit;
+        this.lidnr = lidnr;
+    }
+    
 
     public String getPositie() {
         return positie;
@@ -46,6 +60,34 @@ public class Opstelling {
     public void setTijdstipUit(int tijdstipUit) {
         this.tijdstipUit = tijdstipUit;
     }
+
+    public int getWedstrijdnr() {
+        return wedstrijdnr;
+    }
+
+    public void setWedstrijdnr(int wedstrijdnr) {
+        this.wedstrijdnr = wedstrijdnr;
+    }
+
+    public int getLidnr() {
+        return lidnr;
+    }
+
+    public void setLidnr(int lidnr) {
+        this.lidnr = lidnr;
+    }
+
+    public int getOpstellingNr() {
+        return opstellingNr;
+    }
+
+    public void setOpstellingNr(int opstellingNr) {
+        this.opstellingNr = opstellingNr;
+    }
+    
+    
+    
+    
 
     @Override
     public String toString() {

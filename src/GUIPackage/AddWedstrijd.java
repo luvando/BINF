@@ -46,6 +46,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
     }
     private String competitie;
     private int seizoenInt;
+    private int wedstrijdnr;
     DefaultListModel DLM;
     
     public AddWedstrijd(DriverManager dManager, String competitie, String seizoen) throws SQLException {
@@ -369,9 +370,8 @@ public class AddWedstrijd extends javax.swing.JFrame {
         int stamnruit = Integer.parseInt(teamuittr);
         
         AddOpstelling updateForm = null;
-        
         try {
-            updateForm = new AddOpstelling(dManager, stamnrthuis, stamnruit);
+            updateForm = new AddOpstelling(dManager, stamnrthuis, stamnruit, this.wedstrijdnr);
         } catch (SQLException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -403,7 +403,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
         String arena = jTextArena.getText(); // Ook lijst maken?
 
         String thuis = (String) jListThuisteam.getSelectedValue();
-        
         String[] teamthuis = thuis.split("-");
         String teamthuistr = teamthuis[teamthuis.length - 1].trim();
         int stamnrthuis = Integer.parseInt(teamthuistr);
@@ -426,7 +425,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
         } catch (DBException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         Wedstrijd wed = new Wedstrijd(thuisTeam, uitTeam, arena, this.getjTextScoreThuis(), this.getjTextScoreUit(), scheidsrechter, this.getjTextDatum(), sp);
         try {
             DriverManager.addWedstrijd(wed);

@@ -151,10 +151,10 @@ public class DriverManager {
 
             while (srs.next()) {
                 int stamnr = srs.getInt("stamnr");
-                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
-
+                Team team = DriverManager.getTeam1(con, stamnr);
+                DLM.addElement(team.getNaam()+ " - " + stamnr);
             }
-
+            
             return DLM;
 
         } catch (DBException ex) {
@@ -163,6 +163,7 @@ public class DriverManager {
         }
         return null;
     }
+    
 
     public static DefaultListModel FillLijstSpelers(DefaultListModel DLM, int stamnr) throws SQLException {
         Connection con = null;
@@ -1183,6 +1184,28 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
+    
+    public static void addOpstelling(Opstelling o) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT INTO opstelling "
+                    + "(wedstrijdnr, lidnr, opstellingnr, tijdstip_in, tijdstip_uit, positie)"
+                    + "VALUES ('" + o.getWedstrijdnr() + "','" + o.getLidnr() + "','" + o.getOpstellingNr() + "','" + o.getTijdstipIn() + "','"
+                    + o.getTijdstipUit() + "', '"+o.getPositie()+"')";
+
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
 
     public static Team getTeam(int stamnr) throws DBException {
         Connection con = null;
@@ -1518,8 +1541,13 @@ public class DriverManager {
             int tijdstip_in;
             int tijdstip_uit;
             String positie;
+            int onr;
+            
 
             if (srs.next()) {
+                wedstrijdnr = srs.getInt("wedstrijdnr");
+                lidnr = srs.getInt("lidnr");
+                onr = srs.getInt("opstellingnr");
                 tijdstip_in = srs.getInt("tijdstip_in");
                 tijdstip_uit = srs.getInt("tijdstip_uit");
                 positie = srs.getString("positie");
@@ -1528,7 +1556,7 @@ public class DriverManager {
                 closeConnection(con);
                 return null;
             }
-            Opstelling opstelling = new Opstelling(positie, tijdstip_in, tijdstip_uit);
+            Opstelling opstelling = new Opstelling(wedstrijdnr, lidnr, onr, positie, tijdstip_in, tijdstip_uit);
 
             closeConnection(con);
             return opstelling;
