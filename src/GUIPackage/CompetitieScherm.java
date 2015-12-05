@@ -8,6 +8,7 @@ package GUIPackage;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Seizoen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //import ijshockey.DriverManager.closeConnection;
@@ -316,8 +317,10 @@ public class CompetitieScherm extends javax.swing.JFrame {
 
     private void AddSpeeldagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpeeldagButtonActionPerformed
         AddWedstrijd updateForm = null;
+        Competitie c = DriverManager.getCompetitie((String) LijstCompetities.getSelectedValue());
+        Seizoen s = DriverManager.getSeizoen(Integer.parseInt(LijstSeizoenen.getSelectedValue()),c.getCompetitienaam());
         try {
-            updateForm = new AddWedstrijd(dManager, (String) LijstCompetities.getSelectedValue(), LijstSeizoenen.getSelectedValue());
+            updateForm = new AddWedstrijd(dManager, c, s);
         } catch (SQLException ex) {
             Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,8 +331,10 @@ public class CompetitieScherm extends javax.swing.JFrame {
     private void TeamToevoegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamToevoegenButtonActionPerformed
         // TODO add your handling code here:
         AddTeamEnTrainer updateForm = null;
+        Competitie c = DriverManager.getCompetitie((String) LijstCompetities.getSelectedValue());
+        Seizoen s = DriverManager.getSeizoen(Integer.parseInt(LijstSeizoenen.getSelectedValue()),c.getCompetitienaam());
         try {
-            updateForm = new AddTeamEnTrainer(dManager, (String) LijstCompetities.getSelectedValue(), LijstSeizoenen.getSelectedValue());
+            updateForm = new AddTeamEnTrainer(dManager, c, s);
         } catch (SQLException ex) {
             Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -5,9 +5,11 @@
  */
 package GUIPackage;
 
+import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Scheidsrechter;
+import ijshockey.Seizoen;
 import ijshockey.Speeldag;
 import ijshockey.Wedstrijd;
 import ijshockey.Team;
@@ -44,22 +46,22 @@ public class AddWedstrijd extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    private String competitie;
-    private int seizoenInt;
+    private Competitie competitie;
+    private Seizoen seizoen;
     private int wedstrijdnr;
     DefaultListModel DLM;
     
-    public AddWedstrijd(DriverManager dManager, String competitie, String seizoen) throws SQLException {
+    public AddWedstrijd(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
         AddWedstrijd.dManager = dManager;
         initComponents();
-        this.seizoenInt = Integer.parseInt(seizoen);
+        this.seizoen = seizoen;
         this.competitie = competitie;
         setLocationRelativeTo(null);
-        this.setjLabelTop("Team toevoegen aan " + competitie + " seizoen : " + seizoenInt);
-        this.FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(DLM, competitie, seizoenInt));
+        this.setjLabelTop("Team toevoegen aan " + competitie.getCompetitienaam() + " seizoen : " + seizoen.getJaar());
+        this.FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(DLM, competitie, seizoen));
         this.FillLijstScheids(ijshockey.DriverManager.FillLijstScheids(DLM));
-        this.FillLijstTeamthuis(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoenInt));
-        this.FillLijstTeamuit(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoenInt));
+        this.FillLijstTeamthuis(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoen));
+        this.FillLijstTeamuit(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoen));
     }
     
     private void FillLijstSpeeldag(DefaultListModel DLM) {
@@ -385,10 +387,10 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
     private void jButtonaddSpeeldagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddSpeeldagActionPerformed
         
-        Speeldag sp = new Speeldag(DriverManager.getCompetitie(competitie), DriverManager.getSeizoen(seizoenInt, competitie), this.getjTextaddSpeeldag());
+        Speeldag sp = new Speeldag(competitie, DriverManager.getSeizoen(seizoen.getJaar(), competitie.getCompetitienaam()), this.getjTextaddSpeeldag());
         try {
             DriverManager.addSpeeldag(sp);
-            FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(DLM, competitie, seizoenInt));
+            FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(DLM, competitie, seizoen));
         } catch (DBException | SQLException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -424,7 +426,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
             thuisTeam = DriverManager.getTeam(stamnrthuis);
             uitTeam = DriverManager.getTeam(stamnruit);
             scheidsrechter = DriverManager.getScheids(lidnr);
-            sp = new Speeldag(DriverManager.getCompetitie(competitie), DriverManager.getSeizoen(seizoenInt,competitie), speeldagnr);
+            sp = new Speeldag(competitie, DriverManager.getSeizoen(seizoen.getJaar(),competitie.getCompetitienaam()), speeldagnr);
             
         } catch (DBException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);

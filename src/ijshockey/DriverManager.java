@@ -56,7 +56,7 @@ public class DriverManager {
 //    }
 //FillLijsten!!
 
-    public static DefaultListModel FillLijstSpeeldagen(DefaultListModel DLM, String competitienaam, int jaar) throws SQLException {
+    public static DefaultListModel FillLijstSpeeldagen(DefaultListModel DLM, Competitie competitie, Seizoen seizoen) throws SQLException {
         Connection con = null;
         DLM = new DefaultListModel();
         try {
@@ -64,7 +64,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             String sql = "SELECT speeldagnr FROM speeldag "
-                    + "WHERE competitienaam = '" + competitienaam + "' AND jaar = '" + jaar + "'";
+                    + "WHERE competitienaam = '" + competitie.getCompetitienaam() + "' AND jaar = " + seizoen.getJaar();
 
             ResultSet srs = stmt.executeQuery(sql);
 
@@ -108,7 +108,7 @@ public class DriverManager {
         return null;
     }
 
-    public static DefaultListModel FillLijstTeam(DefaultListModel DLM, String competitie, int seizoenInt) throws SQLException {
+    public static DefaultListModel FillLijstTeam(DefaultListModel DLM, Competitie c, Seizoen s) throws SQLException {
         Connection con = null;
         DLM = new DefaultListModel();
 
@@ -116,7 +116,15 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT stamnr FROM deelname WHERE competitienaam = '"+competitie+"' AND jaar = '"+seizoenInt+"'";
+            String sql = "SELECT naam, stamnr\n"
+                    + "FROM\n"
+                    + "(\n"
+                    + "SELECT team.stamnr, team.naam, deelname.competitienaam, deelname.jaar\n"
+                    + "FROM team\n"
+                    + "JOIN deelname\n"
+                    + "ON team.stamnr = deelname.stamnr\n"
+                    + ") AS tabel\n"
+                    + "WHERE tabel.competitienaam = '" + c.getCompetitienaam() + "' AND tabel.jaar = " + s.getJaar();
 
             ResultSet srs = stmt.executeQuery(sql);
 
@@ -143,13 +151,14 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT * FROM team ";
+            String sql = "SELECT naam, stamnr FROM team ";
 
             ResultSet srs = stmt.executeQuery(sql);
 
             while (srs.next()) {
                 int stamnr = srs.getInt("stamnr");
-                DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
+                String naam = srs.getString("naam");
+                DLM.addElement(naam + " - " + stamnr);
 
             }
             closeConnection(con);
@@ -169,15 +178,16 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT lidnr FROM speler "
+            String sql = "SELECT voornaam, achternaam, lidnr FROM speler "
                     + "WHERE stamnr = '" + stamnr + "'";
 
             ResultSet srs = stmt.executeQuery(sql);
 
             while (srs.next()) {
                 int lidnr = srs.getInt("lidnr");
-                Speler speler = DriverManager.getSpeler1(con, lidnr);
-                DLM.addElement(speler.getVoornaam() + " " + speler.getAchternaam() + " - " + lidnr);
+                String voornaam = srs.getString("voornaam");
+                String achternaam = srs.getString("achternaam");
+                DLM.addElement(voornaam + " " + achternaam + " - " + lidnr);
 
             }
             closeConnection(con);
@@ -190,22 +200,32 @@ public class DriverManager {
         return null;
 
     }
-    
-    public static DefaultListModel FillLijstSpelers(DefaultListModel DLM) throws SQLException {
+
+    public static DefaultListModel FillLijstSpelers(DefaultListModel DLM, Competitie c, Seizoen s) throws SQLException {
         Connection con = null;
         DLM = new DefaultListModel();
         try {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT lidnr FROM speler ";
+            String sql = "SELECT voornaam, achternaam, lidnr\n"
+                    + "FROM \n"
+                    + "(SELECT speler.lidnr, speler.voornaam, speler.achternaam, deelname.competitienaam, deelname.jaar\n"
+                    + "FROM speler\n"
+                    + "JOIN team\n"
+                    + "ON speler.stamnr = team.stamnr\n"
+                    + "JOIN deelname\n"
+                    + "ON team.stamnr = deelname.stamnr\n"
+                    + ") AS tabel\n"
+                    + "WHERE tabel.competitienaam = '" + c.getCompetitienaam() + "' AND tabel.jaar = " + s.getJaar();
 
             ResultSet srs = stmt.executeQuery(sql);
 
             while (srs.next()) {
                 int lidnr = srs.getInt("lidnr");
-                Speler speler = DriverManager.getSpeler1(con, lidnr);
-                DLM.addElement(speler.getVoornaam() + " " + speler.getAchternaam() + " - " + lidnr);
+                String voornaam = srs.getString("voornaam");
+                String achternaam = srs.getString("achternaam");
+                DLM.addElement(voornaam + " " + achternaam + " - " + lidnr);
 
             }
             closeConnection(con);
@@ -336,28 +356,28 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
- public static void addOpstelling(Opstelling o) throws DBException {  
-        Connection con = null;  
-        try {  
-            con = getConnection();  
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,  
-                    ResultSet.CONCUR_READ_ONLY);  
-   
-            String sql = "INSERT INTO opstelling "  
-                    + "(wedstrijdnr, lidnr, opstellingnr, tijdstip_in, tijdstip_uit, positie)"  
-                    + "VALUES ('" + o.getWedstrijdnr() + "','" + o.getLidnr() + "','" + o.getOpstellingNr() + "','" + o.getTijdstipIn() + "','"  
-                    + o.getTijdstipUit() + "', '"+o.getPositie()+"')";  
 
-            stmt.executeUpdate(sql);  
-  
-            closeConnection(con);  
-        } catch (Exception ex) {  
-            ex.printStackTrace();  
-            closeConnection(con);  
-           throw new DBException(ex);  
+    public static void addOpstelling(Opstelling o) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT INTO opstelling "
+                    + "(wedstrijdnr, lidnr, opstellingnr, tijdstip_in, tijdstip_uit, positie)"
+                    + "VALUES ('" + o.getWedstrijdnr() + "','" + o.getLidnr() + "','" + o.getOpstellingNr() + "','" + o.getTijdstipIn() + "','"
+                    + o.getTijdstipUit() + "', '" + o.getPositie() + "')";
+
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
         }
- }
+    }
 
     /*public static void updateScore(Wedstrijd w) throws DBException {
      Connection con = null;
@@ -516,7 +536,7 @@ public class DriverManager {
      }
      }*/
 
- /*public static void addAssist(Assist a) throws DBException {
+    /*public static void addAssist(Assist a) throws DBException {
      Connection con = null;
      try {
      con = getConnection();
@@ -628,7 +648,7 @@ public class DriverManager {
                     + "ON wedstrijd.wedstrijdnr = goal.wedstrijdnr) "
                     + "AS tabel "
                     + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar;
-                  
+
             ResultSet srs = stmt.executeQuery(sql);
 
             ArrayList<Goal> goals = new ArrayList<>();
@@ -802,7 +822,7 @@ public class DriverManager {
                     + "ON wedstrijd.wedstrijdnr = penalty.wedstrijdnr) "
                     + "AS tabel "
                     + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar;
-                
+
             ResultSet srs = stmt.executeQuery(sql);
 
             ArrayList<Penalty> penaltys = new ArrayList<>();
@@ -1067,7 +1087,7 @@ public class DriverManager {
                     + "ON goal.lidnr = speler.lidnr\n"
                     + "\n"
                     + ") AS tabel\n"
-                    + "WHERE tabel.competitienaam = '" + c.getCompetitienaam() +  "' AND tabel.jaar = " + s.getJaar() + " AND tabel1.lidnr = tabel.lidnr\n"
+                    + "WHERE tabel.competitienaam = '" + c.getCompetitienaam() + "' AND tabel.jaar = " + s.getJaar() + " AND tabel1.lidnr = tabel.lidnr\n"
                     + ")\n"
                     + "AS goals\n"
                     + "\n"
@@ -1227,32 +1247,32 @@ public class DriverManager {
      + "aantal assists: " + assists + "\n"
      + "aantal penalty's: " + penaltys + "\n"
      + "aantal speelminuten: " + speelminuten + "\n";*/
- /*public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
-        int playedMinutesGame = 0;
-        try {
-            ArrayList<Opstelling> opstellingen = getOpstellingenGame(wedstrijdnr, lidnr);
-            for (Opstelling opstelling : opstellingen) {
-                playedMinutesGame += opstelling.getTijdstipUit() - opstelling.getTijdstipIn();
-            }
-        } catch (DBException ex) {
-            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return playedMinutesGame;
-    }
+    /*public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
+     int playedMinutesGame = 0;
+     try {
+     ArrayList<Opstelling> opstellingen = getOpstellingenGame(wedstrijdnr, lidnr);
+     for (Opstelling opstelling : opstellingen) {
+     playedMinutesGame += opstelling.getTijdstipUit() - opstelling.getTijdstipIn();
+     }
+     } catch (DBException ex) {
+     Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     return playedMinutesGame;
+     }
 
-    public static int playedMinutesSeason(int lidnr) {
-        int playedMinutesSeason = 0;
-        try {
-            ArrayList<Opstelling> opstellingen = getOpstellingenSeason(lidnr);
-            for (Opstelling opstelling : opstellingen) {
-                playedMinutesSeason += opstelling.getTijdstipUit() - opstelling.getTijdstipIn();
-            }
-        } catch (DBException ex) {
-            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return playedMinutesSeason;
+     public static int playedMinutesSeason(int lidnr) {
+     int playedMinutesSeason = 0;
+     try {
+     ArrayList<Opstelling> opstellingen = getOpstellingenSeason(lidnr);
+     for (Opstelling opstelling : opstellingen) {
+     playedMinutesSeason += opstelling.getTijdstipUit() - opstelling.getTijdstipIn();
+     }
+     } catch (DBException ex) {
+     Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     return playedMinutesSeason;
 
-    }*/
+     }*/
 //trainer
     public static void addTrainer(Trainer s) throws DBException {
         Connection con = null;
@@ -1681,7 +1701,6 @@ public class DriverManager {
             String positie;
             Wedstrijd wedstrijd;
             Speler speler;
-            
 
             if (srs.next()) {
                 tijdstip_in = srs.getInt("tijdstip_in");

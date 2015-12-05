@@ -6,9 +6,11 @@
 package GUIPackage;
 
 import static GUIPackage.CompetitieScherm.dManager;
+import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Scheidsrechter;
+import ijshockey.Seizoen;
 import ijshockey.Team;
 import ijshockey.Trainer;
 import java.awt.Color;
@@ -38,8 +40,8 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     public AddTeamEnTrainer() {
         initComponents();
     }
-    private String competitie;
-    private int seizoenInt;
+    private Competitie competitie;
+    private Seizoen seizoen;
     DefaultListModel DLM;
 
     public AddTeamEnTrainer(DriverManager dManager) {
@@ -50,15 +52,15 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
 
     }
 
-    public AddTeamEnTrainer(DriverManager dManager, String competitie, String seizoen) throws SQLException {
+    public AddTeamEnTrainer(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
         AddTeamEnTrainer.dManager = dManager;
         initComponents();
         setLocationRelativeTo(null);
         Store.addActionListener(new AddTeamEnTrainer.EventHandler(this));
         this.competitie = competitie;
-        this.seizoenInt = Integer.parseInt(seizoen);
-        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoenInt));
-        this.setjLabelTop("Team toevoegen aan " + competitie + " seizoen : " + seizoenInt);
+        this.seizoen = seizoen;
+        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoen));
+        this.setjLabelTop("Team toevoegen aan " + competitie.getCompetitienaam() + " seizoen : " + seizoen.getJaar());
     }
 
     /**
@@ -374,7 +376,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                 try {
 
                     DriverManager.addTrainer(tr);
-                    DriverManager.addTeam(te, competitie, seizoenInt);
+                    DriverManager.addTeam(te, competitie.getCompetitienaam(), seizoen.getJaar());
                     JOptionPane.showMessageDialog(null, "Team en Trainer opgeslagen!");
                 } catch (DBException ex) {
                     Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);

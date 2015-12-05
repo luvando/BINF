@@ -51,7 +51,7 @@ public class RapportTeam extends javax.swing.JFrame {
 
         initComponents();
         setLocationRelativeTo(null);
-        this.FillLijstTeam(ijshockey.DriverManager.FillLijstTeam(DLM, competitie.getCompetitienaam(), seizoen.getJaar()));
+        this.FillLijstTeam(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoen));
     }
 
     private void FillLijstTeam(DefaultListModel DLM) {

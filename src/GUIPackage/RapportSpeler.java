@@ -47,7 +47,7 @@ public class RapportSpeler extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        this.FillLijstSpelers(ijshockey.DriverManager.FillLijstSpelers(DLM));
+        this.FillLijstSpelers(ijshockey.DriverManager.FillLijstSpelers(DLM,competitie, seizoen));
     }
 
     private void FillLijstSpelers(DefaultListModel DLM) {

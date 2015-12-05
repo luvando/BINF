@@ -5,6 +5,7 @@
  */
 package GUIPackage;
 
+import static GUIPackage.TeamRapport.dManager;
 import ijshockey.Competitie;
 import ijshockey.CustomOutputStream;
 import ijshockey.DBException;
@@ -13,6 +14,7 @@ import ijshockey.Seizoen;
 import ijshockey.Speler;
 import ijshockey.Team;
 import java.io.PrintStream;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -107,6 +109,14 @@ public class SpelerRapport extends javax.swing.JFrame {
 
     private void VorigeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeActionPerformed
         // TODO add your handling code here:
+        RapportSpeler updateForm = null;
+        try {
+            updateForm = new RapportSpeler(dManager, competitie, seizoen);
+        } catch (SQLException ex) {
+            Logger.getLogger(TeamRapport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        updateForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_VorigeActionPerformed
 
     /**
