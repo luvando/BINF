@@ -1011,11 +1011,19 @@ public class DriverManager {
                     + "ON goal.lidnr = speler.lidnr\n"
                     + "\n"
                     + ") AS tabel\n"
-                    + "WHERE tabel.competitienaam = '" + c.getCompetitienaam() + "' AND tabel.jaar = " + s.getJaar() + " AND speler.lidnr = tabel.lidnr\n"
+                    + "WHERE tabel.competitienaam = '" + c.getCompetitienaam() +  "' AND tabel.jaar = " + s.getJaar() + " AND tabel1.lidnr = tabel.lidnr\n"
                     + ")\n"
                     + "AS goals\n"
                     + "\n"
+                    + "FROM \n"
+                    + "(SELECT speler.lidnr, speler.voornaam, speler.achternaam, deelname.competitienaam, deelname.jaar\n"
                     + "FROM speler\n"
+                    + "JOIN team\n"
+                    + "ON speler.stamnr = team.stamnr\n"
+                    + "JOIN deelname\n"
+                    + "ON team.stamnr = deelname.stamnr\n"
+                    + "WHERE deelname.competitienaam = '" + c.getCompetitienaam() + "' AND deelname.jaar = " + s.getJaar() + "\n"
+                    + ") AS tabel1\n"
                     + "\n"
                     + "GROUP BY lidnr\n"
                     + "ORDER BY goals DESC";
@@ -1324,18 +1332,27 @@ public class DriverManager {
                     + "(SELECT 2*COUNT(*)\n"
                     + "FROM wedstrijd\n"
                     + "WHERE ((stamnr_uit = stamnr AND score_uit > score_thuis)\n"
-                    + "OR (stamnr_thuis = stamnr AND score_thuis > score_uit)) AND wedstrijd.competitienaam = '" + c.getCompetitienaam() + "' AND wedstrijd.jaar = " + s.getJaar() + "\n"
+                    + "OR (stamnr_thuis = stamnr AND score_thuis > score_uit)) AND wedstrijd.competitienaam = '" + c.getCompetitienaam()
+                    + "' AND wedstrijd.jaar = " + s.getJaar() + "\n"
                     + ")\n"
                     + "+\n"
                     + "(SELECT COUNT(*)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE score_thuis = score_uit AND (stamnr_thuis = stamnr OR stamnr_uit = stamnr) AND wedstrijd.competitienaam = '" + c.getCompetitienaam() + "' AND wedstrijd.jaar = " + s.getJaar() + "\n"
+                    + "WHERE score_thuis = score_uit AND (stamnr_thuis = stamnr OR stamnr_uit = stamnr) AND wedstrijd.competitienaam = '" + c.getCompetitienaam()
+                    + "' AND wedstrijd.jaar = " + s.getJaar() + "\n"
                     + ")\n"
                     + ")\n"
                     + "AS punten\n"
+                    + "FROM\n"
+                    + "(\n"
+                    + "SELECT team.stamnr, team.naam, deelname.competitienaam, deelname.jaar\n"
                     + "FROM team\n"
+                    + "JOIN deelname\n"
+                    + "ON team.stamnr = deelname.stamnr\n"
+                    + ") AS tabel\n"
+                    + "WHERE tabel.competitienaam = '" + c.getCompetitienaam() + "' AND tabel.jaar = " + s.getJaar() + "\n"
                     + "GROUP BY stamnr\n"
-                    + "ORDER BY punten DESC;";
+                    + "ORDER BY punten DESC";
 
             ResultSet srs = stmt.executeQuery(sql);
             String naam;
