@@ -699,6 +699,36 @@ public class DriverManager {
         }
     }
 
+    public static int getNumberOfPenaltys(int lidnr) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT COUNT(*)\n"
+                    + "AS penaltys\n"
+                    + "FROM penalty\n"
+                    + "WHERE penalty.lidnr = " + lidnr;
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            int numberOfPenaltys = 0;
+
+            while(srs.next()) {
+                numberOfPenaltys = srs.getInt("penaltys");
+
+            } 
+            
+            closeConnection(con);
+            return numberOfPenaltys;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
     public static void printPenaltys(int lidnr) throws DBException {
         Connection con = null;
         try {
@@ -1015,18 +1045,35 @@ public class DriverManager {
         }
     }
 
-    /* public static void printSpelerRapport(int lidnr) throws DBException {
+    public static void printSpelerRapport(int lidnr) throws DBException {
 
-     Speler s = DriverManager.getSpeler(lidnr);
-     if (s.getPenaltys() == 0) {
-     System.out.println(getSpeler(lidnr).toStringSpelerRapport());
-     } else {
-     System.out.println(getSpeler(lidnr).toStringSpelerRapport());
-     DriverManager.printGoals(lidnr);
-     DriverManager.printPenaltys(lidnr);
-     }
+        Speler s = DriverManager.getSpeler(lidnr);
+        if (getNumberOfPenaltys(lidnr) == 0) {
+            printSpelerRapportBasic(lidnr);
+        } else {
+            printSpelerRapportBasic(lidnr);
+            printGoals(lidnr);
+            printPenaltys(lidnr);
+        }
 
-     }*/
+    }
+
+    public static void printSpelerRapportBasic(int lidnr) {
+        
+        
+        
+        
+        
+        
+        /*public String toStringSpelerRapport() { //gewoon spelersrapport voor alle spelers, ongeacht of speler penalty gezet heeft
+         return super.getVoornaam() + " " + super.getAchternaam() + "\n"
+         + "---------------------" + "\n"
+         + "aantal doelpunten: " + goals + "\n"
+         + "aantal assists: " + assists + "\n"
+         + "aantal penalty's: " + penaltys + "\n"
+         + "aantal speelminuten: " + speelminuten + "\n";*/
+    }
+
     public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
         int playedMinutesGame = 0;
         try {

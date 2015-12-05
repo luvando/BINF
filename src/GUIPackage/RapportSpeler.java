@@ -5,7 +5,10 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -128,7 +131,12 @@ public class RapportSpeler extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        GegevensOpvragen updateForm = new GegevensOpvragen(dManager);
+        CompetitieOpvragen updateForm = null;
+        try {
+            updateForm = new CompetitieOpvragen(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(RapportSpeler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
         

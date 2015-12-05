@@ -91,14 +91,6 @@ public class Speler extends Lid {
         return super.getVoornaam() + " " + super.getAchternaam() + ": " + goals + " goals";
     }
 
-    public String toStringSpelerRapport() { //gewoon spelersrapport voor alle spelers, ongeacht of speler penalty gezet heeft
-        return super.getVoornaam() + " " + super.getAchternaam() + "\n"
-                + "---------------------" + "\n"
-                + "aantal doelpunten: " + goals + "\n"
-                + "aantal assists: " + assists + "\n"
-                + "aantal penalty's: " + penaltys + "\n"
-                + "aantal speelminuten: " + speelminuten + "\n";
-
-    }
+    
 */
 }
