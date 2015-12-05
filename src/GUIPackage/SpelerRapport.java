@@ -5,9 +5,13 @@
  */
 package GUIPackage;
 
+import ijshockey.Competitie;
 import ijshockey.CustomOutputStream;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Seizoen;
+import ijshockey.Speler;
+import ijshockey.Team;
 import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,12 +23,22 @@ import java.util.logging.Logger;
 public class SpelerRapport extends javax.swing.JFrame {
 
     private PrintStream standardOut;
+    public static DriverManager dManager;
+    
+    private Competitie competitie;
+    private Seizoen seizoen;
+    private Speler speler;
     /**
      * Creates new form SpelerRapport
      */
-    public SpelerRapport() throws DBException {
+    public SpelerRapport(DriverManager dManager, Competitie competitie, Seizoen seizoen, Speler speler) throws DBException {
         super("Rapport");
         initComponents();
+        
+        this.dManager = dManager;
+        this.competitie = competitie;
+        this.seizoen = seizoen;
+        this.speler = speler;
         
         jTextArea1.setEditable(false);
         PrintStream printStream = new PrintStream(new CustomOutputStream(jTextArea1));
@@ -36,7 +50,7 @@ public class SpelerRapport extends javax.swing.JFrame {
         System.setOut(printStream);
         System.setErr(printStream);
         
-        //DriverManager.printSpelerRapport(2);
+        DriverManager.printSpelerRapport(speler, competitie, seizoen);
     }
 
     /**
@@ -98,41 +112,7 @@ public class SpelerRapport extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SpelerRapport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SpelerRapport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SpelerRapport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SpelerRapport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new SpelerRapport().setVisible(true);
-                } catch (DBException ex) {
-                    Logger.getLogger(SpelerRapport.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Vorige;

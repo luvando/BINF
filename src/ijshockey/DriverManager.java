@@ -190,6 +190,34 @@ public class DriverManager {
         return null;
 
     }
+    
+    public static DefaultListModel FillLijstSpelers(DefaultListModel DLM) throws SQLException {
+        Connection con = null;
+        DLM = new DefaultListModel();
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT lidnr FROM speler ";
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            while (srs.next()) {
+                int lidnr = srs.getInt("lidnr");
+                Speler speler = DriverManager.getSpeler1(con, lidnr);
+                DLM.addElement(speler.getVoornaam() + " " + speler.getAchternaam() + " - " + lidnr);
+
+            }
+            closeConnection(con);
+            return DLM;
+
+        } catch (DBException ex) {
+            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+            closeConnection(con);
+        }
+        return null;
+
+    }
 
     public DriverManager() {
     }

@@ -156,7 +156,12 @@ public class GegevensOpvragen extends javax.swing.JFrame {
 
     private void RapportSpelerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RapportSpelerButtonActionPerformed
         // TODO add your handling code here:
-        RapportSpeler updateForm = new RapportSpeler(dManager);
+        RapportSpeler updateForm = null;
+        try {
+            updateForm = new RapportSpeler(dManager, competitie, seizoen);
+        } catch (SQLException ex) {
+            Logger.getLogger(GegevensOpvragen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_RapportSpelerButtonActionPerformed
