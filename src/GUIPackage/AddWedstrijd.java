@@ -387,7 +387,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
     private void jButtonaddSpeeldagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddSpeeldagActionPerformed
         
-        Speeldag sp = new Speeldag(competitie, DriverManager.getSeizoen(seizoen.getJaar(), competitie.getCompetitienaam()), this.getjTextaddSpeeldag());
+        Speeldag sp = new Speeldag(competitie, DriverManager.getSeizoen(seizoen.getJaar(),competitie.getCompetitienaam()), this.getjTextaddSpeeldag());
         try {
             DriverManager.addSpeeldag(sp);
             FillLijstSpeeldag(ijshockey.DriverManager.FillLijstSpeeldagen(DLM, competitie, seizoen));

@@ -28,12 +28,13 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT * FROM competitie";
+            String sql = "SELECT competitienaam FROM competitie";
 
             ResultSet srs = stmt.executeQuery(sql);
-
+            String competitienaam;
             while (srs.next()) {
-                DLM.addElement(srs.getString(1));
+                competitienaam = srs.getString("competitienaam");
+                DLM.addElement(competitienaam);
             }
             closeConnection(con);
             return DLM;
@@ -67,9 +68,10 @@ public class DriverManager {
                     + "WHERE competitienaam = '" + competitie.getCompetitienaam() + "' AND jaar = " + seizoen.getJaar();
 
             ResultSet srs = stmt.executeQuery(sql);
-
+            int speeldagnr;
             while (srs.next()) {
-                DLM.addElement(srs.getString(1));
+                speeldagnr = srs.getInt("speeldagnr");
+                DLM.addElement(speeldagnr);
             }
             closeConnection(con);
             return DLM;
@@ -89,14 +91,19 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT lidnr FROM scheidsrechter ";
+            String sql = "SELECT * FROM scheidsrechter ";
 
             ResultSet srs = stmt.executeQuery(sql);
 
+            int lidnr;
+            String voornaam;
+            String achternaam;
+            
             while (srs.next()) {
-                int lidnr = srs.getInt("lidnr");
-                Scheidsrechter scheids = DriverManager.getScheids1(con, lidnr);
-                DLM.addElement(scheids.getVoornaam() + " " + scheids.getAchternaam() + " - " + lidnr);
+                lidnr = srs.getInt("lidnr");
+                voornaam = srs.getString("voornaam");
+                achternaam = srs.getString("achternaam");
+                DLM.addElement(voornaam + " " + achternaam + " - " + lidnr);
             }
             closeConnection(con);
             return DLM;
@@ -127,11 +134,12 @@ public class DriverManager {
                     + "WHERE tabel.competitienaam = '" + c.getCompetitienaam() + "' AND tabel.jaar = " + s.getJaar();
 
             ResultSet srs = stmt.executeQuery(sql);
-
+            int stamnr;
+            String naam;
             while (srs.next()) {
-                int stamnr = srs.getInt("stamnr");
-                Team team = DriverManager.getTeam1(con, stamnr);
-                DLM.addElement(team.getNaam() + " - " + stamnr);
+                stamnr = srs.getInt("stamnr");
+                naam = srs.getString("naam");
+                DLM.addElement(naam + " - " + stamnr);
             }
             closeConnection(con);
             return DLM;

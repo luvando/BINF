@@ -22,8 +22,8 @@ public class Speeldag {
     public Speeldag(Competitie competitie, Seizoen seizoen, int speeldagnr) {
         this.competitie = competitie;
         this.seizoen = seizoen;
-        this.speeldagnr = speeldagnr;
     }
+    
 
     public Competitie getCompetitie() {
         return competitie;
