@@ -35,7 +35,7 @@ public class DriverManager {
             while (srs.next()) {
                 DLM.addElement(srs.getString(1));
             }
-
+            closeConnection(con);
             return DLM;
 
         } catch (DBException ex) {
@@ -71,7 +71,7 @@ public class DriverManager {
             while (srs.next()) {
                 DLM.addElement(srs.getString(1));
             }
-
+            closeConnection(con);
             return DLM;
 
         } catch (DBException ex) {
@@ -99,7 +99,7 @@ public class DriverManager {
                 Scheidsrechter scheids = DriverManager.getScheids1(con, lidnr);
                 DLM.addElement(scheids.getVoornaam() + " " + scheids.getAchternaam() + " - " + lidnr);
             }
-
+            closeConnection(con);
             return DLM;
 
         } catch (DBException ex) {
@@ -127,7 +127,7 @@ public class DriverManager {
                 Team team = DriverManager.getTeam1(con, stamnr);
                 DLM.addElement(team.getNaam() + " - " + stamnr);
             }
-
+            closeConnection(con);
             return DLM;
 
         } catch (DBException ex) {
@@ -154,7 +154,7 @@ public class DriverManager {
                 DLM.addElement(DriverManager.getTeam(stamnr).getNaam() + " - " + stamnr);
 
             }
-
+            closeConnection(con);
             return DLM;
 
         } catch (DBException ex) {
@@ -182,7 +182,7 @@ public class DriverManager {
                 DLM.addElement(speler.getVoornaam() + " " + speler.getAchternaam() + " - " + lidnr);
 
             }
-
+            closeConnection(con);
             return DLM;
 
         } catch (DBException ex) {
