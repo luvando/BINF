@@ -16,28 +16,22 @@ import java.util.HashMap;
 public class Speler extends Lid {
 
     private String voorkeurpositie;
-    /*private int goals;
-    private int assists;
-    private int penaltys;
-    private int speelminuten;*/
     private Team team; //waarom team en niet stamnr?
-    private int stamnr;
+ 
 
-    public Speler(String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, int goals, int assists, int penaltys, int speelminuten, Team team) {
+
+    
+    public Speler(String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, Team team) {
         super(voornaam, achternaam, geboortedatum);
         this.voorkeurpositie = voorkeurpositie;
-        /*this.goals = goals;
-        this.assists = assists;
-        this.penaltys = penaltys;
-        this.speelminuten = DriverManager.playedMinutesSeason(lidnr);*/
         this.team = team;
     }
-    public Speler(String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, int stamnr) {
-        super(voornaam, achternaam, geboortedatum);
+     public Speler(int lidnr, String voornaam, String achternaam, String geboortedatum, String voorkeurpositie, Team team) {
+        super(voornaam, achternaam, geboortedatum, lidnr);
         this.voorkeurpositie = voorkeurpositie;
-        //this.speelminuten = DriverManager.playedMinutesSeason(lidnr);
-        this.stamnr = stamnr;
+        this.team = team;
     }
+    
 
     public Team getTeam() {
         return team;
@@ -94,8 +88,5 @@ public class Speler extends Lid {
     
 */
 
-    public int getStamNr() {
-        return stamnr;
-    }
     
 }

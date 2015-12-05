@@ -44,18 +44,12 @@ public class Penalty extends Highlight {
     public void setGescoord(int gescoord) {
         this.gescoord = gescoord;
     }
-/*
+
     @Override
     public String toString() {
-        String s = null;
+        String s;
+        return s = "Penalty in minuut " + super.getMinuut() + " in wedstrijd " + super.getWedstrijd().printWedstrijd();
 
-        try {
-            s = "Penalty" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
-        } catch (DBException ex) {
-            Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return s;
-
-    }*/
+    }
 
 }

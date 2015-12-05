@@ -116,8 +116,7 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT stamnr FROM team "
-                   ;
+            String sql = "SELECT stamnr FROM team ";
 
             ResultSet srs = stmt.executeQuery(sql);
 
@@ -467,7 +466,7 @@ public class DriverManager {
      }
      }*/
 
-    /*public static void addAssist(Assist a) throws DBException {
+ /*public static void addAssist(Assist a) throws DBException {
      Connection con = null;
      try {
      con = getConnection();
@@ -564,21 +563,27 @@ public class DriverManager {
         }
     }
 
-    public static void printGoals(int lidnr) throws DBException {
+    public static void printGoals(int lidnr, String competitienaam, int jaar) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT highlightnr "
+            String sql = "SELECT tabel.highlightnr "
+                    + "FROM "
+                    + "(SELECT goal.highlightnr, goal.wedstrijdnr, goal.lidnr, wedstrijd.competitienaam, wedstrijd.jaar "
                     + "FROM goal "
-                    + "WHERE lidnr = " + lidnr;
+                    + "JOIN wedstrijd "
+                    + "ON wedstrijd.wedstrijdnr = goal.wedstrijdnr) "
+                    + "AS tabel "
+                    + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar;
+                  
             ResultSet srs = stmt.executeQuery(sql);
 
             ArrayList<Goal> goals = new ArrayList<>();
             while (srs.next()) {
-                goals.add(getGoal(srs.getInt("highlightnr")));
+                goals.add(getGoal(srs.getInt("tabel.highlightnr")));
             }
 
             closeConnection(con);
@@ -698,17 +703,21 @@ public class DriverManager {
         }
     }
 
-    public static int getNumberOfPenaltys(int lidnr) throws DBException {
+    public static int getNumberOfPenaltys(int lidnr, String competitienaam, int jaar) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT COUNT(*)\n"
-                    + "AS penaltys\n"
-                    + "FROM penalty\n"
-                    + "WHERE penalty.lidnr = " + lidnr;
+            String sql = "SELECT COUNT(*) AS penaltys "
+                    + "FROM "
+                    + "(SELECT penalty.lidnr, penalty.wedstrijdnr, wedstrijd.competitienaam, wedstrijd.jaar "
+                    + "FROM penalty "
+                    + "JOIN wedstrijd "
+                    + "ON wedstrijd.wedstrijdnr = penalty.wedstrijdnr) "
+                    + "AS tabel "
+                    + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar;
 
             ResultSet srs = stmt.executeQuery(sql);
 
@@ -728,16 +737,22 @@ public class DriverManager {
         }
     }
 
-    public static void printPenaltys(int lidnr) throws DBException {
+    public static void printPenaltys(int lidnr, String competitienaam, int jaar) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT highlightnr "
+            String sql = "SELECT tabel.highlightnr "
+                    + "FROM "
+                    + "(SELECT penalty.highlightnr, penalty.wedstrijdnr, penalty.lidnr, wedstrijd.competitienaam, wedstrijd.jaar "
                     + "FROM penalty "
-                    + "WHERE lidnr = " + lidnr;
+                    + "JOIN wedstrijd "
+                    + "ON wedstrijd.wedstrijdnr = penalty.wedstrijdnr) "
+                    + "AS tabel "
+                    + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar;
+                
             ResultSet srs = stmt.executeQuery(sql);
 
             ArrayList<Penalty> penaltys = new ArrayList<>();
@@ -896,7 +911,7 @@ public class DriverManager {
                     + "(voornaam, achternaam, geboortedatum, voorkeurpositie,  stamnr) "
                     + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '"
                     + s.getGeboortedatum() + "', '" + s.getVoorkeurpositie() + "', '"
-                    + s.getStamNr() + "')";
+                    + s.getTeam().getStamNr() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
@@ -924,10 +939,6 @@ public class DriverManager {
             String achternaam;
             String geboortedatum;
             String voorkeurpositie;
-            int goals;
-            int assists;
-            int penaltys;
-            int speelminuten;
             Team team;
 
             if (srs.next()) {
@@ -935,17 +946,13 @@ public class DriverManager {
                 achternaam = srs.getString("achternaam");
                 geboortedatum = srs.getString("geboortedatum");
                 voorkeurpositie = srs.getString("voorkeurpositie");
-                goals = srs.getInt("goals");
-                assists = srs.getInt("assists");
-                penaltys = srs.getInt("penaltys");
-                speelminuten = srs.getInt("speelminuten");
                 team = getTeam(srs.getInt("stamnr"));
 
             } else {
                 closeConnection(con);
                 return null;
             }
-            Speler s = new Speler(voornaam, achternaam, geboortedatum, voorkeurpositie, goals, assists, penaltys, speelminuten, team);
+            Speler s = new Speler(lidnr, voornaam, achternaam, geboortedatum, voorkeurpositie, team);
             closeConnection(con);
             return s;
         } catch (Exception ex) {
@@ -970,19 +977,19 @@ public class DriverManager {
             String achternaam;
             String geboortedatum;
             String voorkeurpositie;
-            int stamnr;
+            Team team;
 
             if (srs.next()) {
                 voornaam = srs.getString("voornaam");
                 achternaam = srs.getString("achternaam");
                 geboortedatum = srs.getString("geboortedatum");
                 voorkeurpositie = srs.getString("voorkeurpositie");
-                stamnr = srs.getInt("stamnr");
+                team = getTeam(srs.getInt("stamnr"));
 
             } else {
                 return null;
             }
-            Speler s = new Speler(voornaam, achternaam, geboortedatum, voorkeurpositie, stamnr);
+            Speler s = new Speler(voornaam, achternaam, geboortedatum, voorkeurpositie, team);
             return s;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -1044,18 +1051,20 @@ public class DriverManager {
         }
     }
 
-    public static void printSpelerRapport(Speler s) throws DBException {
+    public static void printSpelerRapport(Speler s, Competitie c, Seizoen seizoen) throws DBException {
         int lidnr = s.getLidnr();
-        if (getNumberOfPenaltys(lidnr) == 0) {
-            printSpelerRapportBasic(lidnr);
+        String competitienaam = c.getCompetitienaam();
+        int jaar = seizoen.getJaar();
+        if (getNumberOfPenaltys(lidnr, competitienaam, jaar) == 0) {
+            printSpelerRapportBasic(lidnr, competitienaam, jaar);
         } else {
-            printSpelerRapportBasic(lidnr);
-            printGoals(lidnr);
-            printPenaltys(lidnr);
+            printSpelerRapportBasic(lidnr, competitienaam, jaar);
+            printGoals(lidnr, competitienaam, jaar);
+            printPenaltys(lidnr, competitienaam, jaar);
         }
     }
 
-    public static void printSpelerRapportBasic(int lidnr) throws DBException {
+    private static void printSpelerRapportBasic(int lidnr, String competitienaam, int jaar) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -1064,35 +1073,86 @@ public class DriverManager {
 
             String sql
                     = "SELECT voornaam, achternaam,\n"
-                   
-                    + "(SELECT COUNT(*)\n"
-                    + "FROM goal\n"
-                    + "WHERE goal.lidnr = speler.lidnr)\n"
-                    + "AS goals,\n"
-                  
-                    + "(SELECT COUNT(*)\n"
-                    + "FROM goal\n"
-                    + "WHERE goal.lidnr_assist = speler.lidnr)\n"
-                    + "AS assists,\n"
-                  
-                    + "(SELECT COUNT(gescoord)\n"
-                    + "FROM penalty\n"
-                    + "WHERE penalty.lidnr = speler.lidnr)\n"
-                    + "AS penaltysgescoord,\n"
-                  
-                    + "(SELECT COUNT(*)\n"
-                    + "FROM owngoal\n"
-                    + "WHERE owngoal.lidnr = speler.lidnr)\n"
-                    + "AS owngoals,\n"
-                 
-                    + "(SELECT SUM(tijdstip_uit - tijdstip_in)\n"
-                    + "FROM opstelling\n"
-                    + "WHERE opstelling.lidnr = speler.lidnr)\n"
-                    + "AS speelminuten\n"
-                
-                    + "FROM speler\n"
-                    + "WHERE lidnr = " + lidnr;
-            stmt.executeUpdate(sql);
+                    + "(SELECT COUNT(*) "
+                    + "FROM "
+                    + "(SELECT goal.lidnr, goal.wedstrijdnr, wedstrijd.competitienaam, wedstrijd.jaar "
+                    + "FROM goal "
+                    + "JOIN wedstrijd "
+                    + "ON wedstrijd.wedstrijdnr = goal.wedstrijdnr) "
+                    + "AS tabel "
+                    + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar + ")"
+                    + "AS goals, "
+                    + "(SELECT COUNT(*) "
+                    + "FROM \n"
+                    + "(SELECT goal.lidnr_assist, goal.wedstrijdnr, wedstrijd.competitienaam, wedstrijd.jaar "
+                    + "FROM goal "
+                    + "JOIN wedstrijd "
+                    + "ON wedstrijd.wedstrijdnr = goal.wedstrijdnr) "
+                    + "AS tabel "
+                    + "WHERE tabel.lidnr_assist = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar + ")"
+                    + "AS assists,"
+                    + "(SELECT COUNT(gescoord) "
+                    + "FROM \n"
+                    + "(SELECT penalty.lidnr, penalty.wedstrijdnr, wedstrijd.competitienaam, wedstrijd.jaar, penalty.gescoord "
+                    + "FROM penalty \n"
+                    + "JOIN wedstrijd \n"
+                    + "ON wedstrijd.wedstrijdnr = penalty.wedstrijdnr) \n"
+                    + "AS tabel \n"
+                    + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar + ")"
+                    + "AS penaltysgescoord,"
+                    + "(SELECT COUNT(*) "
+                    + "FROM \n"
+                    + "(SELECT owngoal.lidnr, owngoal.wedstrijdnr, wedstrijd.competitienaam, wedstrijd.jaar "
+                    + "FROM owngoal \n"
+                    + "JOIN wedstrijd \n"
+                    + "ON wedstrijd.wedstrijdnr = owngoal.wedstrijdnr) \n"
+                    + "AS tabel \n"
+                    + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar + ")"
+                    + "AS owngoals, "
+                    + "(SELECT SUM(tabel.tijdstip_uit - tabel.tijdstip_in) "
+                    + "FROM "
+                    + "(SELECT opstelling.tijdstip_in, opstelling.tijdstip_uit, opstelling.lidnr, opstelling.wedstrijdnr, wedstrijd.competitienaam, wedstrijd.jaar "
+                    + "FROM opstelling "
+                    + "JOIN wedstrijd "
+                    + "ON wedstrijd.wedstrijdnr = opstelling.wedstrijdnr) "
+                    + "AS tabel "
+                    + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar + ")"
+                    + " AS speelminuten "
+                    + "FROM speler \n"
+                    + "WHERE speler.lidnr = " + lidnr;
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            String voornaam;
+            String achternaam;
+            int goals;
+            int assists;
+            int owngoals;
+            int penaltys = getNumberOfPenaltys(lidnr, competitienaam, jaar);
+            int penaltysgescoord;
+            int speelminuten;
+            //int aantalwedstrijden;
+
+            while (srs.next()) {
+                voornaam = srs.getString("voornaam");
+                achternaam = srs.getString("achternaam");
+                goals = srs.getInt("goals");
+                assists = srs.getInt("assists");
+                owngoals = srs.getInt("owngoals");
+                penaltysgescoord = srs.getInt("penaltysgescoord");
+                speelminuten = srs.getInt("speelminuten");
+                // aantalwedstrijden = srs.getInt("aantalwedstrijden");
+
+                String rapport;
+                rapport = voornaam + achternaam + "\n"
+                        + "----------------------" + "\n"
+                        + speelminuten + " minuten gespeeld in " /*+ aantalwedstrijden + " wedstrijden" */ + "\n"
+                        + goals + " goals" + "\n"
+                        + owngoals + " owngoals" + "\n"
+                        + penaltys + " penaltys, waarvan " + penaltysgescoord + " gescoord" + "\n"
+                        + assists + " assists";
+                System.out.println(rapport);
+            }
 
             closeConnection(con);
         } catch (Exception ex) {
@@ -1109,7 +1169,7 @@ public class DriverManager {
      + "aantal assists: " + assists + "\n"
      + "aantal penalty's: " + penaltys + "\n"
      + "aantal speelminuten: " + speelminuten + "\n";*/
-    public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
+ /*public static int playedMinutesGame(int lidnr, int wedstrijdnr) {
         int playedMinutesGame = 0;
         try {
             ArrayList<Opstelling> opstellingen = getOpstellingenGame(wedstrijdnr, lidnr);
@@ -1134,8 +1194,7 @@ public class DriverManager {
         }
         return playedMinutesSeason;
 
-    }
-
+    }*/
 //trainer
     public static void addTrainer(Trainer s) throws DBException {
         Connection con = null;

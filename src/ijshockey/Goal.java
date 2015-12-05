@@ -21,7 +21,6 @@ public class Goal extends Highlight {
         this.assistgever = assistgever;
     }
 
-
     public Speler getAssistgever() {
         return assistgever;
     }
@@ -29,21 +28,16 @@ public class Goal extends Highlight {
     public void setAssistgever(Speler assistgever) {
         this.assistgever = assistgever;
     }
-    /*
-     @Override
-     public String toString() {
-     String s = null;
 
-     try {
-     s = "Goal" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
-     } catch (DBException ex) {
-     Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     return s;
+    @Override
+    public String toString() {
+        String s;
 
-     }
+        return s = "Goal in minuut " + super.getMinuut() + " in wedstrijd " + super.getWedstrijd().printWedstrijd();
 
-     public String toStringAssist() {
+    }
+
+    /*  public String toStringAssist() {
      String s = null;
 
      try {
@@ -54,6 +48,4 @@ public class Goal extends Highlight {
      return s;
 
      }*/
-
-
 }
