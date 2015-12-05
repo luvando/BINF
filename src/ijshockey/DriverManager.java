@@ -116,8 +116,8 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT stamnr FROM deelname "
-                    + "WHERE competitienaam = '" + competitie + "' AND jaar = '" + seizoenInt + "'";
+            String sql = "SELECT stamnr FROM team "
+                   ;
 
             ResultSet srs = stmt.executeQuery(sql);
 
