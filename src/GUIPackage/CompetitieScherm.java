@@ -65,12 +65,11 @@ public class CompetitieScherm extends javax.swing.JFrame {
         VorigeButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        LijstSeizoenen = new javax.swing.JList<String>();
+        LijstSeizoenen = new javax.swing.JList<>();
         SearchText = new javax.swing.JTextField();
         SearchButton = new javax.swing.JButton();
         NieuwSeizoen = new javax.swing.JTextField();
         NieuwSeizoenButton = new javax.swing.JButton();
-        AddWedstrijdButton = new javax.swing.JButton();
         AddSpeeldagButton = new javax.swing.JButton();
         TeamToevoegenButton = new javax.swing.JButton();
         TeamBewerkenButton = new javax.swing.JButton();
@@ -130,14 +129,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
             }
         });
 
-        AddWedstrijdButton.setText("Speeldag bewerken");
-        AddWedstrijdButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddWedstrijdButtonActionPerformed(evt);
-            }
-        });
-
-        AddSpeeldagButton.setText("Speeldag toevoegen");
+        AddSpeeldagButton.setText("Speeldagen beheren");
         AddSpeeldagButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddSpeeldagButtonActionPerformed(evt);
@@ -151,7 +143,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
             }
         });
 
-        TeamBewerkenButton.setText("Team/Speler bewerken");
+        TeamBewerkenButton.setText("Team bewerken");
         TeamBewerkenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TeamBewerkenButtonActionPerformed(evt);
@@ -192,7 +184,6 @@ public class CompetitieScherm extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(159, 159, 159)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AddWedstrijdButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(AddSpeeldagButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TeamToevoegenButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TeamBewerkenButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,40 +193,37 @@ public class CompetitieScherm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(80, 80, 80)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Competitienaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NieuwSeizoen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(AddSpeeldagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AddWedstrijdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TeamToevoegenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(TeamBewerkenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Competitienaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(NieuwSeizoen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addCompetitieButton)
-                            .addComponent(NieuwSeizoenButton))
+                            .addComponent(NieuwSeizoenButton)
+                            .addComponent(AddSpeeldagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(SearchButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))))
-                .addContainerGap(86, Short.MAX_VALUE))
+                            .addComponent(SearchButton)))
+                    .addComponent(TeamToevoegenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(TeamBewerkenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -325,18 +313,6 @@ public class CompetitieScherm extends javax.swing.JFrame {
             Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_NieuwSeizoenButtonActionPerformed
-
-    private void AddWedstrijdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddWedstrijdButtonActionPerformed
-//        // TODO add your handling code here:
-//        AddWedstrijd updateForm = null;
-//        try {
-//            updateForm = new AddWedstrijd(dManager, (String) LijstCompetities.getSelectedValue(), LijstSeizoenen.getSelectedValue());
-//        } catch (SQLException ex) {
-//            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        updateForm.setVisible(true);
-//        this.setVisible(false);
-    }//GEN-LAST:event_AddWedstrijdButtonActionPerformed
 
     private void AddSpeeldagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpeeldagButtonActionPerformed
         AddWedstrijd updateForm = null;
@@ -433,7 +409,6 @@ public class CompetitieScherm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddSpeeldagButton;
-    private javax.swing.JButton AddWedstrijdButton;
     private javax.swing.JButton CancelButton;
     private javax.swing.JTextField Competitienaam;
     private javax.swing.JList LijstCompetities;

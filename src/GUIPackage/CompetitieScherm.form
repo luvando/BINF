@@ -52,7 +52,6 @@
                       </Group>
                       <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="AddWedstrijdButton" alignment="1" min="-2" pref="175" max="-2" attributes="0"/>
                           <Component id="AddSpeeldagButton" alignment="1" min="-2" pref="175" max="-2" attributes="0"/>
                           <Component id="TeamToevoegenButton" alignment="1" min="-2" pref="175" max="-2" attributes="0"/>
                           <Component id="TeamBewerkenButton" alignment="1" min="-2" pref="175" max="-2" attributes="0"/>
@@ -67,31 +66,18 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                      <Component id="AddSpeeldagButton" min="-2" pref="53" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="AddWedstrijdButton" min="-2" pref="53" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="TeamToevoegenButton" min="-2" pref="53" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="TeamBewerkenButton" min="-2" pref="53" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="VorigeButton" min="-2" pref="53" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="CancelButton" min="-2" pref="53" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Competitienaam" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="NieuwSeizoen" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Competitienaam" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="NieuwSeizoen" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="addCompetitieButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="NieuwSeizoenButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AddSpeeldagButton" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="SearchText" min="-2" max="-2" attributes="0"/>
@@ -100,14 +86,25 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="SearchButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jScrollPane2" pref="342" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
-                      </Group>
+                  </Group>
+                  <Component id="TeamToevoegenButton" min="-2" pref="53" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jScrollPane2" pref="342" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <Component id="TeamBewerkenButton" min="-2" pref="53" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="VorigeButton" min="-2" pref="53" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="CancelButton" min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="86" max="32767" attributes="0"/>
+              <EmptySpace pref="62" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -193,17 +190,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NieuwSeizoenButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="AddWedstrijdButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Speeldag bewerken"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddWedstrijdButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="AddSpeeldagButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Speeldag toevoegen"/>
+        <Property name="text" type="java.lang.String" value="Speeldagen beheren"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddSpeeldagButtonActionPerformed"/>
@@ -219,7 +208,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="TeamBewerkenButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Team/Speler bewerken"/>
+        <Property name="text" type="java.lang.String" value="Team bewerken"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TeamBewerkenButtonActionPerformed"/>

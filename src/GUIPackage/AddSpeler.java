@@ -88,7 +88,7 @@ public class AddSpeler extends javax.swing.JFrame {
             }
         });
 
-        VorigeButton.setText("Terug");
+        VorigeButton.setText("Vorige");
         VorigeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VorigeButtonActionPerformed(evt);
@@ -113,7 +113,7 @@ public class AddSpeler extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(VorigeButton)
-                        .addGap(0, 290, Short.MAX_VALUE))
+                        .addGap(0, 286, Short.MAX_VALUE))
                     .addComponent(NaarStartschermButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AddSpelerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(139, 139, 139))
@@ -199,7 +199,7 @@ public class AddSpeler extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed
-        Speler speler = new Speler(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText(), jTextVoorkeurspositie.getText(), team.getStamNr());
+        Speler speler = new Speler(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText(), jTextVoorkeurspositie.getText(), team);
 
         try {
 

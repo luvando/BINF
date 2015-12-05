@@ -1603,7 +1603,7 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT tijdstip_in, tijdstip_uit, positie "
+            String sql = "SELECT tijdstip_in, tijdstip_uit, positie, wedstrijdnr, lidnr "
                     + "FROM opstelling "
                     + "WHERE wedstrijdnr = " + wedstrijdnr + " AND lidnr = " + lidnr + " AND opstellingnr = " + opstellingnr;
 
@@ -1612,17 +1612,22 @@ public class DriverManager {
             int tijdstip_in;
             int tijdstip_uit;
             String positie;
+            Wedstrijd wedstrijd;
+            Speler speler;
+            
 
             if (srs.next()) {
                 tijdstip_in = srs.getInt("tijdstip_in");
                 tijdstip_uit = srs.getInt("tijdstip_uit");
                 positie = srs.getString("positie");
+                speler = getSpeler(srs.getInt("lidnr"));
+                wedstrijd = getWedstrijd(srs.getInt("wedstrijdnr"));
 
             } else {
                 closeConnection(con);
                 return null;
             }
-            Opstelling opstelling = new Opstelling(positie, tijdstip_in, tijdstip_uit);
+            Opstelling opstelling = new Opstelling(wedstrijd, speler, positie, tijdstip_in, tijdstip_uit);
 
             closeConnection(con);
             return opstelling;
