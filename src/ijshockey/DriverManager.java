@@ -116,7 +116,7 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            String sql = "SELECT stamnr FROM team ";
+            String sql = "SELECT stamnr FROM deelname WHERE competitienaam = '"+competitie+"' AND jaar = '"+seizoenInt+"'";
 
             ResultSet srs = stmt.executeQuery(sql);
 
@@ -308,6 +308,28 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
+    
+ public static void addOpstelling(Opstelling o) throws DBException {  
+        Connection con = null;  
+        try {  
+            con = getConnection();  
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,  
+                    ResultSet.CONCUR_READ_ONLY);  
+   
+            String sql = "INSERT INTO opstelling "  
+                    + "(wedstrijdnr, lidnr, opstellingnr, tijdstip_in, tijdstip_uit, positie)"  
+                    + "VALUES ('" + o.getWedstrijdnr() + "','" + o.getLidnr() + "','" + o.getOpstellingNr() + "','" + o.getTijdstipIn() + "','"  
+                    + o.getTijdstipUit() + "', '"+o.getPositie()+"')";  
+
+            stmt.executeUpdate(sql);  
+  
+            closeConnection(con);  
+        } catch (Exception ex) {  
+            ex.printStackTrace();  
+            closeConnection(con);  
+           throw new DBException(ex);  
+        }
+ }
 
     /*public static void updateScore(Wedstrijd w) throws DBException {
      Connection con = null;

@@ -7,6 +7,7 @@ package GUIPackage;
 
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import static ijshockey.DriverManager.getSpeler;
 import static ijshockey.DriverManager.getWedstrijd;
 import ijshockey.Opstelling;
 import ijshockey.Wedstrijd;
@@ -49,6 +50,7 @@ public class AddOpstelling extends javax.swing.JFrame {
         FillLijstSpelertjesThuis(DriverManager.FillLijstSpelers(DLM, stamnrThuis));
         FillLijstSpelertjesUit(DriverManager.FillLijstSpelers(DLM, stamnrUit));
         Store.addActionListener(new AddOpstelling.EventHandler(this));
+        setLocationRelativeTo(null);
     }
     
     private void FillLijstSpelertjesThuis(DefaultListModel DLM) {
@@ -522,7 +524,12 @@ public class AddOpstelling extends javax.swing.JFrame {
                 
                 String gekozenpositie = (String) form.jComboBoxPositie.getSelectedItem();
         
-                Opstelling ops = new Opstelling(wedstrijdnr, lidnrthuis, gekozenpositie, form.getjTextTijdstipInthuis(), form.getjTextTijdstipUitThuis());
+                Opstelling ops = null;
+                try {
+                    ops = new Opstelling(getWedstrijd(wedstrijdnr), getSpeler(lidnrthuis), gekozenpositie, form.getjTextTijdstipInthuis(), form.getjTextTijdstipUitThuis());
+                } catch (DBException ex) {
+                    Logger.getLogger(AddOpstelling.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 jTextSpelerThuis.setText("");
                 jTextTijdstipInthuis.setText("");
                 jTextTijdstipUitThuis.setText("");
