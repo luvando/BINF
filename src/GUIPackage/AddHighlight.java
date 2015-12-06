@@ -10,6 +10,7 @@ import ijshockey.DriverManager;
 import ijshockey.Owngoal;
 import ijshockey.Speler;
 import ijshockey.Wedstrijd;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,8 +38,12 @@ public class AddHighlight extends javax.swing.JFrame {
         AddHighlight.dManager = dManager;
         this.wedstrijd = wed;
         initComponents();
+        this.setBackground(Color.yellow);
         setLocationRelativeTo(null);
+
         this.setjLabelTop("Opstelling wedstrijd :" + wed.getWedstrijdNr() + " : " + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
+        this.jRadioButtonThuisTeam.setText("Thuis : " + wedstrijd.getThuisTeam().getNaam());
+        this.jRadioButtonUitTeam.setText("Uit : " + wedstrijd.getUitTeam().getNaam());
 
     }
 

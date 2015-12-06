@@ -29,7 +29,7 @@ public class Seizoen {
     public Seizoen() {
     }
 
-    /*public Team searchTeam(int stamNr) { // Viktor 24/11 search methode + setPunten
+    /*public Team searchTeam(int stamNr) { 
         for (Team t : teams) {
             if (t.getStamNr() == stamNr) {
                 return t;

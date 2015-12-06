@@ -41,6 +41,7 @@ public class AddGoal extends javax.swing.JFrame {
         this.speler = speler;
         this.minuut = minuut;
         initComponents();
+        setLocationRelativeTo(null);
         this.setjLabelTop("Highlight toevoegen voor : " + speler.getVoornaam() + " " + speler.getAchternaam() + ", minuut : " + minuut);
         FillLijstSpelertjes(DriverManager.FillLijstSpelers(DLM, speler.getTeam().getStamNr()));
         setLocationRelativeTo(null);
