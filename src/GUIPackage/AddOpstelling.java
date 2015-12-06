@@ -5,6 +5,7 @@
  */
 package GUIPackage;
 
+import static GUIPackage.AddWedstrijd.dManager;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import static ijshockey.DriverManager.getSpeler;
@@ -424,12 +425,20 @@ public class AddOpstelling extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoneActionPerformed
+        TussenSchermOpstHighlight updateForm = null;
 
+        updateForm = new TussenSchermOpstHighlight(dManager, wedstrijd, this);
+        updateForm.setVisible(true);
     }//GEN-LAST:event_DoneActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        AddWedstrijd updateForm = new AddWedstrijd(dManager);
+        AddWedstrijd updateForm = null;
+        try {
+            updateForm = new AddWedstrijd(dManager, wedstrijd.getSp().getCompetitie(), wedstrijd.getSp().getSeizoen());
+        } catch (SQLException ex) {
+            Logger.getLogger(AddOpstelling.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
@@ -509,10 +518,10 @@ public class AddOpstelling extends javax.swing.JFrame {
     }//GEN-LAST:event_StoreActionPerformed
 
     private void jButtonStore2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStore2ActionPerformed
-        String lidnrThuis = this.jTextSpelerUit.getText();
-        String[] thuis = lidnrThuis.split("-");
-        String lidnrthuissp = thuis[thuis.length - 1].trim();
-        int lidnruit = Integer.parseInt(lidnrthuissp);
+        String lidnrUit = this.jTextSpelerUit.getText();
+        String[] uit = lidnrUit.split("-");
+        String lidnruitstr = uit[uit.length - 1].trim();
+        int lidnruit = Integer.parseInt(lidnruitstr);
 
         String gekozenpositie = (String) this.jComboxPositie2.getSelectedItem();
 
@@ -649,7 +658,8 @@ public class AddOpstelling extends javax.swing.JFrame {
     public int getjTextTijdstipInthuis() {
         return Integer.parseInt(jTextTijdstipInthuis.getText());
     }
- public int getjTextTijdstipInUit() {
+
+    public int getjTextTijdstipInUit() {
         return Integer.parseInt(jTextTijdstipInUit.getText());
     }
 
@@ -660,7 +670,8 @@ public class AddOpstelling extends javax.swing.JFrame {
     public int getjTextTijdstipUitThuis() {
         return Integer.parseInt(jTextTijdstipUitThuis.getText());
     }
-     public int getjTextTijdstipUitUit() {
+
+    public int getjTextTijdstipUitUit() {
         return Integer.parseInt(jTextTijdstipUitUit.getText());
     }
 

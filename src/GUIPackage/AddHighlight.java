@@ -5,7 +5,16 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Owngoal;
+import ijshockey.Speler;
+import ijshockey.Wedstrijd;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,16 +23,45 @@ import ijshockey.DriverManager;
 public class AddHighlight extends javax.swing.JFrame {
 
     public static DriverManager dManager;
+    private Wedstrijd wedstrijd;
+    DefaultListModel DLM;
+
     /**
      * Creates new form AddHighlight
      */
     public AddHighlight() {
         initComponents();
     }
-    
-    AddHighlight(DriverManager dManager) {
-        this.dManager = dManager;
+
+    public AddHighlight(DriverManager dManager, Wedstrijd wed) {
+        AddHighlight.dManager = dManager;
+        this.wedstrijd = wed;
         initComponents();
+        setLocationRelativeTo(null);
+        this.setjLabelTop("Opstelling wedstrijd :" + wed.getWedstrijdNr() + " : " + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
+
+    }
+
+    private void FillLijstSpelertjesThuis(DefaultListModel DLM) {
+        try {
+
+            jListSpeler.setModel(DLM);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    private void FillLijstSpelertjesUit(DefaultListModel DLM) {
+        try {
+
+            jListSpeler.setModel(DLM);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     /**
@@ -38,27 +76,26 @@ public class AddHighlight extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jListSpeler = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextMinuut = new javax.swing.JTextField();
         GoalButton = new javax.swing.JButton();
         OwngoalButton = new javax.swing.JButton();
         PenaltyButton = new javax.swing.JButton();
         StrafButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
-        CancelButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jRadioButtonThuisTeam = new javax.swing.JRadioButton();
+        jRadioButtonUitTeam = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabelTop = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Highlight toevoegen");
 
         jLabel1.setText("Selecteer speler");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jListSpeler);
 
         jLabel3.setText("Minuut:");
 
@@ -97,46 +134,84 @@ public class AddHighlight extends javax.swing.JFrame {
             }
         });
 
-        CancelButton.setText("Beëindig");
-        CancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelButtonActionPerformed(evt);
+        jLabel2.setText("Kies soort highlight");
+
+        buttonGroup1.add(jRadioButtonThuisTeam);
+        jRadioButtonThuisTeam.setText("Thuis");
+        jRadioButtonThuisTeam.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButtonThuisTeamStateChanged(evt);
             }
         });
+
+        buttonGroup1.add(jRadioButtonUitTeam);
+        jRadioButtonUitTeam.setText("Uit");
+        jRadioButtonUitTeam.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButtonUitTeamStateChanged(evt);
+            }
+        });
+
+        jLabel4.setText("Selecteer team");
+
+        jLabelTop.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                    .addComponent(VorigeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(StrafButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PenaltyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(OwngoalButton, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(GoalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(VorigeButton)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(34, 34, 34)
+                            .addComponent(jScrollPane1))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabelTop))
+                            .addGap(39, 39, 39)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(StrafButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(PenaltyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(OwngoalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(GoalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextMinuut)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jRadioButtonThuisTeam)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jRadioButtonUitTeam))))))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(28, 28, 28)
+                .addGap(8, 8, 8)
+                .addComponent(jLabelTop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonThuisTeam)
+                    .addComponent(jRadioButtonUitTeam)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(jTextMinuut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(GoalButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(OwngoalButton)
@@ -144,55 +219,137 @@ public class AddHighlight extends javax.swing.JFrame {
                 .addComponent(PenaltyButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(StrafButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(22, 22, 22)
                 .addComponent(VorigeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CancelButton)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
-        AddWedstrijd updateForm = new AddWedstrijd(dManager);
+
+        AddWedstrijd updateForm = null;
+        try {
+            updateForm = new AddWedstrijd(dManager, wedstrijd.getSp().getCompetitie(), wedstrijd.getSp().getSeizoen());
+        } catch (SQLException ex) {
+            Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_CancelButtonActionPerformed
-
     private void GoalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoalButtonActionPerformed
-        // TODO add your handling code here:
-        AddGoal updateForm = new AddGoal(dManager);
+        String listValue = (String) jListSpeler.getSelectedValue();
+        String[] array = listValue.split("-");
+        String lidnrStr = array[array.length - 1].trim();
+        int lidnr = Integer.parseInt(lidnrStr);
+        Speler speler = null;
+        try {
+            speler = DriverManager.getSpeler(lidnr);
+        } catch (DBException ex) {
+            Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int minuut = Integer.parseInt(jTextMinuut.getText());
+        AddGoal updateForm = null;
+        try {
+            updateForm = new AddGoal(dManager, wedstrijd, speler, minuut);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateForm.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_GoalButtonActionPerformed
 
     private void PenaltyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PenaltyButtonActionPerformed
         // TODO add your handling code here:
-        AddPenalty updateForm = new AddPenalty(dManager);
+
+        String listValue = (String) jListSpeler.getSelectedValue();
+        String[] array = listValue.split("-");
+        String lidnrStr = array[array.length - 1].trim();
+        int lidnr = Integer.parseInt(lidnrStr);
+        Speler speler = null;
+        try {
+            speler = DriverManager.getSpeler(lidnr);
+        } catch (DBException ex) {
+            Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        int minuut = Integer.parseInt(jTextMinuut.getText());
+
+        AddPenalty updateForm = new AddPenalty(dManager, wedstrijd, speler, minuut);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_PenaltyButtonActionPerformed
 
     private void StrafButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StrafButtonActionPerformed
-        // TODO add your handling code here:
-        AddStraf updateForm = new AddStraf(dManager);
+
+        String listValue = (String) jListSpeler.getSelectedValue();
+        String[] array = listValue.split("-");
+        String lidnrStr = array[array.length - 1].trim();
+        int lidnr = Integer.parseInt(lidnrStr);
+        Speler speler = null;
+        try {
+            speler = DriverManager.getSpeler(lidnr);
+        } catch (DBException ex) {
+            Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        int minuut = Integer.parseInt(jTextMinuut.getText());
+
+        AddStraf updateForm = new AddStraf(dManager, wedstrijd, speler, minuut);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_StrafButtonActionPerformed
 
     private void OwngoalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OwngoalButtonActionPerformed
         // TODO add your handling code here:
-        
-        // kadertje weergeven met "Owngoal toegevoegd"
+
+        String listValue = (String) jListSpeler.getSelectedValue();
+        String[] array = listValue.split("-");
+        String lidnrStr = array[array.length - 1].trim();
+        int lidnr = Integer.parseInt(lidnrStr);
+        Speler speler = null;
+        try {
+            speler = DriverManager.getSpeler(lidnr);
+        } catch (DBException ex) {
+            Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        int minuut = Integer.parseInt(jTextMinuut.getText());
+
+        Owngoal og = null;
+
+        try {
+            og = new Owngoal(minuut, speler, wedstrijd);
+            DriverManager.addOwngoal(og);
+            this.jTextMinuut.setText("");
+            JOptionPane.showMessageDialog(null, "Owngoal opgeslaan");
+        } catch (DBException ex) {
+            Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_OwngoalButtonActionPerformed
+
+    private void jRadioButtonUitTeamStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonUitTeamStateChanged
+        if (jRadioButtonUitTeam.isSelected()) {
+            try {
+                this.FillLijstSpelertjesUit(DriverManager.FillLijstSpelers(DLM, wedstrijd.getUitTeam().getStamNr()));
+            } catch (SQLException ex) {
+                Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jRadioButtonUitTeamStateChanged
+
+    private void jRadioButtonThuisTeamStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonThuisTeamStateChanged
+        if (jRadioButtonThuisTeam.isSelected()) {
+            try {
+                this.FillLijstSpelertjesThuis(DriverManager.FillLijstSpelers(DLM, wedstrijd.getThuisTeam().getStamNr()));
+            } catch (SQLException ex) {
+                Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jRadioButtonThuisTeamStateChanged
 
     /**
      * @param args the command line arguments
@@ -230,7 +387,6 @@ public class AddHighlight extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelButton;
     private javax.swing.JButton GoalButton;
     private javax.swing.JButton OwngoalButton;
     private javax.swing.JButton PenaltyButton;
@@ -238,9 +394,18 @@ public class AddHighlight extends javax.swing.JFrame {
     private javax.swing.JButton VorigeButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList jList1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelTop;
+    private javax.swing.JList jListSpeler;
+    private javax.swing.JRadioButton jRadioButtonThuisTeam;
+    private javax.swing.JRadioButton jRadioButtonUitTeam;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextMinuut;
     // End of variables declaration//GEN-END:variables
+
+    private void setjLabelTop(String string) {
+        this.jLabelTop.setText(string);
+    }
 }

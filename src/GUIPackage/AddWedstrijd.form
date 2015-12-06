@@ -67,13 +67,9 @@
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="Store" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="219" max="-2" attributes="0"/>
-                                      <Component id="HighlightButton" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="Store" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                               <Component id="VorigeButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -152,7 +148,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="VorigeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Store" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="HighlightButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
           </Group>
@@ -331,14 +326,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="HighlightButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Highlight toevoegen"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HighlightButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabelTop">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

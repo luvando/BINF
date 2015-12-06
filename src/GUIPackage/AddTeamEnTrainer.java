@@ -32,7 +32,7 @@ import javax.swing.JTextField;
  */
 public class AddTeamEnTrainer extends javax.swing.JFrame {
 
-    public static DriverManager dManager;
+    public static DriverManager dManager; // Competitie en Seizoen niet nodig
 
     /**
      * Creates new form AddTeam
@@ -59,8 +59,8 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         Store.addActionListener(new AddTeamEnTrainer.EventHandler(this));
         this.competitie = competitie;
         this.seizoen = seizoen;
-        
-        this.setjLabelTop("Team toevoegen aan " + competitie.getCompetitienaam() + " seizoen : " + seizoen.getJaar());
+
+        this.setjLabelTop("Team toevoegen aan systeem");
     }
 
     /**
@@ -188,14 +188,14 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                             .addComponent(AchternaamTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(GeboortedatumTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Store))))
-                .addContainerGap(424, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelTop)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,8 +317,6 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         });
     }
 
-  
-
     private class EventHandler implements ActionListener {
 
         private AddTeamEnTrainer form;
@@ -395,8 +393,6 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
 
         return Thuisarena.getText();
     }
-
-    
 
     public void setjLabelTop(String jLabelTop) {
         this.jLabelTop.setText(jLabelTop);

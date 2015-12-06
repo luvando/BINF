@@ -5,7 +5,15 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Goal;
+import ijshockey.Penalty;
+import ijshockey.Speler;
+import ijshockey.Wedstrijd;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,18 +21,25 @@ import ijshockey.DriverManager;
  */
 public class AddPenalty extends javax.swing.JFrame {
 
-    
     public static DriverManager dManager;
+    private int minuut;
+    private Speler speler;
+    private Wedstrijd wedstrijd;
+
     /**
      * Creates new form AddPenalty
      */
     public AddPenalty() {
         initComponents();
     }
-    
-    AddPenalty(DriverManager dManager) {
+
+    public AddPenalty(DriverManager dManager, Wedstrijd wedstrijd, Speler speler, int minuut) {
         this.dManager = dManager;
+        this.wedstrijd = wedstrijd;
+        this.speler = speler;
+        this.minuut = minuut;
         initComponents();
+        this.setjLabelTop("Highlight toevoegen voor : " + speler.getVoornaam() + " " + speler.getAchternaam() + ", minuut : " + minuut);
     }
 
     /**
@@ -36,29 +51,37 @@ public class AddPenalty extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButtonJa = new javax.swing.JRadioButton();
+        jRadioButtonNee = new javax.swing.JRadioButton();
         StoreButton = new javax.swing.JButton();
         VoegNieuweHighlightToeButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
-        CancelButton = new javax.swing.JButton();
+        jLabelTop = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Voeg penalty toe");
 
         jLabel1.setText("Penalty gescoord ?");
 
-        jRadioButton1.setText("ja");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(jRadioButtonJa);
+        jRadioButtonJa.setText("ja");
+        jRadioButtonJa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jRadioButtonJaActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("nee");
+        buttonGroup1.add(jRadioButtonNee);
+        jRadioButtonNee.setText("nee");
 
         StoreButton.setText("Store");
+        StoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StoreButtonActionPerformed(evt);
+            }
+        });
 
         VoegNieuweHighlightToeButton.setText("Voeg nieuwe highlight toe");
         VoegNieuweHighlightToeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -74,12 +97,7 @@ public class AddPenalty extends javax.swing.JFrame {
             }
         });
 
-        CancelButton.setText("Beëindig");
-        CancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelButtonActionPerformed(evt);
-            }
-        });
+        jLabelTop.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,71 +106,95 @@ public class AddPenalty extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jLabel1))
+                        .addContainerGap()
+                        .addComponent(jLabelTop))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addContainerGap()
+                        .addComponent(VorigeButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(93, 206, Short.MAX_VALUE)
-                .addComponent(StoreButton)
-                .addGap(131, 131, 131))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(VoegNieuweHighlightToeButton)
-                    .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57))
+                            .addComponent(StoreButton)
+                            .addComponent(jRadioButtonJa)
+                            .addComponent(jRadioButtonNee)
+                            .addComponent(jLabel1)
+                            .addComponent(VoegNieuweHighlightToeButton))))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addContainerGap()
+                .addComponent(jLabelTop)
+                .addGap(45, 45, 45)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButtonJa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonNee)
+                .addGap(17, 17, 17)
                 .addComponent(StoreButton)
                 .addGap(18, 18, 18)
                 .addComponent(VoegNieuweHighlightToeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(VorigeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CancelButton)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    private void jRadioButtonJaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonJaActionPerformed
+
+
+    }//GEN-LAST:event_jRadioButtonJaActionPerformed
 
     private void VoegNieuweHighlightToeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoegNieuweHighlightToeButtonActionPerformed
         // TODO add your handling code here:
-        AddHighlight updateForm = new AddHighlight(dManager);
+        AddHighlight updateForm = new AddHighlight(dManager, wedstrijd);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VoegNieuweHighlightToeButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        AddHighlight updateForm = new AddHighlight(dManager);
+        AddHighlight updateForm = new AddHighlight(dManager, wedstrijd);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_CancelButtonActionPerformed
+    private void StoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreButtonActionPerformed
+        Penalty p = null;
+        Goal g = null;
+        if (this.jRadioButtonJa.isSelected()) {
+            int gescoord = 1;
+            p = new Penalty(minuut, speler, wedstrijd, gescoord);
+
+            g = new Goal(minuut, speler, wedstrijd, null);
+            try {
+                DriverManager.addPenalty(p);
+                DriverManager.addGoal(g);
+
+                this.jRadioButtonJa.setSelected(false);
+                JOptionPane.showMessageDialog(null, "Penalty opgeslaan");
+            } catch (DBException ex) {
+                Logger.getLogger(AddPenalty.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        if (this.jRadioButtonNee.isSelected()) {
+            int gescoord = 0;
+            p = new Penalty(minuut, speler, wedstrijd, gescoord);
+            try {
+                DriverManager.addPenalty(p);
+                this.jRadioButtonNee.setSelected(false);
+                JOptionPane.showMessageDialog(null, "Penalty opgeslaan");
+            } catch (DBException ex) {
+                Logger.getLogger(AddPenalty.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_StoreButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,12 +232,17 @@ public class AddPenalty extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelButton;
     private javax.swing.JButton StoreButton;
     private javax.swing.JButton VoegNieuweHighlightToeButton;
     private javax.swing.JButton VorigeButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel jLabelTop;
+    private javax.swing.JRadioButton jRadioButtonJa;
+    private javax.swing.JRadioButton jRadioButtonNee;
     // End of variables declaration//GEN-END:variables
+
+    private void setjLabelTop(String string) {
+        this.jLabelTop.setText(string);
+    }
 }

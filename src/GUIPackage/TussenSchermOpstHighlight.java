@@ -5,9 +5,8 @@
  */
 package GUIPackage;
 
-import static GUIPackage.AddWedstrijd.dManager;
+import static GUIPackage.TussenSchermWedOpst.dManager;
 import ijshockey.DriverManager;
-import ijshockey.Team;
 import ijshockey.Wedstrijd;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,32 +16,28 @@ import java.util.logging.Logger;
  *
  * @author Viktor
  */
-public class TussenSchermWedOpst extends javax.swing.JFrame {
-
-    private Team thuisTeam;
-    private Team uitTeam;
-
-    static DriverManager dManager;
-    private Wedstrijd wedstrijd;
-    private AddWedstrijd oldForm;
+public class TussenSchermOpstHighlight extends javax.swing.JFrame {
 
     /**
-     * Creates new form TussenSchermWedOpst
+     * Creates new form TussenSchermOpstHighlight
      */
-    public TussenSchermWedOpst() {
+    public static DriverManager dManager;
+    private Wedstrijd wedstrijd;
+    private AddOpstelling oldForm;
+
+    public TussenSchermOpstHighlight() {
         initComponents();
     }
 
-    public TussenSchermWedOpst(DriverManager dManager, Wedstrijd wedstrijd,AddWedstrijd oldForm) {
+    public TussenSchermOpstHighlight(DriverManager dManager, Wedstrijd wedstrijd, AddOpstelling oldForm) {
         super("Message");
         this.wedstrijd = wedstrijd;
-        this.thuisTeam = thuisTeam;
-        this.uitTeam = uitTeam;
         TussenSchermWedOpst.dManager = dManager;
         this.oldForm = oldForm;
-        setLocationRelativeTo(null);
+
         initComponents();
-        this.setjLabetTop("Wedstrijd opgeslaan voor : " + wedstrijd.getThuisTeam().getNaam() + " tegen : " + wedstrijd.getUitTeam().getNaam()+"!");
+        this.setjLabetTop("Opstelling en wissels opgeslaan voor  " + wedstrijd.getThuisTeam().getNaam() + " tegen : " + wedstrijd.getUitTeam().getNaam() + "!");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -54,62 +49,58 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonAddOpstelling = new javax.swing.JButton();
-        jLabelTop = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonAddHighlight = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButtonAddOpstelling.setText("Opstelling en wissels toevoegen");
-        jButtonAddOpstelling.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("jLabel1");
+
+        jButtonAddHighlight.setText("Highlights toevoegen");
+        jButtonAddHighlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddOpstellingActionPerformed(evt);
+                jButtonAddHighlightActionPerformed(evt);
             }
         });
-
-        jLabelTop.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabelTop.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTop, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jButtonAddOpstelling)))
-                .addContainerGap(190, Short.MAX_VALUE))
+                        .addGap(127, 127, 127)
+                        .addComponent(jButtonAddHighlight))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelTop)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
-                .addComponent(jButtonAddOpstelling)
+                .addComponent(jButtonAddHighlight)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonAddOpstellingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddOpstellingActionPerformed
-        // TODO add your handling code here:
-        AddOpstelling updateForm = null;
-        
+    private void jButtonAddHighlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddHighlightActionPerformed
+        AddHighlight updateForm = null;
 
-        try {
-            updateForm = new AddOpstelling(dManager, wedstrijd);
-        } catch (SQLException ex) {
-            Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        updateForm = new AddHighlight(dManager, wedstrijd);
 
         updateForm.setVisible(true);
         oldForm.setVisible(false);
-        this.setVisible(false);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAddOpstellingActionPerformed
+        this.setVisible(false);
+
+
+    }//GEN-LAST:event_jButtonAddHighlightActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,30 +119,30 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TussenSchermWedOpst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TussenSchermOpstHighlight.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TussenSchermWedOpst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TussenSchermOpstHighlight.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TussenSchermWedOpst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TussenSchermOpstHighlight.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TussenSchermWedOpst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TussenSchermOpstHighlight.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TussenSchermWedOpst().setVisible(true);
+                new TussenSchermOpstHighlight().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAddOpstelling;
-    private javax.swing.JLabel jLabelTop;
+    private javax.swing.JButton jButtonAddHighlight;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
-    public void setjLabetTop(String str) {
-        this.jLabelTop.setText(str);
 
+    private void setjLabetTop(String string) {
+        this.jLabel1.setText(string);
     }
 }

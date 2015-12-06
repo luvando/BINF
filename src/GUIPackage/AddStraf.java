@@ -5,15 +5,25 @@
  */
 package GUIPackage;
 
+import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Speler;
+import ijshockey.Straf;
+import ijshockey.Wedstrijd;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Wim
  */
 public class AddStraf extends javax.swing.JFrame {
-    
+
     public static DriverManager dManager;
+    private Wedstrijd wedstrijd;
+    private Speler speler;
+    private int minuut;
 
     /**
      * Creates new form AddStraf
@@ -21,10 +31,14 @@ public class AddStraf extends javax.swing.JFrame {
     public AddStraf() {
         initComponents();
     }
-    
-    AddStraf(DriverManager dManager) {
-        this.dManager = dManager;
+
+    public AddStraf(DriverManager dManager, Wedstrijd wedstrijd, Speler speler, int minuut) {
+        AddStraf.dManager = dManager;
+        this.wedstrijd = wedstrijd;
+        this.speler = speler;
+        this.minuut = minuut;
         initComponents();
+        this.setjLabelTop("Highlight toevoegen voor : " + speler.getVoornaam() + " " + speler.getAchternaam() + ", minuut : " + minuut);
     }
 
     /**
@@ -37,22 +51,22 @@ public class AddStraf extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextReden = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextMinuut = new javax.swing.JTextField();
         StoreButton = new javax.swing.JButton();
         VoegNieuweHighlightToeButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
-        CancelButton = new javax.swing.JButton();
+        jLabelTop = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Voeg straf toe");
 
         jLabel1.setText("Reden van straf :");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextReden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextRedenActionPerformed(evt);
             }
         });
 
@@ -79,12 +93,7 @@ public class AddStraf extends javax.swing.JFrame {
             }
         });
 
-        CancelButton.setText("Beëindig");
-        CancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelButtonActionPerformed(evt);
-            }
-        });
+        jLabelTop.setText("jLabel3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,79 +101,85 @@ public class AddStraf extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(StoreButton)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(StoreButton)
+                            .addComponent(VoegNieuweHighlightToeButton)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(VoegNieuweHighlightToeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(VorigeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jTextReden, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(jTextMinuut))))
                 .addContainerGap(62, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(VorigeButton)
+                    .addComponent(jLabelTop))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
+                .addComponent(jLabelTop)
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextReden, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextMinuut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(StoreButton)
                 .addGap(18, 18, 18)
                 .addComponent(VoegNieuweHighlightToeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(VorigeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CancelButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextRedenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextRedenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextRedenActionPerformed
 
     private void VoegNieuweHighlightToeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoegNieuweHighlightToeButtonActionPerformed
         // TODO add your handling code here:
-         AddHighlight updateForm = new AddHighlight(dManager);
+        AddHighlight updateForm = new AddHighlight(dManager, wedstrijd);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VoegNieuweHighlightToeButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-         AddHighlight updateForm = new AddHighlight(dManager);
+        AddHighlight updateForm = new AddHighlight(dManager, wedstrijd);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_CancelButtonActionPerformed
-
     private void StoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreButtonActionPerformed
-        // TODO add your handling code here:
-        
-        // kadertje weergeven met "stored"
+        String reden = jTextReden.getText();
+        int aantalMinuut = Integer.parseInt(jTextMinuut.getText());
+        Straf s = null;
+        s = new Straf(minuut, reden, aantalMinuut, speler, wedstrijd);
+        try {
+            DriverManager.addStraf(s);
+            jTextMinuut.setText("");
+            jTextReden.setText("");
+            JOptionPane.showMessageDialog(null, "Straf opgeslaan!");
+        } catch (DBException ex) {
+            Logger.getLogger(AddStraf.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_StoreButtonActionPerformed
 
     /**
@@ -203,13 +218,17 @@ public class AddStraf extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelButton;
     private javax.swing.JButton StoreButton;
     private javax.swing.JButton VoegNieuweHighlightToeButton;
     private javax.swing.JButton VorigeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jLabelTop;
+    private javax.swing.JTextField jTextMinuut;
+    private javax.swing.JTextField jTextReden;
     // End of variables declaration//GEN-END:variables
+
+    private void setjLabelTop(String string) {
+        this.jLabelTop.setText(string);
+    }
 }

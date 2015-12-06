@@ -57,7 +57,6 @@ public class AddSpeler extends javax.swing.JFrame {
         jTextVoornaam = new javax.swing.JTextField();
         jTextGeboortedatum = new javax.swing.JTextField();
         NaarStartschermButton = new javax.swing.JButton();
-        AddSpelerButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
         jLabelTop = new javax.swing.JLabel();
         jButtonStore = new javax.swing.JButton();
@@ -81,13 +80,6 @@ public class AddSpeler extends javax.swing.JFrame {
             }
         });
 
-        AddSpelerButton.setText("Nog een speler toevoegen");
-        AddSpelerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddSpelerButtonActionPerformed(evt);
-            }
-        });
-
         VorigeButton.setText("Vorige");
         VorigeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,8 +94,6 @@ public class AddSpeler extends javax.swing.JFrame {
             }
         });
 
-        jTextVoorkeurspositie.setText("jTextField1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,8 +104,7 @@ public class AddSpeler extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(VorigeButton)
                         .addGap(0, 286, Short.MAX_VALUE))
-                    .addComponent(NaarStartschermButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddSpelerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NaarStartschermButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(139, 139, 139))
             .addGroup(layout.createSequentialGroup()
                 .addGap(99, 99, 99)
@@ -162,9 +151,7 @@ public class AddSpeler extends javax.swing.JFrame {
                     .addComponent(jTextVoorkeurspositie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addComponent(jButtonStore)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(AddSpelerButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(NaarStartschermButton)
                 .addGap(36, 36, 36)
                 .addComponent(VorigeButton)
@@ -173,11 +160,6 @@ public class AddSpeler extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void AddSpelerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpelerButtonActionPerformed
-
-
-    }//GEN-LAST:event_AddSpelerButtonActionPerformed
 
     private void NaarStartschermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NaarStartschermButtonActionPerformed
         // TODO add your handling code here:
@@ -244,7 +226,6 @@ public class AddSpeler extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddSpelerButton;
     private javax.swing.JButton NaarStartschermButton;
     private javax.swing.JButton VorigeButton;
     private javax.swing.JButton jButtonStore;

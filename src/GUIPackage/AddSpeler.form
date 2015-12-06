@@ -32,7 +32,6 @@
                       <EmptySpace min="0" pref="286" max="32767" attributes="0"/>
                   </Group>
                   <Component id="NaarStartschermButton" min="-2" pref="205" max="-2" attributes="0"/>
-                  <Component id="AddSpelerButton" min="-2" pref="205" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
           </Group>
@@ -93,9 +92,7 @@
               </Group>
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Component id="jButtonStore" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="45" max="32767" attributes="0"/>
-              <Component id="AddSpelerButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="74" max="32767" attributes="0"/>
               <Component id="NaarStartschermButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Component id="VorigeButton" min="-2" max="-2" attributes="0"/>
@@ -139,14 +136,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NaarStartschermButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="AddSpelerButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nog een speler toevoegen"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddSpelerButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="VorigeButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Vorige"/>
@@ -166,9 +155,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextVoorkeurspositie">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>
