@@ -642,12 +642,23 @@ public class DriverManager {
              + "WHERE lidnr = " + g.getLidNr();
 
              stmt.executeUpdate(sql);*/
-            String sql = "INSERT into goal "
-                    + "(minuut, lidnr, wedstrijdnr, lidnr_assist) "
-                    + "VALUES ('" + g.getMinuut() + "', '" + g.getSpeler().getLidnr() + "', '" + g.getWedstrijd().getWedstrijdNr() + "', '" + g.getAssistgever().getLidnr() + "')";
-            stmt.executeUpdate(sql);
+            if (g.getAssistgever() != null) {
+                String sql = "INSERT into goal "
+                        + "(minuut, lidnr, wedstrijdnr, lidnr_assist) "
+                        + "VALUES ('" + g.getMinuut() + "', '" + g.getSpeler().getLidnr() + "', '" + g.getWedstrijd().getWedstrijdNr() + "', '" + g.getAssistgever().getLidnr() + "')";
+                stmt.executeUpdate(sql);
 
-            closeConnection(con);
+                closeConnection(con);
+            }
+            if (g.getAssistgever() == null) {
+                String sql1 = "INSERT into goal "
+                        + "(minuut, lidnr, wedstrijdnr) "
+                        + "VALUES ('" + g.getMinuut() + "', '" + g.getSpeler().getLidnr() + "', '" + g.getWedstrijd().getWedstrijdNr() + "')";
+                stmt.executeUpdate(sql1);
+
+                closeConnection(con);
+            }
+
         } catch (Exception ex) {
             ex.printStackTrace();
             closeConnection(con);
@@ -1294,7 +1305,7 @@ public class DriverManager {
                 String rapport;
                 rapport = voornaam + " " + achternaam + "\n"
                         + "----------------------" + "\n"
-                        + speelminuten + " minuten gespeeld in " + aantalwedstrijden + " wedstrijd(en)"  + "\n"
+                        + speelminuten + " minuten gespeeld in " + aantalwedstrijden + " wedstrijd(en)" + "\n"
                         + goals + " goal(s)" + "\n"
                         + owngoals + " owngoal(s)" + "\n"
                         + penaltys + " penalty(s), waarvan " + penaltysgescoord + " gescoord" + "\n"

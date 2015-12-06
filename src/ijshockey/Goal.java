@@ -18,7 +18,11 @@ public class Goal extends Highlight {
 
     public Goal(int minuut, Speler speler, Wedstrijd wedstrijd, Speler assistgever) {
         super(minuut, speler, wedstrijd);
-        this.assistgever = assistgever;
+        if (assistgever != null) {
+            this.assistgever = assistgever;
+        } else {
+            this.assistgever = null;
+        }
     }
 
     public Speler getAssistgever() {
