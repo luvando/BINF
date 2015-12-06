@@ -165,15 +165,14 @@ public class AddPenalty extends javax.swing.JFrame {
 
     private void StoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreButtonActionPerformed
         Penalty p = null;
-        Goal g = null;
+       
         if (this.jRadioButtonJa.isSelected()) {
             int gescoord = 1;
             p = new Penalty(minuut, speler, wedstrijd, gescoord);
 
-            g = new Goal(minuut, speler, wedstrijd, null);
+           
             try {
                 DriverManager.addPenalty(p);
-                DriverManager.addGoal(g);
 
                 this.jRadioButtonJa.setSelected(false);
                 JOptionPane.showMessageDialog(null, "Penalty opgeslaan");
