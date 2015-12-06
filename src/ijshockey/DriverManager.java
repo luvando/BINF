@@ -467,7 +467,7 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "SELECT wedstrijdnr "
-                    + "FROM wedstrijd ";
+                    + "FROM wedstrijd";
 
             ResultSet srs = stmt.executeQuery(sql);
             int wnrold = 0;
