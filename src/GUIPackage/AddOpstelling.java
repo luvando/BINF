@@ -10,6 +10,7 @@ import ijshockey.DriverManager;
 import static ijshockey.DriverManager.getSpeler;
 import static ijshockey.DriverManager.getWedstrijd;
 import ijshockey.Opstelling;
+import ijshockey.Team;
 import ijshockey.Wedstrijd;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,49 +31,51 @@ public class AddOpstelling extends javax.swing.JFrame {
      * Creates new form AddOpstelling
      */
     public static DriverManager dManager;
-    private int stamnrThuis;
-    private int stamnrUit;
+
     public Wedstrijd wedstrijd;
-    private int wedstrijdnr;
-    
+
     DefaultListModel DLM;
+
     public AddOpstelling() {
         initComponents();
     }
 
-    AddOpstelling(DriverManager dManager, int stamnrThuis, int stamnrUit, int wedstrijdnr) throws SQLException {
+    AddOpstelling(DriverManager dManager, Wedstrijd wed) throws SQLException {
         this.dManager = dManager;
-        this.wedstrijd = wedstrijd;
-        this.wedstrijdnr = wedstrijdnr;
-        this.stamnrThuis = stamnrThuis;
-        this.stamnrUit = stamnrUit;
+        this.wedstrijd = wed;
+
         initComponents();
-        FillLijstSpelertjesThuis(DriverManager.FillLijstSpelers(DLM, stamnrThuis));
-        FillLijstSpelertjesUit(DriverManager.FillLijstSpelers(DLM, stamnrUit));
-        Store.addActionListener(new AddOpstelling.EventHandler(this));
+        this.setjLabelTop("Opstelling wedstrijd :" + wed.getWedstrijdNr() + " : F" + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
+
+        FillLijstSpelertjesThuis(DriverManager.FillLijstSpelers(DLM, wed.getThuisTeam().getStamNr()));
+
+        FillLijstSpelertjesUit(DriverManager.FillLijstSpelers(DLM, wed.getUitTeam().getStamNr()));
+
         setLocationRelativeTo(null);
     }
-    
+
     private void FillLijstSpelertjesThuis(DefaultListModel DLM) {
         try {
-            
+
             jListSpelersThuis.setModel(DLM);
-            
-        } catch(Exception ex) {
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
     }
-        private void FillLijstSpelertjesUit(DefaultListModel DLM) {
+
+    private void FillLijstSpelertjesUit(DefaultListModel DLM) {
         try {
-            
+
             jListSpelersUit.setModel(DLM);
-            
-        } catch(Exception ex) {
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,30 +109,31 @@ public class AddOpstelling extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        CancelButton = new javax.swing.JButton();
+        Done = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
-        VolgendeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jListSpelersThuis = new javax.swing.JList();
         jTextSpelerThuis = new javax.swing.JTextField();
-        jComboBoxPositie = new javax.swing.JComboBox<>();
+        jComboBoxPositie = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         jTextTijdstipInthuis = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextTijdstipUitThuis = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox14 = new javax.swing.JComboBox<>();
+        jComboxPositie2 = new javax.swing.JComboBox<String>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        jTextTijdstipInUit = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jListSpelersUit = new javax.swing.JList();
-        jTextField10 = new javax.swing.JTextField();
+        jTextTijdstipUitUit = new javax.swing.JTextField();
         jTextSpelerUit = new javax.swing.JTextField();
         Store = new javax.swing.JButton();
+        jButtonStore2 = new javax.swing.JButton();
+        jLabelTop = new javax.swing.JLabel();
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,10 +208,10 @@ public class AddOpstelling extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Opstelling thuisteam");
 
-        CancelButton.setText("Beëindig");
-        CancelButton.addActionListener(new java.awt.event.ActionListener() {
+        Done.setText("Done");
+        Done.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelButtonActionPerformed(evt);
+                DoneActionPerformed(evt);
             }
         });
 
@@ -218,17 +222,15 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
 
-        VolgendeButton.setText("Volgende");
-        VolgendeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolgendeButtonActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Speler:");
 
         jLabel9.setText("Thuisteam");
 
+        jListSpelersThuis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListSpelersThuisMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jListSpelersThuis);
 
         jTextSpelerThuis.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -242,7 +244,7 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxPositie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Goalie", "Defender", "Forward" }));
+        jComboBoxPositie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Goalie", "Defender", "Forward" }));
         jComboBoxPositie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxPositieActionPerformed(evt);
@@ -255,10 +257,10 @@ public class AddOpstelling extends javax.swing.JFrame {
 
         jLabel10.setText("Speler:");
 
-        jComboBox14.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Goalie", "Defender", "Forward" }));
-        jComboBox14.addActionListener(new java.awt.event.ActionListener() {
+        jComboxPositie2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Goalie", "Defender", "Forward" }));
+        jComboxPositie2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox14ActionPerformed(evt);
+                jComboxPositie2ActionPerformed(evt);
             }
         });
 
@@ -268,6 +270,11 @@ public class AddOpstelling extends javax.swing.JFrame {
 
         jLabel13.setText("Tijdstip uit:");
 
+        jListSpelersUit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListSpelersUitMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(jListSpelersUit);
 
         jTextSpelerUit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -288,6 +295,16 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
 
+        jButtonStore2.setText("Store");
+        jButtonStore2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonStore2ActionPerformed(evt);
+            }
+        });
+
+        jLabelTop.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelTop.setText("jLabel14");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -307,23 +324,23 @@ public class AddOpstelling extends javax.swing.JFrame {
                                 .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextSpelerUit)
-                                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextTijdstipInUit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(55, 55, 55)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboxPositie2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel13)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButtonStore2)
+                                            .addComponent(jTextTijdstipUitUit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(0, 81, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(17, 17, 17)
                         .addComponent(VorigeButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(VolgendeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CancelButton)
+                        .addComponent(Done)
                         .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,17 +362,23 @@ public class AddOpstelling extends javax.swing.JFrame {
                                     .addComponent(Store)
                                     .addComponent(jTextTijdstipUitThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jLabelTop)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
+                .addComponent(jLabelTop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addGap(31, 31, 31)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(jLabel12)
                         .addGap(31, 31, 31))
                     .addGroup(layout.createSequentialGroup()
@@ -375,33 +398,34 @@ public class AddOpstelling extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Done)
+                            .addComponent(VorigeButton)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(jTextSpelerUit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboxPositie2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextTijdstipInUit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CancelButton)
-                    .addComponent(VorigeButton)
-                    .addComponent(VolgendeButton))
+                            .addComponent(jTextTijdstipUitUit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(jButtonStore2)))
                 .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_CancelButtonActionPerformed
+    private void DoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoneActionPerformed
+
+    }//GEN-LAST:event_DoneActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
@@ -409,13 +433,6 @@ public class AddOpstelling extends javax.swing.JFrame {
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
-
-    private void VolgendeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolgendeButtonActionPerformed
-        // TODO add your handling code here:
-        AddOpstelling2 updateForm = new AddOpstelling2(dManager);
-        updateForm.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_VolgendeButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -443,7 +460,7 @@ public class AddOpstelling extends javax.swing.JFrame {
 
     private void jTextSpelerThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextSpelerThuisMouseClicked
         // TODO add your handling code here:
-        jTextSpelerThuis.setText((String) jListSpelersThuis.getSelectedValue());
+
     }//GEN-LAST:event_jTextSpelerThuisMouseClicked
 
     private void jTextSpelerThuisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSpelerThuisActionPerformed
@@ -454,13 +471,13 @@ public class AddOpstelling extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxPositieActionPerformed
 
-    private void jComboBox14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox14ActionPerformed
+    private void jComboxPositie2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboxPositie2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox14ActionPerformed
+    }//GEN-LAST:event_jComboxPositie2ActionPerformed
 
     private void jTextSpelerUitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextSpelerUitMouseClicked
         // TODO add your handling code here:
-        jTextSpelerUit.setText((String) jListSpelersUit.getSelectedValue());
+
     }//GEN-LAST:event_jTextSpelerUitMouseClicked
 
     private void jTextSpelerUitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSpelerUitActionPerformed
@@ -468,8 +485,62 @@ public class AddOpstelling extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextSpelerUitActionPerformed
 
     private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
-        // TODO add your handling code here:
+        String lidnrThuis = this.jTextSpelerThuis.getText();
+        String[] thuis = lidnrThuis.split("-");
+        String lidnrthuissp = thuis[thuis.length - 1].trim();
+        int lidnrthuis = Integer.parseInt(lidnrthuissp);
+
+        String gekozenpositie = (String) this.jComboBoxPositie.getSelectedItem();
+
+        Opstelling ops = null;
+        try {
+
+            ops = new Opstelling(wedstrijd, getSpeler(lidnrthuis), gekozenpositie, this.getjTextTijdstipInthuis(), this.getjTextTijdstipUitThuis());
+            DriverManager.addOpstelling(ops);
+            JOptionPane.showMessageDialog(null, "Opstelling Opgeslagen");
+            jTextSpelerThuis.setText("");
+            jTextTijdstipInthuis.setText("");
+            jTextTijdstipUitThuis.setText("");
+        } catch (DBException ex) {
+            Logger.getLogger(AddOpstelling.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_StoreActionPerformed
+
+    private void jButtonStore2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStore2ActionPerformed
+        String lidnrThuis = this.jTextSpelerUit.getText();
+        String[] thuis = lidnrThuis.split("-");
+        String lidnrthuissp = thuis[thuis.length - 1].trim();
+        int lidnruit = Integer.parseInt(lidnrthuissp);
+
+        String gekozenpositie = (String) this.jComboxPositie2.getSelectedItem();
+
+        Opstelling ops = null;
+        try {
+            ops = new Opstelling(wedstrijd, getSpeler(lidnruit), gekozenpositie, this.getjTextTijdstipInUit(), this.getjTextTijdstipUitUit());
+        } catch (DBException ex) {
+            Logger.getLogger(AddOpstelling.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jTextSpelerUit.setText("");
+        jTextTijdstipInUit.setText("");
+        jTextTijdstipUitUit.setText("");
+
+        try {
+
+            DriverManager.addOpstelling(ops);
+            JOptionPane.showMessageDialog(null, "Opstelling Opgeslagen");
+        } catch (DBException ex) {
+            Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+        }    }//GEN-LAST:event_jButtonStore2ActionPerformed
+
+    private void jListSpelersThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListSpelersThuisMouseClicked
+        jTextSpelerThuis.setText((String) jListSpelersThuis.getSelectedValue());
+    }//GEN-LAST:event_jListSpelersThuisMouseClicked
+
+    private void jListSpelersUitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListSpelersUitMouseClicked
+        jTextSpelerUit.setText((String) jListSpelersUit.getSelectedValue());
+    }//GEN-LAST:event_jListSpelersUitMouseClicked
 
     /**
      * @param args the command line arguments
@@ -505,56 +576,17 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
     }
-    
-    private class EventHandler implements ActionListener {
 
-        private AddOpstelling form;
-
-        public EventHandler(AddOpstelling ao) {
-            form = ao;
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == Store) {
-                
-                String lidnrThuis = form.jTextSpelerThuis.getText();
-                String[] thuis = lidnrThuis.split("-");
-                String lidnrthuissp = thuis[thuis.length - 1].trim();
-                int lidnrthuis = Integer.parseInt(lidnrthuissp);
-                
-                String gekozenpositie = (String) form.jComboBoxPositie.getSelectedItem();
-        
-                Opstelling ops = null;
-                try {
-                    ops = new Opstelling(getWedstrijd(wedstrijdnr), getSpeler(lidnrthuis), gekozenpositie, form.getjTextTijdstipInthuis(), form.getjTextTijdstipUitThuis());
-                } catch (DBException ex) {
-                    Logger.getLogger(AddOpstelling.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                jTextSpelerThuis.setText("");
-                jTextTijdstipInthuis.setText("");
-                jTextTijdstipUitThuis.setText("");
-                
-                try {
-
-                    DriverManager.addOpstelling(ops);
-                    JOptionPane.showMessageDialog(null, "Team en Trainer opgeslagen!");
-                } catch (DBException ex) {
-                    Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelButton;
+    private javax.swing.JButton Done;
     private javax.swing.JButton Store;
-    private javax.swing.JButton VolgendeButton;
     private javax.swing.JButton VorigeButton;
+    private javax.swing.JButton jButtonStore2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox10;
     private javax.swing.JComboBox jComboBox11;
     private javax.swing.JComboBox jComboBox12;
-    private javax.swing.JComboBox<String> jComboBox14;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
@@ -564,6 +596,7 @@ public class AddOpstelling extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox8;
     private javax.swing.JComboBox jComboBox9;
     private javax.swing.JComboBox<String> jComboBoxPositie;
+    private javax.swing.JComboBox<String> jComboxPositie2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -577,23 +610,24 @@ public class AddOpstelling extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelTop;
     private javax.swing.JList jListSpelersThuis;
     private javax.swing.JList jListSpelersUit;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTextField jTextSpelerThuis;
     private javax.swing.JTextField jTextSpelerUit;
+    private javax.swing.JTextField jTextTijdstipInUit;
     private javax.swing.JTextField jTextTijdstipInthuis;
     private javax.swing.JTextField jTextTijdstipUitThuis;
+    private javax.swing.JTextField jTextTijdstipUitUit;
     // End of variables declaration//GEN-END:variables
 
     public String getjTextSpelerThuis() {
@@ -615,6 +649,9 @@ public class AddOpstelling extends javax.swing.JFrame {
     public int getjTextTijdstipInthuis() {
         return Integer.parseInt(jTextTijdstipInthuis.getText());
     }
+ public int getjTextTijdstipInUit() {
+        return Integer.parseInt(jTextTijdstipInUit.getText());
+    }
 
     public void setjTextTijdstipInthuis(JTextField jTextTijdstipInthuis) {
         this.jTextTijdstipInthuis = jTextTijdstipInthuis;
@@ -623,11 +660,16 @@ public class AddOpstelling extends javax.swing.JFrame {
     public int getjTextTijdstipUitThuis() {
         return Integer.parseInt(jTextTijdstipUitThuis.getText());
     }
+     public int getjTextTijdstipUitUit() {
+        return Integer.parseInt(jTextTijdstipUitUit.getText());
+    }
 
     public void setjTextTijdstipUitThuis(JTextField jTextTijdstipUitThuis) {
         this.jTextTijdstipUitThuis = jTextTijdstipUitThuis;
     }
 
-
+    private void setjLabelTop(String string) {
+        this.jLabelTop.setText(string);
+    }
 
 }

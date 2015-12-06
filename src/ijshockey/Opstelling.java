@@ -19,6 +19,8 @@ public class Opstelling {
     private int wedstrijdnr;
     private int lidnr;
     private int opstellingNr;
+    private Wedstrijd wedstrijd;
+    private Speler speler;
 
     public Opstelling(int wedstrijdnr, int lidnr, int onr, String positie, int tijdstipIn, int tijdstipUit) {
         this.opstellingNr = onr;
@@ -28,14 +30,14 @@ public class Opstelling {
         this.wedstrijdnr = wedstrijdnr;
         this.lidnr = lidnr;
     }
+
     public Opstelling(Wedstrijd wedstrijd, Speler speler, String positie, int tijdstipIn, int tijdstipUit) {
-        this.wedstrijdnr = wedstrijdnr;
+        this.wedstrijd = wedstrijd;
         this.positie = positie;
         this.tijdstipIn = tijdstipIn;
         this.tijdstipUit = tijdstipUit;
-        this.lidnr = lidnr;
+        this.speler = speler;
     }
-    
 
     public String getPositie() {
         return positie;
@@ -84,10 +86,14 @@ public class Opstelling {
     public void setOpstellingNr(int opstellingNr) {
         this.opstellingNr = opstellingNr;
     }
-    
-    
-    
-    
+
+    public Wedstrijd getWedstrijd() {
+        return wedstrijd;
+    }
+
+    public Speler getSpeler() {
+        return speler;
+    }
 
     @Override
     public String toString() {

@@ -59,7 +59,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         Store.addActionListener(new AddTeamEnTrainer.EventHandler(this));
         this.competitie = competitie;
         this.seizoen = seizoen;
-        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoen));
+        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
         this.setjLabelTop("Team toevoegen aan " + competitie.getCompetitienaam() + " seizoen : " + seizoen.getJaar());
     }
 
