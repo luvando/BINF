@@ -5,6 +5,7 @@
  */
 package GUIPackage;
 
+import static GUIPackage.AddTeamEnTrainer.dManager;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
@@ -36,11 +37,16 @@ public class AddDeelname extends javax.swing.JFrame {
     }
 
     public AddDeelname(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
+        super("Deelname toevoegen");
         this.competitie = competitie;
         this.seizoen = seizoen;
+        this.dManager = dManager;
         initComponents();
 
         this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
+        this.setjLabelTop("Deelname team toevoegen aan : " + competitie.getCompetitienaam() + " seizoen : " + seizoen.getJaar());
+        setLocationRelativeTo(null);
+
     }
 
     private void FillLijstTeams(DefaultListModel DLM) {
@@ -64,14 +70,15 @@ public class AddDeelname extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelBestaandTeam = new javax.swing.JLabel();
+        jLabelTop = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListTeam = new javax.swing.JList();
         Store = new javax.swing.JButton();
+        jButtonVorige = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabelBestaandTeam.setText("Bestaan team toevoegen ");
+        jLabelTop.setText("Bestaan team toevoegen ");
 
         jListTeam.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -87,6 +94,13 @@ public class AddDeelname extends javax.swing.JFrame {
             }
         });
 
+        jButtonVorige.setText("Vorige");
+        jButtonVorige.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVorigeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,10 +110,11 @@ public class AddDeelname extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelBestaandTeam)
-                        .addGap(0, 256, Short.MAX_VALUE))
+                        .addComponent(jLabelTop)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonVorige)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 358, Short.MAX_VALUE)
                         .addComponent(Store)))
                 .addContainerGap())
         );
@@ -107,11 +122,13 @@ public class AddDeelname extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelBestaandTeam)
+                .addComponent(jLabelTop)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(Store)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Store)
+                    .addComponent(jButtonVorige))
                 .addContainerGap())
         );
 
@@ -128,11 +145,23 @@ public class AddDeelname extends javax.swing.JFrame {
 
         try {
             te = DriverManager.getTeam(stamnr);
-            DriverManager.addTeam(te, competitie.getCompetitienaam(), seizoen.getJaar());
+            DriverManager.addDeelname(te, competitie, seizoen);
             JOptionPane.showMessageDialog(null, "Deelname team opgeslagen!");
         } catch (DBException ex) {
             Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
         }    }//GEN-LAST:event_StoreActionPerformed
+
+    private void jButtonVorigeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVorigeActionPerformed
+        CompetitieScherm updateForm = null;
+        try {
+            updateForm = new CompetitieScherm(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        updateForm.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonVorigeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,8 +200,13 @@ public class AddDeelname extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Store;
-    private javax.swing.JLabel jLabelBestaandTeam;
+    private javax.swing.JButton jButtonVorige;
+    private javax.swing.JLabel jLabelTop;
     private javax.swing.JList jListTeam;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void setjLabelTop(String string) {
+        this.jLabelTop.setText(string);
+    }
 }

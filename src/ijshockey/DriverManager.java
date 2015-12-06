@@ -1404,9 +1404,25 @@ public class DriverManager {
                     + "(stamnr, naam, thuisarena) "
                     + "VALUES ('" + t.getStamNr() + "', '" + t.getNaam() + "', '" + t.getThuisArena() + "')";
             stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+    public static void addDeelname(Team t, Competitie competitie, Seizoen seizoen) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
             String sql2 = "INSERT into deelname "
                     + "(competitienaam,jaar, stamnr) "
-                    + "VALUES ('" + competitie + "', '" + jaar + "', '" + t.getStamNr() + "')";
+                    + "VALUES ('" + competitie.getCompetitienaam() + "', '" + seizoen.getJaar() + "', '" + t.getStamNr() + "')";
             stmt.executeUpdate(sql2);
 
             closeConnection(con);
@@ -1415,6 +1431,7 @@ public class DriverManager {
             closeConnection(con);
             throw new DBException(ex);
         }
+
     }
 
     public static Team getTeam(int stamnr) throws DBException {
