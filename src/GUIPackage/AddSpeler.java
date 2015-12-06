@@ -187,15 +187,7 @@ public class AddSpeler extends javax.swing.JFrame {
     }//GEN-LAST:event_NaarStartschermButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
-        BewerkTeam updateForm = null;
-        try {
-            updateForm = new BewerkTeam(dManager);
-        } catch (SQLException ex) {
-            Logger.getLogger(AddSpeler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        updateForm.setVisible(true);
-        this.setVisible(false);
+      
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed

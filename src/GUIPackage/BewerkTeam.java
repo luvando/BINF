@@ -6,9 +6,11 @@
 package GUIPackage;
 
 import static GUIPackage.AddSpeler.dManager;
+import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Scheidsrechter;
+import ijshockey.Seizoen;
 import ijshockey.Speeldag;
 import ijshockey.Team;
 import java.sql.ResultSet;
@@ -34,10 +36,10 @@ public class BewerkTeam extends javax.swing.JFrame {
     public BewerkTeam() {
         initComponents();
     }
-    
+
     DefaultListModel DLM;
 
-    public BewerkTeam(DriverManager dManager) throws SQLException {
+    public BewerkTeam(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
         AddTeamEnTrainer.dManager = dManager;
         initComponents();
         setLocationRelativeTo(null);

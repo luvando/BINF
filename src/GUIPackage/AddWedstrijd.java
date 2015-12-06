@@ -428,7 +428,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
     private void MouseClickedEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseClickedEvent
         String thuis = (String) jListThuisteam.getSelectedValue();
         String[] teamthuis = thuis.split("-");
-        String teamthuistr = teamthuis[1].trim();
+        String teamthuistr = teamthuis[teamthuis.length - 1].trim();
         int stamnrthuis = Integer.parseInt(teamthuistr);
 
         try {
