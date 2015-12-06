@@ -63,9 +63,11 @@ public class AddPenalty extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Voeg penalty toe");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Penalty gescoord ?");
 
         buttonGroup1.add(jRadioButtonJa);
+        jRadioButtonJa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jRadioButtonJa.setText("ja");
         jRadioButtonJa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,8 +76,11 @@ public class AddPenalty extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(jRadioButtonNee);
+        jRadioButtonNee.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jRadioButtonNee.setText("nee");
 
+        StoreButton.setBackground(java.awt.SystemColor.activeCaption);
+        StoreButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         StoreButton.setText("Store");
         StoreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +88,8 @@ public class AddPenalty extends javax.swing.JFrame {
             }
         });
 
+        VoegNieuweHighlightToeButton.setBackground(java.awt.SystemColor.activeCaption);
+        VoegNieuweHighlightToeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         VoegNieuweHighlightToeButton.setText("Voeg nieuwe highlight toe");
         VoegNieuweHighlightToeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +97,8 @@ public class AddPenalty extends javax.swing.JFrame {
             }
         });
 
+        VorigeButton.setBackground(new java.awt.Color(255, 204, 204));
+        VorigeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         VorigeButton.setText("Vorige");
         VorigeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +106,7 @@ public class AddPenalty extends javax.swing.JFrame {
             }
         });
 
+        jLabelTop.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabelTop.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,36 +119,40 @@ public class AddPenalty extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabelTop))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(VorigeButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
+                        .addGap(139, 139, 139)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(StoreButton)
-                            .addComponent(jRadioButtonJa)
-                            .addComponent(jRadioButtonNee)
+                            .addComponent(StoreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(VoegNieuweHighlightToeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(VoegNieuweHighlightToeButton))))
-                .addContainerGap(167, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonNee)
+                                    .addComponent(jRadioButtonJa))))))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelTop)
-                .addGap(45, 45, 45)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jRadioButtonJa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButtonNee)
-                .addGap(17, 17, 17)
-                .addComponent(StoreButton)
+                .addGap(28, 28, 28)
+                .addComponent(StoreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(VoegNieuweHighlightToeButton)
-                .addGap(20, 20, 20)
-                .addComponent(VorigeButton)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(VoegNieuweHighlightToeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();

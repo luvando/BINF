@@ -93,12 +93,24 @@ public class AddHighlight extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Highlight toevoegen");
 
-        jLabel1.setText("Selecteer speler");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Speler:");
 
+        jListSpeler.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jScrollPane1.setViewportView(jListSpeler);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Minuut:");
 
+        jTextMinuut.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextMinuut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextMinuutActionPerformed(evt);
+            }
+        });
+
+        GoalButton.setBackground(java.awt.SystemColor.activeCaption);
+        GoalButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         GoalButton.setText("Goal");
         GoalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +118,8 @@ public class AddHighlight extends javax.swing.JFrame {
             }
         });
 
+        OwngoalButton.setBackground(java.awt.SystemColor.activeCaption);
+        OwngoalButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         OwngoalButton.setText("Owngoal");
         OwngoalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +127,8 @@ public class AddHighlight extends javax.swing.JFrame {
             }
         });
 
+        PenaltyButton.setBackground(java.awt.SystemColor.activeCaption);
+        PenaltyButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         PenaltyButton.setText("Penalty");
         PenaltyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +136,8 @@ public class AddHighlight extends javax.swing.JFrame {
             }
         });
 
+        StrafButton.setBackground(java.awt.SystemColor.activeCaption);
+        StrafButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         StrafButton.setText("Straf");
         StrafButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +145,8 @@ public class AddHighlight extends javax.swing.JFrame {
             }
         });
 
+        VorigeButton.setBackground(new java.awt.Color(255, 204, 204));
+        VorigeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         VorigeButton.setText("Vorige");
         VorigeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,9 +154,11 @@ public class AddHighlight extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Kies soort highlight");
 
         buttonGroup1.add(jRadioButtonThuisTeam);
+        jRadioButtonThuisTeam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jRadioButtonThuisTeam.setText("Thuis");
         jRadioButtonThuisTeam.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -145,6 +167,7 @@ public class AddHighlight extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(jRadioButtonUitTeam);
+        jRadioButtonUitTeam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jRadioButtonUitTeam.setText("Uit");
         jRadioButtonUitTeam.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -152,8 +175,10 @@ public class AddHighlight extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Selecteer team");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("Team:");
 
+        jLabelTop.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabelTop.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,67 +186,77 @@ public class AddHighlight extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(VorigeButton)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(34, 34, 34)
-                            .addComponent(jScrollPane1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabelTop))
-                            .addGap(39, 39, 39)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(StrafButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(PenaltyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(OwngoalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(GoalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextMinuut)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jRadioButtonThuisTeam)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jRadioButtonUitTeam))))))
-                .addContainerGap(91, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabelTop))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel1))
+                                        .addGap(57, 57, 57)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jRadioButtonUitTeam)
+                                                .addGap(51, 51, 51)
+                                                .addComponent(jRadioButtonThuisTeam))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(51, 51, 51)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextMinuut, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(StrafButton, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                    .addComponent(PenaltyButton, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                    .addComponent(OwngoalButton, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                    .addComponent(GoalButton, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                    .addComponent(VorigeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))))))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {GoalButton, OwngoalButton, PenaltyButton, StrafButton, VorigeButton});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(jLabelTop)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
                     .addComponent(jRadioButtonThuisTeam)
-                    .addComponent(jRadioButtonUitTeam)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
+                    .addComponent(jRadioButtonUitTeam))
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextMinuut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jTextMinuut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(GoalButton)
+                .addComponent(GoalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OwngoalButton)
+                .addComponent(OwngoalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PenaltyButton)
+                .addComponent(PenaltyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(StrafButton)
-                .addGap(22, 22, 22)
-                .addComponent(VorigeButton)
-                .addContainerGap())
+                .addComponent(StrafButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -350,6 +385,10 @@ public class AddHighlight extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jRadioButtonThuisTeamStateChanged
+
+    private void jTextMinuutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMinuutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextMinuutActionPerformed
 
     /**
      * @param args the command line arguments

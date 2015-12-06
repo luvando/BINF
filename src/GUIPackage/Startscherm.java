@@ -45,7 +45,6 @@ public class Startscherm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         BestaandeCompetitieButton = new javax.swing.JButton();
-        CancelButton = new javax.swing.JButton();
         GegevensOpvragenButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -65,7 +64,11 @@ public class Startscherm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Competitie");
         setAlwaysOnTop(true);
+        setAutoRequestFocus(false);
+        setBackground(java.awt.Color.blue);
 
+        BestaandeCompetitieButton.setBackground(java.awt.SystemColor.activeCaption);
+        BestaandeCompetitieButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BestaandeCompetitieButton.setText("Competities");
         BestaandeCompetitieButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,20 +76,17 @@ public class Startscherm extends javax.swing.JFrame {
             }
         });
 
-        CancelButton.setText("Cancel");
-        CancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelButtonActionPerformed(evt);
-            }
-        });
-
+        GegevensOpvragenButton.setBackground(java.awt.SystemColor.activeCaption);
+        GegevensOpvragenButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         GegevensOpvragenButton.setText("Gegevens opvragen");
+        GegevensOpvragenButton.setMaximumSize(new java.awt.Dimension(180, 29));
         GegevensOpvragenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GegevensOpvragenButtonActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ijshockey");
 
@@ -94,28 +94,28 @@ public class Startscherm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(114, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CancelButton)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(GegevensOpvragenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BestaandeCompetitieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(GegevensOpvragenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(160, 160, 160)
+                            .addComponent(BestaandeCompetitieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(56, 56, 56))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1)
-                .addGap(35, 35, 35)
-                .addComponent(BestaandeCompetitieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(BestaandeCompetitieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(GegevensOpvragenButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addComponent(CancelButton)
-                .addContainerGap())
+                .addComponent(GegevensOpvragenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,11 +134,6 @@ public class Startscherm extends javax.swing.JFrame {
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BestaandeCompetitieButtonActionPerformed
-
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // cancel
-        System.exit(0);
-    }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void GegevensOpvragenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GegevensOpvragenButtonActionPerformed
         // TODO add your handling code here:
@@ -189,7 +184,6 @@ public class Startscherm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BestaandeCompetitieButton;
-    private javax.swing.JButton CancelButton;
     private javax.swing.JButton GegevensOpvragenButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

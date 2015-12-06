@@ -78,15 +78,14 @@ public class AddDeelname extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabelTop.setText("Bestaan team toevoegen ");
+        jLabelTop.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelTop.setText("Bestaand team toevoegen");
 
-        jListTeam.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jListTeam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jScrollPane1.setViewportView(jListTeam);
 
+        Store.setBackground(java.awt.SystemColor.activeCaption);
+        Store.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         Store.setText("Store");
         Store.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +93,8 @@ public class AddDeelname extends javax.swing.JFrame {
             }
         });
 
+        jButtonVorige.setBackground(new java.awt.Color(255, 204, 204));
+        jButtonVorige.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonVorige.setText("Vorige");
         jButtonVorige.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,29 +107,33 @@ public class AddDeelname extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTop)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonVorige)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 358, Short.MAX_VALUE)
-                        .addComponent(Store)))
+                        .addContainerGap()
+                        .addComponent(jButtonVorige, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+                        .addComponent(Store, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(207, 207, 207)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addComponent(jLabelTop)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jLabelTop)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Store)
-                    .addComponent(jButtonVorige))
+                    .addComponent(Store, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVorige, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -148,7 +153,7 @@ public class AddDeelname extends javax.swing.JFrame {
             DriverManager.addDeelname(te, competitie, seizoen);
             JOptionPane.showMessageDialog(null, "Deelname team opgeslagen!");
         } catch (DBException ex) {
-            Logger.getLogger(AddNieuweCompetitie.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddDeelname.class.getName()).log(Level.SEVERE, null, ex);
         }    }//GEN-LAST:event_StoreActionPerformed
 
     private void jButtonVorigeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVorigeActionPerformed

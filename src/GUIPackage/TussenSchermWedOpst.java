@@ -42,7 +42,7 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
         this.oldForm = oldForm;
         setLocationRelativeTo(null);
         initComponents();
-        this.setjLabetTop("Wedstrijd opgeslaan voor : " + wedstrijd.getThuisTeam().getNaam() + " tegen : " + wedstrijd.getUitTeam().getNaam()+"!");
+        this.setjLabetTop("Wedstrijd opgeslaan voor : " + wedstrijd.getThuisTeam().getNaam() + " - " + wedstrijd.getUitTeam().getNaam()+"!");
     }
 
     /**
@@ -59,6 +59,8 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jButtonAddOpstelling.setBackground(java.awt.SystemColor.activeCaption);
+        jButtonAddOpstelling.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonAddOpstelling.setText("Opstelling en wissels toevoegen");
         jButtonAddOpstelling.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +68,7 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
             }
         });
 
-        jLabelTop.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelTop.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelTop.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -74,22 +76,22 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTop, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jButtonAddOpstelling)))
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addGap(197, 197, 197)
+                .addComponent(jButtonAddOpstelling, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabelTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelTop)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
-                .addComponent(jButtonAddOpstelling)
-                .addContainerGap())
+                .addGap(105, 105, 105)
+                .addComponent(jButtonAddOpstelling, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         pack();
