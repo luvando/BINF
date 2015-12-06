@@ -84,8 +84,6 @@ public class TeamRapport extends javax.swing.JFrame {
             }
         });
 
-        jLabelTop.setText("---");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

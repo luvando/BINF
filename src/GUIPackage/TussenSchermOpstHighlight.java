@@ -54,7 +54,7 @@ public class TussenSchermOpstHighlight extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel1.setText("jLabel1");
 
         jButtonAddHighlight.setText("Highlights toevoegen");
