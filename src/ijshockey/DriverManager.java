@@ -1221,6 +1221,15 @@ public class DriverManager {
                     + "AS tabel "
                     + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar + ")"
                     + "AS goals, "
+                    + "(SELECT COUNT(DISTINCT tabel.wedstrijdnr)\n"
+                    + "FROM \n"
+                    + "(SELECT goal.lidnr, goal.wedstrijdnr, wedstrijd.competitienaam, wedstrijd.jaar\n"
+                    + "FROM goal\n"
+                    + "JOIN wedstrijd\n"
+                    + "ON goal.wedstrijdnr = wedstrijd.wedstrijdnr\n"
+                    + ")AS tabel\n"
+                    + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar + "\n"
+                    + ") AS 'wedstrijden gespeeld',"
                     + "(SELECT COUNT(*) "
                     + "FROM \n"
                     + "(SELECT goal.lidnr_assist, goal.wedstrijdnr, wedstrijd.competitienaam, wedstrijd.jaar "
@@ -1230,14 +1239,14 @@ public class DriverManager {
                     + "AS tabel "
                     + "WHERE tabel.lidnr_assist = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar + ")"
                     + "AS assists,"
-                    + "(SELECT COUNT(gescoord) "
+                    + "(SELECT COUNT(*) "
                     + "FROM \n"
                     + "(SELECT penalty.lidnr, penalty.wedstrijdnr, wedstrijd.competitienaam, wedstrijd.jaar, penalty.gescoord "
                     + "FROM penalty \n"
                     + "JOIN wedstrijd \n"
                     + "ON wedstrijd.wedstrijdnr = penalty.wedstrijdnr) \n"
                     + "AS tabel \n"
-                    + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar + ")"
+                    + "WHERE tabel.lidnr = " + lidnr + " AND tabel.competitienaam = '" + competitienaam + "' AND tabel.jaar = " + jaar + " AND tabel.gescoord = 1)"
                     + "AS penaltysgescoord,"
                     + "(SELECT COUNT(*) "
                     + "FROM \n"
@@ -1270,7 +1279,7 @@ public class DriverManager {
             int penaltys = getNumberOfPenaltys(lidnr, competitienaam, jaar);
             int penaltysgescoord;
             int speelminuten;
-            //int aantalwedstrijden;
+            int aantalwedstrijden;
 
             while (srs.next()) {
                 voornaam = srs.getString("voornaam");
@@ -1280,16 +1289,16 @@ public class DriverManager {
                 owngoals = srs.getInt("owngoals");
                 penaltysgescoord = srs.getInt("penaltysgescoord");
                 speelminuten = srs.getInt("speelminuten");
-                // aantalwedstrijden = srs.getInt("aantalwedstrijden");
+                aantalwedstrijden = srs.getInt("wedstrijden gespeeld");
 
                 String rapport;
                 rapport = voornaam + " " + achternaam + "\n"
                         + "----------------------" + "\n"
-                        + speelminuten + " minuten gespeeld in " /*+ aantalwedstrijden + " wedstrijden" */ + "\n"
-                        + goals + " goals" + "\n"
-                        + owngoals + " owngoals" + "\n"
-                        + penaltys + " penaltys, waarvan " + penaltysgescoord + " gescoord" + "\n"
-                        + assists + " assists";
+                        + speelminuten + " minuten gespeeld in " + aantalwedstrijden + " wedstrijd(en)"  + "\n"
+                        + goals + " goal(s)" + "\n"
+                        + owngoals + " owngoal(s)" + "\n"
+                        + penaltys + " penalty(s), waarvan " + penaltysgescoord + " gescoord" + "\n"
+                        + assists + " assist(s)";
                 System.out.println(rapport);
             }
 

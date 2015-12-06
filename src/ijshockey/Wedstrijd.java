@@ -142,12 +142,12 @@ public class Wedstrijd {
     }
 
     public String printWedstrijd() {
-        return thuisTeam.getNaam() + " - " + uitTeam.getNaam() + " " + datum;
+        return "  " + thuisTeam.getNaam() + "  -  " + uitTeam.getNaam() + "  (" + datum + ")";
     }
 
     @Override
     public String toString() {
-        return thuisTeam + " - " + uitTeam + " " + datum;
+        return "  " + thuisTeam + "  -  " + uitTeam + "  (" + datum + ")";
     }
 
 }
