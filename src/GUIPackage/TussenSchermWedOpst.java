@@ -60,7 +60,7 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonAddOpstelling.setBackground(java.awt.SystemColor.activeCaption);
-        jButtonAddOpstelling.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButtonAddOpstelling.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonAddOpstelling.setText("Opstelling en wissels toevoegen");
         jButtonAddOpstelling.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,7 +68,7 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
             }
         });
 
-        jLabelTop.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelTop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelTop.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -76,13 +76,13 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(jButtonAddOpstelling, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(jLabelTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelTop, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jButtonAddOpstelling)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,8 +90,8 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelTop)
                 .addGap(105, 105, 105)
-                .addComponent(jButtonAddOpstelling, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addComponent(jButtonAddOpstelling, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         pack();

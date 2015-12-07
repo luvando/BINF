@@ -210,7 +210,7 @@ public class AddOpstelling extends javax.swing.JFrame {
         setTitle("Opstelling thuisteam");
 
         Done.setBackground(java.awt.SystemColor.activeCaption);
-        Done.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Done.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Done.setText("Done");
         Done.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,7 +219,7 @@ public class AddOpstelling extends javax.swing.JFrame {
         });
 
         VorigeButton.setBackground(new java.awt.Color(255, 204, 204));
-        VorigeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        VorigeButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         VorigeButton.setText("Vorige");
         VorigeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,13 +227,13 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Speler:");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Thuisteam");
 
-        jListSpelersThuis.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jListSpelersThuis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jListSpelersThuis.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jListSpelersThuisMouseClicked(evt);
@@ -241,7 +241,7 @@ public class AddOpstelling extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jListSpelersThuis);
 
-        jTextSpelerThuis.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextSpelerThuis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextSpelerThuis.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextSpelerThuisMouseClicked(evt);
@@ -253,7 +253,7 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxPositie.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBoxPositie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBoxPositie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Goalie", "Defender", "Forward" }));
         jComboBoxPositie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,20 +261,20 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Tijdstip in:");
 
-        jTextTijdstipInthuis.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextTijdstipInthuis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Tijdstip uit:");
 
-        jTextTijdstipUitThuis.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextTijdstipUitThuis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Speler:");
 
-        jComboxPositie2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboxPositie2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboxPositie2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Goalie", "Defender", "Forward" }));
         jComboxPositie2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,18 +282,18 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Tijdstip in:");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Uitteam");
 
-        jTextTijdstipInUit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextTijdstipInUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Tijdstip uit:");
 
-        jListSpelersUit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jListSpelersUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jListSpelersUit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jListSpelersUitMouseClicked(evt);
@@ -301,9 +301,9 @@ public class AddOpstelling extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(jListSpelersUit);
 
-        jTextTijdstipUitUit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextTijdstipUitUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextSpelerUit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextSpelerUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextSpelerUit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextSpelerUitMouseClicked(evt);
@@ -316,7 +316,7 @@ public class AddOpstelling extends javax.swing.JFrame {
         });
 
         Store.setBackground(java.awt.SystemColor.activeCaption);
-        Store.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Store.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Store.setText("Store");
         Store.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,7 +325,7 @@ public class AddOpstelling extends javax.swing.JFrame {
         });
 
         jButtonStore2.setBackground(java.awt.SystemColor.activeCaption);
-        jButtonStore2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButtonStore2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonStore2.setText("Store");
         jButtonStore2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -333,7 +333,7 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
 
-        jLabelTop.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabelTop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelTop.setText("jLabel14");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -348,12 +348,30 @@ public class AddOpstelling extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(47, 47, 47)
                                 .addComponent(jLabel12))
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelTop)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
-                                .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11))
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextSpelerUit)
+                                    .addComponent(jTextTijdstipInUit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(55, 55, 55)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboxPositie2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButtonStore2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextTijdstipUitUit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(0, 102, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -361,16 +379,19 @@ public class AddOpstelling extends javax.swing.JFrame {
                                 .addComponent(jLabel9))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(480, 480, 480)
+                                        .addComponent(Done, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel1)
                                             .addComponent(jLabel2))
                                         .addGap(21, 21, 21)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jTextSpelerThuis)
-                                            .addComponent(jTextTijdstipInthuis, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jTextTijdstipInthuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(55, 55, 55)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jComboBoxPositie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,27 +399,9 @@ public class AddOpstelling extends javax.swing.JFrame {
                                                 .addComponent(jLabel3)
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(Store, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jTextTijdstipUitThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel11))
-                                        .addGap(21, 21, 21)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextSpelerUit)
-                                            .addComponent(jTextTijdstipInUit, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(55, 55, 55)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboxPositie2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel13)
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jButtonStore2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jTextTijdstipUitUit, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(Done, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                        .addContainerGap(57, Short.MAX_VALUE))))
+                                                    .addComponent(Store, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTextTijdstipUitThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                        .addContainerGap(60, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,7 +445,7 @@ public class AddOpstelling extends javax.swing.JFrame {
                             .addComponent(jTextTijdstipUitUit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButtonStore2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Done, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
