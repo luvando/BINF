@@ -402,7 +402,7 @@ public class DriverManager {
 
             String sql = "UPDATE wedstrijd\n"
                     + "SET datum = " + datum + ", score_thuis = " + score_thuis + ", score_uit = " + score_uit + "\n"
-                    + "WHERE competitienaam = "  + " AND jaar = " + " AND wedstrijdnr = " + "";
+                    + "WHERE competitienaam = '" + w.getSeizoen().getC().getCompetitienaam()  + "' AND jaar = " + w.getSeizoen().getJaar();
 
             stmt.executeUpdate(sql);
 
