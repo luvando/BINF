@@ -26,9 +26,11 @@ public class Wedstrijd {
     private Speeldag sp;
     private Boolean gespeeldBoo;
     private Seizoen seizoen;
+    
 
     public Wedstrijd(Seizoen seizoen, Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
 //        this.wedstrijdNr = wedstrijdNr;
+        this.seizoen = seizoen;
         this.thuisTeam = thuisTeam;
         this.uitTeam = uitTeam;
         this.arena = arena;
@@ -42,6 +44,7 @@ public class Wedstrijd {
 
     public Wedstrijd(Seizoen seizoen, Team thuisTeam, Team uitTeam, String arena, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
 //        this.wedstrijdNr = wedstrijdNr;
+        this.seizoen = seizoen;
         this.thuisTeam = thuisTeam;
         this.uitTeam = uitTeam;
         this.arena = arena;
@@ -105,7 +108,6 @@ public class Wedstrijd {
     public void setSeizoen(Seizoen seizoen) {
         this.seizoen = seizoen;
     }
-    
 
     public int getScoreThuisTeam() {
         return scoreThuisTeam;

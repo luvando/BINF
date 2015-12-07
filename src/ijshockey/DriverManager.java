@@ -351,7 +351,7 @@ public class DriverManager {
             String sql = "INSERT INTO wedstrijd "
                     + "(competitienaam ,jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, "
                     + "lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit)"
-                    + "VALUES ('" + w.getSeizoen().getC().getCompetitienaam() + "','" + w.getSeizoen().getJaar() + "','" + w.getWedstrijdNr() + "','" + w.getArena() + "','"
+                    + "VALUES ('" + w.getSeizoen().getC().getCompetitienaam() + "'," + w.getSeizoen().getJaar() + ",'" + w.getWedstrijdNr() + "','" + w.getArena() + "','"
                     + w.getDatum() + "','" + w.getGespeeld() + "','" + w.getScoreThuisTeam() + "','" + w.getScoreUitTeam() + "','" + w.getScheidsrechter().getLidnr() + "','"
                     + w.getSp().getSpeeldagnr() + "','" + w.getThuisTeam().getStamNr() + "','" + w.getUitTeam().getStamNr() + "')";
 
