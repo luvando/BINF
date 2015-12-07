@@ -52,6 +52,7 @@ public class AddScheids extends javax.swing.JFrame {
         Vorige = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Scheidsrechter toevoegen");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Voornaam:");
@@ -170,6 +171,7 @@ public class AddScheids extends javax.swing.JFrame {
             Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
         }
         updateForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_VorigeActionPerformed
 
     /**
