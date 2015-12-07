@@ -45,6 +45,7 @@ public class SpelerRanking extends javax.swing.JFrame {
         System.setErr(printStream);
         
         DriverManager.printSpelerRanking(competitie, seizoen);
+        setLocationRelativeTo(null);
     }
 
     /**
