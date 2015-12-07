@@ -30,34 +30,34 @@ public class AddDeelname extends javax.swing.JFrame {
     private DriverManager dManager;
     private Competitie competitie;
     private Seizoen seizoen;
-
+    
     public AddDeelname() {
         initComponents();
-
+        
     }
-
+    
     public AddDeelname(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
         super("Deelname toevoegen");
         this.competitie = competitie;
         this.seizoen = seizoen;
         this.dManager = dManager;
         initComponents();
-
+        
         this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
         this.setjLabelTop("Deelname team toevoegen aan : " + competitie.getCompetitienaam() + " seizoen : " + seizoen.getJaar());
         setLocationRelativeTo(null);
-
+        
     }
-
+    
     private void FillLijstTeams(DefaultListModel DLM) {
-
+        
         try {
-
+            
             jListTeam.setModel(DLM);
-
+            
         } catch (Exception ex) {
             ex.printStackTrace();
-
+            
         }
     }
 
@@ -139,12 +139,12 @@ public class AddDeelname extends javax.swing.JFrame {
 
     private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
         Team te = null;
-
+        
         String team = (String) jListTeam.getSelectedValue();
         String[] teamstra = team.split("-");
         String teamstr = teamstra[teamstra.length - 1].trim();
         int stamnr = Integer.parseInt(teamstr);
-
+        
         try {
             te = DriverManager.getTeam(stamnr);
             DriverManager.addDeelname(te, competitie, seizoen);
@@ -162,7 +162,8 @@ public class AddDeelname extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        updateForm.setVisible(true);        // TODO add your handling code here:
+        updateForm.setVisible(true);        
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_jButtonVorigeActionPerformed
 
     /**
