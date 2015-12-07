@@ -54,7 +54,7 @@ public class Wedstrijd {
         this.sp = sp;
     } // VOOR NIET GESPEELDE MATCHEN
 
-    Wedstrijd(int wnr, Seizoen s, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, Speeldag sp, int gespeeld) {
+    Wedstrijd(int wnr, Seizoen s, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, Speeldag speeldag, int gespeeld) {
         this.seizoen = s;
         this.wedstrijdNr = wnr;
         this.thuisTeam = thuis;
@@ -65,6 +65,22 @@ public class Wedstrijd {
         this.scheidsrechter = scheidsrechter;
         this.datum = datum;
         this.gespeeld = gespeeld;
+        this.sp = speeldag;
+//SEARCH GESPEELDE MATCH
+    }
+
+    Wedstrijd(int wnr, Seizoen s, Team thuis, Team uit, String arena, Scheidsrechter scheidsrechter, String datum, Speeldag speeldag, int gespeeld) {
+        this.seizoen = s;
+        this.wedstrijdNr = wnr;
+        this.thuisTeam = thuis;
+        this.uitTeam = uit;
+        this.arena = arena;
+
+        this.scheidsrechter = scheidsrechter;
+        this.datum = datum;
+        this.gespeeld = gespeeld;
+        this.sp = speeldag;
+//SEARCH NIET GESPEELDE MATCH
     }
 
     public int getWedstrijdNr() {

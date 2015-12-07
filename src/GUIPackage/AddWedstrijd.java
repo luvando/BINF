@@ -438,21 +438,36 @@ public class AddWedstrijd extends javax.swing.JFrame {
         } catch (DBException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Wedstrijd wed = new Wedstrijd(seizoen, thuisTeam, uitTeam, arena, this.getjTextScoreThuis(), this.getjTextScoreUit(), scheidsrechter, this.getjTextDatum(), sp);
-        try {
-            DriverManager.addWedstrijd(wed);
-            int wedstrijdnr = DriverManager.getRecentWedstrijdNr();
-            this.wedstrijd = DriverManager.getWedstrijd(wedstrijdnr);
-            jTextScoreUit.setText("");
-            jTextScoreThuis.setText("");
-            jTextDatum.setText("");
-            jTextArena.setText("");
-            updateForm = new TussenSchermWedOpst(dManager, wedstrijd, this);
-            updateForm.setVisible(true);
-        } catch (DBException ex) {
-            Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if (jTextScoreThuis.getText().isEmpty()) {
+            Wedstrijd wedntgespeeld = new Wedstrijd(seizoen, thuisTeam, uitTeam, arena, scheidsrechter, this.getjTextDatum(), sp);
+            try {
+                DriverManager.addNoScoreWedstrijd(wedntgespeeld);
 
+                jTextScoreUit.setText("");
+                jTextScoreThuis.setText("");
+                jTextDatum.setText("");
+                jTextArena.setText("");
+                JOptionPane.showMessageDialog(null, "Wedstrijd gepland !!");
+            } catch (DBException ex) {
+                Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            Wedstrijd wed = new Wedstrijd(seizoen, thuisTeam, uitTeam, arena, this.getjTextScoreThuis(), this.getjTextScoreUit(), scheidsrechter, this.getjTextDatum(), sp);
+            try {
+                DriverManager.addWedstrijd(wed);
+                int wedstrijdnr = DriverManager.getRecentWedstrijdNr();
+                this.wedstrijd = DriverManager.getWedstrijd(wedstrijdnr);
+                jTextScoreUit.setText("");
+                jTextScoreThuis.setText("");
+                jTextDatum.setText("");
+                jTextArena.setText("");
+                updateForm = new TussenSchermWedOpst(dManager, wedstrijd, this);
+                updateForm.setVisible(true);
+            } catch (DBException ex) {
+                Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
      }//GEN-LAST:event_StoreActionPerformed
 

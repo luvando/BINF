@@ -451,8 +451,17 @@ public class CompetitieScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_addCompetitieButtonActionPerformed
 
     private void WedstrijdBewerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WedstrijdBewerkenButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_WedstrijdBewerkenButtonActionPerformed
+        BewerkWedstrijd updateForm = null;
+        Competitie c = DriverManager.getCompetitie((String) LijstCompetities.getSelectedValue());
+        Seizoen s = DriverManager.getSeizoen(Integer.parseInt(LijstSeizoenen.getSelectedValue()), c.getCompetitienaam());
+
+        try {
+            updateForm = new BewerkWedstrijd(dManager, c, s);
+        } catch (SQLException | DBException ex) {
+            Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        updateForm.setVisible(true);
+        this.setVisible(false);    }//GEN-LAST:event_WedstrijdBewerkenButtonActionPerformed
 
     private void DeelnameTeamToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeelnameTeamToevoegenActionPerformed
         AddDeelname updateForm = null;
@@ -472,7 +481,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
         AddScheids updateForm = new AddScheids(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_AddScheidsrechterButtonActionPerformed
 
     /**

@@ -254,9 +254,9 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT * "
+            String sql = "SELECT wedstrijdnr "
                     + "FROM wedstrijd "
-                    + "WHERE wedstrijdnr = '" + c.getCompetitienaam() + "'AND jaar = '" + s.getJaar()
+                    + "WHERE competitienaam = '" + c.getCompetitienaam() + "'AND jaar = '" + s.getJaar()
                     + "'AND gespeeld = " + "0";
 
             ResultSet srs = stmt.executeQuery(sql);
@@ -265,8 +265,7 @@ public class DriverManager {
             String arena;
             String datum;
             int gespeeld;
-            int score_thuis;
-            int score_uit;
+
             Scheidsrechter scheidsrechter;
             Speeldag speeldag;
             Team thuis;
@@ -278,13 +277,12 @@ public class DriverManager {
                 arena = srs.getString("arena");
                 datum = srs.getString("datum");
                 gespeeld = srs.getInt("gespeeld");
-                score_thuis = srs.getInt("score_thuis");
-                score_uit = srs.getInt("score_uit");
+
                 scheidsrechter = getScheids(srs.getInt("lidnr_scheidsrechter"));
                 speeldag = getSpeeldag(srs.getString("competitienaam"), srs.getInt("jaar"), srs.getInt("speeldagnr"));
                 thuis = getTeam(srs.getInt("stamnr_thuis"));
                 uit = getTeam(srs.getInt("stamnr_uit"));
-                Wedstrijd w = new Wedstrijd(wnr, s, thuis, uit, arena, score_thuis, score_uit, scheidsrechter, datum, speeldag, gespeeld);
+                Wedstrijd w = new Wedstrijd(wnr, s, thuis, uit, arena, scheidsrechter, datum, speeldag, gespeeld);
                 DLM.addElement(w);
 
             }
@@ -393,6 +391,37 @@ public class DriverManager {
     }
 
 //wedstrijd
+    public static void addNoScoreWedstrijd(Wedstrijd w) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "INSERT INTO wedstrijd "
+                    + "(competitienaam ,jaar, arena, datum, gespeeld, "
+                    + "lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit)"
+                    + "VALUES ('" + w.getSeizoen().getC().getCompetitienaam() + "','"
+                    + w.getSeizoen().getJaar() + "','"
+                    + w.getArena() + "','"
+                    + w.getDatum() + "','"
+                    + w.getGespeeld() + "','"
+                   
+                    + w.getScheidsrechter().getLidnr() + "','"
+                    + w.getSp().getSpeeldagnr() + "','"
+                    + w.getThuisTeam().getStamNr() + "','"
+                    + w.getUitTeam().getStamNr() + "')";
+
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
     public static void addWedstrijd(Wedstrijd w) throws DBException {
         Connection con = null;
         try {
@@ -401,11 +430,19 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "INSERT INTO wedstrijd "
-                    + "(competitienaam ,jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, "
+                    + "(competitienaam ,jaar, arena, datum, gespeeld, score_thuis, score_uit, "
                     + "lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit)"
-                    + "VALUES ('" + w.getSeizoen().getC().getCompetitienaam() + "'," + w.getSeizoen().getJaar() + ",'" + w.getWedstrijdNr() + "','" + w.getArena() + "','"
-                    + w.getDatum() + "','" + w.getGespeeld() + "','" + w.getScoreThuisTeam() + "','" + w.getScoreUitTeam() + "','" + w.getScheidsrechter().getLidnr() + "','"
-                    + w.getSp().getSpeeldagnr() + "','" + w.getThuisTeam().getStamNr() + "','" + w.getUitTeam().getStamNr() + "')";
+                    + "VALUES ('" + w.getSeizoen().getC().getCompetitienaam() + "','"
+                    + w.getSeizoen().getJaar() + "','"
+                    + w.getArena() + "','"
+                    + w.getDatum() + "','"
+                    + w.getGespeeld() + "','"
+                    + w.getScoreThuisTeam() + "','"
+                    + w.getScoreUitTeam() + "','"
+                    + w.getScheidsrechter().getLidnr() + "','"
+                    + w.getSp().getSpeeldagnr() + "','"
+                    + w.getThuisTeam().getStamNr() + "','"
+                    + w.getUitTeam().getStamNr() + "')";
 
             stmt.executeUpdate(sql);
 
@@ -427,7 +464,6 @@ public class DriverManager {
             String sql = "UPDATE wedstrijd\n"
                     + "SET datum = " + datum + ", score_thuis = " + score_thuis + ", score_uit = " + score_uit + ",lidnr_scheidsrechter = " + scheids.getLidnr() + "\n"
                     + "WHERE competitienaam = '" + w.getSeizoen().getC().getCompetitienaam() + "' AND jaar = " + w.getSeizoen().getJaar();
-
             stmt.executeUpdate(sql);
 
             closeConnection(con);
