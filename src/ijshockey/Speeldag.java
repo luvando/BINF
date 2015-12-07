@@ -17,13 +17,11 @@ public class Speeldag {
     private int speeldagnr;
     private Seizoen seizoen;
 
-    
-
     public Speeldag(Competitie competitie, Seizoen seizoen, int speeldagnr) {
         this.competitie = competitie;
         this.seizoen = seizoen;
+        this.speeldagnr = speeldagnr;
     }
-    
 
     public Competitie getCompetitie() {
         return competitie;
@@ -40,8 +38,6 @@ public class Speeldag {
     public void setSeizoen(Seizoen seizoen) {
         this.seizoen = seizoen;
     }
-
-
 
     public int getSpeeldagnr() {
         return speeldagnr;

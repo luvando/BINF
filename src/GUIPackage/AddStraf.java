@@ -39,6 +39,7 @@ public class AddStraf extends javax.swing.JFrame {
         this.minuut = minuut;
         initComponents();
         this.setjLabelTop("Highlight toevoegen voor : " + speler.getVoornaam() + " " + speler.getAchternaam() + ", minuut : " + minuut);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -51,26 +52,20 @@ public class AddStraf extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextReden = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextMinuut = new javax.swing.JTextField();
         StoreButton = new javax.swing.JButton();
         VoegNieuweHighlightToeButton = new javax.swing.JButton();
         VorigeButton = new javax.swing.JButton();
         jLabelTop = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextReden = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Voeg straf toe");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Reden van straf");
-
-        jTextReden.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextReden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextRedenActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Aantal minuten geschorst");
@@ -82,6 +77,7 @@ public class AddStraf extends javax.swing.JFrame {
             }
         });
 
+        StoreButton.setBackground(java.awt.SystemColor.activeCaption);
         StoreButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         StoreButton.setText("Store");
         StoreButton.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +86,7 @@ public class AddStraf extends javax.swing.JFrame {
             }
         });
 
+        VoegNieuweHighlightToeButton.setBackground(java.awt.SystemColor.activeCaption);
         VoegNieuweHighlightToeButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         VoegNieuweHighlightToeButton.setText("Voeg nieuwe highlight toe");
         VoegNieuweHighlightToeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +95,7 @@ public class AddStraf extends javax.swing.JFrame {
             }
         });
 
+        VorigeButton.setBackground(new java.awt.Color(255, 204, 204));
         VorigeButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         VorigeButton.setText("Vorige");
         VorigeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +106,10 @@ public class AddStraf extends javax.swing.JFrame {
 
         jLabelTop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelTop.setText("jLabel3");
+
+        jTextReden.setColumns(20);
+        jTextReden.setRows(5);
+        jScrollPane1.setViewportView(jTextReden);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,7 +127,7 @@ public class AddStraf extends javax.swing.JFrame {
                             .addComponent(VorigeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(jTextMinuut)
                             .addComponent(StoreButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jTextReden))))
+                            .addComponent(jScrollPane1))))
                 .addContainerGap(119, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -145,8 +147,8 @@ public class AddStraf extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextReden, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jTextMinuut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,10 +163,6 @@ public class AddStraf extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextRedenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextRedenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextRedenActionPerformed
 
     private void VoegNieuweHighlightToeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoegNieuweHighlightToeButtonActionPerformed
         // TODO add your handling code here:
@@ -242,8 +240,9 @@ public class AddStraf extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelTop;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextMinuut;
-    private javax.swing.JTextField jTextReden;
+    private javax.swing.JTextArea jTextReden;
     // End of variables declaration//GEN-END:variables
 
     private void setjLabelTop(String string) {

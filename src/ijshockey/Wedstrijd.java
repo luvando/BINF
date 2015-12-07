@@ -25,9 +25,12 @@ public class Wedstrijd {
     private int gespeeld;
     private Speeldag sp;
     private Boolean gespeeldBoo;
+    private Seizoen seizoen;
+    
 
-    public Wedstrijd(Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
+    public Wedstrijd(Seizoen seizoen, Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
 //        this.wedstrijdNr = wedstrijdNr;
+        this.seizoen = seizoen;
         this.thuisTeam = thuisTeam;
         this.uitTeam = uitTeam;
         this.arena = arena;
@@ -37,7 +40,20 @@ public class Wedstrijd {
         this.scheidsrechter = scheidsrechter;
         this.gespeeld = 1;
         this.sp = sp;
-    }
+    } // GESPEELDE WEDSTRIJDEN
+
+    public Wedstrijd(Seizoen seizoen, Team thuisTeam, Team uitTeam, String arena, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
+//        this.wedstrijdNr = wedstrijdNr;
+        this.seizoen = seizoen;
+        this.thuisTeam = thuisTeam;
+        this.uitTeam = uitTeam;
+        this.arena = arena;
+        this.seizoen = seizoen;
+        this.datum = datum;
+        this.scheidsrechter = scheidsrechter;
+        this.gespeeld = 0;
+        this.sp = sp;
+    } // VOOR NIET GESPEELDE MATCHEN
 
     Wedstrijd(int wnr, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, Speeldag sp, int gespeeld) {
         this.wedstrijdNr = wnr;
@@ -83,6 +99,14 @@ public class Wedstrijd {
 
     public void setArena(String arena) {
         this.arena = arena;
+    }
+
+    public Seizoen getSeizoen() {
+        return seizoen;
+    }
+
+    public void setSeizoen(Seizoen seizoen) {
+        this.seizoen = seizoen;
     }
 
     public int getScoreThuisTeam() {

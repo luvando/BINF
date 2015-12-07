@@ -107,6 +107,7 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
             }
         });
 
+        SearchButton.setBackground(java.awt.SystemColor.activeCaption);
         SearchButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         SearchButton.setText("Zoek competitie");
         SearchButton.addActionListener(new java.awt.event.ActionListener() {

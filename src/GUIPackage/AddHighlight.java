@@ -195,12 +195,12 @@ public class AddHighlight extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel1))
                                 .addGap(57, 57, 57)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jRadioButtonUitTeam)
-                                        .addGap(51, 51, 51)
-                                        .addComponent(jRadioButtonThuisTeam))))
+                                        .addComponent(jRadioButtonThuisTeam)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jRadioButtonUitTeam))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,9 +266,9 @@ public class AddHighlight extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
 
-        AddWedstrijd updateForm = null;
+        AddOpstelling updateForm = null;
         try {
-            updateForm = new AddWedstrijd(dManager, wedstrijd.getSp().getCompetitie(), wedstrijd.getSp().getSeizoen());
+            updateForm = new AddOpstelling(dManager, wedstrijd);
         } catch (SQLException ex) {
             Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
         }

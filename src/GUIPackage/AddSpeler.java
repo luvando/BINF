@@ -5,8 +5,11 @@
  */
 package GUIPackage;
 
+import static GUIPackage.BewerkTeam.dManager;
+import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Seizoen;
 import ijshockey.Speler;
 import ijshockey.Team;
 import ijshockey.Trainer;
@@ -24,6 +27,8 @@ public class AddSpeler extends javax.swing.JFrame {
 
     public static DriverManager dManager;
     public Team team;
+    private Competitie competitie;
+    private Seizoen siezoen;
 
     /**
      * Creates new form AddSpeler
@@ -32,10 +37,11 @@ public class AddSpeler extends javax.swing.JFrame {
         initComponents();
     }
 
-    public AddSpeler(DriverManager dManager, Team team) {
+    public AddSpeler(DriverManager dManager, Team team, Competitie competitie, Seizoen seizoen) {
         this.dManager = dManager;
         this.team = team;
-
+        this.competitie = competitie;
+        this.siezoen = seizoen;
         initComponents();
         this.setjLabelTop("Speler toevoegen aan : " + team.getNaam());
     }
@@ -166,7 +172,16 @@ public class AddSpeler extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-      
+        BewerkTeam updateForm = null;
+
+        try {
+            updateForm = new BewerkTeam(dManager, competitie, siezoen);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddSpeler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        updateForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed

@@ -438,7 +438,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
         } catch (DBException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Wedstrijd wed = new Wedstrijd(thuisTeam, uitTeam, arena, this.getjTextScoreThuis(), this.getjTextScoreUit(), scheidsrechter, this.getjTextDatum(), sp);
+        Wedstrijd wed = new Wedstrijd(seizoen, thuisTeam, uitTeam, arena, this.getjTextScoreThuis(), this.getjTextScoreUit(), scheidsrechter, this.getjTextDatum(), sp);
         try {
             DriverManager.addWedstrijd(wed);
             int wedstrijdnr = DriverManager.getRecentWedstrijdNr();
