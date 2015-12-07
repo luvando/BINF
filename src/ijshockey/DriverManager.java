@@ -349,9 +349,9 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "INSERT INTO wedstrijd "
-                    + "(competitienaam, jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, "
+                    + "(competitienaam ,jaar, wedstrijdnr, arena, datum, gespeeld, score_thuis, score_uit, "
                     + "lidnr_scheidsrechter, speeldagnr, stamnr_thuis, stamnr_uit)"
-                    + "VALUES ('" + w.getSp().getCompetitie().getCompetitienaam() + "','" + w.getSp().getSeizoen().getJaar() + "','" + w.getWedstrijdNr() + "','" + w.getArena() + "','"
+                    + "VALUES ('" + w.getSeizoen().getC().getCompetitienaam() + "','" + w.getSeizoen().getJaar() + "','" + w.getWedstrijdNr() + "','" + w.getArena() + "','"
                     + w.getDatum() + "','" + w.getGespeeld() + "','" + w.getScoreThuisTeam() + "','" + w.getScoreUitTeam() + "','" + w.getScheidsrechter().getLidnr() + "','"
                     + w.getSp().getSpeeldagnr() + "','" + w.getThuisTeam().getStamNr() + "','" + w.getUitTeam().getStamNr() + "')";
 
@@ -1335,8 +1335,12 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "INSERT into trainer "
-                    + "(voornaam, achternaam, geboortedatum) "
-                    + "VALUES ('" + s.getVoornaam() + "', '" + s.getAchternaam() + "', '" + s.getGeboortedatum() + "')";
+                    + "(voornaam, achternaam, geboortedatum,stamnr_team) "
+                    + "VALUES ('"
+                    + s.getVoornaam() + "', '"
+                    + s.getAchternaam() + "', '"
+                    + s.getGeboortedatum() + "','"
+                    + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
@@ -1385,7 +1389,7 @@ public class DriverManager {
     }
 
 //team
-    public static void addTeam(Team t, String competitie, int jaar) throws DBException {
+    public static void addTeam(Team t) throws DBException {
         Connection con = null;
         try {
             con = getConnection();

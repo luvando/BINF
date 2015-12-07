@@ -72,6 +72,7 @@ public class Seizoen {
     public void setJaar(int jaar) {
         this.jaar = jaar;
     }
+    
 
     /*public ArrayList<Speeldag> getSpeeldagen() {
         return speeldagen;
@@ -80,6 +81,14 @@ public class Seizoen {
     public void setSpeeldagen(ArrayList<Speeldag> speeldagen) {
         this.speeldagen = speeldagen;
     }*/
+
+    public Competitie getC() {
+        return c;
+    }
+
+    public void setC(Competitie c) {
+        this.c = c;
+    }
     
     
 

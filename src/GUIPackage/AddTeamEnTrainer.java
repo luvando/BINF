@@ -48,7 +48,6 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         AddTeamEnTrainer.dManager = dManager;
         initComponents();
         setLocationRelativeTo(null);
-        Store.addActionListener(new AddTeamEnTrainer.EventHandler(this));
 
     }
 
@@ -56,7 +55,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         AddTeamEnTrainer.dManager = dManager;
         initComponents();
         setLocationRelativeTo(null);
-        Store.addActionListener(new AddTeamEnTrainer.EventHandler(this));
+
         this.competitie = competitie;
         this.seizoen = seizoen;
 
@@ -154,6 +153,11 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         Store.setBackground(java.awt.SystemColor.activeCaption);
         Store.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Store.setText("Store");
+        Store.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StoreActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Team");
@@ -303,6 +307,28 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         updateForm.setVisible(true);
         this.setVisible(false);    }//GEN-LAST:event_jButtonTerugActionPerformed
 
+    private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
+
+        Trainer tr = new Trainer(VoornaamTrainer.getText(), AchternaamTrainer.getText(), GeboortedatumTrainer.getText());
+        Team te = new Team(Integer.parseInt(Stamnummer.getText()), TeamNaam.getText(), Thuisarena.getText(), tr);
+        AchternaamTrainer.setText("");
+        VoornaamTrainer.setText("");
+        GeboortedatumTrainer.setText("");
+        TeamNaam.setText("");
+        Thuisarena.setText("");
+        Stamnummer.setText("");
+
+        try {
+
+            DriverManager.addTrainer(tr);
+            DriverManager.addTeam(te);
+            JOptionPane.showMessageDialog(null, "Team en Trainer opgeslagen!");
+        } catch (DBException ex) {
+            Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_StoreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -317,16 +343,21 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddTeamEnTrainer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddTeamEnTrainer.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddTeamEnTrainer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddTeamEnTrainer.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddTeamEnTrainer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddTeamEnTrainer.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddTeamEnTrainer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddTeamEnTrainer.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -337,39 +368,9 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
                 new AddTeamEnTrainer().setVisible(true);
             }
         });
+
     }
 
-    private class EventHandler implements ActionListener {
-
-        private AddTeamEnTrainer form;
-
-        public EventHandler(AddTeamEnTrainer antr) {
-            form = antr;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == Store) {
-                Team te = new Team(form.getStamnummer(), form.getThuisArena(), form.getTeamNaam());
-                Trainer tr = new Trainer(form.getVoornaamTrainer(), form.getAchternaamTrainer(), form.getGeboortedatumTrainer());
-                AchternaamTrainer.setText("");
-                VoornaamTrainer.setText("");
-                GeboortedatumTrainer.setText("");
-                TeamNaam.setText("");
-                Thuisarena.setText("");
-                Stamnummer.setText("");
-
-                try {
-
-                    DriverManager.addTrainer(tr);
-                    DriverManager.addTeam(te, competitie.getCompetitienaam(), seizoen.getJaar());
-                    JOptionPane.showMessageDialog(null, "Team en Trainer opgeslagen!");
-                } catch (DBException ex) {
-                    Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AchternaamTrainer;

@@ -266,9 +266,9 @@ public class AddHighlight extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
 
-        AddWedstrijd updateForm = null;
+        AddOpstelling updateForm = null;
         try {
-            updateForm = new AddWedstrijd(dManager, wedstrijd.getSp().getCompetitie(), wedstrijd.getSp().getSeizoen());
+            updateForm = new AddOpstelling(dManager, wedstrijd);
         } catch (SQLException ex) {
             Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
         }

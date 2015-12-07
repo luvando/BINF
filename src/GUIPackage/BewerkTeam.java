@@ -27,8 +27,8 @@ import javax.swing.text.Position;
 public class BewerkTeam extends javax.swing.JFrame {
 
     public static DriverManager dManager;
-    private String competitie;
-    private int seizoenInt;
+    private Competitie competitie;
+    private Seizoen seizoen;
 
     /**
      * Creates new form BewerkTeam
@@ -41,6 +41,8 @@ public class BewerkTeam extends javax.swing.JFrame {
 
     public BewerkTeam(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
         AddTeamEnTrainer.dManager = dManager;
+        this.competitie = competitie;
+        this.seizoen = seizoen;
         initComponents();
         setLocationRelativeTo(null);
         this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
@@ -192,7 +194,7 @@ public class BewerkTeam extends javax.swing.JFrame {
         int stamnr = Integer.parseInt(teamstr);
         try {
             team = DriverManager.getTeam(stamnr);
-            updateForm = new AddSpeler(dManager, team);
+            updateForm = new AddSpeler(dManager, team, competitie, seizoen);
 
         } catch (DBException ex) {
             Logger.getLogger(BewerkTeam.class.getName()).log(Level.SEVERE, null, ex);
