@@ -460,21 +460,51 @@ public class DriverManager {
 
      }*/
     public static int getRecentWedstrijdNr() throws DBException {
-        int wnr = 0;
         Connection con = null;
         try {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT MAX(wedstrijdnr) AS wedstrijdnr FROM wedstrijd";
+            String sql = "SELECT wedstrijdnr "
+                    + "FROM wedstrijd ";
 
             ResultSet srs = stmt.executeQuery(sql);
-            if (srs.next()) {
-                wnr = srs.getInt("wedstrijdnr");
+            int wnrold = 0;
+            int wnrfinal = 0;
+
+//            Competitie c;
+//            int jaar;
+//            String arena;
+//            String datum;
+//            int gespeeld;
+//            int score_thuis;
+//            int score_uit;
+//            Scheidsrechter scheidsrechter;
+//            Speeldag s;
+//            Team thuis;
+//            Team uit;
+            while (srs.next()) {
+                wnrold = srs.getInt("wedstrijdnr");
+                if (wnrold > wnrfinal) {
+                    wnrfinal = wnrold;
+                }
+
+//                c = getCompetitie(srs.getString("competitienaam"));
+//                jaar = srs.getInt("jaar");
+//                arena = srs.getString("arena");
+//                datum = srs.getString("datum");
+//                gespeeld = srs.getInt("gespeeld");
+//                score_thuis = srs.getInt("score_thuis");
+//                score_uit = srs.getInt("score_uit");
+//                scheidsrechter = getScheids(srs.getInt("lidnr_scheidsrechter"));
+//                s = getSpeeldag(srs.getString("competitienaam"), srs.getInt("jaar"), srs.getInt("speeldagnr"));
+//                thuis = getTeam(srs.getInt("stamnr_thuis"));
+//                uit = getTeam(srs.getInt("stamnr_uit"));
             }
+
             closeConnection(con);
-            return wnr;
+            return wnrfinal;
         } catch (Exception ex) {
             ex.printStackTrace();
             closeConnection(con);

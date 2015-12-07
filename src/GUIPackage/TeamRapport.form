@@ -101,6 +101,9 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelTop">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="---"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
