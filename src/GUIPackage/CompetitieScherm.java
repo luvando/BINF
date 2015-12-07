@@ -85,7 +85,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
         setTitle("Bestaande competitie");
 
         LijstCompetities.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        LijstCompetities.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        LijstCompetities.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LijstCompetities.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 LijstCompetitiesValueChanged(evt);
@@ -106,7 +106,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
         jLabel2.setText("Selecteer Seizoen");
 
         LijstSeizoenen.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        LijstSeizoenen.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        LijstSeizoenen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LijstSeizoenen.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 LijstSeizoenenValueChanged(evt);
@@ -114,7 +114,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(LijstSeizoenen);
 
-        SearchText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        SearchText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         SearchText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchTextActionPerformed(evt);
@@ -130,7 +130,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
             }
         });
 
-        NieuwSeizoen.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        NieuwSeizoen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         NieuwSeizoenButton.setBackground(java.awt.SystemColor.activeCaption);
         NieuwSeizoenButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -177,7 +177,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
             }
         });
 
-        Competitienaam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Competitienaam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         WedstrijdBewerkenButton.setBackground(java.awt.SystemColor.activeCaption);
         WedstrijdBewerkenButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -216,11 +216,11 @@ public class CompetitieScherm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(579, 579, 579)
+                                .addComponent(VorigeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(379, 379, 379)
                                 .addComponent(TeamToevoegenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(VorigeButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(SearchText, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(SearchButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(addCompetitieButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -244,7 +244,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(117, 117, 117)
                                         .addComponent(jLabel2)))))
-                        .addGap(75, 75, 75))))
+                        .addGap(45, 45, 45))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,24 +270,22 @@ public class CompetitieScherm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(DeelnameTeamToevoegen, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AddSpeeldagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(WedstrijdBewerkenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3))
-                            .addComponent(jScrollPane2))
+                        .addComponent(DeelnameTeamToevoegen, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AddSpeeldagButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(WedstrijdBewerkenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
                         .addGap(14, 14, 14)
                         .addComponent(TeamBewerkenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2))
                 .addGap(18, 18, 18)
-                .addComponent(TeamToevoegenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TeamToevoegenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
