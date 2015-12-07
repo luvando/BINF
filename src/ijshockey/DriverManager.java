@@ -254,10 +254,11 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT wedstrijdnr "
-                    + "FROM wedstrijd "
-                    + "WHERE competitienaam = '" + c.getCompetitienaam() + "'AND jaar = '" + s.getJaar()
-                    + "'AND gespeeld = " + "0";
+            String sql = "SELECT * \n"
+                    + "FROM wedstrijd\n "
+                    + "WHERE competitienaam = '" + c.getCompetitienaam()
+                    + "'AND jaar = " + s.getJaar()
+                    + "AND gespeeld = 0";
 
             ResultSet srs = stmt.executeQuery(sql);
 
@@ -406,7 +407,6 @@ public class DriverManager {
                     + w.getArena() + "','"
                     + w.getDatum() + "','"
                     + w.getGespeeld() + "','"
-                   
                     + w.getScheidsrechter().getLidnr() + "','"
                     + w.getSp().getSpeeldagnr() + "','"
                     + w.getThuisTeam().getStamNr() + "','"
