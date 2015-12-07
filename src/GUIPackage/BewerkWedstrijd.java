@@ -6,6 +6,7 @@
 package GUIPackage;
 
 import ijshockey.Competitie;
+import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Seizoen;
 import java.sql.SQLException;
@@ -31,7 +32,7 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
 
     }
 
-    public BewerkWedstrijd(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
+    public BewerkWedstrijd(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException, DBException {
         AddWedstrijd.dManager = dManager;
 
         this.seizoen = seizoen;

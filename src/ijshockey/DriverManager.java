@@ -272,7 +272,7 @@ public class DriverManager {
             Team thuis;
             Team uit;
 
-            if (srs.next()) {
+            while (srs.next()) {
 
                 wnr = srs.getInt("wedstrijdnr");
                 arena = srs.getString("arena");
@@ -286,19 +286,17 @@ public class DriverManager {
                 uit = getTeam(srs.getInt("stamnr_uit"));
                 Wedstrijd w = new Wedstrijd(wnr, s, thuis, uit, arena, score_thuis, score_uit, scheidsrechter, datum, speeldag, gespeeld);
                 DLM.addElement(w);
-            } else {
-                closeConnection(con);
-                return null;
-            }
 
+            }
             closeConnection(con);
+            return DLM;
 
         } catch (Exception ex) {
             ex.printStackTrace();
             closeConnection(con);
             throw new DBException(ex);
         }
-        return null;
+
     }
 
     public DriverManager() {
