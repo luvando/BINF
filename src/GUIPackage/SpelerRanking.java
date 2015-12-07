@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author Jasper
  */
 public class SpelerRanking extends javax.swing.JFrame {
-
+    
     private PrintStream standardOut;
     private Competitie competitie;
     private Seizoen seizoen;
@@ -33,6 +33,7 @@ public class SpelerRanking extends javax.swing.JFrame {
         this.competitie = competitie;
         this.seizoen = seizoen;
         initComponents();
+        setLocationRelativeTo(null);
         jTextArea1.setEditable(false);
         PrintStream printStream = new PrintStream(new CustomOutputStream(jTextArea1));
 
@@ -42,7 +43,7 @@ public class SpelerRanking extends javax.swing.JFrame {
         // re-assigns standard output stream and error output stream
         System.setOut(printStream);
         System.setErr(printStream);
-
+        
         DriverManager.printSpelerRanking(competitie, seizoen);
     }
 
