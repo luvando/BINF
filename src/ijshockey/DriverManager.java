@@ -246,6 +246,34 @@ public class DriverManager {
         return null;
 
     }
+    
+    public static DefaultListModel FillLijstWedstrijden(DefaultListModel DLM, Competitie c, Seizoen s) throws SQLException {
+        Connection con = null;
+        DLM = new DefaultListModel();
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT stamnr_thuis, stamnr_uit FROM wedstrijd";
+
+            ResultSet srs = stmt.executeQuery(sql);
+            int stamnr_thuis;
+            int stamnr_uit;
+            while (srs.next()) {
+                stamnr_thuis = srs.getInt("stamnr_thuis");
+                stamnr_uit = srs.getInt("stamnr_uit");
+                DLM.addElement(stamnr_thuis + " - " + stamnr_uit);
+            }
+            closeConnection(con);
+            return DLM;
+
+        } catch (Exception ex) {
+            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+            closeConnection(con);
+        }
+        return null;
+
+    }
 
     public DriverManager() {
     }
@@ -354,6 +382,27 @@ public class DriverManager {
                     + "VALUES ('" + w.getSp().getCompetitie().getCompetitienaam() + "','" + w.getSp().getSeizoen().getJaar() + "','" + w.getWedstrijdNr() + "','" + w.getArena() + "','"
                     + w.getDatum() + "','" + w.getGespeeld() + "','" + w.getScoreThuisTeam() + "','" + w.getScoreUitTeam() + "','" + w.getScheidsrechter().getLidnr() + "','"
                     + w.getSp().getSpeeldagnr() + "','" + w.getThuisTeam().getStamNr() + "','" + w.getUitTeam().getStamNr() + "')";
+
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+
+    public static void bewerkWedstrijd(Wedstrijd w, String datum, int score_thuis, int score_uit) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "UPDATE wedstrijd\n"
+                    + "SET datum = " + datum + ", score_thuis = " + score_thuis + ", score_uit = " + score_uit + "\n"
+                    + "WHERE competitienaam = "  + " AND jaar = " + " AND wedstrijdnr = " + "";
 
             stmt.executeUpdate(sql);
 
