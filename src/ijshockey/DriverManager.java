@@ -253,12 +253,12 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-
+            int nul = 0;
             String sql = "SELECT * \n"
                     + "FROM wedstrijd\n "
                     + "WHERE competitienaam = '" + c.getCompetitienaam()
                     + "'AND jaar = " + s.getJaar()
-                    + "AND gespeeld = 0";
+                    + "AND gespeeld = " + nul;
 
             ResultSet srs = stmt.executeQuery(sql);
 
