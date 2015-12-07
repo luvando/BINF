@@ -20,21 +20,26 @@ import java.util.logging.Logger;
  * @author Jasper
  */
 public class SpelerRanking extends javax.swing.JFrame {
-
     
     private PrintStream standardOut;
+    private Competitie competitie;
+    private Seizoen seizoen;
+
     /**
      * Creates new form SpelerRanking
      */
     public SpelerRanking(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws DBException {
         super("Topschutters");
+        this.competitie = competitie;
+        this.seizoen = seizoen;
         initComponents();
+        setLocationRelativeTo(null);
         jTextArea1.setEditable(false);
         PrintStream printStream = new PrintStream(new CustomOutputStream(jTextArea1));
-         
+
         // keeps reference of standard output stream
         standardOut = System.out;
-         
+
         // re-assigns standard output stream and error output stream
         System.setOut(printStream);
         System.setErr(printStream);
@@ -101,12 +106,8 @@ public class SpelerRanking extends javax.swing.JFrame {
 
     private void VorigeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeActionPerformed
         // TODO add your handling code here:
-        CompetitieOpvragen updateForm = null;
-        try {
-            updateForm = new CompetitieOpvragen(dManager);
-        } catch (DBException ex) {
-            Logger.getLogger(Startscherm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        GegevensOpvragen updateForm = null;
+        updateForm = new GegevensOpvragen(dManager, competitie, seizoen);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeActionPerformed
@@ -114,7 +115,6 @@ public class SpelerRanking extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Vorige;

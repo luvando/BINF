@@ -7,6 +7,7 @@ package GUIPackage;
 
 import static GUIPackage.CompetitieOpvragen.dManager;
 import static GUIPackage.RapportTeam.dManager;
+import static GUIPackage.TeamRanking.dManager;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
@@ -162,15 +163,10 @@ public class RapportSpeler extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
-        CompetitieOpvragen updateForm = null;
-        try {
-            updateForm = new CompetitieOpvragen(dManager);
-        } catch (DBException ex) {
-            Logger.getLogger(RapportSpeler.class.getName()).log(Level.SEVERE, null, ex);
-        }
+   GegevensOpvragen updateForm = null;
+        updateForm = new GegevensOpvragen(dManager, competitie, seizoen);
         updateForm.setVisible(true);
         this.setVisible(false);
-
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     /**

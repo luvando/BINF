@@ -32,12 +32,16 @@ public class TeamRanking extends javax.swing.JFrame {
     public static DriverManager dManager;
 
     private PrintStream standardOut;
+    private Competitie competitie;
+    private Seizoen seizoen;
 
     /**
      * Creates new form TeamRanking
      */
     public TeamRanking(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws DBException {
         super("Klassement");
+        this.competitie = competitie;
+        this.seizoen = seizoen;
         initComponents();
         this.setjLabelTop("Klassement van " + competitie.getCompetitienaam() + " seizoen : " + seizoen.getJaar());
 //        FillList();
@@ -151,12 +155,8 @@ public class TeamRanking extends javax.swing.JFrame {
 
     private void VorigeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeActionPerformed
         // TODO add your handling code here:
-        CompetitieOpvragen updateForm = null;
-        try {
-            updateForm = new CompetitieOpvragen(dManager);
-        } catch (DBException ex) {
-            Logger.getLogger(Startscherm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        GegevensOpvragen updateForm = null;
+        updateForm = new GegevensOpvragen(dManager, competitie, seizoen);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeActionPerformed

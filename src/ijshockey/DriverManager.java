@@ -39,7 +39,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -76,7 +76,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -108,7 +108,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -144,7 +144,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -172,7 +172,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -201,7 +201,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -239,7 +239,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -466,41 +466,13 @@ public class DriverManager {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT wedstrijdnr "
-                    + "FROM wedstrijd ";
+            String sql = "SELECT MAX(wedstrijdnr) AS wedstrijdnr " + " FROM wedstrijd ";
 
             ResultSet srs = stmt.executeQuery(sql);
-            int wnrold = 0;
+
             int wnrfinal = 0;
-
-//            Competitie c;
-//            int jaar;
-//            String arena;
-//            String datum;
-//            int gespeeld;
-//            int score_thuis;
-//            int score_uit;
-//            Scheidsrechter scheidsrechter;
-//            Speeldag s;
-//            Team thuis;
-//            Team uit;
             while (srs.next()) {
-                wnrold = srs.getInt("wedstrijdnr");
-                if (wnrold > wnrfinal) {
-                    wnrfinal = wnrold;
-                }
-
-//                c = getCompetitie(srs.getString("competitienaam"));
-//                jaar = srs.getInt("jaar");
-//                arena = srs.getString("arena");
-//                datum = srs.getString("datum");
-//                gespeeld = srs.getInt("gespeeld");
-//                score_thuis = srs.getInt("score_thuis");
-//                score_uit = srs.getInt("score_uit");
-//                scheidsrechter = getScheids(srs.getInt("lidnr_scheidsrechter"));
-//                s = getSpeeldag(srs.getString("competitienaam"), srs.getInt("jaar"), srs.getInt("speeldagnr"));
-//                thuis = getTeam(srs.getInt("stamnr_thuis"));
-//                uit = getTeam(srs.getInt("stamnr_uit"));
+                wnrfinal = srs.getInt("wedstrijdnr");
             }
 
             closeConnection(con);
