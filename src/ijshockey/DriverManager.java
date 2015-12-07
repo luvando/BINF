@@ -257,8 +257,8 @@ public class DriverManager {
             String sql = "SELECT * \n"
                     + "FROM wedstrijd\n "
                     + "WHERE competitienaam = '" + c.getCompetitienaam()
-                    + "'AND jaar = " + s.getJaar()
-                    + "AND gespeeld = " + nul;
+                    + "' AND jaar = " + s.getJaar()
+                    + " AND gespeeld = " + nul;
 
             ResultSet srs = stmt.executeQuery(sql);
 
