@@ -26,7 +26,6 @@ public class Wedstrijd {
     private Speeldag sp;
     private Boolean gespeeldBoo;
     private Seizoen seizoen;
-    
 
     public Wedstrijd(Seizoen seizoen, Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
 //        this.wedstrijdNr = wedstrijdNr;
@@ -55,7 +54,8 @@ public class Wedstrijd {
         this.sp = sp;
     } // VOOR NIET GESPEELDE MATCHEN
 
-    Wedstrijd(int wnr, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, Speeldag sp, int gespeeld) {
+    Wedstrijd(int wnr, Seizoen s, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, Speeldag sp, int gespeeld) {
+        this.seizoen = s;
         this.wedstrijdNr = wnr;
         this.thuisTeam = thuis;
         this.uitTeam = uit;
@@ -64,9 +64,7 @@ public class Wedstrijd {
         this.scoreUitTeam = score_thuis;
         this.scheidsrechter = scheidsrechter;
         this.datum = datum;
-        if (gespeeld == 1) {
-            this.setGespeeldBoo(true);
-        }
+        this.gespeeld = gespeeld;
     }
 
     public int getWedstrijdNr() {

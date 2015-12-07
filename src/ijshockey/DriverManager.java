@@ -246,33 +246,59 @@ public class DriverManager {
         return null;
 
     }
-    
-    public static DefaultListModel FillLijstWedstrijden(DefaultListModel DLM, Competitie c, Seizoen s) throws SQLException {
+
+    public static DefaultListModel FillLijstWedstrijden(DefaultListModel DLM, Competitie c, Seizoen s) throws SQLException, DBException {
         Connection con = null;
-        DLM = new DefaultListModel();
         try {
             con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT stamnr_thuis, stamnr_uit FROM wedstrijd";
+            String sql = "SELECT * "
+                    + "FROM wedstrijd "
+                    + "WHERE wedstrijdnr = '" + c.getCompetitienaam() + "'AND jaar = '" + s.getJaar()
+                    + "'AND gespeeld = " + "0";
 
             ResultSet srs = stmt.executeQuery(sql);
-            int stamnr_thuis;
-            int stamnr_uit;
-            while (srs.next()) {
-                stamnr_thuis = srs.getInt("stamnr_thuis");
-                stamnr_uit = srs.getInt("stamnr_uit");
-                DLM.addElement(stamnr_thuis + " - " + stamnr_uit);
+
+            int wnr;
+            String arena;
+            String datum;
+            int gespeeld;
+            int score_thuis;
+            int score_uit;
+            Scheidsrechter scheidsrechter;
+            Speeldag speeldag;
+            Team thuis;
+            Team uit;
+
+            if (srs.next()) {
+
+                wnr = srs.getInt("wedstrijdnr");
+                arena = srs.getString("arena");
+                datum = srs.getString("datum");
+                gespeeld = srs.getInt("gespeeld");
+                score_thuis = srs.getInt("score_thuis");
+                score_uit = srs.getInt("score_uit");
+                scheidsrechter = getScheids(srs.getInt("lidnr_scheidsrechter"));
+                speeldag = getSpeeldag(srs.getString("competitienaam"), srs.getInt("jaar"), srs.getInt("speeldagnr"));
+                thuis = getTeam(srs.getInt("stamnr_thuis"));
+                uit = getTeam(srs.getInt("stamnr_uit"));
+                Wedstrijd w = new Wedstrijd(wnr, s, thuis, uit, arena, score_thuis, score_uit, scheidsrechter, datum, speeldag, gespeeld);
+                DLM.addElement(w);
+            } else {
+                closeConnection(con);
+                return null;
             }
+
             closeConnection(con);
-            return DLM;
 
         } catch (Exception ex) {
-            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
             closeConnection(con);
+            throw new DBException(ex);
         }
         return null;
-
     }
 
     public DriverManager() {
@@ -393,7 +419,7 @@ public class DriverManager {
         }
     }
 
-    public static void bewerkWedstrijd(Wedstrijd w, String datum, int score_thuis, int score_uit) throws DBException {
+    public static void bewerkWedstrijd(Wedstrijd w, String datum, int score_thuis, int score_uit, Scheidsrechter scheids) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -401,8 +427,8 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "UPDATE wedstrijd\n"
-                    + "SET datum = " + datum + ", score_thuis = " + score_thuis + ", score_uit = " + score_uit + "\n"
-                    + "WHERE competitienaam = '" + w.getSeizoen().getC().getCompetitienaam()  + "' AND jaar = " + w.getSeizoen().getJaar();
+                    + "SET datum = " + datum + ", score_thuis = " + score_thuis + ", score_uit = " + score_uit + ",lidnr_scheidsrechter = " + scheids.getLidnr() + "\n"
+                    + "WHERE competitienaam = '" + w.getSeizoen().getC().getCompetitienaam() + "' AND jaar = " + w.getSeizoen().getJaar();
 
             stmt.executeUpdate(sql);
 
@@ -575,7 +601,8 @@ public class DriverManager {
                 closeConnection(con);
                 return null;
             }
-            Wedstrijd w = new Wedstrijd(wnr, thuis, uit, arena, score_thuis, score_uit, scheidsrechter, datum, speeldag, gespeeld);
+            Seizoen s = new Seizoen(c, jaar);
+            Wedstrijd w = new Wedstrijd(wnr, s, thuis, uit, arena, score_thuis, score_uit, scheidsrechter, datum, speeldag, gespeeld);
             closeConnection(con);
             return w;
         } catch (Exception ex) {
@@ -1586,7 +1613,6 @@ public class DriverManager {
             ResultSet srs = stmt.executeQuery(sql);
             String naam;
             int punten;
-            
 
             while (srs.next()) {
                 naam = srs.getString("naam");
