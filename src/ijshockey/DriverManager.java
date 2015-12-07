@@ -1533,12 +1533,13 @@ public class DriverManager {
             ResultSet srs = stmt.executeQuery(sql);
             String naam;
             int punten;
+            
 
             while (srs.next()) {
                 naam = srs.getString("naam");
                 punten = srs.getInt("punten");
 
-                System.out.println(naam + " " + punten);
+                System.out.println(naam + " - " + punten);
             }
 
             closeConnection(con);
