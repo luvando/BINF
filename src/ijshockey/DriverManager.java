@@ -39,7 +39,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -76,7 +76,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -108,7 +108,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -144,7 +144,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -172,7 +172,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -201,7 +201,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
@@ -239,7 +239,7 @@ public class DriverManager {
             closeConnection(con);
             return DLM;
 
-        } catch (DBException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
         }
