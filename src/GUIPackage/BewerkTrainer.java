@@ -5,8 +5,10 @@
  */
 package GUIPackage;
 
+import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Seizoen;
 import ijshockey.Team;
 import ijshockey.Trainer;
 import java.sql.SQLException;
@@ -25,6 +27,8 @@ public class BewerkTrainer extends javax.swing.JFrame {
     private Team team;
     public static DriverManager dManager;
     DefaultListModel DLM;
+    private Competitie competitie;
+    private Seizoen seizoen;
 
     /**
      * Creates new form BewerkTrainer
@@ -33,11 +37,12 @@ public class BewerkTrainer extends javax.swing.JFrame {
         initComponents();
     }
     
-    public BewerkTrainer(DriverManager dManager, Team team) throws SQLException {
+    public BewerkTrainer(DriverManager dManager, Team team, Competitie competitie, Seizoen seizoen) throws SQLException {
         super("Bewerk Trainer");
         BewerkSpeler.dManager = dManager;
         this.team = team;
-        
+        this.competitie = competitie;
+        this.seizoen = seizoen;
         initComponents();
         setLocationRelativeTo(null);
         Trainer trainer = team.getTrainer();
@@ -234,7 +239,7 @@ public class BewerkTrainer extends javax.swing.JFrame {
         BewerkTeam updateForm = null;
         
         try {
-            updateForm = new BewerkTeam(dManager);
+            updateForm = new BewerkTeam(dManager, competitie, seizoen);
         } catch (SQLException ex) {
             Logger.getLogger(BewerkTrainer.class.getName()).log(Level.SEVERE, null, ex);
         }

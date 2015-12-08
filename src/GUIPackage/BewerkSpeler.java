@@ -5,8 +5,10 @@
  */
 package GUIPackage;
 
+import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Seizoen;
 import ijshockey.Speler;
 import ijshockey.Team;
 import java.sql.SQLException;
@@ -26,6 +28,8 @@ public class BewerkSpeler extends javax.swing.JFrame {
     private Team team;
     public static DriverManager dManager;
     DefaultListModel DLM;
+    private Competitie competitie;
+    private Seizoen seizoen;
 
     /**
      * Creates new form BewerkSpeler
@@ -34,11 +38,12 @@ public class BewerkSpeler extends javax.swing.JFrame {
         initComponents();
     }
 
-    public BewerkSpeler(DriverManager dManager, Team team) throws SQLException {
+    public BewerkSpeler(DriverManager dManager, Team team, Competitie competitie, Seizoen seizoen) throws SQLException {
         super("Bewerk speler");
         BewerkSpeler.dManager = dManager;
         this.team = team;
-
+        this.competitie = competitie;
+        this.seizoen = seizoen;
         initComponents();
         setLocationRelativeTo(null);
         this.FillLijstSpelers(ijshockey.DriverManager.FillLijstSpelers(DLM, team));
@@ -295,7 +300,7 @@ public class BewerkSpeler extends javax.swing.JFrame {
         BewerkTeam updateForm = null;
 
         try {
-            updateForm = new BewerkTeam(dManager);
+            updateForm = new BewerkTeam(dManager, competitie, seizoen);
 
         } catch (SQLException ex) {
             Logger.getLogger(AddSpeler.class
@@ -307,7 +312,10 @@ public class BewerkSpeler extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void LijstSpelersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstSpelersValueChanged
-        String listValue = (String) LijstSpelers.getSelectedValue();
+        if(LijstSpelers.isSelectionEmpty()){
+            
+        }else{
+            String listValue = (String) LijstSpelers.getSelectedValue();
         String[] array = listValue.split("-");
         String lidnrStr = array[array.length - 1].trim();
         int lidnr = Integer.parseInt(lidnrStr);
@@ -321,6 +329,8 @@ public class BewerkSpeler extends javax.swing.JFrame {
         } catch (DBException ex) {
             Logger.getLogger(BewerkSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
+                
 
     }//GEN-LAST:event_LijstSpelersValueChanged
 

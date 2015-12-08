@@ -28,7 +28,7 @@ public class AddSpeler extends javax.swing.JFrame {
     public static DriverManager dManager;
     public Team team;
     private Competitie competitie;
-    private Seizoen siezoen;
+    private Seizoen seizoen;
 
     /**
      * Creates new form AddSpeler
@@ -41,7 +41,7 @@ public class AddSpeler extends javax.swing.JFrame {
         this.dManager = dManager;
         this.team = team;
         this.competitie = competitie;
-        this.siezoen = seizoen;
+        this.seizoen = seizoen;
         initComponents();
         this.setjLabelTop("Speler toevoegen aan : " + team.getNaam());
     }
@@ -180,7 +180,7 @@ public class AddSpeler extends javax.swing.JFrame {
         BewerkTeam updateForm = null;
 
         try {
-            updateForm = new BewerkTeam(dManager);
+            updateForm = new BewerkTeam(dManager, competitie, seizoen);
         } catch (SQLException ex) {
             Logger.getLogger(AddSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
