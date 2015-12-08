@@ -114,38 +114,43 @@ public class DriverManager {
         }
         return null;
     }
-//
-//    public static DefaultListModel FillLijstTrainer(DefaultListModel DLM) throws SQLException {
-//        Connection con = null;
-//        DLM = new DefaultListModel();
-//
-//        try {
-//            con = getConnection();
-//            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-//
-//            String sql = "SELECT * FROM trainer ";
-//
-//            ResultSet srs = stmt.executeQuery(sql);
-//
-//            int lidnr;
-//            String voornaam;
-//            String achternaam;
-//
-//            while (srs.next()) {
-//                lidnr = srs.getInt("lidnr");
-//                voornaam = srs.getString("voornaam");
-//                achternaam = srs.getString("achternaam");
-//                DLM.addElement(voornaam + " " + achternaam + " - " + lidnr);
-//            }
-//            closeConnection(con);
-//            return DLM;
-//
-//        } catch (Exception ex) {
-//            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
-//            closeConnection(con);
-//        }
-//        return null;
-//    }
+
+    public static DefaultListModel FillLijstTrainer(DefaultListModel DLM) throws SQLException {
+        Connection con = null;
+        DLM = new DefaultListModel();
+
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT lidnr, voornaam, achternaam\n"
+                    + "FROM trainer\n"
+                    + "WHERE NOT EXISTS\n"
+                    + "(SELECT stamnr \n"
+                    + "FROM team\n"
+                    + "WHERE trainer.lidnr = team.lidnr_trainer)";
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            int lidnr;
+            String voornaam;
+            String achternaam;
+
+            while (srs.next()) {
+                lidnr = srs.getInt("lidnr");
+                voornaam = srs.getString("voornaam");
+                achternaam = srs.getString("achternaam");
+                DLM.addElement(voornaam + " " + achternaam + " - " + lidnr);
+            }
+            closeConnection(con);
+            return DLM;
+
+        } catch (Exception ex) {
+            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+            closeConnection(con);
+        }
+        return null;
+    }
 
     public static DefaultListModel FillLijstTeam(DefaultListModel DLM, Competitie c, Seizoen s) throws SQLException {
         Connection con = null;
@@ -343,8 +348,6 @@ public class DriverManager {
 
     }
 
-    
-    
     public DriverManager() {
     }
 
@@ -520,7 +523,7 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
+
     public static void bewerkWedstrijd(int wnr, String datum, Scheidsrechter scheids, int gespeeld) throws DBException {
         Connection con = null;
         try {
@@ -1608,7 +1611,7 @@ public class DriverManager {
         }
     }
 
-    public static void bewerkTrainer(Team t) throws DBException {
+    public static void bewerkTrainer(int stamnr, int lidnr_trainer) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -1616,8 +1619,8 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "UPDATE team\n"
-                    + "SET lidnr_trainer = " + t.getTrainer().getLidnr() + "\n"
-                    + "WHERE stamnr = " + t.getStamNr();
+                    + "SET lidnr_trainer = " + lidnr_trainer + "\n"
+                    + "WHERE stamnr = " + stamnr;
             stmt.executeUpdate(sql);
 
             closeConnection(con);

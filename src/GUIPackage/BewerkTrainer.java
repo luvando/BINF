@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  * @author Viktor
  */
 public class BewerkTrainer extends javax.swing.JFrame {
-    
+
     private Team team;
     public static DriverManager dManager;
     DefaultListModel DLM;
@@ -36,7 +36,7 @@ public class BewerkTrainer extends javax.swing.JFrame {
     public BewerkTrainer() {
         initComponents();
     }
-    
+
     public BewerkTrainer(DriverManager dManager, Team team, Competitie competitie, Seizoen seizoen) throws SQLException {
         super("Bewerk Trainer");
         BewerkSpeler.dManager = dManager;
@@ -48,20 +48,20 @@ public class BewerkTrainer extends javax.swing.JFrame {
         Trainer trainer = team.getTrainer();
         this.setjTextTrainer(trainer.getVoornaam() + " " + trainer.getAchternaam());
         this.setjLabelTop("Trainer bewerken voor team : " + team.getNaam());
-        // this.FillLijstTrainer(DriverManager.FillLijstTrainer(DLM));
+        this.FillLijstTrainer(DriverManager.FillLijstTrainer(DLM));
 
     }
-//
-//    private void FillLijstTrainer(DefaultListModel DLM) {
-//        try {
-//
-//            jListTrainer.setModel(DLM);
-//
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//
-//    }
+
+    private void FillLijstTrainer(DefaultListModel DLM) {
+        try {
+
+            jListTrainer.setModel(DLM);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -237,37 +237,56 @@ public class BewerkTrainer extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         BewerkTeam updateForm = null;
-        
+
         try {
             updateForm = new BewerkTeam(dManager, competitie, seizoen);
         } catch (SQLException ex) {
             Logger.getLogger(BewerkTrainer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed
-        Team newTeam = null;
-        
-        Trainer tr = new Trainer(VoornaamTrainer.getText(), AchternaamTrainer.getText(), GeboortedatumTrainer.getText());
-        try {
-            DriverManager.addTrainer(tr);
-            int lidnrtrainer = DriverManager.getRecentLidnrTrainer();
-            Trainer trFinal = DriverManager.getTrainer(lidnrtrainer);
-            newTeam = new Team(team.getStamNr(), team.getNaam(), team.getThuisArena(), trFinal);
-            DriverManager.bewerkTrainer(newTeam);
-            AchternaamTrainer.setText("");
-            VoornaamTrainer.setText("");
-            GeboortedatumTrainer.setText("");
+
+        if (jListTrainer.isSelectionEmpty()) {
+            
+
+            Trainer tr = new Trainer(VoornaamTrainer.getText(), AchternaamTrainer.getText(), GeboortedatumTrainer.getText());
+            try {
+                DriverManager.addTrainer(tr);
+                int lidnrtrainer = DriverManager.getRecentLidnrTrainer();
+                Trainer trFinal = DriverManager.getTrainer(lidnrtrainer);
+                
+                DriverManager.bewerkTrainer(team.getStamNr(), lidnrtrainer);
+                AchternaamTrainer.setText("");
+                VoornaamTrainer.setText("");
+                GeboortedatumTrainer.setText("");
+                this.setjTextTrainer(trFinal.getVoornaam() + " " + trFinal.getAchternaam());
+                JOptionPane.showMessageDialog(null, "Trainer van het team bewerkt!");
+
+            } catch (DBException ex) {
+                Logger.getLogger(AddSpeler.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            String tr = (String) jListTrainer.getSelectedValue();
+            String[] tra = tr.split("-");
+            String trai = tra[tra.length - 1].trim();
+            int lidnr_trainer = Integer.parseInt(trai);
+            Trainer trFinal = null;
+            try {
+                trFinal = DriverManager.getTrainer(lidnr_trainer);
+                DriverManager.bewerkTrainer(team.getStamNr(), lidnr_trainer);
+            } catch (DBException ex) {
+                Logger.getLogger(BewerkTrainer.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.setjTextTrainer(trFinal.getVoornaam() + " " + trFinal.getAchternaam());
             JOptionPane.showMessageDialog(null, "Trainer van het team bewerkt!");
             
-        } catch (DBException ex) {
-            Logger.getLogger(AddSpeler.class
-                    .getName()).log(Level.SEVERE, null, ex);
         }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonStoreActionPerformed
 
@@ -339,7 +358,7 @@ public class BewerkTrainer extends javax.swing.JFrame {
     public void setjTextTrainer(String jTextTeam) {
         this.jTextTrainer.setText(jTextTeam);
     }
-    
+
     public void setjLabelTop(String jTextTeam) {
         this.jLabelTop.setText(jTextTeam);
     }
