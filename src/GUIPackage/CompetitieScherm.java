@@ -183,7 +183,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
 
         WedstrijdBewerkenButton.setBackground(java.awt.SystemColor.activeCaption);
         WedstrijdBewerkenButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        WedstrijdBewerkenButton.setText("Wedstrijd bewerken");
+        WedstrijdBewerkenButton.setText("Wedstrijden beheren");
         WedstrijdBewerkenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 WedstrijdBewerkenButtonActionPerformed(evt);
@@ -206,6 +206,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
         jLabel3.setText("-----------------------------------");
 
         AddScheidsrechterButton.setBackground(java.awt.SystemColor.activeCaption);
+        AddScheidsrechterButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         AddScheidsrechterButton.setText("Scheidsrechter toevoegen");
         AddScheidsrechterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,10 +410,10 @@ public class CompetitieScherm extends javax.swing.JFrame {
     private void TeamToevoegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamToevoegenButtonActionPerformed
         // TODO add your handling code here:
         AddTeamEnTrainer updateForm = null;
-        Competitie c = DriverManager.getCompetitie((String) LijstCompetities.getSelectedValue());
-        Seizoen s = DriverManager.getSeizoen(Integer.parseInt(LijstSeizoenen.getSelectedValue()), c.getCompetitienaam());
-        try {
-            updateForm = new AddTeamEnTrainer(dManager, c, s);
+//        Competitie c = DriverManager.getCompetitie((String) LijstCompetities.getSelectedValue());
+//        Seizoen s = DriverManager.getSeizoen(Integer.parseInt(LijstSeizoenen.getSelectedValue()), c.getCompetitienaam());
+       try {
+            updateForm = new AddTeamEnTrainer(dManager);
         } catch (SQLException ex) {
             Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
         }

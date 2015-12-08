@@ -44,22 +44,12 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     private Seizoen seizoen;
     DefaultListModel DLM;
 
-    public AddTeamEnTrainer(DriverManager dManager) {
+    public AddTeamEnTrainer(DriverManager dManager) throws SQLException {
         AddTeamEnTrainer.dManager = dManager;
         initComponents();
         setLocationRelativeTo(null);
 
-    }
-
-    public AddTeamEnTrainer(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
-        AddTeamEnTrainer.dManager = dManager;
-        initComponents();
-        setLocationRelativeTo(null);
-
-        this.competitie = competitie;
-        this.seizoen = seizoen;
-
-        this.setjLabelTop("Team toevoegen aan systeem");
+        this.setjLabelTop("Team en bijhorende trainer toevoegen aan systeem");
     }
 
     /**
@@ -321,7 +311,9 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         try {
 
             DriverManager.addTrainer(tr);
-            DriverManager.addTeam(te,tr);
+            int lidnrtrainer = DriverManager.getRecentLidnrTrainer();
+            Trainer trFinal = DriverManager.getTrainer(lidnrtrainer);
+            DriverManager.addTeam(te, trFinal);
             JOptionPane.showMessageDialog(null, "Team en Trainer opgeslagen!");
         } catch (DBException ex) {
             Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
