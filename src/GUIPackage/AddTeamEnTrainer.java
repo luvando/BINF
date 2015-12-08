@@ -321,7 +321,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         try {
 
             DriverManager.addTrainer(tr);
-            DriverManager.addTeam(te);
+            DriverManager.addTeam(te,tr);
             JOptionPane.showMessageDialog(null, "Team en Trainer opgeslagen!");
         } catch (DBException ex) {
             Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);

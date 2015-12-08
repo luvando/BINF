@@ -253,12 +253,10 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            int nul = 0;
-            String sql = "SELECT * \n"
-                    + "FROM wedstrijd\n "
-                    + "WHERE competitienaam = '" + c.getCompetitienaam()
-                    + "'AND jaar = " + s.getJaar()
-                    + " AND gespeeld = " + nul;
+            String sql = "SELECT *\n"
+                    + "FROM \n"
+                    + "wedstrijd \n"
+                    + "WHERE competitienaam = '" + c.getCompetitienaam() + "' AND jaar = " + s.getJaar() + " AND gespeeld = 0";
 
             ResultSet srs = stmt.executeQuery(sql);
 
@@ -284,7 +282,7 @@ public class DriverManager {
                 thuis = getTeam(srs.getInt("stamnr_thuis"));
                 uit = getTeam(srs.getInt("stamnr_uit"));
                 Wedstrijd w = new Wedstrijd(wnr, s, thuis, uit, arena, scheidsrechter, datum, speeldag, gespeeld);
-                DLM.addElement(w.getWedstrijdNr());
+                DLM.addElement(w.getThuisTeam() + " - " + w.getUitTeam() + "( " + w.getDatum() + " )");
 
             }
             closeConnection(con);
@@ -1449,8 +1447,7 @@ public class DriverManager {
                     + "VALUES ('"
                     + s.getVoornaam() + "', '"
                     + s.getAchternaam() + "', '"
-                    + s.getGeboortedatum() + "','"
-                    + "')";
+                    + s.getGeboortedatum() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
@@ -1499,7 +1496,7 @@ public class DriverManager {
     }
 
 //team
-    public static void addTeam(Team t) throws DBException {
+    public static void addTeam(Team t, Trainer tr) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -1507,8 +1504,8 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "INSERT into team "
-                    + "(stamnr, naam, thuisarena) "
-                    + "VALUES ('" + t.getStamNr() + "', '" + t.getNaam() + "', '" + t.getThuisArena() + "')";
+                    + "(stamnr, naam, thuisarena, lidnr_trainer) "
+                    + "VALUES ('" + t.getStamNr() + "', '" + t.getNaam() + "', '" + t.getThuisArena() + "', '" + tr.getLidnr() + "')";
             stmt.executeUpdate(sql);
 
             closeConnection(con);
