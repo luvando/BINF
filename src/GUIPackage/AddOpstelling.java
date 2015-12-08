@@ -48,17 +48,13 @@ public class AddOpstelling extends javax.swing.JFrame {
         initComponents();
         this.setjLabelTop("Opstelling wedstrijd :" + wed.getWedstrijdNr() + " : F" + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
 
-        FillLijstSpelertjesThuis(DriverManager.FillLijstSpelers(DLM, wed.getThuisTeam().getStamNr()));
-
-        FillLijstSpelertjesUit(DriverManager.FillLijstSpelers(DLM, wed.getUitTeam().getStamNr()));
-
         setLocationRelativeTo(null);
     }
 
     private void FillLijstSpelertjesThuis(DefaultListModel DLM) {
         try {
 
-            jListSpelersThuis.setModel(DLM);
+            jListSpeler.setModel(DLM);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -69,7 +65,7 @@ public class AddOpstelling extends javax.swing.JFrame {
     private void FillLijstSpelertjesUit(DefaultListModel DLM) {
         try {
 
-            jListSpelersUit.setModel(DLM);
+            jListSpeler.setModel(DLM);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -110,31 +106,21 @@ public class AddOpstelling extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Done = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         VorigeButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jListSpelersThuis = new javax.swing.JList();
-        jTextSpelerThuis = new javax.swing.JTextField();
-        jComboBoxPositie = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jTextTijdstipInthuis = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextTijdstipUitThuis = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jComboxPositie2 = new javax.swing.JComboBox<>();
+        jComboxPositie = new javax.swing.JComboBox<String>();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jTextTijdstipInUit = new javax.swing.JTextField();
+        jTextTijdstipIn = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jListSpelersUit = new javax.swing.JList();
-        jTextTijdstipUitUit = new javax.swing.JTextField();
-        jTextSpelerUit = new javax.swing.JTextField();
-        Store = new javax.swing.JButton();
-        jButtonStore2 = new javax.swing.JButton();
+        jTextTijdstipUit = new javax.swing.JTextField();
+        jButtonStore = new javax.swing.JButton();
         jLabelTop = new javax.swing.JLabel();
+        jRadioButtonUitTeam = new javax.swing.JRadioButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jRadioButtonThuisTeam = new javax.swing.JRadioButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListSpeler = new javax.swing.JList();
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,15 +195,6 @@ public class AddOpstelling extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Opstelling thuisteam");
 
-        Done.setBackground(java.awt.SystemColor.activeCaption);
-        Done.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Done.setText("Done");
-        Done.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DoneActionPerformed(evt);
-            }
-        });
-
         VorigeButton.setBackground(new java.awt.Color(255, 204, 204));
         VorigeButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         VorigeButton.setText("Vorige");
@@ -227,246 +204,145 @@ public class AddOpstelling extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Speler:");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Thuisteam");
-
-        jListSpelersThuis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jListSpelersThuis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListSpelersThuisMouseClicked(evt);
-            }
-        });
-        jScrollPane4.setViewportView(jListSpelersThuis);
-
-        jTextSpelerThuis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextSpelerThuis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextSpelerThuisMouseClicked(evt);
-            }
-        });
-        jTextSpelerThuis.addActionListener(new java.awt.event.ActionListener() {
+        jComboxPositie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboxPositie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Goalie", "Defender", "Forward" }));
+        jComboxPositie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextSpelerThuisActionPerformed(evt);
-            }
-        });
-
-        jComboBoxPositie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBoxPositie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Goalie", "Defender", "Forward" }));
-        jComboBoxPositie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxPositieActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Tijdstip in:");
-
-        jTextTijdstipInthuis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Tijdstip uit:");
-
-        jTextTijdstipUitThuis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Speler:");
-
-        jComboxPositie2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboxPositie2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Goalie", "Defender", "Forward" }));
-        jComboxPositie2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboxPositie2ActionPerformed(evt);
+                jComboxPositieActionPerformed(evt);
             }
         });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Tijdstip in:");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Uitteam");
-
-        jTextTijdstipInUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextTijdstipIn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Tijdstip uit:");
 
-        jListSpelersUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jListSpelersUit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListSpelersUitMouseClicked(evt);
-            }
-        });
-        jScrollPane5.setViewportView(jListSpelersUit);
+        jTextTijdstipUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextTijdstipUitUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jTextSpelerUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextSpelerUit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextSpelerUitMouseClicked(evt);
-            }
-        });
-        jTextSpelerUit.addActionListener(new java.awt.event.ActionListener() {
+        jButtonStore.setBackground(java.awt.SystemColor.activeCaption);
+        jButtonStore.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonStore.setText("Store");
+        jButtonStore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextSpelerUitActionPerformed(evt);
+                jButtonStoreActionPerformed(evt);
             }
         });
 
-        Store.setBackground(java.awt.SystemColor.activeCaption);
-        Store.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Store.setText("Store");
-        Store.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StoreActionPerformed(evt);
-            }
-        });
-
-        jButtonStore2.setBackground(java.awt.SystemColor.activeCaption);
-        jButtonStore2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonStore2.setText("Store");
-        jButtonStore2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonStore2ActionPerformed(evt);
-            }
-        });
-
-        jLabelTop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelTop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelTop.setText("jLabel14");
+
+        buttonGroup1.add(jRadioButtonUitTeam);
+        jRadioButtonUitTeam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButtonUitTeam.setText("Uit");
+        jRadioButtonUitTeam.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButtonUitTeamStateChanged(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Team:");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Speler:");
+
+        buttonGroup1.add(jRadioButtonThuisTeam);
+        jRadioButtonThuisTeam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButtonThuisTeam.setText("Thuis");
+        jRadioButtonThuisTeam.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButtonThuisTeamStateChanged(evt);
+            }
+        });
+
+        jListSpeler.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jScrollPane2.setViewportView(jListSpeler);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel12))
-                            .addComponent(jLabelTop)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11))
-                                .addGap(21, 21, 21)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel1))
+                                .addGap(57, 57, 57)
+                                .addComponent(jRadioButtonThuisTeam)
+                                .addGap(102, 102, 102)
+                                .addComponent(jRadioButtonUitTeam))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(99, 99, 99)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, 0)
+                                        .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel13))
+                                .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextSpelerUit)
-                                    .addComponent(jTextTijdstipInUit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(55, 55, 55)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboxPositie2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButtonStore2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextTijdstipUitUit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 102, Short.MAX_VALUE))
+                                    .addComponent(jTextTijdstipIn)
+                                    .addComponent(jComboxPositie, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextTijdstipUit)
+                                    .addComponent(jButtonStore, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel9))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(480, 480, 480)
-                                        .addComponent(Done, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel2))
-                                        .addGap(21, 21, 21)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextSpelerThuis)
-                                            .addComponent(jTextTijdstipInthuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(55, 55, 55)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBoxPositie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(Store, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jTextTijdstipUitThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                        .addContainerGap(60, Short.MAX_VALUE))))
+                        .addContainerGap()
+                        .addComponent(jLabelTop)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelTop)
-                .addGap(47, 47, 47)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jRadioButtonThuisTeam)
+                    .addComponent(jRadioButtonUitTeam))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonStore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextSpelerThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxPositie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextTijdstipInthuis, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextTijdstipUitThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(Store, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jTextSpelerUit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboxPositie2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jTextTijdstipInUit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextTijdstipIn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(jTextTijdstipUitUit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonStore2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Done, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31))
+                            .addComponent(jTextTijdstipUit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(103, 103, 103)
+                        .addComponent(jComboxPositie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoneActionPerformed
-        TussenSchermOpstHighlight updateForm = null;
-
-        updateForm = new TussenSchermOpstHighlight(dManager, wedstrijd, this);
-        updateForm.setVisible(true);
-    }//GEN-LAST:event_DoneActionPerformed
-
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         // TODO add your handling code here:
         AddWedstrijd updateForm = null;
         try {
-            updateForm = new AddWedstrijd(dManager, wedstrijd.getSp().getCompetitie(), wedstrijd.getSp().getSeizoen());
+            updateForm = new AddWedstrijd(dManager, wedstrijd.getSeizoen().getC(), wedstrijd.getSeizoen());
         } catch (SQLException ex) {
             Logger.getLogger(AddOpstelling.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -498,63 +374,17 @@ public class AddOpstelling extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
-    private void jTextSpelerThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextSpelerThuisMouseClicked
+    private void jComboxPositieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboxPositieActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_jComboxPositieActionPerformed
 
-    }//GEN-LAST:event_jTextSpelerThuisMouseClicked
-
-    private void jTextSpelerThuisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSpelerThuisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextSpelerThuisActionPerformed
-
-    private void jComboBoxPositieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPositieActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxPositieActionPerformed
-
-    private void jComboxPositie2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboxPositie2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboxPositie2ActionPerformed
-
-    private void jTextSpelerUitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextSpelerUitMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jTextSpelerUitMouseClicked
-
-    private void jTextSpelerUitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSpelerUitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextSpelerUitActionPerformed
-
-    private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
-        String lidnrThuis = this.jTextSpelerThuis.getText();
-        String[] thuis = lidnrThuis.split("-");
-        String lidnrthuissp = thuis[thuis.length - 1].trim();
-        int lidnrthuis = Integer.parseInt(lidnrthuissp);
-
-        String gekozenpositie = (String) this.jComboBoxPositie.getSelectedItem();
-
-        Opstelling ops = null;
-        try {
-
-            ops = new Opstelling(wedstrijd, getSpeler(lidnrthuis), gekozenpositie, this.getjTextTijdstipInthuis(), this.getjTextTijdstipUitThuis());
-            DriverManager.addOpstelling(ops);
-            JOptionPane.showMessageDialog(null, "Opstelling Opgeslagen");
-            jTextSpelerThuis.setText("");
-            jTextTijdstipInthuis.setText("");
-            jTextTijdstipUitThuis.setText("");
-        } catch (DBException ex) {
-            Logger.getLogger(AddOpstelling.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-    }//GEN-LAST:event_StoreActionPerformed
-
-    private void jButtonStore2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStore2ActionPerformed
-        String lidnrUit = this.jTextSpelerUit.getText();
-        String[] uit = lidnrUit.split("-");
+    private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed
+        String lidnr = (String) this.jListSpeler.getSelectedValue();
+        String[] uit = lidnr.split("-");
         String lidnruitstr = uit[uit.length - 1].trim();
         int lidnruit = Integer.parseInt(lidnruitstr);
 
-        String gekozenpositie = (String) this.jComboxPositie2.getSelectedItem();
+        String gekozenpositie = (String) this.jComboxPositie.getSelectedItem();
 
         Opstelling ops = null;
         try {
@@ -562,25 +392,38 @@ public class AddOpstelling extends javax.swing.JFrame {
         } catch (DBException ex) {
             Logger.getLogger(AddOpstelling.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jTextSpelerUit.setText("");
-        jTextTijdstipInUit.setText("");
-        jTextTijdstipUitUit.setText("");
+
+        jTextTijdstipIn.setText("");
+        jTextTijdstipUit.setText("");
 
         try {
 
             DriverManager.addOpstelling(ops);
+            this.jListSpeler.clearSelection();
             JOptionPane.showMessageDialog(null, "Opstelling Opgeslagen");
         } catch (DBException ex) {
             Logger.getLogger(AddOpstelling.class.getName()).log(Level.SEVERE, null, ex);
-        }    }//GEN-LAST:event_jButtonStore2ActionPerformed
+        }    }//GEN-LAST:event_jButtonStoreActionPerformed
 
-    private void jListSpelersThuisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListSpelersThuisMouseClicked
-        jTextSpelerThuis.setText((String) jListSpelersThuis.getSelectedValue());
-    }//GEN-LAST:event_jListSpelersThuisMouseClicked
+    private void jRadioButtonUitTeamStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonUitTeamStateChanged
+        if (jRadioButtonUitTeam.isSelected()) {
+            try {
+                this.FillLijstSpelertjesUit(DriverManager.FillLijstSpelers(DLM, wedstrijd.getUitTeam().getStamNr()));
+            } catch (SQLException ex) {
+                Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jRadioButtonUitTeamStateChanged
 
-    private void jListSpelersUitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListSpelersUitMouseClicked
-        jTextSpelerUit.setText((String) jListSpelersUit.getSelectedValue());
-    }//GEN-LAST:event_jListSpelersUitMouseClicked
+    private void jRadioButtonThuisTeamStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonThuisTeamStateChanged
+        if (jRadioButtonThuisTeam.isSelected()) {
+            try {
+                this.FillLijstSpelertjesThuis(DriverManager.FillLijstSpelers(DLM, wedstrijd.getThuisTeam().getStamNr()));
+            } catch (SQLException ex) {
+                Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jRadioButtonThuisTeamStateChanged
 
     /**
      * @param args the command line arguments
@@ -619,10 +462,9 @@ public class AddOpstelling extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Done;
-    private javax.swing.JButton Store;
     private javax.swing.JButton VorigeButton;
-    private javax.swing.JButton jButtonStore2;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButtonStore;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox10;
     private javax.swing.JComboBox jComboBox11;
@@ -635,79 +477,38 @@ public class AddOpstelling extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox7;
     private javax.swing.JComboBox jComboBox8;
     private javax.swing.JComboBox jComboBox9;
-    private javax.swing.JComboBox<String> jComboBoxPositie;
-    private javax.swing.JComboBox<String> jComboxPositie2;
+    private javax.swing.JComboBox<String> jComboxPositie;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelTop;
-    private javax.swing.JList jListSpelersThuis;
-    private javax.swing.JList jListSpelersUit;
+    private javax.swing.JList jListSpeler;
+    private javax.swing.JRadioButton jRadioButtonThuisTeam;
+    private javax.swing.JRadioButton jRadioButtonUitTeam;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextSpelerThuis;
-    private javax.swing.JTextField jTextSpelerUit;
-    private javax.swing.JTextField jTextTijdstipInUit;
-    private javax.swing.JTextField jTextTijdstipInthuis;
-    private javax.swing.JTextField jTextTijdstipUitThuis;
-    private javax.swing.JTextField jTextTijdstipUitUit;
+    private javax.swing.JTextField jTextTijdstipIn;
+    private javax.swing.JTextField jTextTijdstipUit;
     // End of variables declaration//GEN-END:variables
 
-    public String getjTextSpelerThuis() {
-        return jTextSpelerThuis.getText();
-    }
-
-    public void setjTextSpelerThuis(JTextField jTextSpelerThuis) {
-        this.jTextSpelerThuis = jTextSpelerThuis;
-    }
-
-    public String getjTextSpelerUit() {
-        return jTextSpelerUit.getText();
-    }
-
-    public void setjTextSpelerUit(JTextField jTextSpelerUit) {
-        this.jTextSpelerUit = jTextSpelerUit;
-    }
-
-    public int getjTextTijdstipInthuis() {
-        return Integer.parseInt(jTextTijdstipInthuis.getText());
-    }
-
     public int getjTextTijdstipInUit() {
-        return Integer.parseInt(jTextTijdstipInUit.getText());
-    }
-
-    public void setjTextTijdstipInthuis(JTextField jTextTijdstipInthuis) {
-        this.jTextTijdstipInthuis = jTextTijdstipInthuis;
-    }
-
-    public int getjTextTijdstipUitThuis() {
-        return Integer.parseInt(jTextTijdstipUitThuis.getText());
+        return Integer.parseInt(jTextTijdstipIn.getText());
     }
 
     public int getjTextTijdstipUitUit() {
-        return Integer.parseInt(jTextTijdstipUitUit.getText());
-    }
-
-    public void setjTextTijdstipUitThuis(JTextField jTextTijdstipUitThuis) {
-        this.jTextTijdstipUitThuis = jTextTijdstipUitThuis;
+        return Integer.parseInt(jTextTijdstipUit.getText());
     }
 
     private void setjLabelTop(String string) {

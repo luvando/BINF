@@ -39,7 +39,7 @@ public class AddHighlight extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.setjLabelTop("Opstelling wedstrijd :" + wed.getWedstrijdNr() + " : " + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
-
+        this.jListSpeler.clearSelection();
     }
 
     private void FillLijstSpelertjesThuis(DefaultListModel DLM) {
@@ -188,7 +188,7 @@ public class AddHighlight extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
+                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +222,7 @@ public class AddHighlight extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabelTop)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +244,7 @@ public class AddHighlight extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(42, 42, 42)
                         .addComponent(jTextMinuut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jLabel2)
@@ -362,6 +362,7 @@ public class AddHighlight extends javax.swing.JFrame {
             og = new Owngoal(minuut, speler, wedstrijd);
             DriverManager.addOwngoal(og);
             this.jTextMinuut.setText("");
+            this.jListSpeler.clearSelection();
             JOptionPane.showMessageDialog(null, "Owngoal opgeslaan");
         } catch (DBException ex) {
             Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
