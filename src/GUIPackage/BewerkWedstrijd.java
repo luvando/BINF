@@ -8,9 +8,15 @@ package GUIPackage;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import ijshockey.Scheidsrechter;
 import ijshockey.Seizoen;
+import ijshockey.Team;
+import ijshockey.Wedstrijd;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +28,8 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
     private Seizoen seizoen;
     private Competitie competitie;
     DefaultListModel DLM;
+    private Wedstrijd w;
+    private int gespeeld = 0;
 
     /**
      * Creates new form BewerkWedstrijd
@@ -42,6 +50,7 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
 
         this.setjLabelTop("Wedstrijd bewerken voor : " + competitie.getCompetitienaam() + " Seizoen : " + seizoen.getJaar());
         FillLijstWedstrijd(DriverManager.FillLijstWedstrijden(DLM, competitie, seizoen));
+        this.FillLijstScheids(ijshockey.DriverManager.FillLijstScheids(DLM));
 
     }
 
@@ -55,6 +64,19 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
 
         }
     }
+    
+    private void FillLijstScheids(DefaultListModel DLM) {
+        try {
+
+            jListScheids.setModel(DLM);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,12 +89,21 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jListWedstrijd = new javax.swing.JList();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jTextScoreThuis = new javax.swing.JTextField();
+        jTextScoreUit = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabelTop = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Store = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jTextDatum = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListScheids = new javax.swing.JList();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,42 +113,92 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
 
         jLabelTop.setText("jLabel3");
 
-        jButton1.setText("Store");
+        Store.setText("Store");
+        Store.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StoreActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("  -");
+
+        jTextDatum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextDatumActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("*Datum");
+
+        jScrollPane2.setViewportView(jListScheids);
+
+        jLabel3.setText("*Scheidsrechter");
+
+        jButton1.setText("Vorige");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("  -");
+        jCheckBox1.setText("Gespeeld?");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("* = verplicht");
+
+        jLabel6.setText("*Wedstrijd");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 293, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelTop)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Store))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBox1)
+                                .addGap(53, 53, 53))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTextScoreThuis, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jTextScoreUit, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(jLabel5))
+                            .addComponent(jLabelTop))
+                        .addGap(0, 1, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,26 +206,129 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelTop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jCheckBox1))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(jTextScoreThuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextScoreUit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Store)
+                            .addComponent(jButton1))
+                        .addGap(50, 50, 50))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
+        // TODO add your handling code here:
+        String we = (String) jListWedstrijd.getSelectedValue();
+        String[] wed = we.split("-");
+        String weds = wed[0].trim();
+        int wedstrijdnr = Integer.parseInt(weds);
+        
+        
+        Scheidsrechter scheidsrechter = null;
+        String scheids = (String) jListScheids.getSelectedValue();
+        String[] scheidsa = scheids.split("-");
+        String scheidstr = scheidsa[scheidsa.length - 1].trim();
+        int lidnr = Integer.parseInt(scheidstr);
+        try {
+            scheidsrechter = DriverManager.getScheids(lidnr);
+        } catch (DBException ex) {
+            Logger.getLogger(BewerkWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        String datum = jTextDatum.getText();
+        
+        if(jTextScoreThuis.getText().isEmpty() || jTextScoreUit.getText().isEmpty())
+        {
+        try {
+            DriverManager.bewerkWedstrijd(wedstrijdnr, datum, scheidsrechter, gespeeld);
+            
+                jTextScoreUit.setText("");
+                jTextScoreThuis.setText("");
+                jTextScoreUit.setText("");
+                jTextDatum.setText("");
+                jCheckBox1.setSelected(false);
+                this.gespeeld = 0;
+                FillLijstWedstrijd(DriverManager.FillLijstWedstrijden(DLM, competitie, seizoen));
+                JOptionPane.showMessageDialog(null, "Wedstrijd bewerkt!");
+        } catch (DBException ex) {
+            Logger.getLogger(BewerkWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BewerkWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        else {
+            try {
+            int score_thuis = Integer.parseInt(jTextScoreThuis.getText());
+            int score_uit = Integer.parseInt(jTextScoreUit.getText());
+            DriverManager.bewerkWedstrijd(wedstrijdnr, datum, score_thuis, score_uit, scheidsrechter, gespeeld);
+            
+                jTextScoreUit.setText("");
+                jTextScoreThuis.setText("");
+                jTextScoreUit.setText("");
+                jTextDatum.setText("");
+                jCheckBox1.setSelected(false);
+                this.gespeeld = 0;
+                FillLijstWedstrijd(DriverManager.FillLijstWedstrijden(DLM, competitie, seizoen));
+                JOptionPane.showMessageDialog(null, "Wedstrijd bewerkt!");
+        } catch (DBException ex) {
+            Logger.getLogger(BewerkWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BewerkWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_StoreActionPerformed
+
+    private void jTextDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDatumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextDatumActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        CompetitieScherm updateForm = null;
+        
+        try {
+            updateForm = new CompetitieScherm(dManager);
+        } catch (DBException ex) {
+            Logger.getLogger(BewerkWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BewerkWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        updateForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+        this.gespeeld = 1;
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,14 +366,23 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Store;
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelTop;
+    private javax.swing.JList jListScheids;
     private javax.swing.JList jListWedstrijd;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextDatum;
+    private javax.swing.JTextField jTextScoreThuis;
+    private javax.swing.JTextField jTextScoreUit;
     // End of variables declaration//GEN-END:variables
 
     private void setjLabelTop(String string) {

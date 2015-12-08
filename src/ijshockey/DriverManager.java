@@ -317,17 +317,19 @@ public class DriverManager {
 
             String sql = "SELECT *\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE competitienaam = '" + c.getCompetitienaam() + "' AND jaar = " + s.getJaar();
+                    + "WHERE competitienaam = '" + c.getCompetitienaam() + "' AND jaar = " + s.getJaar() + " AND gespeeld = 0";
 
             ResultSet srs = stmt.executeQuery(sql);
             Team thuis = null;
             Team uit = null;
             String datum;
+            int wnr;
             while (srs.next()) {
+                wnr = srs.getInt("wedstrijdnr");
                 datum = srs.getString("datum");
                 thuis = getTeam(srs.getInt("stamnr_thuis"));
                 uit = getTeam(srs.getInt("stamnr_uit"));
-                DLM.addElement(thuis.getNaam() + " - " + uit.getNaam() + " ( " + datum + " )");
+                DLM.addElement(wnr + " - " + thuis.getNaam() + " vs " + uit.getNaam() + " ( " + datum + " )");
 
             }
             closeConnection(con);
@@ -499,7 +501,7 @@ public class DriverManager {
         }
     }
 
-    public static void bewerkWedstrijd(Wedstrijd w) throws DBException {
+    public static void bewerkWedstrijd(int wnr, String datum, int score_thuis, int score_uit, Scheidsrechter scheids, int gespeeld) throws DBException {
         Connection con = null;
         try {
             con = getConnection();
@@ -507,8 +509,28 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "UPDATE wedstrijd\n"
-                    + "SET datum = " + w.getDatum() + ", score_thuis = " + w.getScoreThuisTeam() + ", score_uit = " + w.getScoreUitTeam() + ",lidnr_scheidsrechter = " + w.getScheidsrechter().getLidnr() + "\n"
-                    + "WHERE competitienaam = '" + w.getSeizoen().getC().getCompetitienaam() + "' AND jaar = " + w.getSeizoen().getJaar() + " AND wedstrijdnr = " + w.getWedstrijdNr();
+                    + "SET datum = '" + datum + "', score_thuis = " + score_thuis + ", score_uit = " + score_uit + ",lidnr_scheidsrechter = " + scheids.getLidnr() + ", gespeeld = " + gespeeld + "\n"
+                    + "WHERE wedstrijdnr = " + wnr;
+            stmt.executeUpdate(sql);
+
+            closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
+    
+    public static void bewerkWedstrijd(int wnr, String datum, Scheidsrechter scheids, int gespeeld) throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "UPDATE wedstrijd\n"
+                    + "SET datum = '" + datum + "',lidnr_scheidsrechter = " + scheids.getLidnr() + ", gespeeld = " + gespeeld + "\n"
+                    + "WHERE wedstrijdnr = " + wnr;
             stmt.executeUpdate(sql);
 
             closeConnection(con);
