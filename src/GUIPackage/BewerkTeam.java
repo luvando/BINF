@@ -45,7 +45,7 @@ public class BewerkTeam extends javax.swing.JFrame {
         this.seizoen = seizoen;
         initComponents();
         setLocationRelativeTo(null);
-        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
+        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoen));
 
     }
 
