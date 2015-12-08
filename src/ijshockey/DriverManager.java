@@ -114,38 +114,38 @@ public class DriverManager {
         }
         return null;
     }
-
-    public static DefaultListModel FillLijstTrainer(DefaultListModel DLM) throws SQLException {
-        Connection con = null;
-        DLM = new DefaultListModel();
-
-        try {
-            con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-
-            String sql = "SELECT * FROM trainer ";
-
-            ResultSet srs = stmt.executeQuery(sql);
-
-            int lidnr;
-            String voornaam;
-            String achternaam;
-
-            while (srs.next()) {
-                lidnr = srs.getInt("lidnr");
-                voornaam = srs.getString("voornaam");
-                achternaam = srs.getString("achternaam");
-                DLM.addElement(voornaam + " " + achternaam + " - " + lidnr);
-            }
-            closeConnection(con);
-            return DLM;
-
-        } catch (Exception ex) {
-            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
-            closeConnection(con);
-        }
-        return null;
-    }
+//
+//    public static DefaultListModel FillLijstTrainer(DefaultListModel DLM) throws SQLException {
+//        Connection con = null;
+//        DLM = new DefaultListModel();
+//
+//        try {
+//            con = getConnection();
+//            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+//
+//            String sql = "SELECT * FROM trainer ";
+//
+//            ResultSet srs = stmt.executeQuery(sql);
+//
+//            int lidnr;
+//            String voornaam;
+//            String achternaam;
+//
+//            while (srs.next()) {
+//                lidnr = srs.getInt("lidnr");
+//                voornaam = srs.getString("voornaam");
+//                achternaam = srs.getString("achternaam");
+//                DLM.addElement(voornaam + " " + achternaam + " - " + lidnr);
+//            }
+//            closeConnection(con);
+//            return DLM;
+//
+//        } catch (Exception ex) {
+//            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+//            closeConnection(con);
+//        }
+//        return null;
+//    }
 
     public static DefaultListModel FillLijstTeam(DefaultListModel DLM, Competitie c, Seizoen s) throws SQLException {
         Connection con = null;

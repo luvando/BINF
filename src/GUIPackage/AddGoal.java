@@ -176,21 +176,34 @@ public class AddGoal extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void StoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreButtonActionPerformed
-        String listValue = (String) jListSpeler.getSelectedValue();
-        String[] array = listValue.split("-");
-        String lidnrStr = array[array.length - 1].trim();
-        int lidnr = Integer.parseInt(lidnrStr);
-        Speler spelerAss = null;
-        Goal g = null;
-        try {
-            spelerAss = DriverManager.getSpeler(lidnr);
-            g = new Goal(minuut, speler, wedstrijd, spelerAss);
-            DriverManager.addGoal(g);
-            JOptionPane.showMessageDialog(null, "Goal opgeslaan");
-        } catch (DBException ex) {
-            Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if (!jListSpeler.isSelectionEmpty()) {
+            String listValue = (String) jListSpeler.getSelectedValue();
+            String[] array = listValue.split("-");
+            String lidnrStr = array[array.length - 1].trim();
+            int lidnr = Integer.parseInt(lidnrStr);
+            Speler spelerAss = null;
 
+            Goal g = null;
+            try {
+                spelerAss = DriverManager.getSpeler(lidnr);
+                g = new Goal(minuut, speler, wedstrijd, spelerAss);
+                DriverManager.addGoal(g);
+                JOptionPane.showMessageDialog(null, "Goal opgeslaan");
+            } catch (DBException ex) {
+                Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            Goal g = null;
+            try {
+
+                g = new Goal(minuut, speler, wedstrijd, null);
+                DriverManager.addGoal(g);
+                JOptionPane.showMessageDialog(null, "Goal opgeslaan");
+            } catch (DBException ex) {
+                Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
 
     }//GEN-LAST:event_StoreButtonActionPerformed
 
