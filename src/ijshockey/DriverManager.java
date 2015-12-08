@@ -247,6 +247,35 @@ public class DriverManager {
 
     }
 
+    public static DefaultListModel FillLijstSpelers(DefaultListModel DLM, Team team) throws SQLException {
+        Connection con = null;
+        DLM = new DefaultListModel();
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT * FROM speler WHERE stamnr = " + team.getStamNr();
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            while (srs.next()) {
+                int lidnr = srs.getInt("lidnr");
+                String voornaam = srs.getString("voornaam");
+                String achternaam = srs.getString("achternaam");
+                DLM.addElement(voornaam + " " + achternaam + " - " + lidnr);
+
+            }
+            closeConnection(con);
+            return DLM;
+
+        } catch (Exception ex) {
+            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
+            closeConnection(con);
+        }
+        return null;
+
+    }
+
     public static DefaultListModel FillLijstWedstrijden(DefaultListModel DLM, Competitie c, Seizoen s) throws SQLException, DBException {
         Connection con = null;
         try {
