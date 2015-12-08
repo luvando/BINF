@@ -308,53 +308,41 @@ public class DriverManager {
 
     }
 
-    public static DefaultListModel FillLijstWedstrijden(DefaultListModel DLM, Competitie c, Seizoen s) throws SQLException, DBException {
+    public static DefaultListModel FillLijstWedstrijden(DefaultListModel DLM, Competitie c, Seizoen s) throws SQLException {
         Connection con = null;
+        DLM = new DefaultListModel();
         try {
             con = getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT wedstrijdnr, arena, datum , gespeeld, lidnr_scheidsrechter, competitienaam, jaar , speeldagnr, stamnr_thuis, stamnr_uit\n"
-                    + "FROM wedstrijd \n"
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String sql = "SELECT *\n"
+                    + "FROM wedstrijd\n"
                     + "WHERE competitienaam = '" + c.getCompetitienaam() + "' AND jaar = " + s.getJaar();
 
             ResultSet srs = stmt.executeQuery(sql);
-
-            int wnr;
-            String arena;
+            Team thuis = null;
+            Team uit = null;
             String datum;
-
-            Scheidsrechter scheidsrechter;
-            Speeldag speeldag;
-            Team thuis;
-            Team uit;
-
             while (srs.next()) {
-
-                wnr = srs.getInt("wedstrijdnr");
-                arena = srs.getString("arena");
                 datum = srs.getString("datum");
-
-                scheidsrechter = getScheids(srs.getInt("lidnr_scheidsrechter"));
-                speeldag = getSpeeldag(srs.getString("competitienaam"), srs.getInt("jaar"), srs.getInt("speeldagnr"));
                 thuis = getTeam(srs.getInt("stamnr_thuis"));
                 uit = getTeam(srs.getInt("stamnr_uit"));
-
-                DLM.addElement(thuis.getNaam() + " - " + uit.getNaam() + "( " + datum + " )" + " - " + wnr);
+                DLM.addElement(thuis.getNaam() + " - " + uit.getNaam() + " ( " + datum + " )");
 
             }
             closeConnection(con);
             return DLM;
 
         } catch (Exception ex) {
-            ex.getMessage();
-            ex.printStackTrace();
+            Logger.getLogger(DriverManager.class.getName()).log(Level.SEVERE, null, ex);
             closeConnection(con);
-            throw new DBException(ex);
         }
+        return null;
 
     }
 
+    
+    
     public DriverManager() {
     }
 
