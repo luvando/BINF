@@ -254,6 +254,11 @@ public class AddWedstrijd extends javax.swing.JFrame {
                 MouseClickedEvent(evt);
             }
         });
+        jListThuisteam.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListThuisteamValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(jListThuisteam);
 
         jListUitteam.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -481,18 +486,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
      }//GEN-LAST:event_StoreActionPerformed
 
     private void MouseClickedEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseClickedEvent
-        String thuis = (String) jListThuisteam.getSelectedValue();
-        String[] teamthuis = thuis.split("-");
-        String teamthuistr = teamthuis[teamthuis.length - 1].trim();
-        int stamnrthuis = Integer.parseInt(teamthuistr);
 
-        try {
-            Team thuisTeam1 = DriverManager.getTeam(stamnrthuis);
-            jTextArena.setText(thuisTeam1.getThuisArena());
-
-        } catch (DBException ex) {
-            Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_MouseClickedEvent
 
     private void jListSpeeldagValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListSpeeldagValueChanged
@@ -502,6 +496,23 @@ public class AddWedstrijd extends javax.swing.JFrame {
     private void jTextArenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextArenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextArenaActionPerformed
+
+    private void jListThuisteamValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListThuisteamValueChanged
+        String thuis = (String) jListThuisteam.getSelectedValue();
+        String[] teamthuis = thuis.split("-");
+        String teamthuistr = teamthuis[teamthuis.length - 1].trim();
+        int stamnrthuis = Integer.parseInt(teamthuistr);
+
+        try {
+            Team thuisTeam1 = DriverManager.getTeam(stamnrthuis);
+            jTextArena.setText(thuisTeam1.getThuisArena());
+            this.FillLijstTeamuit(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoen));
+        } catch (DBException | SQLException ex) {
+            Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO add your handling code here:
+                // TODO add your handling code here:
+    }//GEN-LAST:event_jListThuisteamValueChanged
 
     /**
      * @param args the command line arguments
