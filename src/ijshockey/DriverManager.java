@@ -253,17 +253,15 @@ public class DriverManager {
             con = getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT *\n"
-                    + "FROM \n"
-                    + "wedstrijd \n"
-                    + "WHERE competitienaam = '" + c.getCompetitienaam() + "' AND jaar = " + s.getJaar() + " AND gespeeld = 0";
+            String sql = "SELECT wedstrijdnr, arena, datum , gespeeld, lidnr_scheidsrechter, competitienaam, jaar , speeldagnr, stamnr_thuis, stamnr_uit\n"
+                    + "FROM wedstrijd \n"
+                    + "WHERE competitienaam = '" + c.getCompetitienaam() + "' AND jaar = " + s.getJaar();
 
             ResultSet srs = stmt.executeQuery(sql);
 
             int wnr;
             String arena;
             String datum;
-            int gespeeld;
 
             Scheidsrechter scheidsrechter;
             Speeldag speeldag;
@@ -275,20 +273,20 @@ public class DriverManager {
                 wnr = srs.getInt("wedstrijdnr");
                 arena = srs.getString("arena");
                 datum = srs.getString("datum");
-                gespeeld = srs.getInt("gespeeld");
 
                 scheidsrechter = getScheids(srs.getInt("lidnr_scheidsrechter"));
                 speeldag = getSpeeldag(srs.getString("competitienaam"), srs.getInt("jaar"), srs.getInt("speeldagnr"));
                 thuis = getTeam(srs.getInt("stamnr_thuis"));
                 uit = getTeam(srs.getInt("stamnr_uit"));
-                Wedstrijd w = new Wedstrijd(wnr, s, thuis, uit, arena, scheidsrechter, datum, speeldag, gespeeld);
-                DLM.addElement(w.getThuisTeam() + " - " + w.getUitTeam() + "( " + w.getDatum() + " )");
+
+                DLM.addElement(thuis.getNaam() + " - " + uit.getNaam() + "( " + datum + " )" + " - " + wnr);
 
             }
             closeConnection(con);
             return DLM;
 
         } catch (Exception ex) {
+            ex.getMessage();
             ex.printStackTrace();
             closeConnection(con);
             throw new DBException(ex);
@@ -644,6 +642,30 @@ public class DriverManager {
         }
     }
 
+    public static int getRecentLidnrTrainer() throws DBException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT MAX(lidnr) AS lidnr " + " FROM trainer ";
+
+            ResultSet srs = stmt.executeQuery(sql);
+
+            int lidnrfinal = 0;
+            while (srs.next()) {
+                lidnrfinal = srs.getInt("lidnr");
+            }
+
+            closeConnection(con);
+            return lidnrfinal;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            closeConnection(con);
+            throw new DBException(ex);
+        }
+    }
 //assist
     /*public static void printAssist(int lidnr) throws DBException {
      Connection con = null;

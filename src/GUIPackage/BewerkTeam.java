@@ -202,7 +202,7 @@ public class BewerkTeam extends javax.swing.JFrame {
     }//GEN-LAST:event_AddSpelerButtonActionPerformed
 
     private void SpelerBewerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpelerBewerkenButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_SpelerBewerkenButtonActionPerformed
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
