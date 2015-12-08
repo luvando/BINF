@@ -258,7 +258,7 @@ public class DriverManager {
                     + "FROM wedstrijd\n "
                     + "WHERE competitienaam = '" + c.getCompetitienaam()
                     + "'AND jaar = " + s.getJaar()
-                    + "AND gespeeld = " + nul;
+                    + " AND gespeeld = " + nul;
 
             ResultSet srs = stmt.executeQuery(sql);
 
@@ -284,7 +284,7 @@ public class DriverManager {
                 thuis = getTeam(srs.getInt("stamnr_thuis"));
                 uit = getTeam(srs.getInt("stamnr_uit"));
                 Wedstrijd w = new Wedstrijd(wnr, s, thuis, uit, arena, scheidsrechter, datum, speeldag, gespeeld);
-                DLM.addElement(w);
+                DLM.addElement(w.getWedstrijdNr());
 
             }
             closeConnection(con);
@@ -1445,7 +1445,7 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "INSERT into trainer "
-                    + "(voornaam, achternaam, geboortedatum,stamnr_team) "
+                    + "(voornaam, achternaam, geboortedatum) "
                     + "VALUES ('"
                     + s.getVoornaam() + "', '"
                     + s.getAchternaam() + "', '"
