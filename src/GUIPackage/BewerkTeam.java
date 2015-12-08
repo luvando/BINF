@@ -105,6 +105,11 @@ public class BewerkTeam extends javax.swing.JFrame {
         TrainerBewerkenButton.setBackground(java.awt.SystemColor.activeCaption);
         TrainerBewerkenButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         TrainerBewerkenButton.setText("Trainer bewerken");
+        TrainerBewerkenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TrainerBewerkenButtonActionPerformed(evt);
+            }
+        });
 
         SearchButton.setBackground(java.awt.SystemColor.activeCaption);
         SearchButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -244,6 +249,28 @@ public class BewerkTeam extends javax.swing.JFrame {
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TrainerBewerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainerBewerkenButtonActionPerformed
+
+        Team team = null;
+        BewerkTrainer updateForm = null;
+        String teamstring = (String) jListTeam.getSelectedValue();
+
+        String[] teama = teamstring.split("-");
+        String teamstr = teama[teama.length - 1].trim();
+        int stamnr = Integer.parseInt(teamstr);
+
+        try {
+            team = DriverManager.getTeam(stamnr);
+             updateForm = new BewerkTrainer(dManager, team);
+        } catch (DBException | SQLException ex) {
+            Logger.getLogger(BewerkTeam.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+
+        updateForm.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_TrainerBewerkenButtonActionPerformed
 
     /**
      * @param args the command line arguments

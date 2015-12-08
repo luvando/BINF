@@ -43,6 +43,7 @@ public class BewerkSpeler extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.FillLijstSpelers(ijshockey.DriverManager.FillLijstSpelers(DLM, team));
         this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
+        this.setjLabelTop("Trainer bewerken voor team : " + team.getNaam());
 
     }
 
@@ -96,6 +97,7 @@ public class BewerkSpeler extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         SearchButton = new javax.swing.JButton();
         SearchText = new javax.swing.JTextField();
+        jLabelTop = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -159,7 +161,7 @@ public class BewerkSpeler extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jListTeam);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Team aanpassen");
+        jLabel5.setText("Team speler aanpassen");
 
         SearchButton.setBackground(java.awt.SystemColor.activeCaption);
         SearchButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -176,6 +178,9 @@ public class BewerkSpeler extends javax.swing.JFrame {
                 SearchTextActionPerformed(evt);
             }
         });
+
+        jLabelTop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelTop.setText("jLabel6");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,13 +211,18 @@ public class BewerkSpeler extends javax.swing.JFrame {
                             .addComponent(jTextAchternaam, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                             .addComponent(jTextGeboortedatum, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                             .addComponent(jTextVoornaam))
-                        .addGap(78, 78, 78)))
+                        .addGap(78, 78, 78))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelTop)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addContainerGap()
+                .addComponent(jLabelTop)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSpeler))
@@ -241,7 +251,7 @@ public class BewerkSpeler extends javax.swing.JFrame {
                         .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SearchButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonStore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -258,18 +268,25 @@ public class BewerkSpeler extends javax.swing.JFrame {
         String teamstr = teama[teama.length - 1].trim();
         int stamnr = Integer.parseInt(teamstr);
 
+        String listValue = (String) LijstSpelers.getSelectedValue();
+        String[] array = listValue.split("-");
+        String lidnrStr = array[array.length - 1].trim();
+        int lidnr = Integer.parseInt(lidnrStr);
         try {
             newTeam = DriverManager.getTeam(stamnr);
 
-            Speler speler = new Speler(jTextVoornaam.getText(), jTextAchternaam.getText(),
+            Speler speler = new Speler(lidnr, jTextVoornaam.getText(), jTextAchternaam.getText(),
                     jTextGeboortedatum.getText(), (String) this.jComboBoxPositie.getSelectedItem(),
                     newTeam);
             DriverManager.bewerkSpeler(speler);
+            this.FillLijstSpelers(ijshockey.DriverManager.FillLijstSpelers(DLM, team));
             JOptionPane.showMessageDialog(null, "Speler bewerkt!");
 
         } catch (DBException ex) {
             Logger.getLogger(AddSpeler.class
                     .getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BewerkSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonStoreActionPerformed
@@ -304,7 +321,6 @@ public class BewerkSpeler extends javax.swing.JFrame {
         } catch (DBException ex) {
             Logger.getLogger(BewerkSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
-
 
     }//GEN-LAST:event_LijstSpelersValueChanged
 
@@ -371,6 +387,7 @@ public class BewerkSpeler extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelSpeler;
+    private javax.swing.JLabel jLabelTop;
     private javax.swing.JList jListTeam;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -378,6 +395,9 @@ public class BewerkSpeler extends javax.swing.JFrame {
     private javax.swing.JTextField jTextGeboortedatum;
     private javax.swing.JTextField jTextVoornaam;
     // End of variables declaration//GEN-END:variables
+  public void setjLabelTop(String jTextTeam) {
+        this.jLabelTop.setText(jTextTeam);
+    }
 
     public JTextField getjTextAchternaam() {
         return jTextAchternaam;

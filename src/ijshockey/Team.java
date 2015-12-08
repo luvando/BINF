@@ -19,13 +19,13 @@ public class Team {
     private String naam;
     private String thuisArena;
     private Trainer trainer;
-    
 
     public Team(int stamNr, String naam, String thuisArena, Trainer trainer) {
         this.stamNr = stamNr;
         this.naam = naam;
         this.thuisArena = thuisArena;
-        
+        this.trainer = trainer;
+
     }
 
     public Team(int stamnummer, String teamNaam, String thuisArena) {
@@ -35,7 +35,6 @@ public class Team {
 
     }
 
-    
     public int getStamNr() {
         return stamNr;
     }
@@ -68,7 +67,4 @@ public class Team {
         this.trainer = trainer;
     }
 
-   
-
-    
 }
