@@ -65,7 +65,7 @@ public class AddSpeler extends javax.swing.JFrame {
         VorigeButton = new javax.swing.JButton();
         jLabelTop = new javax.swing.JLabel();
         jButtonStore = new javax.swing.JButton();
-        jTextVoorkeurspositie = new javax.swing.JTextField();
+        jComboBoxPositie = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Speler Toevoegen");
@@ -106,7 +106,8 @@ public class AddSpeler extends javax.swing.JFrame {
             }
         });
 
-        jTextVoorkeurspositie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBoxPositie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBoxPositie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Goalie", "Defender", "Forward" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,13 +135,12 @@ public class AddSpeler extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))))
                         .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextGeboortedatum)
-                                .addComponent(jTextVoorkeurspositie, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextAchternaam, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextVoornaam, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextGeboortedatum, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jTextAchternaam, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jTextVoornaam, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jComboBoxPositie, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,11 +162,11 @@ public class AddSpeler extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextGeboortedatum, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(20, 20, 20)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextVoorkeurspositie, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(40, 40, 40)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBoxPositie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonStore, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -180,7 +180,7 @@ public class AddSpeler extends javax.swing.JFrame {
         BewerkTeam updateForm = null;
 
         try {
-            updateForm = new BewerkTeam(dManager, competitie, siezoen);
+            updateForm = new BewerkTeam(dManager);
         } catch (SQLException ex) {
             Logger.getLogger(AddSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -190,7 +190,7 @@ public class AddSpeler extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed
-        Speler speler = new Speler(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText(), jTextVoorkeurspositie.getText(), team);
+        Speler speler = new Speler(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText(),(String) this.jComboBoxPositie.getSelectedItem(), team);
 
         try {
 
@@ -200,7 +200,7 @@ public class AddSpeler extends javax.swing.JFrame {
             jTextAchternaam.setText("");
             jTextVoornaam.setText("");
             jTextGeboortedatum.setText("");
-            jTextVoorkeurspositie.setText("");
+            
         } catch (DBException ex) {
             Logger.getLogger(AddSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -245,6 +245,7 @@ public class AddSpeler extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton VorigeButton;
     private javax.swing.JButton jButtonStore;
+    private javax.swing.JComboBox jComboBoxPositie;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -252,7 +253,6 @@ public class AddSpeler extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTop;
     private javax.swing.JTextField jTextAchternaam;
     private javax.swing.JTextField jTextGeboortedatum;
-    private javax.swing.JTextField jTextVoorkeurspositie;
     private javax.swing.JTextField jTextVoornaam;
     // End of variables declaration//GEN-END:variables
 

@@ -39,13 +39,12 @@ public class BewerkTeam extends javax.swing.JFrame {
 
     DefaultListModel DLM;
 
-    public BewerkTeam(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
+    public BewerkTeam(DriverManager dManager) throws SQLException {
         AddTeamEnTrainer.dManager = dManager;
-        this.competitie = competitie;
-        this.seizoen = seizoen;
+
         initComponents();
         setLocationRelativeTo(null);
-        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoen));
+        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
 
     }
 
@@ -202,7 +201,25 @@ public class BewerkTeam extends javax.swing.JFrame {
     }//GEN-LAST:event_AddSpelerButtonActionPerformed
 
     private void SpelerBewerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpelerBewerkenButtonActionPerformed
-        
+        Team team = null;
+        BewerkSpeler updateForm = null;
+        String teamstring = (String) jListTeam.getSelectedValue();
+
+        String[] teama = teamstring.split("-");
+        String teamstr = teama[teama.length - 1].trim();
+        int stamnr = Integer.parseInt(teamstr);
+        try {
+            team = DriverManager.getTeam(stamnr);
+            updateForm = new BewerkSpeler(dManager, team);
+
+        } catch (DBException ex) {
+            Logger.getLogger(BewerkTeam.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BewerkTeam.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        updateForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_SpelerBewerkenButtonActionPerformed
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed

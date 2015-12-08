@@ -424,11 +424,11 @@ public class CompetitieScherm extends javax.swing.JFrame {
     private void TeamBewerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamBewerkenButtonActionPerformed
         // TODO add your handling code here:
         BewerkTeam updateForm = null;
-        Competitie c = DriverManager.getCompetitie((String) LijstCompetities.getSelectedValue());
-        Seizoen s = DriverManager.getSeizoen(Integer.parseInt(LijstSeizoenen.getSelectedValue()), c.getCompetitienaam());
+//        Competitie c = DriverManager.getCompetitie((String) LijstCompetities.getSelectedValue());
+//        Seizoen s = DriverManager.getSeizoen(Integer.parseInt(LijstSeizoenen.getSelectedValue()), c.getCompetitienaam());
 
         try {
-            updateForm = new BewerkTeam(dManager, c, s);
+            updateForm = new BewerkTeam(dManager);
         } catch (SQLException ex) {
             Logger.getLogger(CompetitieScherm.class.getName()).log(Level.SEVERE, null, ex);
         }

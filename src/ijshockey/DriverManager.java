@@ -1278,7 +1278,7 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql = "UPDATE speler\n"
-                    + "SET voorkeurpositie = " + s.getVoorkeurpositie() + ", stamnr = " + s.getTeam().getStamNr() + "\n"
+                    + "SET voorkeurpositie = '" + s.getVoorkeurpositie() + "', stamnr = " + s.getTeam().getStamNr() + "\n"
                     + "WHERE lidnr = " + s.getLidnr();
             stmt.executeUpdate(sql);
 
@@ -1585,9 +1585,8 @@ public class DriverManager {
             throw new DBException(ex);
         }
     }
-    
-//team
 
+//team
     public static void addTeam(Team t, Trainer tr) throws DBException {
         Connection con = null;
         try {
