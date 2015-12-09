@@ -14,7 +14,7 @@ import java.util.Collections;
  */
 public class Competitie {
 
-    public String competitienaam; // PK
+    public String competitienaam; //PK
 
     public Competitie(String competitienaam) {
         this.competitienaam = competitienaam;

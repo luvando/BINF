@@ -46,7 +46,7 @@ public class AddOpstelling extends javax.swing.JFrame {
         this.wedstrijd = wed;
 
         initComponents();
-        this.setjLabelTop("Opstelling wedstrijd :" + wed.getWedstrijdNr() + " : F" + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
+        this.setjLabelTop("Opstelling wedstrijd : " + wed.getWedstrijdNr() + " - " + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
 
         setLocationRelativeTo(null);
     }

@@ -15,35 +15,51 @@ import java.util.Arrays;
 public class Test {
 
     public static void main(String[] args) throws DBException {
-        /* DriverManager.printTeamRanking(); //werkt
-         DriverManager.printSpelerRanking(); //werkt
-         DriverManager.printSpelerRapport(3); //werkt
+       /* Competitie c = new Competitie("test league");
+        DriverManager.addComp(c);
+        DriverManager.getCompetitie(c.getCompetitienaam());
 
-         DriverManager.printSpelerRapport(2);
-         Owngoal o = new Owngoal(16, 2, 1);
-         DriverManager.addOwngoal(o);
+        Seizoen s = new Seizoen(c, 2000);
+        //DriverManager.addSeizoen(s);
+        DriverManager.getSeizoen(s.getJaar(), c.getCompetitienaam());
 
-         Straf s = new Straf(15, "heel stout geweest", 10, 2, 1);
-         DriverManager.addStraf(s);
-         Penalty p = new Penalty(15, 2, 1, 0);
-         DriverManager.addPenalty(p);
+        Speeldag speeldag = new Speeldag(c, s, 100);
+        DriverManager.addSpeeldag(speeldag);
+        DriverManager.getSpeeldag(c.getCompetitienaam(), s.getJaar(), speeldag.getSpeeldagnr());
 
-         Goal g = new Goal(15, 2, 1, 3);
-         DriverManager.addGoal(g);
+        Team t1 = new Team(100, "testteam 1", "testarena 1");
+        Team t2 = new Team(200, "testteam 2", "testarena 2");
+        Team t3 = new Team(300, "testteam 3", "testarena 3");
 
-         Team t = DriverManager.getTeam(1);
-         Team tt = DriverManager.getTeam(2);
-         Scheidsrechter s2 = DriverManager.getScheids(1);
-         Speeldag ss = DriverManager.getSpeeldag("National League", 2015, 1);
-         Wedstrijd w = new Wedstrijd(t, tt, "Camp Nou", 5, 0, s2, "11/11/2015", ss);
-         //        DriverManager.addWedstrijd(w);*/
-//
-//        Competitie c = new Competitie("Stella pro league");
-//        Seizoen s = new Seizoen(c, 2015);
-//        Speler speler = DriverManager.getSpeler(2);
-//        //Team t = DriverManager.getTeam(80);
-//      //  DriverManager.printTeamRapport(c, s, t);
-//        DriverManager.printSpelerRapport(speler, c, s);
+        Trainer tr1 = new Trainer("testvoornaam", "testachternaam", "testgbd", 100);
+        Trainer tr2 = new Trainer("testvoornaam", "testachternaam", "testgbd", 200);
+        Trainer tr3 = new Trainer("testvoornaam", "testachternaam", "testgbd", 300);
 
+        DriverManager.addTrainer(tr1);
+        DriverManager.addTrainer(tr2);
+        DriverManager.addTrainer(tr3);
+
+        DriverManager.getTrainer(100);
+        DriverManager.getTrainer(200);
+        DriverManager.getTrainer(300);
+
+        DriverManager.addTeam(t1, tr1);
+        DriverManager.addTeam(t2, tr2);
+        DriverManager.addTeam(t3, tr3);
+
+        DriverManager.getTeam(100);
+        DriverManager.getTeam(200);
+        DriverManager.getTeam(300);
+        
+        Scheidsrechter scheidsrechter = new Scheidsrechter("testvoornaamscheids", "testachternaamscheids", "testgbdscheids");
+        DriverManager.addScheids(scheidsrechter);
+        DriverManager.getScheids(scheidsrechter.getLidnr());
+        
+        Wedstrijd w = new Wedstrijd(s, t1, t2, t1.getThuisArena(), 5, 0, scheidsrechter, "testdatum", speeldag);
+        DriverManager.addWedstrijd(w);
+        DriverManager.getWedstrijd(w.getWedstrijdNr());
+
+        DriverManager.printTeamRapport(c, s, t1);*/
+        
     }
 }
