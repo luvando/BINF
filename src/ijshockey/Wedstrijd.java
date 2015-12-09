@@ -21,7 +21,6 @@ public class Wedstrijd {
     private String datum;
     private int gespeeld;
     private Speeldag sp;
-    private Boolean gespeeldBoo;
     private Seizoen seizoen;
 
 // GESPEELDE MATCHEN    
@@ -158,14 +157,6 @@ public class Wedstrijd {
 
     public void setGespeeld(int gespeeld) {
         this.gespeeld = gespeeld;
-    }
-
-    public Boolean getGespeeldBoo() {
-        return gespeeldBoo;
-    }
-
-    public void setGespeeldBoo(Boolean gespeeldBoo) {
-        this.gespeeldBoo = gespeeldBoo;
     }
 
     public Speeldag getSp() {

@@ -20,14 +20,14 @@ public class Opstelling {
     private Wedstrijd wedstrijd;
     private Speler speler;
 
-    public Opstelling(int wedstrijdnr, int lidnr, int onr, String positie, int tijdstipIn, int tijdstipUit) {
+    /*public Opstelling(int wedstrijdnr, int lidnr, int onr, String positie, int tijdstipIn, int tijdstipUit) {
         this.opstellingNr = onr;
         this.positie = positie;
         this.tijdstipIn = tijdstipIn;
         this.tijdstipUit = tijdstipUit;
         this.wedstrijdnr = wedstrijdnr;
         this.lidnr = lidnr;
-    }
+    }*/
 
     public Opstelling(Wedstrijd wedstrijd, Speler speler, String positie, int tijdstipIn, int tijdstipUit) {
         this.wedstrijd = wedstrijd;
