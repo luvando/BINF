@@ -5,13 +5,11 @@
  */
 package GUIPackage;
 
-import static GUIPackage.AddWedstrijd.dManager;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Scheidsrechter;
 import ijshockey.Seizoen;
-import ijshockey.Team;
 import ijshockey.Wedstrijd;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -267,7 +265,6 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
-        // TODO add your handling code here:
         String we = (String) jListWedstrijd.getSelectedValue();
         String[] wed = we.split("-");
         String weds = wed[0].trim();
@@ -328,11 +325,9 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
     }//GEN-LAST:event_StoreActionPerformed
 
     private void jTextDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDatumActionPerformed
-
      }//GEN-LAST:event_jTextDatumActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         CompetitieScherm updateForm = null;
 
         try {
@@ -348,7 +343,6 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
         this.gespeeld = 1;
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
@@ -366,8 +360,7 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
             } catch (DBException ex) {
                 Logger.getLogger(BewerkWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }// TODO add your handling code here:
-
+        }
     }//GEN-LAST:event_jListWedstrijdValueChanged
 
     private void jListWedstrijdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListWedstrijdMouseClicked
@@ -432,5 +425,4 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
     private void setjLabelTop(String string) {
         this.jLabelTop.setText(string);
     }
-
 }

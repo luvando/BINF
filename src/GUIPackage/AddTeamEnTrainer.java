@@ -5,26 +5,18 @@
  */
 package GUIPackage;
 
-import static GUIPackage.CompetitieScherm.dManager;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
-import ijshockey.Scheidsrechter;
 import ijshockey.Seizoen;
 import ijshockey.Team;
 import ijshockey.Trainer;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -32,7 +24,7 @@ import javax.swing.JTextField;
  */
 public class AddTeamEnTrainer extends javax.swing.JFrame {
 
-    public static DriverManager dManager; // Competitie en Seizoen niet nodig
+    public static DriverManager dManager;
 
     /**
      * Creates new form AddTeam
@@ -253,19 +245,15 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void StamnummerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StamnummerActionPerformed
-
     }//GEN-LAST:event_StamnummerActionPerformed
 
     private void VoornaamTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoornaamTrainerActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_VoornaamTrainerActionPerformed
 
     private void GeboortedatumTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeboortedatumTrainerActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_GeboortedatumTrainerActionPerformed
 
     private void AchternaamTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AchternaamTrainerActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_AchternaamTrainerActionPerformed
 
     private void StamnummerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StamnummerKeyReleased

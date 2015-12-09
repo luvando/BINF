@@ -5,14 +5,12 @@
  */
 package GUIPackage;
 
-import static GUIPackage.BewerkTeam.dManager;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Seizoen;
 import ijshockey.Speler;
 import ijshockey.Team;
-import ijshockey.Trainer;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +22,7 @@ import javax.swing.JOptionPane;
  * @author ekmaes
  */
 public class AddSpeler extends javax.swing.JFrame {
-    
+
     public static DriverManager dManager;
     public Team team;
     private Competitie competitie;
@@ -36,7 +34,7 @@ public class AddSpeler extends javax.swing.JFrame {
     public AddSpeler() {
         initComponents();
     }
-    
+
     public AddSpeler(DriverManager dManager, Team team, Competitie competitie, Seizoen seizoen) {
         this.dManager = dManager;
         this.team = team;
@@ -44,7 +42,7 @@ public class AddSpeler extends javax.swing.JFrame {
         this.seizoen = seizoen;
         initComponents();
         setLocationRelativeTo(null);
-        this.setjLabelTop("Speler toevoegen aan : " + team.getNaam());
+        this.setjLabelTop2("Speler toevoegen aan : " + team.getNaam());
     }
 
     /**
@@ -67,6 +65,7 @@ public class AddSpeler extends javax.swing.JFrame {
         jLabelTop = new javax.swing.JLabel();
         jButtonStore = new javax.swing.JButton();
         jComboBoxPositie = new javax.swing.JComboBox();
+        jLabelTop2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Speler Toevoegen");
@@ -110,6 +109,8 @@ public class AddSpeler extends javax.swing.JFrame {
         jComboBoxPositie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBoxPositie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Goalie", "Defender", "Forward" }));
 
+        jLabelTop2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,18 +124,17 @@ public class AddSpeler extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
+                        .addContainerGap()
+                        .addComponent(jLabelTop2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
                         .addComponent(jLabelTop))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
                         .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jTextGeboortedatum, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -147,14 +147,13 @@ public class AddSpeler extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addComponent(jTextVoornaam, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)))
+                .addComponent(jLabelTop2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelTop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextVoornaam, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextAchternaam, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,33 +178,32 @@ public class AddSpeler extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         BewerkTeam updateForm = null;
-        
+
         try {
             updateForm = new BewerkTeam(dManager);
         } catch (SQLException ex) {
             Logger.getLogger(AddSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed
         Speler speler = new Speler(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText(), (String) this.jComboBoxPositie.getSelectedItem(), team);
-        
+
         try {
-            
+
             DriverManager.addSpeler(speler);
-            
+
             JOptionPane.showMessageDialog(null, "Speler opgeslagen!");
             jTextAchternaam.setText("");
             jTextVoornaam.setText("");
             jTextGeboortedatum.setText("");
-            
+
         } catch (DBException ex) {
             Logger.getLogger(AddSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonStoreActionPerformed
 
     /**
@@ -252,6 +250,7 @@ public class AddSpeler extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelTop;
+    private javax.swing.JLabel jLabelTop2;
     private javax.swing.JTextField jTextAchternaam;
     private javax.swing.JTextField jTextGeboortedatum;
     private javax.swing.JTextField jTextVoornaam;
@@ -260,9 +259,9 @@ public class AddSpeler extends javax.swing.JFrame {
     public JLabel getjLabelTop() {
         return jLabelTop;
     }
-    
-    public void setjLabelTop(String string) {
+
+    public void setjLabelTop2(String string) {
         this.jLabelTop.setText(string);
     }
-    
+
 }

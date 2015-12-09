@@ -5,14 +5,12 @@
  */
 package GUIPackage;
 
-import static GUIPackage.TeamRapport.dManager;
 import ijshockey.Competitie;
 import ijshockey.CustomOutputStream;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Seizoen;
 import ijshockey.Speler;
-import ijshockey.Team;
 import java.io.PrintStream;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -26,32 +24,31 @@ public class SpelerRapport extends javax.swing.JFrame {
 
     private PrintStream standardOut;
     public static DriverManager dManager;
-    
+
     private Competitie competitie;
     private Seizoen seizoen;
     private Speler speler;
+
     /**
      * Creates new form SpelerRapport
      */
     public SpelerRapport(DriverManager dManager, Competitie competitie, Seizoen seizoen, Speler speler) throws DBException {
         super("Rapport");
         initComponents();
-        
+
         this.dManager = dManager;
         this.competitie = competitie;
         this.seizoen = seizoen;
         this.speler = speler;
-        
+
         jTextArea1.setEditable(false);
         PrintStream printStream = new PrintStream(new CustomOutputStream(jTextArea1));
-         
-        // keeps reference of standard output stream
+
         standardOut = System.out;
-         
-        // re-assigns standard output stream and error output stream
+
         System.setOut(printStream);
         System.setErr(printStream);
-        
+
         DriverManager.printSpelerRapport(speler, competitie, seizoen);
         setLocationRelativeTo(null);
     }
@@ -127,7 +124,6 @@ public class SpelerRapport extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Vorige;

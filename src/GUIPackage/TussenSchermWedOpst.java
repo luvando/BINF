@@ -5,7 +5,6 @@
  */
 package GUIPackage;
 
-import static GUIPackage.AddWedstrijd.dManager;
 import ijshockey.DriverManager;
 import ijshockey.Team;
 import ijshockey.Wedstrijd;
@@ -111,7 +110,6 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAddOpstellingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddOpstellingActionPerformed
-        // TODO add your handling code here:
         AddOpstelling updateForm = null;
 
         try {
@@ -127,7 +125,7 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
         if (oldForm == null) {
             oldForm2.setVisible(false);
         }
-        this.setVisible(false);        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonAddOpstellingActionPerformed
 
     /**
@@ -169,6 +167,7 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAddOpstelling;
     private javax.swing.JLabel jLabelTop;
     // End of variables declaration//GEN-END:variables
+
     public void setjLabetTop(String str) {
         this.jLabelTop.setText(str);
 

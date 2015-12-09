@@ -5,15 +5,11 @@
  */
 package GUIPackage;
 
-import static GUIPackage.AddSpeler.dManager;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
-import ijshockey.Scheidsrechter;
 import ijshockey.Seizoen;
-import ijshockey.Speeldag;
 import ijshockey.Team;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +18,7 @@ import javax.swing.text.Position;
 
 /**
  *
- * @author Wim
+ * @author jornys
  */
 public class BewerkTeam extends javax.swing.JFrame {
 
@@ -41,9 +37,9 @@ public class BewerkTeam extends javax.swing.JFrame {
 
     public BewerkTeam(DriverManager dManager) throws SQLException {
         AddTeamEnTrainer.dManager = dManager;
-        
+
         initComponents();
-   
+
         setLocationRelativeTo(null);
         this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
 
@@ -186,7 +182,6 @@ public class BewerkTeam extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddSpelerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSpelerButtonActionPerformed
-        // TODO add your handling code here:
         Team team = null;
         AddSpeler updateForm = null;
         String teamstring = (String) jListTeam.getSelectedValue();
@@ -229,13 +224,11 @@ public class BewerkTeam extends javax.swing.JFrame {
     }//GEN-LAST:event_SpelerBewerkenButtonActionPerformed
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-        // TODO add your handling code here:
         int zoekresultaat = jListTeam.getNextMatch(SearchText.getText(), 0, Position.Bias.Forward);
         jListTeam.setSelectedIndex(zoekresultaat);
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void SearchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_SearchTextActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -252,7 +245,6 @@ public class BewerkTeam extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TrainerBewerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainerBewerkenButtonActionPerformed
-
         Team team = null;
         BewerkTrainer updateForm = null;
         String teamstring = (String) jListTeam.getSelectedValue();
@@ -263,11 +255,10 @@ public class BewerkTeam extends javax.swing.JFrame {
 
         try {
             team = DriverManager.getTeam(stamnr);
-             updateForm = new BewerkTrainer(dManager, team , competitie, seizoen);
+            updateForm = new BewerkTrainer(dManager, team, competitie, seizoen);
         } catch (DBException | SQLException ex) {
             Logger.getLogger(BewerkTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
 
         updateForm.setVisible(true);
         this.setVisible(false);

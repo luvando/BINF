@@ -9,10 +9,6 @@ import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Seizoen;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-//import ijshockey.DriverManager.closeConnection;
-//import ijshockey.DriverManager.getConnection;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -310,7 +306,6 @@ public class CompetitieScherm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
         Startscherm updateForm = new Startscherm(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
@@ -344,22 +339,17 @@ public class CompetitieScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_LijstCompetitiesValueChanged
 
     private void LijstSeizoenenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstSeizoenenValueChanged
-        // TODO add your handling code here:
-
     }//GEN-LAST:event_LijstSeizoenenValueChanged
 
     private void SearchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_SearchTextActionPerformed
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-        // TODO add your handling code here:
         int zoekresultaat = LijstCompetities.getNextMatch(SearchText.getText(), 0, Position.Bias.Forward);
         LijstCompetities.setSelectedIndex(zoekresultaat);
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void NieuwSeizoenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NieuwSeizoenButtonActionPerformed
-        // TODO add your handling code here:
         Connection con = null;
         try {
             con = dManager.getConnection();
@@ -403,10 +393,8 @@ public class CompetitieScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_AddSpeeldagButtonActionPerformed
 
     private void TeamToevoegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamToevoegenButtonActionPerformed
-        // TODO add your handling code here:
         AddTeamEnTrainer updateForm = null;
-//        Competitie c = DriverManager.getCompetitie((String) LijstCompetities.getSelectedValue());
-//        Seizoen s = DriverManager.getSeizoen(Integer.parseInt(LijstSeizoenen.getSelectedValue()), c.getCompetitienaam());
+
         try {
             updateForm = new AddTeamEnTrainer(dManager);
         } catch (SQLException ex) {
@@ -417,10 +405,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_TeamToevoegenButtonActionPerformed
 
     private void TeamBewerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamBewerkenButtonActionPerformed
-        // TODO add your handling code here:
         BewerkTeam updateForm = null;
-//        Competitie c = DriverManager.getCompetitie((String) LijstCompetities.getSelectedValue());
-//        Seizoen s = DriverManager.getSeizoen(Integer.parseInt(LijstSeizoenen.getSelectedValue()), c.getCompetitienaam());
 
         try {
             updateForm = new BewerkTeam(dManager);
@@ -472,11 +457,9 @@ public class CompetitieScherm extends javax.swing.JFrame {
     }//GEN-LAST:event_DeelnameTeamToevoegenActionPerformed
 
     private void AddScheidsrechterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddScheidsrechterButtonActionPerformed
-        // TODO add your handling code here:
         AddScheids updateForm = new AddScheids(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
-
     }//GEN-LAST:event_AddScheidsrechterButtonActionPerformed
 
     /**
@@ -543,7 +526,8 @@ public class CompetitieScherm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
- public String getCompetitieNaam() {
+
+    public String getCompetitieNaam() {
         return Competitienaam.getText();
     }
 

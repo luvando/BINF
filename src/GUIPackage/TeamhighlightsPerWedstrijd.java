@@ -9,9 +9,10 @@ import ijshockey.DriverManager;
 
 /**
  *
- * @author Wim
+ * @author jornys
  */
 public class TeamhighlightsPerWedstrijd extends javax.swing.JFrame {
+
     public static DriverManager dManager;
 
     /**
@@ -20,8 +21,7 @@ public class TeamhighlightsPerWedstrijd extends javax.swing.JFrame {
     public TeamhighlightsPerWedstrijd() {
         initComponents();
     }
-   
-    
+
     public TeamhighlightsPerWedstrijd(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
@@ -114,24 +114,21 @@ public class TeamhighlightsPerWedstrijd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VolgendeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolgendeButtonActionPerformed
-        // TODO add your handling code here:
         TeamhighlightsPerWedstrijd2 updateForm = new TeamhighlightsPerWedstrijd2(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_VolgendeButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
         GegevensOpvragen updateForm = new GegevensOpvragen(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     /**

@@ -5,10 +5,8 @@
  */
 package GUIPackage;
 
-import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
-import ijshockey.Seizoen;
 import ijshockey.Speler;
 import ijshockey.Team;
 import java.sql.SQLException;
@@ -28,7 +26,6 @@ public class BewerkSpeler extends javax.swing.JFrame {
     private Team team;
     public static DriverManager dManager;
     DefaultListModel DLM;
-   
 
     /**
      * Creates new form BewerkSpeler
@@ -283,6 +280,7 @@ public class BewerkSpeler extends javax.swing.JFrame {
                     newTeam);
             DriverManager.bewerkSpeler(speler);
             this.FillLijstSpelers(ijshockey.DriverManager.FillLijstSpelers(DLM, team));
+            this.jListTeam.clearSelection();
             JOptionPane.showMessageDialog(null, "Speler bewerkt!");
 
         } catch (DBException ex) {
@@ -291,7 +289,6 @@ public class BewerkSpeler extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(BewerkSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonStoreActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
@@ -310,36 +307,35 @@ public class BewerkSpeler extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void LijstSpelersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstSpelersValueChanged
-        if(LijstSpelers.isSelectionEmpty()){
-            
-        }else{
+        if (LijstSpelers.isSelectionEmpty()) {
+
+        } else {
             String listValue = (String) LijstSpelers.getSelectedValue();
-        String[] array = listValue.split("-");
-        String lidnrStr = array[array.length - 1].trim();
-        int lidnr = Integer.parseInt(lidnrStr);
-        Speler speler = null;
-        try {
-            speler = DriverManager.getSpeler(lidnr);
-            this.setjTextVoornaam(speler.getVoornaam());
-            this.setjTextAchternaam(speler.getAchternaam());
-            this.setjTextGeboortedatum(speler.getGeboortedatum());
-            this.setjTextVoorkeurspositie(speler.getVoorkeurpositie());
-        } catch (DBException ex) {
-            Logger.getLogger(BewerkSpeler.class.getName()).log(Level.SEVERE, null, ex);
+            String[] array = listValue.split("-");
+            String lidnrStr = array[array.length - 1].trim();
+            int lidnr = Integer.parseInt(lidnrStr);
+            Speler speler = null;
+            try {
+                speler = DriverManager.getSpeler(lidnr);
+                this.setjTextVoornaam(speler.getVoornaam());
+                this.setjTextAchternaam(speler.getAchternaam());
+                this.setjTextGeboortedatum(speler.getGeboortedatum());
+                this.setjTextVoorkeurspositie(speler.getVoorkeurpositie());
+                this.jListTeam.setSelectedValue(speler.getTeam().getNaam() + " - " + speler.getTeam().getStamNr(), true);
+            } catch (DBException ex) {
+                Logger.getLogger(BewerkSpeler.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        }
-                
+
 
     }//GEN-LAST:event_LijstSpelersValueChanged
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-        // TODO add your handling code here:
         int zoekresultaat = jListTeam.getNextMatch(SearchText.getText(), 0, Position.Bias.Forward);
         jListTeam.setSelectedIndex(zoekresultaat);
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void SearchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_SearchTextActionPerformed
 
     /**
@@ -403,7 +399,8 @@ public class BewerkSpeler extends javax.swing.JFrame {
     private javax.swing.JTextField jTextGeboortedatum;
     private javax.swing.JTextField jTextVoornaam;
     // End of variables declaration//GEN-END:variables
-  public void setjLabelTop(String jTextTeam) {
+
+    public void setjLabelTop(String jTextTeam) {
         this.jLabelTop.setText(jTextTeam);
     }
 
