@@ -39,14 +39,13 @@ public class BewerkTeam extends javax.swing.JFrame {
 
     DefaultListModel DLM;
 
-    public BewerkTeam(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {
+    public BewerkTeam(DriverManager dManager) throws SQLException {
         AddTeamEnTrainer.dManager = dManager;
         
         initComponents();
-        this.seizoen = seizoen;
-        this.competitie = competitie;
+   
         setLocationRelativeTo(null);
-        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeam(DLM, competitie, seizoen));
+        this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
 
     }
 
@@ -217,7 +216,7 @@ public class BewerkTeam extends javax.swing.JFrame {
         int stamnr = Integer.parseInt(teamstr);
         try {
             team = DriverManager.getTeam(stamnr);
-            updateForm = new BewerkSpeler(dManager, team, competitie, seizoen);
+            updateForm = new BewerkSpeler(dManager, team);
 
         } catch (DBException ex) {
             Logger.getLogger(BewerkTeam.class.getName()).log(Level.SEVERE, null, ex);

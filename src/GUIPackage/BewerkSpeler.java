@@ -28,8 +28,7 @@ public class BewerkSpeler extends javax.swing.JFrame {
     private Team team;
     public static DriverManager dManager;
     DefaultListModel DLM;
-    private Competitie competitie;
-    private Seizoen seizoen;
+   
 
     /**
      * Creates new form BewerkSpeler
@@ -38,12 +37,11 @@ public class BewerkSpeler extends javax.swing.JFrame {
         initComponents();
     }
 
-    public BewerkSpeler(DriverManager dManager, Team team, Competitie competitie, Seizoen seizoen) throws SQLException {
+    public BewerkSpeler(DriverManager dManager, Team team) throws SQLException {
         super("Bewerk speler");
         BewerkSpeler.dManager = dManager;
         this.team = team;
-        this.competitie = competitie;
-        this.seizoen = seizoen;
+
         initComponents();
         setLocationRelativeTo(null);
         this.FillLijstSpelers(ijshockey.DriverManager.FillLijstSpelers(DLM, team));
@@ -300,7 +298,7 @@ public class BewerkSpeler extends javax.swing.JFrame {
         BewerkTeam updateForm = null;
 
         try {
-            updateForm = new BewerkTeam(dManager, competitie, seizoen);
+            updateForm = new BewerkTeam(dManager);
 
         } catch (SQLException ex) {
             Logger.getLogger(AddSpeler.class
