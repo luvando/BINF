@@ -42,7 +42,7 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
         this.oldForm = oldForm;
         setLocationRelativeTo(null);
         initComponents();
-        this.setjLabetTop("Wedstrijd opgeslaan voor : " + wedstrijd.getThuisTeam().getNaam() + " - " + wedstrijd.getUitTeam().getNaam() + "!");
+        this.setjLabetTop("Wedstrijd " + wedstrijd.getThuisTeam().getNaam() + " versus " + wedstrijd.getUitTeam().getNaam() + " opgeslagen!");
     }
 
     public TussenSchermWedOpst(DriverManager dManager, Wedstrijd wedstrijd, BewerkWedstrijd oldForm2) {

@@ -43,7 +43,7 @@ public class GegevensOpvragen extends javax.swing.JFrame {
         this.seizoen = DriverManager.getSeizoen(jaar, competitienaam);
         initComponents();
         setLocationRelativeTo(null);
-        this.setjLabelTop("Gegevens opvragen van " + competitienaam + " seizoen : " + jaar);
+        this.setjLabelTop("Gegevens opvragen van " + competitienaam + ", seizoen " + jaar);
     }
 
     GegevensOpvragen(DriverManager dManager, Competitie competitie, Seizoen seizoen) {
@@ -52,7 +52,7 @@ public class GegevensOpvragen extends javax.swing.JFrame {
         this.seizoen = seizoen;
         initComponents();
         setLocationRelativeTo(null);
-        this.setjLabelTop("Gegevens opvragen van " + competitie.getCompetitienaam() + " seizoen : " + seizoen.getJaar());
+        this.setjLabelTop("Gegevens opvragen van " + competitie.getCompetitienaam() + ", seizoen " + seizoen.getJaar());
 
     }
 

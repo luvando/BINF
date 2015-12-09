@@ -38,7 +38,7 @@ public class AddStraf extends javax.swing.JFrame {
         this.speler = speler;
         this.minuut = minuut;
         initComponents();
-        this.setjLabelTop("Highlight toevoegen voor : " + speler.getVoornaam() + " " + speler.getAchternaam() + ", minuut : " + minuut);
+        this.setjLabelTop("Straf toevoegen voor " + speler.getVoornaam() + " " + speler.getAchternaam() + ", minuut " + minuut);
         setLocationRelativeTo(null);
     }
 
@@ -185,7 +185,7 @@ public class AddStraf extends javax.swing.JFrame {
             DriverManager.addStraf(s);
             jTextMinuut.setText("");
             jTextReden.setText("");
-            JOptionPane.showMessageDialog(null, "Straf opgeslaan!");
+            JOptionPane.showMessageDialog(null, "Straf opgeslagen!");
         } catch (DBException ex) {
             Logger.getLogger(AddStraf.class.getName()).log(Level.SEVERE, null, ex);
         }

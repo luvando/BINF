@@ -32,7 +32,7 @@ public class TussenSchermOpstHighlight extends javax.swing.JFrame {
         this.oldForm = oldForm;
 
         initComponents();
-        this.setjLabetTop("Opstelling en wissels opgeslaan voor  " + wedstrijd.getThuisTeam().getNaam() + " tegen : " + wedstrijd.getUitTeam().getNaam() + "!");
+        this.setjLabetTop("Opstelling en wissels opgeslagen voor  " + wedstrijd.getThuisTeam().getNaam() + " versus " + wedstrijd.getUitTeam().getNaam() + "!");
         setLocationRelativeTo(null);
     }
 

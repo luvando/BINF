@@ -43,7 +43,7 @@ public class AddDeelname extends javax.swing.JFrame {
         initComponents();
         
         this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
-        this.setjLabelTop("Deelname team toevoegen aan : " + competitie.getCompetitienaam() + " seizoen : " + seizoen.getJaar());
+        this.setjLabelTop("Deelname team toevoegen aan " + competitie.getCompetitienaam() + ", seizoen " + seizoen.getJaar());
         setLocationRelativeTo(null);
         
     }

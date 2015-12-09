@@ -38,7 +38,7 @@ public class AddPenalty extends javax.swing.JFrame {
         this.speler = speler;
         this.minuut = minuut;
         initComponents();
-        this.setjLabelTop("Highlight toevoegen voor : " + speler.getVoornaam() + " " + speler.getAchternaam() + ", minuut : " + minuut);
+        this.setjLabelTop("Penalty toevoegen voor " + speler.getVoornaam() + " " + speler.getAchternaam() + ", minuut " + minuut);
     }
 
     /**
@@ -186,7 +186,7 @@ public class AddPenalty extends javax.swing.JFrame {
                 DriverManager.addPenalty(p);
 
                 this.jRadioButtonJa.setSelected(false);
-                JOptionPane.showMessageDialog(null, "Penalty opgeslaan");
+                JOptionPane.showMessageDialog(null, "Penalty opgeslagen");
             } catch (DBException ex) {
                 Logger.getLogger(AddPenalty.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -198,7 +198,7 @@ public class AddPenalty extends javax.swing.JFrame {
             try {
                 DriverManager.addPenalty(p);
                 this.jRadioButtonNee.setSelected(false);
-                JOptionPane.showMessageDialog(null, "Penalty opgeslaan");
+                JOptionPane.showMessageDialog(null, "Penalty opgeslagen");
             } catch (DBException ex) {
                 Logger.getLogger(AddPenalty.class.getName()).log(Level.SEVERE, null, ex);
             }

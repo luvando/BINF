@@ -42,7 +42,7 @@ public class AddSpeler extends javax.swing.JFrame {
         this.seizoen = seizoen;
         initComponents();
         setLocationRelativeTo(null);
-        this.setjLabelTop2("Speler toevoegen aan : " + team.getNaam());
+        this.setjLabelTop2("Speler toevoegen aan " + team.getNaam());
     }
 
     /**

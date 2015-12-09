@@ -41,7 +41,7 @@ public class AddGoal extends javax.swing.JFrame {
         this.speler = speler;
         this.minuut = minuut;
         initComponents();
-        this.setjLabelTop("Highlight toevoegen voor : " + speler.getVoornaam() + " " + speler.getAchternaam() + ", minuut : " + minuut);
+        this.setjLabelTop("Goal toevoegen voor " + speler.getVoornaam() + " " + speler.getAchternaam() + ", minuut " + minuut);
         FillLijstSpelertjes(DriverManager.FillLijstSpelers(DLM, speler.getTeam().getStamNr()));
         setLocationRelativeTo(null);
     }
@@ -186,7 +186,7 @@ public class AddGoal extends javax.swing.JFrame {
                 spelerAss = DriverManager.getSpeler(lidnr);
                 g = new Goal(minuut, speler, wedstrijd, spelerAss);
                 DriverManager.addGoal(g);
-                JOptionPane.showMessageDialog(null, "Goal opgeslaan");
+                JOptionPane.showMessageDialog(null, "Goal opgeslagen");
             } catch (DBException ex) {
                 Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -196,7 +196,7 @@ public class AddGoal extends javax.swing.JFrame {
 
                 g = new Goal(minuut, speler, wedstrijd, null);
                 DriverManager.addGoal(g);
-                JOptionPane.showMessageDialog(null, "Goal opgeslaan");
+                JOptionPane.showMessageDialog(null, "Goal opgeslagen");
             } catch (DBException ex) {
                 Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
             }

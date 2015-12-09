@@ -40,7 +40,7 @@ public class AddOpstelling extends javax.swing.JFrame {
         this.wedstrijd = wed;
 
         initComponents();
-        this.setjLabelTop("Opstelling wedstrijd : " + wed.getWedstrijdNr() + " - " + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
+        this.setjLabelTop("Opstelling wedstrijd (" + wed.getWedstrijdNr() + ") " + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
 
         setLocationRelativeTo(null);
     }
@@ -393,7 +393,7 @@ public class AddOpstelling extends javax.swing.JFrame {
 
             DriverManager.addOpstelling(ops);
             this.jListSpeler.clearSelection();
-            JOptionPane.showMessageDialog(null, "Opstelling Opgeslagen");
+            JOptionPane.showMessageDialog(null, "Opstelling opgeslagen");
         } catch (DBException ex) {
             Logger.getLogger(AddOpstelling.class.getName()).log(Level.SEVERE, null, ex);
         }    }//GEN-LAST:event_jButtonStoreActionPerformed

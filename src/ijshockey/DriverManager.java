@@ -1116,12 +1116,14 @@ public class DriverManager {
             String voornaam = null;
             String achternaam = null;
             int goals = 0;
+            int count = 0;
 
             while (srs.next()) {
+                count++;
                 voornaam = srs.getString("voornaam");
                 achternaam = srs.getString("achternaam");
                 goals = srs.getInt("goals");
-                System.out.println(voornaam + " " + achternaam + " " + goals);
+                System.out.println(count + ". " + voornaam + " " + achternaam + " " + goals);
             }
 
             closeConnection(con);
@@ -1481,41 +1483,46 @@ public class DriverManager {
                     + "AS punten,\n"
                     + "\n"
                     + "(SELECT\n"
-                    + "\n"
-                    + "(SELECT SUM(score_uit)\n"
+                    + "(SELECT  COALESCE(SUM(score_uit),0)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE (stamnr_uit = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
-                    + "+\n"
-                    + "(SELECT SUM(score_thuis)\n"
-                    + "FROM wedstrijd\n"
-                    + "WHERE (stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
-                    + "-\n"
-                    + "(SELECT SUM(score_uit)\n"
-                    + "FROM wedstrijd\n"
-                    + "WHERE (stamnr_uit = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
-                    + "-\n"
-                    + "(SELECT SUM(score_thuis)\n"
-                    + "FROM wedstrijd\n"
-                    + "WHERE(stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "WHERE (stamnr_uit = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar\n"
                     + ")\n"
-                    + "AS doelpuntensaldo\n"
+                    + "+\n"
+                    + "(SELECT COALESCE(SUM(score_thuis),0)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar\n"
+                    + ")\n"
+                    + "-\n"
+                    + "(SELECT COALESCE(SUM(score_thuis),0)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_uit = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar\n"
+                    + ")\n"
+                    + "-\n"
+                    + "(SELECT COALESCE(SUM(score_uit),0)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE(stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar\n"
+                    + ")\n"
+                    + ") AS doelpuntensaldo\n"
                     + "\n"
                     + "FROM deelname\n"
-                    + "WHERE (competitienaam = " + c.getCompetitienaam() + "\n"
-                    + "AND jaar = "+ s.getJaar() + ")\n"
+                    + "WHERE (competitienaam = '" + c.getCompetitienaam() + "'\n"
+                    + "AND jaar = " + s.getJaar() + ")\n"
                     + "\n"
                     + "\n"
                     + "GROUP BY deelname.stamnr\n"
-                    + "ORDER BY punten DESC";
+                    + "ORDER BY punten DESC, doelpuntensaldo DESC;";
 
             ResultSet srs = stmt.executeQuery(sql);
             String naam;
             int punten;
-
+            int doelpuntensaldo;
+            int count = 0;
             while (srs.next()) {
+                count++;
                 naam = srs.getString("naam");
                 punten = srs.getInt("punten");
-                System.out.println(naam + " - " + punten);
+                doelpuntensaldo = srs.getInt("doelpuntensaldo");
+                System.out.println(count + ". " + naam + " - " + punten + " punt(en) (doelpuntensaldo: " + doelpuntensaldo + ")");
             }
 
             closeConnection(con);
@@ -1700,9 +1707,9 @@ public class DriverManager {
                         + "----------------------" + "\n"
                         + punten + " punten in " + gespeeld + " wedstrijd(en) (" + gewonnen + "/" + gelijk + "/" + verloren + ")" + "\n"
                         + "doelpuntensaldo: " + doelpuntensaldo + "\n"
-                        + goalsperthuisgame + " goals per thuiswedstrijd\n"
-                        + goalsperuitgame + " goals per uitwedstrijd\n"
-                        + goalspergame + " goals per wedstrijd\n"
+                        + goalsperthuisgame + " goal(s) per thuiswedstrijd\n"
+                        + goalsperuitgame + " goal(s) per uitwedstrijd\n"
+                        + goalspergame + " goal(s) per wedstrijd\n"
                         + penaltys + " penalty(s) gegeven, waarvan " + penaltysgescoord + " gescoord";
                 System.out.println(rapport);
             }

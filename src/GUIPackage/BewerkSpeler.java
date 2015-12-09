@@ -43,7 +43,7 @@ public class BewerkSpeler extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.FillLijstSpelers(ijshockey.DriverManager.FillLijstSpelers(DLM, team));
         this.FillLijstTeams(ijshockey.DriverManager.FillLijstTeamAll(DLM));
-        this.setjLabelTop("Trainer bewerken voor team : " + team.getNaam());
+        this.setjLabelTop("Speler bewerken voor team : " + team.getNaam());
 
     }
 

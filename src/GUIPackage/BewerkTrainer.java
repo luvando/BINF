@@ -46,7 +46,7 @@ public class BewerkTrainer extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         Trainer trainer = team.getTrainer();
         this.setjTextTrainer(trainer.getVoornaam() + " " + trainer.getAchternaam());
-        this.setjLabelTop("Trainer bewerken voor team : " + team.getNaam());
+        this.setjLabelTop("Trainer bewerken voor team " + team.getNaam());
         this.FillLijstTrainer(DriverManager.FillLijstTrainer(DLM));
 
     }

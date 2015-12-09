@@ -47,7 +47,7 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
         this.seizoen = seizoen;
         this.competitie = competitie;
 
-        this.setjLabelTop("Wedstrijd bewerken voor : " + competitie.getCompetitienaam() + " Seizoen : " + seizoen.getJaar());
+        this.setjLabelTop("Wedstrijd bewerken voor " + competitie.getCompetitienaam() + ", seizoen " + seizoen.getJaar());
         FillLijstWedstrijd(DriverManager.FillLijstWedstrijden(DLM, competitie, seizoen));
         this.FillLijstScheids(ijshockey.DriverManager.FillLijstScheids(DLM));
 

@@ -39,7 +39,7 @@ public class AddHighlight extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        this.setjLabelTop("Opstelling wedstrijd :" + wed.getWedstrijdNr() + " : " + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
+        this.setjLabelTop("Highlight toevoegen voor wedstrijd (" + wed.getWedstrijdNr() + ") " + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
 
         this.jListSpeler.clearSelection();
     }
@@ -191,7 +191,11 @@ public class AddHighlight extends javax.swing.JFrame {
 
         jTextGoals.setEditable(false);
         jTextGoals.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextGoals.setText("Numbergoals");
+        jTextGoals.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextGoalsActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(java.awt.SystemColor.activeCaption);
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -226,7 +230,7 @@ public class AddHighlight extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel5)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextGoals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTextGoals, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(VorigeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(165, 165, 165)))
@@ -383,7 +387,7 @@ public class AddHighlight extends javax.swing.JFrame {
             DriverManager.addOwngoal(og);
             this.jTextMinuut.setText("");
             this.jListSpeler.clearSelection();
-            JOptionPane.showMessageDialog(null, "Owngoal opgeslaan");
+            JOptionPane.showMessageDialog(null, "Owngoal opgeslagen");
         } catch (DBException ex) {
             Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -420,6 +424,10 @@ public class AddHighlight extends javax.swing.JFrame {
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextGoalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextGoalsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextGoalsActionPerformed
 
     /**
      * @param args the command line arguments

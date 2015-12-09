@@ -72,6 +72,7 @@ public class RapportSpeler extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Rapport speler");
 
+        VolgendeButton.setBackground(java.awt.SystemColor.activeCaption);
         VolgendeButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         VolgendeButton.setText("Druk rapport af");
         VolgendeButton.setToolTipText("");
@@ -81,6 +82,7 @@ public class RapportSpeler extends javax.swing.JFrame {
             }
         });
 
+        VorigeButton.setBackground(new java.awt.Color(255, 204, 204));
         VorigeButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         VorigeButton.setText("Vorige");
         VorigeButton.addActionListener(new java.awt.event.ActionListener() {
