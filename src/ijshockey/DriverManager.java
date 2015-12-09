@@ -1461,32 +1461,52 @@ public class DriverManager {
                     ResultSet.CONCUR_READ_ONLY);
 
             String sql
-                    = "SELECT naam, \n"
-                    + "(\n"
+                    = "SELECT\n"
+                    + "(SELECT naam\n"
+                    + "FROM team\n"
+                    + "WHERE (stamnr = deelname.stamnr))\n"
+                    + "AS naam,\n"
+                    + "\n"
+                    + "(SELECT  \n"
+                    + "\n"
                     + "(SELECT 2*COUNT(*)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE ((stamnr_uit = stamnr AND score_uit > score_thuis)\n"
-                    + "OR (stamnr_thuis = stamnr AND score_thuis > score_uit)) AND wedstrijd.competitienaam = '" + c.getCompetitienaam()
-                    + "' AND wedstrijd.jaar = " + s.getJaar() + "\n"
-                    + ")\n"
+                    + "WHERE (stamnr_uit = deelname.stamnr AND score_uit > score_thuis AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "OR (stamnr_thuis = deelname.stamnr AND score_thuis > score_uit AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar))\n"
                     + "+\n"
                     + "(SELECT COUNT(*)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE score_thuis = score_uit AND (stamnr_thuis = stamnr OR stamnr_uit = stamnr) AND wedstrijd.competitienaam = '" + c.getCompetitienaam()
-                    + "' AND wedstrijd.jaar = " + s.getJaar() + "\n"
+                    + "WHERE score_thuis = score_uit AND ((stamnr_thuis = deelname.stamnr AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar) OR (stamnr_uit = deelname.stamnr AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar))) \n"
                     + ")\n"
+                    + "AS punten,\n"
+                    + "\n"
+                    + "(SELECT \n"
+                    + "\n"
+                    + "(SELECT SUM(score_uit)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_uit = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "+\n"
+                    + "(SELECT SUM(score_thuis)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "-\n"
+                    + "(SELECT SUM(score_thuis)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_uit = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "-\n"
+                    + "(SELECT SUM(score_uit)\n"
+                    + "FROM wedstrijd\n"
+                    + "WHERE (stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
                     + ")\n"
-                    + "AS punten\n"
-                    + "FROM\n"
-                    + "(\n"
-                    + "SELECT team.stamnr, team.naam, deelname.competitienaam, deelname.jaar\n"
-                    + "FROM team\n"
-                    + "JOIN deelname\n"
-                    + "ON team.stamnr = deelname.stamnr\n"
-                    + ") AS tabel\n"
-                    + "WHERE tabel.competitienaam = '" + c.getCompetitienaam() + "' AND tabel.jaar = " + s.getJaar() + "\n"
-                    + "GROUP BY stamnr\n"
-                    + "ORDER BY punten DESC";
+                    + "AS doelpuntensaldo\n"
+                    + "\n"
+                    + "FROM deelname\n"
+                    + "WHERE (competitienaam = '"+ c.getCompetitienaam() + "'\n"
+                    + "AND jaar = " + s.getJaar() + ")\n"
+                    + "\n"
+                    + "\n"
+                    + "GROUP BY deelname.stamnr\n"
+                    + "ORDER BY punten DESC;";
 
             ResultSet srs = stmt.executeQuery(sql);
             String naam;
@@ -1495,7 +1515,6 @@ public class DriverManager {
             while (srs.next()) {
                 naam = srs.getString("naam");
                 punten = srs.getInt("punten");
-
                 System.out.println(naam + " - " + punten);
             }
 
