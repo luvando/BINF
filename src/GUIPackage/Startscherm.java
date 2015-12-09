@@ -65,10 +65,12 @@ public class Startscherm extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Competitie");
+        setTitle("Startscherm\n");
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
-        setBackground(java.awt.Color.blue);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFocusCycleRoot(false);
+        setFocusableWindowState(false);
 
         BestaandeCompetitieButton.setBackground(java.awt.SystemColor.activeCaption);
         BestaandeCompetitieButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -153,8 +155,8 @@ public class Startscherm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(25, 25, 25)
-                .addComponent(BestaandeCompetitieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(BestaandeCompetitieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(GegevensOpvragenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
