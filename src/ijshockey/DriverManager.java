@@ -1679,7 +1679,7 @@ public class DriverManager {
                 String rapport;
                 rapport = naam + "\n"
                         + "----------------------" + "\n"
-                        + punten + " punten in " + gespeeld + " matchen (" + gewonnen + "/" + gelijk + "/" + verloren + ")" + "\n"
+                        + punten + " punten in " + gespeeld + " wedstrijd(en) (" + gewonnen + "/" + gelijk + "/" + verloren + ")" + "\n"
                         + "doelpuntensaldo: " + doelpuntensaldo + "\n"
                         + goalsperthuisgame + " goals per thuiswedstrijd\n"
                         + goalsperuitgame + " goals per uitwedstrijd\n"
