@@ -7,6 +7,7 @@ package GUIPackage;
 
 import ijshockey.DBException;
 import ijshockey.DriverManager;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,11 +26,13 @@ public class Startscherm extends javax.swing.JFrame {
     public Startscherm() {
         initComponents();
         setLocationRelativeTo(null);
+       
     }
 
     public Startscherm(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
+
         setLocationRelativeTo(null);
     }
 
@@ -48,7 +51,7 @@ public class Startscherm extends javax.swing.JFrame {
         GegevensOpvragenButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jPaneldisc = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
@@ -68,6 +71,7 @@ public class Startscherm extends javax.swing.JFrame {
         setTitle("Startscherm\n");
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
+        setBackground(new java.awt.Color(235, 209, 209));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusCycleRoot(false);
         setFocusableWindowState(false);
@@ -98,27 +102,27 @@ public class Startscherm extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagePackage/icehockey.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Disclaimer")));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPaneldisc.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Disclaimer")));
+        jPaneldisc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel2MouseClicked(evt);
+                jPaneldiscMouseClicked(evt);
             }
         });
 
         jLabel3.setText("Made by BINFG11");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPaneldiscLayout = new javax.swing.GroupLayout(jPaneldisc);
+        jPaneldisc.setLayout(jPaneldiscLayout);
+        jPaneldiscLayout.setHorizontalGroup(
+            jPaneldiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPaneldiscLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPaneldiscLayout.setVerticalGroup(
+            jPaneldiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPaneldiscLayout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addGap(0, 8, Short.MAX_VALUE))
         );
@@ -136,7 +140,7 @@ public class Startscherm extends javax.swing.JFrame {
                             .addComponent(GegevensOpvragenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPaneldisc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +164,7 @@ public class Startscherm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(GegevensOpvragenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPaneldisc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -191,12 +195,12 @@ public class Startscherm extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_GegevensOpvragenButtonActionPerformed
 
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+    private void jPaneldiscMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPaneldiscMouseClicked
         Makers updateForm = null;
         updateForm = new Makers(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jPanel2MouseClicked
+    }//GEN-LAST:event_jPaneldiscMouseClicked
 
     /**
      * @param args the command line arguments
@@ -241,6 +245,6 @@ public class Startscherm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPaneldisc;
     // End of variables declaration//GEN-END:variables
 }

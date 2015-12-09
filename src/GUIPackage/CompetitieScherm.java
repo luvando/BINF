@@ -46,6 +46,7 @@ public class CompetitieScherm extends javax.swing.JFrame {
         initComponents();
         FillLijst(ijshockey.DriverManager.FillLijstCompetities(DLM));
         setLocationRelativeTo(null);
+       
 
     }
 

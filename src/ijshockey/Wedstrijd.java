@@ -58,7 +58,7 @@ public class Wedstrijd {
         this.uitTeam = uit;
         this.arena = arena;
         this.scoreThuisTeam = score_thuis;
-        this.scoreUitTeam = score_thuis;
+        this.scoreUitTeam = score_uit;
         this.scheidsrechter = scheidsrechter;
         this.datum = datum;
         this.gespeeld = gespeeld;
