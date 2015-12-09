@@ -25,6 +25,7 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
     static DriverManager dManager;
     private Wedstrijd wedstrijd;
     private AddWedstrijd oldForm;
+    private BewerkWedstrijd oldForm2;
 
     /**
      * Creates new form TussenSchermWedOpst
@@ -33,7 +34,7 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
         initComponents();
     }
 
-    public TussenSchermWedOpst(DriverManager dManager, Wedstrijd wedstrijd,AddWedstrijd oldForm) {
+    public TussenSchermWedOpst(DriverManager dManager, Wedstrijd wedstrijd, AddWedstrijd oldForm) {
         super("Message");
         this.wedstrijd = wedstrijd;
         this.thuisTeam = thuisTeam;
@@ -42,7 +43,19 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
         this.oldForm = oldForm;
         setLocationRelativeTo(null);
         initComponents();
-        this.setjLabetTop("Wedstrijd opgeslaan voor : " + wedstrijd.getThuisTeam().getNaam() + " - " + wedstrijd.getUitTeam().getNaam()+"!");
+        this.setjLabetTop("Wedstrijd opgeslaan voor : " + wedstrijd.getThuisTeam().getNaam() + " - " + wedstrijd.getUitTeam().getNaam() + "!");
+    }
+
+    public TussenSchermWedOpst(DriverManager dManager, Wedstrijd wedstrijd, BewerkWedstrijd oldForm2) {
+        super("Message");
+        this.wedstrijd = wedstrijd;
+        this.thuisTeam = thuisTeam;
+        this.uitTeam = uitTeam;
+        TussenSchermWedOpst.dManager = dManager;
+        this.oldForm2 = oldForm2;
+        setLocationRelativeTo(null);
+        initComponents();
+        this.setjLabetTop("Wedstrijd bewerkt voor : " + wedstrijd.getThuisTeam().getNaam() + " - " + wedstrijd.getUitTeam().getNaam() + "!");
     }
 
     /**
@@ -76,13 +89,13 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabelTop, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addComponent(jButtonAddOpstelling)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelTop, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +113,6 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
     private void jButtonAddOpstellingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddOpstellingActionPerformed
         // TODO add your handling code here:
         AddOpstelling updateForm = null;
-        
 
         try {
             updateForm = new AddOpstelling(dManager, wedstrijd);
@@ -109,7 +121,12 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
         }
 
         updateForm.setVisible(true);
-        oldForm.setVisible(false);
+        if (oldForm == null) {
+            oldForm2.setVisible(false);
+        }
+        if (oldForm == null) {
+            oldForm2.setVisible(false);
+        }
         this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAddOpstellingActionPerformed
 

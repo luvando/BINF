@@ -251,14 +251,13 @@ public class BewerkTrainer extends javax.swing.JFrame {
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed
 
         if (jListTrainer.isSelectionEmpty()) {
-            
 
             Trainer tr = new Trainer(VoornaamTrainer.getText(), AchternaamTrainer.getText(), GeboortedatumTrainer.getText());
             try {
                 DriverManager.addTrainer(tr);
                 int lidnrtrainer = DriverManager.getRecentLidnrTrainer();
                 Trainer trFinal = DriverManager.getTrainer(lidnrtrainer);
-                
+
                 DriverManager.bewerkTrainer(team.getStamNr(), lidnrtrainer);
                 AchternaamTrainer.setText("");
                 VoornaamTrainer.setText("");
@@ -283,8 +282,13 @@ public class BewerkTrainer extends javax.swing.JFrame {
                 Logger.getLogger(BewerkTrainer.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.setjTextTrainer(trFinal.getVoornaam() + " " + trFinal.getAchternaam());
+            try {
+                this.FillLijstTrainer(DriverManager.FillLijstTrainer(DLM));
+            } catch (SQLException ex) {
+                Logger.getLogger(BewerkTrainer.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(null, "Trainer van het team bewerkt!");
-            
+
         }
 
         // TODO add your handling code here:

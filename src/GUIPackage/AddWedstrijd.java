@@ -476,6 +476,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
                 jTextScoreThuis.setText("");
                 jTextDatum.setText("");
                 jTextArena.setText("");
+                
                 updateForm = new TussenSchermWedOpst(dManager, wedstrijd, this);
                 updateForm.setVisible(true);
             } catch (DBException ex) {

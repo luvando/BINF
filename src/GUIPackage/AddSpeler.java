@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  * @author ekmaes
  */
 public class AddSpeler extends javax.swing.JFrame {
-
+    
     public static DriverManager dManager;
     public Team team;
     private Competitie competitie;
@@ -36,13 +36,14 @@ public class AddSpeler extends javax.swing.JFrame {
     public AddSpeler() {
         initComponents();
     }
-
+    
     public AddSpeler(DriverManager dManager, Team team, Competitie competitie, Seizoen seizoen) {
         this.dManager = dManager;
         this.team = team;
         this.competitie = competitie;
         this.seizoen = seizoen;
         initComponents();
+        setLocationRelativeTo(null);
         this.setjLabelTop("Speler toevoegen aan : " + team.getNaam());
     }
 
@@ -178,24 +179,24 @@ public class AddSpeler extends javax.swing.JFrame {
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
         BewerkTeam updateForm = null;
-
+        
         try {
             updateForm = new BewerkTeam(dManager, competitie, seizoen);
         } catch (SQLException ex) {
             Logger.getLogger(AddSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed
-        Speler speler = new Speler(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText(),(String) this.jComboBoxPositie.getSelectedItem(), team);
-
+        Speler speler = new Speler(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText(), (String) this.jComboBoxPositie.getSelectedItem(), team);
+        
         try {
-
+            
             DriverManager.addSpeler(speler);
-
+            
             JOptionPane.showMessageDialog(null, "Speler opgeslagen!");
             jTextAchternaam.setText("");
             jTextVoornaam.setText("");
@@ -259,9 +260,9 @@ public class AddSpeler extends javax.swing.JFrame {
     public JLabel getjLabelTop() {
         return jLabelTop;
     }
-
+    
     public void setjLabelTop(String string) {
         this.jLabelTop.setText(string);
     }
-
+    
 }
