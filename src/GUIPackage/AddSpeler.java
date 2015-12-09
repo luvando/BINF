@@ -181,7 +181,7 @@ public class AddSpeler extends javax.swing.JFrame {
         BewerkTeam updateForm = null;
         
         try {
-            updateForm = new BewerkTeam(dManager, competitie, seizoen);
+            updateForm = new BewerkTeam(dManager);
         } catch (SQLException ex) {
             Logger.getLogger(AddSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
