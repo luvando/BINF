@@ -461,7 +461,11 @@ public class AddWedstrijd extends javax.swing.JFrame {
                 jTextScoreThuis.setText("");
                 jTextDatum.setText("");
                 jTextArena.setText("");
-                JOptionPane.showMessageDialog(null, "Wedstrijd gepland !!");
+                this.jListScheids.clearSelection();
+                this.jListSpeeldag.clearSelection();
+                this.jListThuisteam.clearSelection();
+                this.jListUitteam.clearSelection();
+                JOptionPane.showMessageDialog(null, "Wedstrijd gepland !");
             } catch (DBException ex) {
                 Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -476,7 +480,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
                 jTextScoreThuis.setText("");
                 jTextDatum.setText("");
                 jTextArena.setText("");
-                
+
                 updateForm = new TussenSchermWedOpst(dManager, wedstrijd, this);
                 updateForm.setVisible(true);
             } catch (DBException ex) {
@@ -512,7 +516,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
         // TODO add your handling code here:
-                // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jListThuisteamValueChanged
 
     /**
