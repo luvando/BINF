@@ -1480,7 +1480,7 @@ public class DriverManager {
                     + ")\n"
                     + "AS punten,\n"
                     + "\n"
-                    + "(SELECT \n"
+                    + "(SELECT\n"
                     + "\n"
                     + "(SELECT SUM(score_uit)\n"
                     + "FROM wedstrijd\n"
@@ -1490,23 +1490,23 @@ public class DriverManager {
                     + "FROM wedstrijd\n"
                     + "WHERE (stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
                     + "-\n"
-                    + "(SELECT SUM(score_thuis)\n"
+                    + "(SELECT SUM(score_uit)\n"
                     + "FROM wedstrijd\n"
                     + "WHERE (stamnr_uit = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
                     + "-\n"
-                    + "(SELECT SUM(score_uit)\n"
+                    + "(SELECT SUM(score_thuis)\n"
                     + "FROM wedstrijd\n"
-                    + "WHERE (stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
+                    + "WHERE(stamnr_thuis = deelname.stamnr) AND wedstrijd.competitienaam = deelname.competitienaam AND wedstrijd.jaar = deelname.jaar)\n"
                     + ")\n"
                     + "AS doelpuntensaldo\n"
                     + "\n"
                     + "FROM deelname\n"
-                    + "WHERE (competitienaam = '"+ c.getCompetitienaam() + "'\n"
-                    + "AND jaar = " + s.getJaar() + ")\n"
+                    + "WHERE (competitienaam = " + c.getCompetitienaam() + "\n"
+                    + "AND jaar = "+ s.getJaar() + ")\n"
                     + "\n"
                     + "\n"
                     + "GROUP BY deelname.stamnr\n"
-                    + "ORDER BY punten DESC;";
+                    + "ORDER BY punten DESC";
 
             ResultSet srs = stmt.executeQuery(sql);
             String naam;
