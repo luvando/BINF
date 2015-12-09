@@ -39,7 +39,7 @@ public class AddHighlight extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        this.setjLabelTop("Opstelling wedstrijd :" + wed.getWedstrijdNr() + " : " + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
+        this.setjLabelTop("Highlights wedstrijd : " + wed.getWedstrijdNr() + " : " + wed.getThuisTeam().getNaam() + " versus " + wed.getUitTeam().getNaam());
 
         this.jListSpeler.clearSelection();
     }
