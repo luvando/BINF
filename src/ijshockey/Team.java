@@ -60,5 +60,4 @@ public class Team {
     public void setTrainer(Trainer trainer) {
         this.trainer = trainer;
     }
-
 }

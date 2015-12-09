@@ -1244,7 +1244,7 @@ public class DriverManager {
                         + speelminuten + " minuten gespeeld in " + aantalwedstrijden + " wedstrijd(en)" + "\n"
                         + goals + " goal(s)" + "\n"
                         + owngoals + " owngoal(s)" + "\n"
-                        + penaltys + " penalty(s), waarvan " + penaltysgescoord + " gescoord" + "\n"
+                        + penaltys + " penalty(s) gegeven, waarvan " + penaltysgescoord + " gescoord" + "\n"
                         + assists + " assist(s)";
                 System.out.println(rapport);
             }
@@ -1697,14 +1697,13 @@ public class DriverManager {
 
                 String rapport;
                 rapport = naam + "\n"
-                        + "---------------------" + "\n"
-                        + punten + " punten in " + gespeeld + " matchen (" + gewonnen + "/" + gelijk + "/" + verloren + ")" + "\n"
+                        + "----------------------" + "\n"
+                        + punten + " punten in " + gespeeld + " wedstrijd(en) (" + gewonnen + "/" + gelijk + "/" + verloren + ")" + "\n"
                         + "doelpuntensaldo: " + doelpuntensaldo + "\n"
                         + goalsperthuisgame + " goals per thuiswedstrijd\n"
                         + goalsperuitgame + " goals per uitwedstrijd\n"
                         + goalspergame + " goals per wedstrijd\n"
-                        + penaltys + " penaltys gegeven\n"
-                        + penaltysgescoord + " penaltys gescoord";
+                        + penaltys + " penalty(s) gegeven, waarvan " + penaltysgescoord + " gescoord";
                 System.out.println(rapport);
             }
 

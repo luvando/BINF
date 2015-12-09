@@ -56,10 +56,10 @@ public class AddScheids extends javax.swing.JFrame {
         setTitle("Scheidsrechter toevoegen");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Voornaam:");
+        jLabel1.setText("Voornaam");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Achternaam:");
+        jLabel2.setText("Achternaam");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Geboortedatum:");

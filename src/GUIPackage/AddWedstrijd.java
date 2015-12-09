@@ -154,10 +154,10 @@ public class AddWedstrijd extends javax.swing.JFrame {
         jLabel3.setText("*Scheidsrechter:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("*Datum:");
+        jLabel4.setText("*Datum");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Score:");
+        jLabel7.setText("Score");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("-");
@@ -183,12 +183,12 @@ public class AddWedstrijd extends javax.swing.JFrame {
         jTextScoreThuis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("*Speeldag:");
+        jLabel5.setText("*Speeldag");
 
         jTextScoreUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("*Arena:");
+        jLabel2.setText("*Arena");
 
         VorigeButton.setBackground(new java.awt.Color(255, 204, 204));
         VorigeButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -200,10 +200,10 @@ public class AddWedstrijd extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("*Uitteam:");
+        jLabel6.setText("*Uitteam");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("*Thuisteam:");
+        jLabel9.setText("*Thuisteam");
 
         jTextaddSpeeldag.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextaddSpeeldag.setToolTipText("");
@@ -318,7 +318,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(131, 131, Short.MAX_VALUE))
+                .addGap(137, 137, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(jLabelTop)
