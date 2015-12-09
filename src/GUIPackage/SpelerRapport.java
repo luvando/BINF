@@ -24,7 +24,6 @@ public class SpelerRapport extends javax.swing.JFrame {
 
     private PrintStream standardOut;
     public static DriverManager dManager;
-
     private Competitie competitie;
     private Seizoen seizoen;
     private Speler speler;

@@ -26,9 +26,7 @@ public class AddOpstelling extends javax.swing.JFrame {
      * Creates new form AddOpstelling
      */
     public static DriverManager dManager;
-
-    public Wedstrijd wedstrijd;
-
+    private Wedstrijd wedstrijd;
     DefaultListModel DLM;
 
     public AddOpstelling() {

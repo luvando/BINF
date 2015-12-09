@@ -36,9 +36,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
     private Competitie competitie;
     private Seizoen seizoen;
-
     private Wedstrijd wedstrijd;
-
     private Team thuisTeam;
     private Team uitTeam;
     DefaultListModel DLM;

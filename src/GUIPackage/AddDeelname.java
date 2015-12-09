@@ -31,8 +31,7 @@ public class AddDeelname extends javax.swing.JFrame {
     private Seizoen seizoen;
     
     public AddDeelname() {
-        initComponents();
-        
+        initComponents();   
     }
     
     public AddDeelname(DriverManager dManager, Competitie competitie, Seizoen seizoen) throws SQLException {

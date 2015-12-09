@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 public class AddSpeler extends javax.swing.JFrame {
 
     public static DriverManager dManager;
-    public Team team;
+    private Team team;
     private Competitie competitie;
     private Seizoen seizoen;
 

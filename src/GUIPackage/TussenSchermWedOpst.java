@@ -20,8 +20,7 @@ public class TussenSchermWedOpst extends javax.swing.JFrame {
 
     private Team thuisTeam;
     private Team uitTeam;
-
-    static DriverManager dManager;
+    public static DriverManager dManager;
     private Wedstrijd wedstrijd;
     private AddWedstrijd oldForm;
     private BewerkWedstrijd oldForm2;
