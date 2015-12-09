@@ -1,9 +1,5 @@
 package ijshockey;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,7 +11,7 @@ import java.util.HashMap;
  */
 public class Team {
 
-    private int stamNr; //PK
+    private int stamNr;
     private String naam;
     private String thuisArena;
     private Trainer trainer;
@@ -25,14 +21,12 @@ public class Team {
         this.naam = naam;
         this.thuisArena = thuisArena;
         this.trainer = trainer;
-
     }
 
     public Team(int stamnummer, String teamNaam, String thuisArena) {
         this.stamNr = stamnummer;
         this.naam = teamNaam;
         this.thuisArena = thuisArena;
-
     }
 
     public int getStamNr() {

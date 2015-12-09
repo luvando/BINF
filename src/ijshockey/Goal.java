@@ -1,8 +1,5 @@
 package ijshockey;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -40,16 +37,4 @@ public class Goal extends Highlight {
         return s = "Goal in minuut " + super.getMinuut() + " in wedstrijd " + super.getWedstrijd().printWedstrijd();
 
     }
-
-    /*  public String toStringAssist() {
-     String s = null;
-
-     try {
-     s = "Assist" + " in minuut " + super.getMinuut() + " in wedstrijd " + (DriverManager.getWedstrijd(super.getWedstrijdNr())).printWedstrijd();
-     } catch (DBException ex) {
-     Logger.getLogger(Goal.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     return s;
-
-     }*/
 }

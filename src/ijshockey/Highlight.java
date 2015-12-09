@@ -11,7 +11,7 @@ package ijshockey;
  */
 public class Highlight {
 
-    private int highlightNr; //PK
+    private int highlightNr;
     private int minuut;
     private Speler speler; 
     private Wedstrijd wedstrijd;
