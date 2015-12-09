@@ -5,7 +5,6 @@
  */
 package GUIPackage;
 
-import static GUIPackage.TeamRanking.dManager;
 import ijshockey.Competitie;
 import ijshockey.CustomOutputStream;
 import ijshockey.DBException;
@@ -46,10 +45,8 @@ public class TeamRapport extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         PrintStream printStream = new PrintStream(new CustomOutputStream(jTextArea1));
 
-        // keeps reference of standard output stream
         standardOut = System.out;
 
-        // re-assigns standard output stream and error output stream
         System.setOut(printStream);
         System.setErr(printStream);
         DriverManager.printTeamRapport(competitie, seizoen, team);
@@ -138,7 +135,6 @@ public class TeamRapport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VorigeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeActionPerformed
-        // TODO add your handling code here:
         RapportTeam updateForm = null;
         try {
             updateForm = new RapportTeam(dManager, competitie, seizoen);

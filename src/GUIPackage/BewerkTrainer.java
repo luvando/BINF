@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -60,7 +59,6 @@ public class BewerkTrainer extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     /**
@@ -249,9 +247,7 @@ public class BewerkTrainer extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed
-
         if (jListTrainer.isSelectionEmpty()) {
-
             Trainer tr = new Trainer(VoornaamTrainer.getText(), AchternaamTrainer.getText(), GeboortedatumTrainer.getText());
             try {
                 DriverManager.addTrainer(tr);
@@ -290,20 +286,15 @@ public class BewerkTrainer extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Trainer van het team bewerkt!");
 
         }
-
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonStoreActionPerformed
 
     private void AchternaamTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AchternaamTrainerActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_AchternaamTrainerActionPerformed
 
     private void VoornaamTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoornaamTrainerActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_VoornaamTrainerActionPerformed
 
     private void GeboortedatumTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeboortedatumTrainerActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_GeboortedatumTrainerActionPerformed
 
     /**

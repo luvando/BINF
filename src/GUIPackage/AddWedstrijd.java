@@ -13,22 +13,15 @@ import ijshockey.Seizoen;
 import ijshockey.Speeldag;
 import ijshockey.Wedstrijd;
 import ijshockey.Team;
-import ijshockey.Trainer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Array;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
- * @author Wim
+ * @author jornys
  */
 public class AddWedstrijd extends javax.swing.JFrame {
 
@@ -392,8 +385,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
-
         CompetitieScherm updateForm = null;
         try {
             updateForm = new CompetitieScherm(dManager);
@@ -408,7 +399,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jButtonaddSpeeldagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddSpeeldagActionPerformed
-
         Speeldag sp = new Speeldag(competitie, DriverManager.getSeizoen(seizoen.getJaar(), competitie.getCompetitienaam()), this.getjTextaddSpeeldag());
         try {
             DriverManager.addSpeeldag(sp);
@@ -427,7 +417,7 @@ public class AddWedstrijd extends javax.swing.JFrame {
 
         int speeldagnr = (Integer) jListSpeeldag.getSelectedValue();
 
-        String arena = jTextArena.getText(); // Ook lijst maken?
+        String arena = jTextArena.getText();
 
         String thuis = (String) jListThuisteam.getSelectedValue();
         String[] teamthuis = thuis.split("-");
@@ -491,15 +481,12 @@ public class AddWedstrijd extends javax.swing.JFrame {
      }//GEN-LAST:event_StoreActionPerformed
 
     private void MouseClickedEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseClickedEvent
-
     }//GEN-LAST:event_MouseClickedEvent
 
     private void jListSpeeldagValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListSpeeldagValueChanged
-        // TODO add your handling code here:
     }//GEN-LAST:event_jListSpeeldagValueChanged
 
     private void jTextArenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextArenaActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextArenaActionPerformed
 
     private void jListThuisteamValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListThuisteamValueChanged
@@ -515,8 +502,6 @@ public class AddWedstrijd extends javax.swing.JFrame {
         } catch (DBException | SQLException ex) {
             Logger.getLogger(AddWedstrijd.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // TODO add your handling code here:
-        // TODO add your handling code here:
     }//GEN-LAST:event_jListThuisteamValueChanged
 
     /**

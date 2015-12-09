@@ -5,7 +5,6 @@
  */
 package GUIPackage;
 
-import static GUIPackage.AddTeamEnTrainer.dManager;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
@@ -139,7 +138,6 @@ public class AddDeelname extends javax.swing.JFrame {
 
     private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
         Team te = null;
-        
         String team = (String) jListTeam.getSelectedValue();
         String[] teamstra = team.split("-");
         String teamstr = teamstra[teamstra.length - 1].trim();
@@ -163,7 +161,7 @@ public class AddDeelname extends javax.swing.JFrame {
             Logger.getLogger(AddTeamEnTrainer.class.getName()).log(Level.SEVERE, null, ex);
         }
         updateForm.setVisible(true);        
-        this.setVisible(false);// TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonVorigeActionPerformed
 
     /**

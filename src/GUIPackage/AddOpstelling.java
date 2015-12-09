@@ -5,22 +5,16 @@
  */
 package GUIPackage;
 
-import static GUIPackage.AddWedstrijd.dManager;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import static ijshockey.DriverManager.getSpeler;
-import static ijshockey.DriverManager.getWedstrijd;
 import ijshockey.Opstelling;
-import ijshockey.Team;
 import ijshockey.Wedstrijd;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -346,7 +340,6 @@ public class AddOpstelling extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
         AddWedstrijd updateForm = null;
         try {
             updateForm = new AddWedstrijd(dManager, wedstrijd.getSeizoen().getC(), wedstrijd.getSeizoen());
@@ -358,31 +351,24 @@ public class AddOpstelling extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jComboxPositieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboxPositieActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jComboxPositieActionPerformed
 
     private void jButtonStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStoreActionPerformed
@@ -436,7 +422,7 @@ public class AddOpstelling extends javax.swing.JFrame {
         TussenSchermOpstHighlight updateForm = null;
 
         updateForm = new TussenSchermOpstHighlight(dManager, wedstrijd, this);
-        updateForm.setVisible(true);        // TODO add your handling code here:
+        updateForm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

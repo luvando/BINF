@@ -119,7 +119,6 @@ public class Startscherm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BestaandeCompetitieButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BestaandeCompetitieButtonActionPerformed
-        // bestaande competitie bewerken
         CompetitieScherm updateForm = null;
         try {
             updateForm = new CompetitieScherm(dManager);
@@ -133,7 +132,6 @@ public class Startscherm extends javax.swing.JFrame {
     }//GEN-LAST:event_BestaandeCompetitieButtonActionPerformed
 
     private void GegevensOpvragenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GegevensOpvragenButtonActionPerformed
-        // TODO add your handling code here:
         CompetitieOpvragen updateForm = null;
         try {
             updateForm = new CompetitieOpvragen(dManager);

@@ -5,14 +5,12 @@
  */
 package GUIPackage;
 
-import static GUIPackage.BewerkTeam.dManager;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Seizoen;
 import ijshockey.Speler;
 import ijshockey.Team;
-import ijshockey.Trainer;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -206,7 +204,6 @@ public class AddSpeler extends javax.swing.JFrame {
         } catch (DBException ex) {
             Logger.getLogger(AddSpeler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonStoreActionPerformed
 
     /**

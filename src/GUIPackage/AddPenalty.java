@@ -7,7 +7,6 @@ package GUIPackage;
 
 import ijshockey.DBException;
 import ijshockey.DriverManager;
-import ijshockey.Goal;
 import ijshockey.Penalty;
 import ijshockey.Speler;
 import ijshockey.Wedstrijd;
@@ -17,7 +16,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Wim
+ * @author jornys
  */
 public class AddPenalty extends javax.swing.JFrame {
 
@@ -165,14 +164,12 @@ public class AddPenalty extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonJaActionPerformed
 
     private void VoegNieuweHighlightToeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoegNieuweHighlightToeButtonActionPerformed
-        // TODO add your handling code here:
         AddHighlight updateForm = new AddHighlight(dManager, wedstrijd);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VoegNieuweHighlightToeButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
         AddHighlight updateForm = new AddHighlight(dManager, wedstrijd);
         updateForm.setVisible(true);
         this.setVisible(false);
@@ -180,12 +177,11 @@ public class AddPenalty extends javax.swing.JFrame {
 
     private void StoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreButtonActionPerformed
         Penalty p = null;
-       
+
         if (this.jRadioButtonJa.isSelected()) {
             int gescoord = 1;
             p = new Penalty(minuut, speler, wedstrijd, gescoord);
 
-           
             try {
                 DriverManager.addPenalty(p);
 
