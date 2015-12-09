@@ -36,8 +36,8 @@
                           <Component id="SearchText" alignment="0" max="32767" attributes="0"/>
                           <Component id="SearchButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="addCompetitieButton" alignment="0" max="32767" attributes="0"/>
-                          <Component id="Competitienaam" alignment="0" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" alignment="1" pref="334" max="32767" attributes="0"/>
+                          <Component id="Competitienaam" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
