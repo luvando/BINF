@@ -72,7 +72,6 @@ public class Wedstrijd {
         this.thuisTeam = thuis;
         this.uitTeam = uit;
         this.arena = arena;
-
         this.scheidsrechter = scheidsrechter;
         this.datum = datum;
         this.gespeeld = gespeeld;

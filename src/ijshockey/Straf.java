@@ -18,7 +18,6 @@ public class Straf extends Highlight {
         super(minuut, speler, wedstrijd);
         this.reden = reden;
         this.aantalMinuten = aantalMinuten;
-
     }
 
     public int getAantalMinuten() {

@@ -11,7 +11,7 @@ package ijshockey;
  */
 public class Lid {
 
-    public int lidnr;
+    private int lidnr;
     private String voornaam;
     private String achternaam;
     private String geboortedatum;

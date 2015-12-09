@@ -19,9 +19,6 @@ public class Seizoen {
         this.jaar = jaar;
     }
 
-    public Seizoen() {
-    }
-
     public int getJaar() {
         return jaar;
     }

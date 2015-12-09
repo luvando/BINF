@@ -13,7 +13,6 @@ public class Trainer extends Lid {
 
     public Trainer(String voornaam, String achternaam, String geboortedatum) {
         super(voornaam, achternaam, geboortedatum);
-
     }
 
     public Trainer(String voornaam, String achternaam, String geboortedatum, int lidnr) {

@@ -11,7 +11,7 @@ package ijshockey;
  */
 public class Competitie {
 
-    public String competitienaam;
+    private String competitienaam;
 
     public Competitie(String competitienaam) {
         this.competitienaam = competitienaam;
