@@ -208,12 +208,12 @@ public class AddOpstelling extends javax.swing.JFrame {
         });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Tijdstip in:");
+        jLabel11.setText("Minuut in");
 
         jTextTijdstipIn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Tijdstip uit:");
+        jLabel13.setText("Minuut uit:");
 
         jTextTijdstipUit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -239,10 +239,10 @@ public class AddOpstelling extends javax.swing.JFrame {
         });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("Team:");
+        jLabel14.setText("Team");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Speler:");
+        jLabel1.setText("Speler");
 
         buttonGroup1.add(jRadioButtonThuisTeam);
         jRadioButtonThuisTeam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -301,7 +301,7 @@ public class AddOpstelling extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabelTop)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

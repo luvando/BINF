@@ -99,13 +99,13 @@ public class AddHighlight extends javax.swing.JFrame {
         setTitle("Highlight toevoegen");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Speler:");
+        jLabel1.setText("Speler");
 
         jListSpeler.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(jListSpeler);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Minuut:");
+        jLabel3.setText("Minuut");
 
         jTextMinuut.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextMinuut.addActionListener(new java.awt.event.ActionListener() {
@@ -181,13 +181,13 @@ public class AddHighlight extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Team:");
+        jLabel4.setText("Team");
 
         jLabelTop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelTop.setText("jLabel5");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Aantal Goals toe te voegen : ");
+        jLabel5.setText("Aantal Goals toe te voegen ");
 
         jTextGoals.setEditable(false);
         jTextGoals.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
