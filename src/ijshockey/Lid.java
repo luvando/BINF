@@ -1,9 +1,5 @@
 package ijshockey;
 
-//import java.time.Instant;
-import java.util.Calendar;
-import java.util.Date;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,7 +11,7 @@ import java.util.Date;
  */
 public class Lid {
 
-    public int lidnr; //nodig?
+    public int lidnr;
     private String voornaam;
     private String achternaam;
     private String geboortedatum;

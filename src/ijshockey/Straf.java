@@ -18,7 +18,7 @@ public class Straf extends Highlight {
         super(minuut, speler, wedstrijd);
         this.reden = reden;
         this.aantalMinuten = aantalMinuten;
-        
+
     }
 
     public int getAantalMinuten() {
@@ -36,7 +36,5 @@ public class Straf extends Highlight {
     public void setReden(String reden) {
         this.reden = reden;
     }
-
-    
 
 }

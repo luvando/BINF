@@ -1,8 +1,5 @@
 package ijshockey;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,8 +24,8 @@ public class Wedstrijd {
     private Boolean gespeeldBoo;
     private Seizoen seizoen;
 
+// GESPEELDE MATCHEN    
     public Wedstrijd(Seizoen seizoen, Team thuisTeam, Team uitTeam, String arena, int scoreThuisTeam, int scoreUitTeam, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
-//        this.wedstrijdNr = wedstrijdNr;
         this.seizoen = seizoen;
         this.thuisTeam = thuisTeam;
         this.uitTeam = uitTeam;
@@ -39,10 +36,10 @@ public class Wedstrijd {
         this.scheidsrechter = scheidsrechter;
         this.gespeeld = 1;
         this.sp = sp;
-    } // GESPEELDE WEDSTRIJDEN
+    }
 
+//NIET GESPEELDE MATCHEN    
     public Wedstrijd(Seizoen seizoen, Team thuisTeam, Team uitTeam, String arena, Scheidsrechter scheidsrechter, String datum, Speeldag sp) {
-//        this.wedstrijdNr = wedstrijdNr;
         this.seizoen = seizoen;
         this.thuisTeam = thuisTeam;
         this.uitTeam = uitTeam;
@@ -52,8 +49,9 @@ public class Wedstrijd {
         this.scheidsrechter = scheidsrechter;
         this.gespeeld = 0;
         this.sp = sp;
-    } // VOOR NIET GESPEELDE MATCHEN
+    }
 
+//SEARCH GESPEELDE MATCH    
     Wedstrijd(int wnr, Seizoen s, Team thuis, Team uit, String arena, int score_thuis, int score_uit, Scheidsrechter scheidsrechter, String datum, Speeldag speeldag, int gespeeld) {
         this.seizoen = s;
         this.wedstrijdNr = wnr;
@@ -66,9 +64,9 @@ public class Wedstrijd {
         this.datum = datum;
         this.gespeeld = gespeeld;
         this.sp = speeldag;
-//SEARCH GESPEELDE MATCH
     }
 
+//SEARCH NIET GESPEELDE MATCH
     Wedstrijd(int wnr, Seizoen s, Team thuis, Team uit, String arena, Scheidsrechter scheidsrechter, String datum, Speeldag speeldag, int gespeeld) {
         this.seizoen = s;
         this.wedstrijdNr = wnr;
@@ -80,7 +78,6 @@ public class Wedstrijd {
         this.datum = datum;
         this.gespeeld = gespeeld;
         this.sp = speeldag;
-//SEARCH NIET GESPEELDE MATCH
     }
 
     public int getWedstrijdNr() {
