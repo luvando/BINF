@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Wim
+ * @author jornys
  */
 public class AddGoal extends javax.swing.JFrame {
 
@@ -162,14 +162,12 @@ public class AddGoal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VoegNieuweHighlightToeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoegNieuweHighlightToeButtonActionPerformed
-        // TODO add your handling code here:
         AddHighlight updateForm = new AddHighlight(dManager, wedstrijd);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VoegNieuweHighlightToeButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
         AddHighlight updateForm = new AddHighlight(dManager, wedstrijd);
         updateForm.setVisible(true);
         this.setVisible(false);

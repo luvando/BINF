@@ -5,12 +5,8 @@
  */
 package GUIPackage;
 
-import static GUIPackage.TussenSchermWedOpst.dManager;
 import ijshockey.DriverManager;
 import ijshockey.Wedstrijd;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

@@ -5,11 +5,8 @@
  */
 package GUIPackage;
 
-import static GUIPackage.CompetitieScherm.dManager;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
-//import static ijshockey.DriverManager.closeConnection;
-//import static ijshockey.DriverManager.getConnection;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -172,9 +169,8 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VolgendeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolgendeButtonActionPerformed
-        // TODO add your handling code here:
         GegevensOpvragen updateForm = null;
-        updateForm = new GegevensOpvragen(dManager, (String) LijstCompetities.getSelectedValue(), 
+        updateForm = new GegevensOpvragen(dManager, (String) LijstCompetities.getSelectedValue(),
                 Integer.parseInt((String) LijstSeizoenen.getSelectedValue()));
         updateForm.setVisible(true);
         this.setVisible(false);
@@ -182,7 +178,6 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
     }//GEN-LAST:event_VolgendeButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
         Startscherm updateForm = new Startscherm(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
@@ -195,7 +190,6 @@ public class CompetitieOpvragen extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void LijstCompetitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstCompetitiesValueChanged
-        // TODO add your handling code here:
         Connection con = null;
         try {
             con = dManager.getConnection();

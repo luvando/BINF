@@ -5,26 +5,19 @@
  */
 package GUIPackage;
 
-import static GUIPackage.CompetitieOpvragen.dManager;
-import static GUIPackage.GegevensOpvragen.dManager;
-import static GUIPackage.RapportSpeler.dManager;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Seizoen;
 import ijshockey.Team;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author Wim
+ * @author jornys
  */
 public class RapportTeam extends javax.swing.JFrame {
 
@@ -150,7 +143,6 @@ public class RapportTeam extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DrukRapportAfButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DrukRapportAfButtonActionPerformed
-        // TODO add your handling code here:
         Team team = null;
         String thuis = (String) LijstTeams.getSelectedValue();
 
@@ -173,7 +165,6 @@ public class RapportTeam extends javax.swing.JFrame {
     }//GEN-LAST:event_DrukRapportAfButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
         GegevensOpvragen updateForm = null;
         updateForm = new GegevensOpvragen(dManager, competitie, seizoen);
         updateForm.setVisible(true);
@@ -182,8 +173,6 @@ public class RapportTeam extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void LijstTeamsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_LijstTeamsValueChanged
-        // TODO add your handling code here:
-
     }//GEN-LAST:event_LijstTeamsValueChanged
 
     /**

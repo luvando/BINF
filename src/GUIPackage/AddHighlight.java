@@ -5,7 +5,6 @@
  */
 package GUIPackage;
 
-import static GUIPackage.CompetitieScherm.dManager;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Owngoal;
@@ -326,8 +325,6 @@ public class AddHighlight extends javax.swing.JFrame {
     }//GEN-LAST:event_GoalButtonActionPerformed
 
     private void PenaltyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PenaltyButtonActionPerformed
-        // TODO add your handling code here:
-
         String listValue = (String) jListSpeler.getSelectedValue();
         String[] array = listValue.split("-");
         String lidnrStr = array[array.length - 1].trim();
@@ -347,7 +344,6 @@ public class AddHighlight extends javax.swing.JFrame {
     }//GEN-LAST:event_PenaltyButtonActionPerformed
 
     private void StrafButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StrafButtonActionPerformed
-
         String listValue = (String) jListSpeler.getSelectedValue();
         String[] array = listValue.split("-");
         String lidnrStr = array[array.length - 1].trim();
@@ -367,8 +363,6 @@ public class AddHighlight extends javax.swing.JFrame {
     }//GEN-LAST:event_StrafButtonActionPerformed
 
     private void OwngoalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OwngoalButtonActionPerformed
-        // TODO add your handling code here:
-
         String listValue = (String) jListSpeler.getSelectedValue();
         String[] array = listValue.split("-");
         String lidnrStr = array[array.length - 1].trim();
@@ -399,7 +393,7 @@ public class AddHighlight extends javax.swing.JFrame {
         if (jRadioButtonUitTeam.isSelected()) {
             try {
                 this.jTextGoals.setText("" + wedstrijd.getScoreUitTeam());
-                
+
                 this.FillLijstSpelertjesUit(DriverManager.FillLijstSpelers(DLM, wedstrijd.getUitTeam().getStamNr()));
             } catch (SQLException ex) {
                 Logger.getLogger(AddHighlight.class.getName()).log(Level.SEVERE, null, ex);
@@ -419,11 +413,9 @@ public class AddHighlight extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonThuisTeamStateChanged
 
     private void jTextMinuutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMinuutActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextMinuutActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         Startscherm updateForm = new Startscherm(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);

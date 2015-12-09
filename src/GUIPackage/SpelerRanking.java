@@ -12,15 +12,13 @@ import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Seizoen;
 import java.io.PrintStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Jasper
  */
 public class SpelerRanking extends javax.swing.JFrame {
-    
+
     private PrintStream standardOut;
     private Competitie competitie;
     private Seizoen seizoen;
@@ -37,13 +35,11 @@ public class SpelerRanking extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         PrintStream printStream = new PrintStream(new CustomOutputStream(jTextArea1));
 
-        // keeps reference of standard output stream
         standardOut = System.out;
 
-        // re-assigns standard output stream and error output stream
         System.setOut(printStream);
         System.setErr(printStream);
-        
+
         DriverManager.printSpelerRanking(competitie, seizoen);
         setLocationRelativeTo(null);
     }
@@ -105,7 +101,6 @@ public class SpelerRanking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VorigeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeActionPerformed
-        // TODO add your handling code here:
         GegevensOpvragen updateForm = null;
         updateForm = new GegevensOpvragen(dManager, competitie, seizoen);
         updateForm.setVisible(true);

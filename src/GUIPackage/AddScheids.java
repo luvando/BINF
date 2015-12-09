@@ -8,7 +8,6 @@ package GUIPackage;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Scheidsrechter;
-import ijshockey.Speler;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +18,7 @@ import javax.swing.JOptionPane;
  * @author Chillteki
  */
 public class AddScheids extends javax.swing.JFrame {
+
     public static DriverManager dManager;
 
     /**
@@ -27,6 +27,7 @@ public class AddScheids extends javax.swing.JFrame {
     public AddScheids() {
         initComponents();
     }
+
     public AddScheids(DriverManager dManager) {
         AddScheids.dManager = dManager;
         initComponents();
@@ -141,12 +142,10 @@ public class AddScheids extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextGeboortedatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextGeboortedatumActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextGeboortedatumActionPerformed
 
     private void StoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreActionPerformed
-        // TODO add your handling code here:
-               Scheidsrechter scheids = new Scheidsrechter(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText());
+        Scheidsrechter scheids = new Scheidsrechter(jTextVoornaam.getText(), jTextAchternaam.getText(), jTextGeboortedatum.getText());
 
         try {
 

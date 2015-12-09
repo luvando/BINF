@@ -178,7 +178,6 @@ public class GegevensOpvragen extends javax.swing.JFrame {
     }//GEN-LAST:event_RapportTeamButtonActionPerformed
 
     private void RapportSpelerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RapportSpelerButtonActionPerformed
-        // TODO add your handling code here:
         RapportSpeler updateForm = null;
         try {
             updateForm = new RapportSpeler(dManager, competitie, seizoen);
@@ -190,8 +189,6 @@ public class GegevensOpvragen extends javax.swing.JFrame {
     }//GEN-LAST:event_RapportSpelerButtonActionPerformed
 
     private void RankingTeamsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingTeamsButtonActionPerformed
-        // TODO add your handling code here:
-
         TeamRanking updateForm = null;
         try {
             updateForm = new TeamRanking(dManager, competitie, seizoen);
@@ -203,7 +200,6 @@ public class GegevensOpvragen extends javax.swing.JFrame {
     }//GEN-LAST:event_RankingTeamsButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
         CompetitieOpvragen updateForm = null;
         try {
             updateForm = new CompetitieOpvragen(dManager);
@@ -216,7 +212,6 @@ public class GegevensOpvragen extends javax.swing.JFrame {
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     private void RankingSpelersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingSpelersButtonActionPerformed
-        // TODO add your handling code here:
         SpelerRanking updateForm = null;
         try {
             updateForm = new SpelerRanking(dManager, competitie, seizoen);

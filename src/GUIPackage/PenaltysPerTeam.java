@@ -9,9 +9,10 @@ import ijshockey.DriverManager;
 
 /**
  *
- * @author Wim
+ * @author jornys
  */
 public class PenaltysPerTeam extends javax.swing.JFrame {
+
     public static DriverManager dManager;
 
     /**
@@ -20,7 +21,7 @@ public class PenaltysPerTeam extends javax.swing.JFrame {
     public PenaltysPerTeam() {
         initComponents();
     }
-    
+
     public PenaltysPerTeam(DriverManager dManager) {
         this.dManager = dManager;
         initComponents();
@@ -110,18 +111,16 @@ public class PenaltysPerTeam extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DrukPenaltysAfButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DrukPenaltysAfButtonActionPerformed
-        // TODO add your handling code here:
         GegevensOpvragen updateForm = new GegevensOpvragen(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_DrukPenaltysAfButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
         GegevensOpvragen updateForm = new GegevensOpvragen(dManager);
         updateForm.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_VorigeButtonActionPerformed
 
     /**

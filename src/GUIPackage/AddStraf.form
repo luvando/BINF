@@ -33,10 +33,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="VoegNieuweHighlightToeButton" pref="200" max="32767" attributes="0"/>
-                          <Component id="VorigeButton" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="VoegNieuweHighlightToeButton" max="32767" attributes="0"/>
+                          <Component id="VorigeButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextMinuut" alignment="0" max="32767" attributes="0"/>
-                          <Component id="StoreButton" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="StoreButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" max="32767" attributes="0"/>
                       </Group>
                   </Group>

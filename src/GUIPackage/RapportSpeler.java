@@ -5,27 +5,19 @@
  */
 package GUIPackage;
 
-import static GUIPackage.CompetitieOpvragen.dManager;
-import static GUIPackage.RapportTeam.dManager;
-import static GUIPackage.TeamRanking.dManager;
 import ijshockey.Competitie;
 import ijshockey.DBException;
 import ijshockey.DriverManager;
 import ijshockey.Seizoen;
 import ijshockey.Speler;
-import ijshockey.Team;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author Wim
+ * @author jornys
  */
 public class RapportSpeler extends javax.swing.JFrame {
 
@@ -48,18 +40,18 @@ public class RapportSpeler extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        this.FillLijstSpelers(ijshockey.DriverManager.FillLijstSpelers(DLM,competitie, seizoen));
+        this.FillLijstSpelers(ijshockey.DriverManager.FillLijstSpelers(DLM, competitie, seizoen));
     }
 
     private void FillLijstSpelers(DefaultListModel DLM) {
         try {
-            
+
             LijstSpelers.setModel(DLM);
-            
-        } catch(Exception ex) {
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
     }
 
     /**
@@ -140,7 +132,6 @@ public class RapportSpeler extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VolgendeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolgendeButtonActionPerformed
-        // TODO add your handling code here:
         Speler speler = null;
         String sp = (String) LijstSpelers.getSelectedValue();
         String[] thuis = sp.split("-");
@@ -162,8 +153,7 @@ public class RapportSpeler extends javax.swing.JFrame {
     }//GEN-LAST:event_VolgendeButtonActionPerformed
 
     private void VorigeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VorigeButtonActionPerformed
-        // TODO add your handling code here:
-   GegevensOpvragen updateForm = null;
+        GegevensOpvragen updateForm = null;
         updateForm = new GegevensOpvragen(dManager, competitie, seizoen);
         updateForm.setVisible(true);
         this.setVisible(false);
