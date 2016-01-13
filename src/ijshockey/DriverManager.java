@@ -1520,9 +1520,17 @@ public class DriverManager {
             while (srs.next()) {
                 count++;
                 naam = srs.getString("naam");
+                String fnaam = String.format("%-80s", naam);
                 punten = srs.getInt("punten");
+
                 doelpuntensaldo = srs.getInt("doelpuntensaldo");
-                System.out.println(count + ". " + naam + " - " + punten + " punt(en) (doelpuntensaldo: " + doelpuntensaldo + ")");
+                if (punten == 1) {
+                    System.out.println(count + ". " + fnaam + "\t" + punten + " punt" + " \t " + "doelpuntensaldo: "
+                            + doelpuntensaldo);
+                } else {
+                    System.out.println(count + ". " + fnaam + "\t" + punten + " punten" + " \t " + "doelpuntensaldo: "
+                            + doelpuntensaldo);
+                }
             }
 
             closeConnection(con);
