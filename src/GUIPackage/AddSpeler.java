@@ -87,6 +87,7 @@ public class AddSpeler extends javax.swing.JFrame {
         jTextVoornaam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jTextGeboortedatum.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextGeboortedatum.setText("YYYY-MM-DD");
 
         VorigeButton.setBackground(new java.awt.Color(255, 204, 204));
         VorigeButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

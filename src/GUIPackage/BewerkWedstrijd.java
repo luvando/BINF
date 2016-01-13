@@ -140,6 +140,7 @@ public class BewerkWedstrijd extends javax.swing.JFrame {
         jLabel4.setText("  -");
 
         jTextDatum.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextDatum.setText("YYYY-MM-DD");
         jTextDatum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextDatumActionPerformed(evt);

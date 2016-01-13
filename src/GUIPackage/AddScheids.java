@@ -69,6 +69,7 @@ public class AddScheids extends javax.swing.JFrame {
         jTextAchternaam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jTextGeboortedatum.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextGeboortedatum.setText("YYYY-MM-DD");
         jTextGeboortedatum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextGeboortedatumActionPerformed(evt);

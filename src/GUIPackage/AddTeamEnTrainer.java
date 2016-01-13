@@ -116,6 +116,7 @@ public class AddTeamEnTrainer extends javax.swing.JFrame {
         });
 
         GeboortedatumTrainer.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        GeboortedatumTrainer.setText("YYYY-MM-DD");
         GeboortedatumTrainer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GeboortedatumTrainerActionPerformed(evt);
